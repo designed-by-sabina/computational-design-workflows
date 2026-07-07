@@ -57,10 +57,9 @@ let hoverLabel = null;
 
 let discoveryLabel = null;
 
+let lastDiscoveryTime = 0;
 
-
-
-
+const discoveryCooldown = 3000; // milliseconds
 
 
 
@@ -653,9 +652,7 @@ function removeHoverLabel(){
 // OVERLAP DETECTION
 // ==========================================
 
-
 function detectOverlaps(){
-
 
 
     for(
@@ -665,18 +662,15 @@ function detectOverlaps(){
     ){
 
 
-
         for(
             let j=i+1;
             j<circles.length;
-            j++
+        j++
         ){
-
 
 
             let a =
                 circles[i];
-
 
 
             let b =
@@ -696,32 +690,66 @@ function detectOverlaps(){
 
 
 
+            let overlap =
+
+            a.radius +
+            b.radius -
+            distance;
+
+
+
+            let minimumOverlap =
+
+            (a.radius+b.radius)
+            *
+            0.30;
+
+
+
             if(
-                distance <
-                a.radius+b.radius
+                overlap >
+                minimumOverlap
             ){
 
 
 
-                createDiscovery(
+                let now =
+                    Date.now();
 
-                    (a.x+b.x)/2,
 
-                    (a.y+b.y)/2
 
-                );
+                if(
+                    now -
+                    lastDiscoveryTime
+                    >
+                    discoveryCooldown
+                ){
+
+
+                    createDiscovery(
+
+                        (a.x+b.x)/2,
+
+                        (a.y+b.y)/2
+
+                    );
+
+
+
+                    lastDiscoveryTime =
+                        now;
+
+
+                }
 
 
             }
 
 
-
         }
 
 
-
     }
-
 
 
 }
@@ -769,7 +797,7 @@ y
 
 
     let key =
-        rgb.join(",");
+    normalizeColor(rgb);
 
 
 
@@ -841,6 +869,7 @@ rgb
 
 
 
+
     let label =
         document.createElement("div");
 
@@ -891,16 +920,30 @@ rgb
     setTimeout(()=>{
 
 
-        if(discoveryLabel){
+    if(discoveryLabel){
 
-            discoveryLabel.remove();
-
-            discoveryLabel = null;
-
-        }
+        discoveryLabel.style.opacity = "0";
 
 
-    },4000);
+        setTimeout(()=>{
+
+
+            if(discoveryLabel){
+
+                discoveryLabel.remove();
+
+                discoveryLabel = null;
+
+            }
+
+
+        },1000);
+
+
+    }
+
+
+},8000);
 
 
 
@@ -1209,5 +1252,24 @@ function random(min,max){
     +
     min;
 
+
+}
+
+function normalizeColor(rgb){
+
+
+    let r =
+        Math.round(rgb[0] / 20) * 20;
+
+
+    let g =
+        Math.round(rgb[1] / 20) * 20;
+
+
+    let b =
+        Math.round(rgb[2] / 20) * 20;
+
+
+    return `${r},${g},${b}`;
 
 }
