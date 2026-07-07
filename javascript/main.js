@@ -194,7 +194,7 @@ class Circle{
             random(0,5000);
 
         this.speed =
-            random(0.8,1.3);
+            random(0.5,0.9);
 
         this.phase =
             random(0,1000);
@@ -203,100 +203,111 @@ class Circle{
 
 
 
-    update(){
+  update(){
 
 
-        // smooth drifting direction
+    // continuously changing direction
 
-        let angle =
+    let angle =
 
-            noise(
-                animationTime*0.7 +
-                this.offsetX
-            )
-
-            *
-
-            Math.PI
-
-            *
-
-            2;
+        noise(
+            animationTime * 0.5 +
+            this.offsetX
+        )
+        *
+        Math.PI
+        *
+        2;
 
 
 
-        this.x +=
+    // organic floating movement
 
-            Math.cos(angle)
+    this.x +=
 
-            *
-
-            this.speed;
-
-
-
-        this.y +=
-
-            Math.sin(angle)
-
-            *
-
-            this.speed;
+        Math.cos(angle)
+        *
+        this.speed;
 
 
 
-        // subtle breathing transparency
+    this.y +=
 
-        this.alpha =
-
-            0.30 +
-
-            Math.sin(
-
-                animationTime*0.5 +
-
-                this.phase
-
-            )
-
-            *
-
-            0.05;
+        Math.sin(angle)
+        *
+        this.speed;
 
 
 
-        // gentle edge avoidance
+    // subtle transparency breathing
 
-        const margin =
-            this.radius;
+    this.alpha =
+
+        0.32 +
+
+        Math.sin(
+            animationTime * 0.8 +
+            this.phase
+        )
+        *
+        0.04;
 
 
 
-        if(this.x < margin){
+    // stronger soft boundary steering
 
-            this.x += 0.8;
+    let margin =
+        this.radius;
 
-        }
 
-        if(this.x > canvas.width-margin){
 
-            this.x -= 0.8;
+    if(this.x < margin){
 
-        }
+        this.x += 1.5;
 
-        if(this.y < margin){
-
-            this.y += 0.8;
-
-        }
-
-        if(this.y > canvas.height-margin){
-
-            this.y -= 0.8;
-
-        }
+        this.offsetX += 0.5;
 
     }
+
+
+
+    if(
+        this.x >
+        canvas.width-margin
+    ){
+
+        this.x -= 1.5;
+
+        this.offsetX += 0.5;
+
+    }
+
+
+
+    if(this.y < margin){
+
+        this.y += 1.5;
+
+        this.offsetY += 0.5;
+
+    }
+
+
+
+    if(
+        this.y >
+        canvas.height-margin
+    ){
+
+        this.y -= 1.5;
+
+        this.offsetY += 0.5;
+
+    }
+
+
+
+}
 
 
 
