@@ -6,14 +6,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Transparency | Interaction of Color</title>
+    <title>
+        Transparency | Interaction of Color
+    </title>
 
-<!-- CSS -->
-<link rel="stylesheet" href="styles/style.css">
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles/style.css">
 
 </head>
 
+
 <body>
+
 
     <!-- ==========================================
          HEADER
@@ -24,87 +28,181 @@
         <h1>TRANSPARENCY</h1>
 
         <p class="subtitle">
-            
             Exploration of Interaction, Perception, and Overlapping Color
-            
         </p>
 
     </header>
 
 
+
+
     <!-- ==========================================
-         MAIN INTERACTIVE CANVAS
+         MAIN CONTENT
     =========================================== -->
+
 
     <main>
 
+
+        <!-- ======================================
+             PRIMARY INTERACTIVE COLOR CANVAS
+        ======================================= -->
+
+
         <section class="main-canvas-section">
 
+
             <canvas id="colorCanvas"></canvas>
+
 
         </section>
 
 
-        <!-- Floating labels will be inserted here -->
-        <div id="labelContainer"></div>
 
 
-        <!-- Instructions -->
+        <!-- ======================================
+             LABEL CONTAINERS
+             
+             Generated dynamically by JavaScript
+        ======================================= -->
+
+
+        <!-- Labels attached to original circles -->
+        <div id="sourceLabelContainer"></div>
+
+
+
+        <!-- Labels created from color interactions -->
+        <div id="discoveredLabelContainer"></div>
+
+
+
+
+
+
+        <!-- ======================================
+             INSTRUCTIONS
+        ======================================= -->
+
 
         <section class="instructions">
 
             <p>
                 Press <strong>SPACEBAR</strong> to pause or resume the animation.
-                Pause to observe how transparent colors interact and create new colors.
+                Pause to observe relationships between transparent colors.
             </p>
 
         </section>
 
 
-        <!-- ==========================================
-             EXERCISE NAVIGATION
-        =========================================== -->
+
+
+
+
+
+        <!-- ======================================
+             DISCOVERED COLOR ARCHIVE
+        ======================================= -->
+
+
+        <section class="color-archive">
+
+
+            <h2>
+                Discovered Colors
+            </h2>
+
+
+
+            <div id="colorArchiveContainer">
+
+                <!--
+                    JavaScript will generate
+                    discovered color swatches here.
+
+                    Example:
+
+                    Lavender
+                    RGB 221 194 233
+
+                -->
+
+
+            </div>
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+        <!-- ======================================
+             FUTURE EXERCISE NAVIGATION
+        ======================================= -->
+
 
         <nav class="exercise-tabs">
+
 
             <button class="tab active" data-canvas="1">
                 Exercise 01
             </button>
 
+
             <button class="tab" data-canvas="2">
                 Exercise 02
             </button>
+
 
             <button class="tab" data-canvas="3">
                 Exercise 03
             </button>
 
+
             <button class="tab" data-canvas="4">
                 Exercise 04
             </button>
+
 
             <button class="tab" data-canvas="5">
                 Exercise 05
             </button>
 
+
             <button class="tab" data-canvas="6">
                 Exercise 06
             </button>
 
+
         </nav>
 
 
-        <!-- ==========================================
+
+
+
+
+
+        <!-- ======================================
              FUTURE ASSIGNMENT CANVASES
-        =========================================== -->
+             
+             Reserved for future coursework
+        ======================================= -->
+
 
         <section class="exercise-container">
 
-            <!-- Exercise 1 -->
+
 
             <div class="exercise-panel active" id="exercise1">
 
+
                 <canvas class="exerciseCanvas"></canvas>
+
 
                 <div class="placeholder-text">
 
@@ -112,14 +210,18 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- Exercise 2 -->
+
+
 
             <div class="exercise-panel" id="exercise2">
 
+
                 <canvas class="exerciseCanvas"></canvas>
+
 
                 <div class="placeholder-text">
 
@@ -127,14 +229,19 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- Exercise 3 -->
+
+
+
 
             <div class="exercise-panel" id="exercise3">
 
+
                 <canvas class="exerciseCanvas"></canvas>
+
 
                 <div class="placeholder-text">
 
@@ -142,14 +249,19 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- Exercise 4 -->
+
+
+
 
             <div class="exercise-panel" id="exercise4">
 
+
                 <canvas class="exerciseCanvas"></canvas>
+
 
                 <div class="placeholder-text">
 
@@ -157,14 +269,19 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- Exercise 5 -->
+
+
+
 
             <div class="exercise-panel" id="exercise5">
 
+
                 <canvas class="exerciseCanvas"></canvas>
+
 
                 <div class="placeholder-text">
 
@@ -172,14 +289,19 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- Exercise 6 -->
+
+
+
 
             <div class="exercise-panel" id="exercise6">
 
+
                 <canvas class="exerciseCanvas"></canvas>
+
 
                 <div class="placeholder-text">
 
@@ -187,32 +309,51 @@
 
                 </div>
 
+
             </div>
+
+
 
         </section>
 
+
+
     </main>
+
+
+
+
+
 
 
     <!-- ==========================================
          FOOTER
     =========================================== -->
 
+
     <footer>
 
+
         <p>
-            Inspired by Josef Albers' book <em>Interaction of Color</em>
+            Inspired by Josef Albers' book
+            <em>Interaction of Color</em>
         </p>
+
 
     </footer>
 
 
-    <!-- ==========================================
-         JAVASCRIPT
-    =========================================== -->
+
+
+
+
+
+    <!-- JavaScript -->
 
     <script src="javascript/main.js"></script>
 
+
 </body>
+
 
 </html>

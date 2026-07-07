@@ -1,31 +1,58 @@
 /* ==========================================
    TRANSPARENCY
+   Digital Color Study
+
    Inspired by Josef Albers'
    Interaction of Color
 
-   Main interactions:
-   - floating transparent circles
-   - color mixing
-   - RGB labels
-   - pause/resume
 ========================================== */
 
 
 
 // ==========================================
-// MAIN CANVAS SETUP
+// CANVAS SETUP
 // ==========================================
 
-const canvas = document.getElementById("colorCanvas");
-const ctx = canvas.getContext("2d");
 
-const labelContainer = document.getElementById("labelContainer");
+const canvas =
+document.getElementById("colorCanvas");
+
+
+const ctx =
+canvas.getContext("2d");
+
+
+
+const sourceLabelContainer =
+document.getElementById(
+    "sourceLabelContainer"
+);
+
+
+const discoveredLabelContainer =
+document.getElementById(
+    "discoveredLabelContainer"
+);
+
+
+const archiveContainer =
+document.getElementById(
+    "colorArchiveContainer"
+);
+
+
+
+
 
 let circles = [];
 
-let animationPaused = false;
+let discoveredColors = [];
 
-let animationFrame;
+let paused = false;
+
+
+
+
 
 
 
@@ -33,10 +60,17 @@ let animationFrame;
 // RESIZE CANVAS
 // ==========================================
 
+
 function resizeCanvas(){
 
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+
+    canvas.width =
+        canvas.clientWidth;
+
+
+    canvas.height =
+        canvas.clientHeight;
+
 
 }
 
@@ -51,23 +85,41 @@ resizeCanvas();
 
 
 
+
+
+
+
+
 // ==========================================
 // COLOR PALETTE
-// pastel transparent colors
 // ==========================================
 
 
-const colors = [
+const palette = [
 
-    [255,180,180],
-    [255,220,150],
-    [180,220,255],
-    [220,190,255],
-    [180,255,210],
-    [255,190,220],
-    [240,240,170]
+
+    [255,180,180], // pink
+
+    [255,220,150], // peach
+
+    [180,220,255], // blue
+
+    [220,190,255], // lavender
+
+    [180,255,210], // mint
+
+    [255,190,220], // rose
+
+    [240,240,170]  // cream
+
 
 ];
+
+
+
+
+
+
 
 
 
@@ -81,8 +133,10 @@ class Circle {
 
     constructor(){
 
+
         this.radius =
-            random(50,150);
+            random(60,140);
+
 
 
         this.x =
@@ -92,6 +146,7 @@ class Circle {
             );
 
 
+
         this.y =
             random(
                 this.radius,
@@ -99,83 +154,114 @@ class Circle {
             );
 
 
+
         this.color =
-            colors[
+            palette[
                 Math.floor(
-                    Math.random()*colors.length
+                    Math.random()*palette.length
                 )
             ];
 
 
-        this.alpha = 0.35;
+
+        this.alpha =
+            0.35;
 
 
-        // very slow movement
 
         this.vx =
-            random(-0.5,0.5);
+            random(-1,1);
+
 
 
         this.vy =
-            random(-0.5,0.5);
+            random(-1,1);
+
+
+
+        this.name =
+            getColorName(
+                this.color
+            );
 
 
     }
+
+
+
+
 
 
 
     update(){
 
 
-        // movement
-
         this.x += this.vx;
+
         this.y += this.vy;
 
 
 
-        // soft attraction away from edges
+        // gentle attraction toward center
 
-        let margin = 150;
-
-
-        if(this.x < margin){
-
-            this.vx +=0.01;
-
-        }
+        let centerX =
+            canvas.width/2;
 
 
-        if(this.x > canvas.width-margin){
-
-            this.vx -=0.01;
-
-        }
-
-
-        if(this.y < margin){
-
-            this.vy +=0.01;
-
-        }
-
-
-        if(this.y > canvas.height-margin){
-
-            this.vy -=0.01;
-
-        }
+        let centerY =
+            canvas.height/2;
 
 
 
-        // keep speed controlled
+        this.vx +=
+            (centerX-this.x)
+            *0.0008;
 
-        this.vx *=0.995;
-        this.vy *=0.995;
+
+
+        this.vy +=
+            (centerY-this.y)
+            *0.0008;
+
+
+
+
+
+        // speed limit
+
+        let maxSpeed = 1.2;
+
+
+
+        this.vx =
+            Math.max(
+                Math.min(
+                    this.vx,
+                    maxSpeed
+                ),
+                -maxSpeed
+            );
+
+
+
+        this.vy =
+            Math.max(
+                Math.min(
+                    this.vy,
+                    maxSpeed
+                ),
+                -maxSpeed
+            );
 
 
 
     }
+
+
+
+
+
+
 
 
 
@@ -185,47 +271,71 @@ class Circle {
         ctx.beginPath();
 
 
+
         ctx.fillStyle =
-        `rgba(
-            ${this.color[0]},
-            ${this.color[1]},
-            ${this.color[2]},
-            ${this.alpha}
-        )`;
+        `
+        rgba(
+        ${this.color[0]},
+        ${this.color[1]},
+        ${this.color[2]},
+        ${this.alpha}
+        )
+        `;
+
 
 
         ctx.arc(
+
             this.x,
+
             this.y,
+
             this.radius,
+
             0,
+
             Math.PI*2
+
         );
+
 
 
         ctx.fill();
 
 
-    }
 
+    }
 
 
 }
 
 
 
+
+
+
+
+
+
 // ==========================================
-// CREATE CIRCLES
+// CREATE INITIAL COMPOSITION
 // ==========================================
 
 
-for(let i=0;i<9;i++){
+for(let i=0;i<10;i++){
+
 
     circles.push(
         new Circle()
     );
 
+
 }
+
+
+
+
+
 
 
 
@@ -238,28 +348,44 @@ for(let i=0;i<9;i++){
 function animate(){
 
 
+
     ctx.clearRect(
+
         0,
+
         0,
+
         canvas.width,
+
         canvas.height
+
     );
+
+
+
 
 
     circles.forEach(circle=>{
 
 
-        if(!animationPaused){
+        if(!paused){
 
             circle.update();
 
         }
 
 
+
         circle.draw();
 
 
+
+        drawSourceLabel(circle);
+
+
+
     });
+
 
 
 
@@ -267,16 +393,99 @@ function animate(){
 
 
 
-    animationFrame =
-        requestAnimationFrame(
-            animate
-        );
+    requestAnimationFrame(
+        animate
+    );
 
 
 }
 
 
+
 animate();
+
+
+
+
+
+
+
+
+
+// ==========================================
+// ORIGINAL COLOR LABELS
+// ==========================================
+
+
+function drawSourceLabel(circle){
+
+
+    let existing =
+        document.getElementById(
+            "source-"+circle.name
+        );
+
+
+
+    if(!existing){
+
+
+        let label =
+            document.createElement("div");
+
+
+
+        label.className =
+            "source-label";
+
+
+
+        label.id =
+            "source-"+circle.name;
+
+
+
+        label.innerHTML =
+
+        `
+        <span>${circle.name}</span>
+        <span>
+        ${circle.color[0]}
+        /
+        ${circle.color[1]}
+        /
+        ${circle.color[2]}
+        </span>
+        `;
+
+
+
+        sourceLabelContainer.appendChild(label);
+
+
+
+        existing = label;
+
+
+    }
+
+
+
+
+    existing.style.left =
+        circle.x+"px";
+
+
+
+    existing.style.top =
+        circle.y+"px";
+
+
+}
+
+
+
+
 
 
 
@@ -288,6 +497,7 @@ animate();
 
 
 function detectOverlaps(){
+
 
 
     for(
@@ -314,9 +524,13 @@ function detectOverlaps(){
 
 
             let distance =
+
             Math.sqrt(
-                (a.x-b.x)**2+
+
+                (a.x-b.x)**2 +
+
                 (a.y-b.y)**2
+
             );
 
 
@@ -327,9 +541,12 @@ function detectOverlaps(){
             ){
 
 
-                showColorLabel(
+                createDiscovery(
+
                     (a.x+b.x)/2,
+
                     (a.y+b.y)/2
+
                 );
 
 
@@ -338,96 +555,8 @@ function detectOverlaps(){
 
         }
 
-    }
-
-}
-
-
-
-
-
-// ==========================================
-// COLOR LABEL
-// ==========================================
-
-
-let lastLabelTime = 0;
-
-
-function showColorLabel(x,y){
-
-
-    let now =
-        Date.now();
-
-
-    // prevents too many labels
-
-    if(
-        now-lastLabelTime <1500
-    ){
-
-        return;
 
     }
-
-
-    lastLabelTime = now;
-
-
-
-    let rgb =
-        getPixelColor(
-            x,
-            y
-        );
-
-
-
-    let name =
-        getColorName(rgb);
-
-
-
-    let label =
-        document.createElement("div");
-
-
-    label.className =
-        "color-label";
-
-
-    label.style.left =
-        x+"px";
-
-
-    label.style.top =
-        y+"px";
-
-
-
-    label.innerHTML =
-
-    `
-    <strong>${name}</strong>
-    RGB:
-    ${rgb[0]},
-    ${rgb[1]},
-    ${rgb[2]}
-    `;
-
-
-
-    labelContainer.appendChild(label);
-
-
-
-    setTimeout(()=>{
-
-        label.remove();
-
-    },2500);
-
 
 
 }
@@ -437,12 +566,16 @@ function showColorLabel(x,y){
 
 
 
+
+
+
 // ==========================================
-// SAMPLE REAL CANVAS COLOR
+// CREATE DISCOVERED COLOR
 // ==========================================
 
 
-function getPixelColor(x,y){
+function createDiscovery(x,y){
+
 
 
     let pixel =
@@ -455,13 +588,56 @@ function getPixelColor(x,y){
 
 
 
-    return [
+    let rgb = [
 
         pixel[0],
+
         pixel[1],
+
         pixel[2]
 
     ];
+
+
+
+    let key =
+        rgb.join(",");
+
+
+
+    if(
+        discoveredColors.includes(key)
+    ){
+
+        return;
+
+    }
+
+
+
+    discoveredColors.push(key);
+
+
+
+    let name =
+        getColorName(rgb);
+
+
+
+
+    createDiscoveryLabel(
+        x,
+        y,
+        name,
+        rgb
+    );
+
+
+
+    createArchiveCard(
+        name,
+        rgb
+    );
 
 
 }
@@ -470,46 +646,182 @@ function getPixelColor(x,y){
 
 
 
+
+
+
+
 // ==========================================
-// SIMPLE COLOR NAME DATABASE
+// DISCOVERY LABEL
+// ==========================================
+
+
+function createDiscoveryLabel(
+    x,
+    y,
+    name,
+    rgb
+){
+
+
+
+    let label =
+        document.createElement("div");
+
+
+
+    label.className =
+        "discovered-label";
+
+
+
+    label.innerHTML =
+
+    `
+    <strong>${name}</strong>
+
+    RGB
+
+    ${rgb[0]},
+    ${rgb[1]},
+    ${rgb[2]}
+
+    `;
+
+
+
+    label.style.left =
+        x+"px";
+
+
+
+    label.style.top =
+        y+"px";
+
+
+
+    discoveredLabelContainer.appendChild(
+        label
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// COLOR ARCHIVE
+// ==========================================
+
+
+function createArchiveCard(
+    name,
+    rgb
+){
+
+
+
+    let card =
+        document.createElement("div");
+
+
+
+    card.className =
+        "color-swatch";
+
+
+
+    card.style.background =
+
+    `
+    rgb(
+    ${rgb[0]},
+    ${rgb[1]},
+    ${rgb[2]}
+    )
+    `;
+
+
+
+    card.innerHTML =
+
+    `
+    <strong>${name}</strong>
+
+    ${rgb[0]},
+    ${rgb[1]},
+    ${rgb[2]}
+
+    `;
+
+
+
+    archiveContainer.appendChild(
+        card
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// COLOR NAME FUNCTION
 // ==========================================
 
 
 function getColorName(rgb){
 
 
-    let names = {
+    let colors = {
 
 
-        "255,200,200":
+        "255,180,180":
         "Soft Pink",
 
 
-        "200,220,255":
-        "Light Blue",
-
-
-        "220,200,255":
-        "Lavender",
-
-
-        "200,255,220":
-        "Mint",
-
-
-        "255,220,180":
+        "255,220,150":
         "Peach",
 
 
-        "240,240,190":
+        "180,220,255":
+        "Sky Blue",
+
+
+        "220,190,255":
+        "Lavender",
+
+
+        "180,255,210":
+        "Mint",
+
+
+        "255,190,220":
+        "Rose",
+
+
+        "240,240,170":
         "Cream"
 
 
     };
 
 
+
     let closest =
         "Mixed Color";
+
 
 
     let smallest =
@@ -517,11 +829,12 @@ function getColorName(rgb){
 
 
 
-    for(let color in names){
+
+    for(let c in colors){
 
 
         let values =
-            color.split(",")
+            c.split(",")
             .map(Number);
 
 
@@ -530,8 +843,10 @@ function getColorName(rgb){
 
         Math.sqrt(
 
-            (rgb[0]-values[0])**2+
-            (rgb[1]-values[1])**2+
+            (rgb[0]-values[0])**2 +
+
+            (rgb[1]-values[1])**2 +
+
             (rgb[2]-values[2])**2
 
         );
@@ -540,15 +855,20 @@ function getColorName(rgb){
 
         if(distance < smallest){
 
-            smallest = distance;
+
+            smallest =
+                distance;
+
 
             closest =
-            names[color];
+                colors[c];
+
 
         }
 
 
     }
+
 
 
     return closest;
@@ -560,29 +880,38 @@ function getColorName(rgb){
 
 
 
+
+
+
+
 // ==========================================
-// SPACEBAR PAUSE / RESUME
+// SPACEBAR OBSERVATION MODE
 // ==========================================
 
 
 document.addEventListener(
-"keydown",
-function(event){
+    "keydown",
+    function(event){
 
 
-    if(event.code==="Space"){
-
-        event.preventDefault();
+        if(event.code==="Space"){
 
 
-        animationPaused =
-            !animationPaused;
+            event.preventDefault();
+
+
+            paused =
+                !paused;
+
+
+        }
 
 
     }
+);
 
 
-});
+
 
 
 
@@ -612,31 +941,39 @@ tabs.forEach(tab=>{
 
 
             tabs.forEach(t=>
-                t.classList.remove("active")
+
+                t.classList.remove(
+                    "active"
+                )
+
             );
+
 
 
             panels.forEach(panel=>
-                panel.classList.remove("active")
+
+                panel.classList.remove(
+                    "active"
+                )
+
             );
 
 
 
-            tab.classList.add("active");
-
-
-
-            let number =
-                tab.dataset.canvas;
+            tab.classList.add(
+                "active"
+            );
 
 
 
             document
             .getElementById(
-                "exercise"+number
+                "exercise"+
+                tab.dataset.canvas
             )
-            .classList.add("active");
-
+            .classList.add(
+                "active"
+            );
 
 
         }
@@ -648,13 +985,21 @@ tabs.forEach(tab=>{
 
 
 
+
+
+
+
+
 // ==========================================
-// RANDOM NUMBER FUNCTION
+// RANDOM NUMBER
 // ==========================================
 
 
 function random(min,max){
 
-    return Math.random()*(max-min)+min;
+
+    return Math.random()
+    *(max-min)+min;
+
 
 }
