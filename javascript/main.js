@@ -719,3 +719,863 @@ function normalizeColor(rgb){
     return `${r},${g},${b}`;
 
 }
+
+
+
+
+
+// ==========================================
+// HOVER INTERACTION
+// ==========================================
+
+
+canvas.addEventListener(
+    "mousemove",
+    function(event){
+
+
+        let rect =
+            canvas.getBoundingClientRect();
+
+
+
+        let mouseX =
+            event.clientX -
+            rect.left;
+
+
+
+        let mouseY =
+            event.clientY -
+            rect.top;
+
+
+
+        let foundOverlap =
+            null;
+
+
+        let foundCircle =
+            null;
+
+
+
+        // Check overlap regions first
+        // because they are the more important
+        // Albers color interactions
+
+
+        overlapRegions.forEach(region=>{
+
+
+            let d =
+                distance(
+
+                    mouseX,
+
+                    mouseY,
+
+                    region.x,
+
+                    region.y
+
+                );
+
+
+
+            if(
+                d <
+                region.radius
+            ){
+
+                foundOverlap =
+                    region;
+
+            }
+
+
+        });
+
+
+
+
+
+
+        // Check original circles
+
+
+        circles.forEach(circle=>{
+
+
+            let d =
+                distance(
+
+                    mouseX,
+
+                    mouseY,
+
+                    circle.x,
+
+                    circle.y
+
+                );
+
+
+
+            if(
+                d <
+                circle.radius
+            ){
+
+                foundCircle =
+                    circle;
+
+            }
+
+
+        });
+
+
+
+
+
+
+
+        if(foundOverlap){
+
+
+            showHoverLabel(
+                foundOverlap
+            );
+
+
+        }
+
+        else if(foundCircle){
+
+
+            showHoverLabel(
+                {
+
+                    x:
+                    foundCircle.x,
+
+
+                    y:
+                    foundCircle.y,
+
+
+                    rgb:
+                    foundCircle.rgb,
+
+
+                    name:
+                    foundCircle.name
+
+                }
+            );
+
+
+        }
+
+        else{
+
+
+            removeHoverLabel();
+
+
+        }
+
+
+    }
+
+);
+
+
+
+
+
+
+// remove label when leaving canvas
+
+canvas.addEventListener(
+
+    "mouseleave",
+
+    function(){
+
+        removeHoverLabel();
+
+    }
+
+);
+
+
+
+
+
+
+
+
+
+// ==========================================
+// CREATE HOVER LABEL
+// ==========================================
+
+
+function showHoverLabel(item){
+
+
+    removeHoverLabel();
+
+
+
+    let label =
+        document.createElement("div");
+
+
+
+    label.className =
+        "source-label";
+
+
+
+    label.innerHTML =
+
+
+    `
+
+    <strong>
+    ${item.name}
+    </strong>
+
+    <br>
+
+    RGB
+
+    ${item.rgb[0]},
+    ${item.rgb[1]},
+    ${item.rgb[2]}
+
+    `;
+
+
+
+    label.style.left =
+        item.x+"px";
+
+
+
+    label.style.top =
+        item.y+"px";
+
+
+
+    sourceLabelContainer.appendChild(
+        label
+    );
+
+
+
+    hoverLabel =
+        label;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// REMOVE HOVER LABEL
+// ==========================================
+
+
+function removeHoverLabel(){
+
+
+    if(hoverLabel){
+
+
+        hoverLabel.remove();
+
+
+        hoverLabel =
+            null;
+
+
+    }
+
+
+}
+
+
+
+// ==========================================
+// COLOR NAMING USING HSL PERCEPTION
+// ==========================================
+
+
+function getColorName(rgb){
+
+
+    let hsl =
+        rgbToHsl(
+
+            rgb[0],
+
+            rgb[1],
+
+            rgb[2]
+
+        );
+
+
+
+    let h =
+        hsl.h;
+
+
+
+    let s =
+        hsl.s;
+
+
+
+    let l =
+        hsl.l;
+
+
+
+    let prefix = "";
+
+
+
+    // lightness description
+
+
+    if(l > 85){
+
+        prefix =
+            "Light ";
+
+    }
+
+    else if(l < 35){
+
+        prefix =
+            "Deep ";
+
+    }
+
+    else if(s < 45){
+
+        prefix =
+            "Muted ";
+
+    }
+
+
+
+
+
+
+    let name;
+
+
+
+    // hue families
+
+
+    if(s < 15){
+
+        name =
+            "Neutral Gray";
+
+    }
+
+
+    else if(h < 15){
+
+        name =
+            "Red";
+
+    }
+
+
+    else if(h < 45){
+
+        name =
+            "Peach";
+
+    }
+
+
+    else if(h < 70){
+
+        name =
+            "Yellow";
+
+    }
+
+
+    else if(h < 160){
+
+        name =
+            "Green";
+
+    }
+
+
+    else if(h < 200){
+
+        name =
+            "Turquoise";
+
+    }
+
+
+    else if(h < 250){
+
+        name =
+            "Blue";
+
+    }
+
+
+    else if(h < 290){
+
+        name =
+            "Lavender";
+
+    }
+
+
+    else if(h < 340){
+
+        name =
+            "Pink";
+
+    }
+
+
+    else{
+
+        name =
+            "Rose";
+
+    }
+
+
+
+    return prefix + name;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// RGB TO HSL
+// ==========================================
+
+
+function rgbToHsl(r,g,b){
+
+
+    r /= 255;
+
+    g /= 255;
+
+    b /= 255;
+
+
+
+    let max =
+        Math.max(
+            r,
+            g,
+            b
+        );
+
+
+
+    let min =
+        Math.min(
+            r,
+            g,
+            b
+        );
+
+
+
+    let h;
+
+    let s;
+
+    let l =
+        (max+min)/2;
+
+
+
+    if(max===min){
+
+
+        h = 0;
+
+        s = 0;
+
+
+    }
+
+    else{
+
+
+        let d =
+            max-min;
+
+
+
+        s =
+
+        l > 0.5
+
+        ?
+
+        d /
+        (2-max-min)
+
+        :
+
+        d /
+        (max+min);
+
+
+
+
+        switch(max){
+
+
+            case r:
+
+                h =
+                (g-b)
+                /
+                d
+                +
+                (g<b ? 6 : 0);
+
+                break;
+
+
+
+            case g:
+
+                h =
+                (b-r)
+                /
+                d
+                +
+                2;
+
+                break;
+
+
+
+            case b:
+
+                h =
+                (r-g)
+                /
+                d
+                +
+                4;
+
+                break;
+
+
+        }
+
+
+
+        h *= 60;
+
+
+    }
+
+
+
+    return {
+
+
+        h:h,
+
+
+        s:s*100,
+
+
+        l:l*100
+
+
+    };
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// SPACEBAR PAUSE / RESUME
+// ==========================================
+
+
+document.addEventListener(
+
+    "keydown",
+
+    function(event){
+
+
+
+        if(event.code === "Space"){
+
+
+            event.preventDefault();
+
+
+
+            paused =
+                !paused;
+
+
+
+        }
+
+
+    }
+
+);
+
+
+
+
+
+
+
+
+
+// ==========================================
+// EXERCISE TABS
+// ==========================================
+
+
+const tabs =
+document.querySelectorAll(
+    ".tab"
+);
+
+
+
+const panels =
+document.querySelectorAll(
+    ".exercise-panel"
+);
+
+
+
+tabs.forEach(tab=>{
+
+
+    tab.addEventListener(
+
+        "click",
+
+        function(){
+
+
+
+            tabs.forEach(t=>{
+
+
+                t.classList.remove(
+                    "active"
+                );
+
+
+            });
+
+
+
+
+            panels.forEach(panel=>{
+
+
+                panel.classList.remove(
+                    "active"
+                );
+
+
+            });
+
+
+
+
+
+            tab.classList.add(
+                "active"
+            );
+
+
+
+
+
+            let target =
+
+                document.getElementById(
+
+                    "exercise"
+                    +
+                    tab.dataset.canvas
+
+                );
+
+
+
+            if(target){
+
+                target.classList.add(
+                    "active"
+                );
+
+            }
+
+
+
+        }
+
+
+    );
+
+
+});
+
+
+
+
+
+
+
+
+
+// ==========================================
+// UTILITY FUNCTIONS
+// ==========================================
+
+
+function distance(
+    x1,
+    y1,
+    x2,
+    y2
+){
+
+
+    return Math.sqrt(
+
+        (x2-x1)**2
+
+        +
+
+        (y2-y1)**2
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+function noise(value){
+
+
+    return (
+
+        Math.sin(value)
+
+        +
+
+        Math.sin(value*0.37)
+
+        +
+
+        Math.sin(value*0.11)
+
+
+    )
+
+    /
+
+    3
+
+    *
+
+    0.5
+
+    +
+
+    0.5;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function random(min,max){
+
+
+    return Math.random()
+
+    *
+
+    (max-min)
+
+    +
+
+    min;
+
+
+
+}
+

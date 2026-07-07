@@ -298,11 +298,15 @@ h1 {
     max-width:180px;
 
 
-    transform:translate(-50%,-115%);
+    transform:
+    translate(-50%, -130%);
 
-    transition:opacity .25s ease;
+     pointer-events:none;
 
-     z-index:20;
+     transition:
+    opacity 0.2s ease;
+
+    z-index:30;
 
 
     color:

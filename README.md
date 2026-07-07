@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-**Transparency** is an interactive web experiment exploring how colors change through relationships, overlap, and perception.
+**Transparency** is an interactive web experiment exploring how colors transform through overlap, movement, perception, and visual relationships.
 
-The project is inspired by Josef Albers' seminal book **_Interaction of Color_ (1963)**, which investigates the idea that color is not experienced independently, but is constantly influenced by surrounding colors, context, and visual relationships.
+The project is inspired by Josef Albers' seminal book **_Interaction of Color_ (1963)**, which explores the idea that color is not experienced as an isolated property, but is continuously affected by surrounding colors, context, and perception.
 
-This website translates Albers' color studies into a digital environment where transparent moving forms continuously generate new color interactions.
+This website translates Albers' color experiments into a digital environment where transparent moving forms generate evolving color relationships. Instead of presenting colors as fixed samples, the project creates an active space for observing how colors interact over time.
 
 ---
 
@@ -14,14 +14,14 @@ This website translates Albers' color studies into a digital environment where t
 
 The central idea of the project is **transparency as an active visual experience**.
 
-Rather than presenting colors as fixed samples, the website creates a constantly changing composition where:
+The website treats the canvas as a digital color laboratory where:
 
 - colors overlap,
-- new colors emerge,
-- perception shifts depending on context,
-- and viewers can pause and examine individual interactions.
+- new color relationships emerge,
+- perception changes through context,
+- viewers can interact with and examine individual moments.
 
-The project treats the browser canvas as a digital color laboratory inspired by Albers' approach to experimentation and observation.
+Inspired by Albers' method of observation and experimentation, the project focuses not only on the colors themselves, but on the relationships created between them.
 
 ---
 
@@ -36,13 +36,15 @@ The design language is influenced by:
 
 The interface emphasizes:
 
-- large-scale typography
-- geometric simplicity
-- generous white space
-- restrained visual elements
-- focus on color as the primary content
+- oversized typography,
+- geometric simplicity,
+- generous white space,
+- restrained visual elements,
+- color as the primary content.
 
-The oversized title **"TRANSPARENCY"** references Bauhaus poster design through its bold typography, strong contrast, and minimal composition.
+The large-scale title **"TRANSPARENCY"** references Bauhaus graphic design through bold typography, strong contrast, and minimal composition.
+
+The overall experience is designed to feel closer to a digital color study or exhibition piece rather than a traditional website interface.
 
 ---
 
@@ -52,25 +54,55 @@ The oversized title **"TRANSPARENCY"** references Bauhaus poster design through 
 
 The main canvas contains multiple transparent pastel-colored circles that:
 
-- move slowly across the screen,
-- float organically through space,
-- respond softly to canvas boundaries,
-- create continuously changing compositions.
+- move continuously through the canvas,
+- drift organically with smooth directional changes,
+- create evolving compositions,
+- respond softly near canvas boundaries,
+- subtly change transparency over time.
 
-The movement is intentionally slow to encourage observation and allow users to study color relationships.
+The movement is intentionally smooth and playful, allowing users to observe gradual transformations rather than fast animation.
 
 ---
 
 ## Color Interaction and Mixing
 
-When two or more transparent circles overlap:
+When transparent circles overlap:
 
-- the resulting mixed color is detected,
-- a floating information label appears,
-- the generated color is identified,
+- meaningful overlap regions are detected,
+- new mixed colors are generated,
+- color information appears through dynamic labels,
 - RGB values are displayed.
 
-The interaction is inspired by Albers' exploration of how colors are perceived differently depending on their surrounding context.
+The system avoids detecting very small accidental contacts and focuses on stronger color interactions where a visible new color relationship is created.
+
+Users can also hover over:
+
+- individual circles to view their original color,
+- overlapping regions to view the generated mixed color.
+
+This interaction is inspired by Albers' exploration of how colors shift depending on neighboring colors and surrounding conditions.
+
+---
+
+## Perceptual Color Naming
+
+Generated colors are analyzed using RGB and HSL color relationships.
+
+Instead of assigning names only from a fixed palette, the system evaluates:
+
+- hue,
+- saturation,
+- lightness,
+
+to create more perceptually relevant color descriptions such as:
+
+- Turquoise
+- Lavender
+- Peach
+- Muted Green
+- Light Rose
+
+The displayed RGB values preserve the actual sampled color produced by the interaction.
 
 ---
 
@@ -78,11 +110,13 @@ The interaction is inspired by Albers' exploration of how colors are perceived d
 
 Users can press:
 
+```
 SPACEBAR
+```
 
 to pause and resume the animation.
 
-This allows viewers to stop the movement and analyze specific moments of color interaction, similar to studying a physical color composition.
+This allows viewers to freeze a specific composition and examine the relationships between transparent layers, similar to studying a physical color arrangement.
 
 ---
 
@@ -94,10 +128,11 @@ Each tab represents a future canvas area that can be expanded with additional co
 
 Current structure:
 
+```
 Exercise 01 | Exercise 02 | Exercise 03 | Exercise 04 | Exercise 05 | Exercise 06
+```
 
-
-The modular layout allows future assignments to be added without changing the overall website structure.
+The modular layout allows future assignments and experiments to be added without changing the overall website structure.
 
 ---
 
@@ -110,6 +145,8 @@ The project is created using:
 - JavaScript
 - HTML Canvas API
 
+---
+
 ## HTML
 
 Provides:
@@ -117,7 +154,8 @@ Provides:
 - page structure,
 - canvas containers,
 - navigation tabs,
-- future exercise areas.
+- future exercise areas,
+- interactive content organization.
 
 ---
 
@@ -128,8 +166,9 @@ Controls:
 - Bauhaus-inspired typography,
 - minimalist layout,
 - responsive behavior,
-- interactive tabs,
-- floating information labels.
+- horizontal exercise navigation,
+- floating color information labels,
+- visual hierarchy and spacing.
 
 ---
 
@@ -137,13 +176,22 @@ Controls:
 
 Handles:
 
-- animated circle movement,
+- organic circle movement,
 - transparency rendering,
-- collision and overlap detection,
-- RGB color sampling,
-- dynamic labels,
+- live overlap detection,
+- dynamic color sampling,
+- RGB and HSL color analysis,
+- perceptual color naming,
+- hover-based color exploration,
+- discovery labels,
+- color archive generation,
 - pause/resume functionality,
 - exercise navigation.
 
 ---
 
+# Inspiration
+
+Josef Albers' **_Interaction of Color_** demonstrated that color perception is relational: a color changes depending on what surrounds it.
+
+**Transparency** transforms this principle into an interactive digital experiment where users do not simply view colors, but actively discover how colors influence and transform one another.
