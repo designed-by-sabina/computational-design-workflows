@@ -29,10 +29,12 @@ document.getElementById(
 );
 
 
+
 const discoveredLabelContainer =
 document.getElementById(
     "discoveredLabelContainer"
 );
+
 
 
 const archiveContainer =
@@ -51,13 +53,19 @@ let discoveredColors = [];
 let paused = false;
 
 
+let hoverLabel = null;
+
+let discoveryLabel = null;
+
+
+
 
 
 
 
 
 // ==========================================
-// RESIZE CANVAS
+// CANVAS SIZE
 // ==========================================
 
 
@@ -75,13 +83,16 @@ function resizeCanvas(){
 }
 
 
+
 window.addEventListener(
     "resize",
     resizeCanvas
 );
 
 
+
 resizeCanvas();
+
 
 
 
@@ -97,21 +108,19 @@ resizeCanvas();
 
 const palette = [
 
+    [255,180,180], // Soft Pink
 
-    [255,180,180], // pink
+    [255,220,150], // Peach
 
-    [255,220,150], // peach
+    [180,220,255], // Sky Blue
 
-    [180,220,255], // blue
+    [220,190,255], // Lavender
 
-    [220,190,255], // lavender
+    [180,255,210], // Mint
 
-    [180,255,210], // mint
+    [255,190,220], // Rose
 
-    [255,190,220], // rose
-
-    [240,240,170]  // cream
-
+    [240,240,170]  // Cream
 
 ];
 
@@ -132,6 +141,7 @@ class Circle {
 
 
     constructor(){
+
 
 
         this.radius =
@@ -158,7 +168,9 @@ class Circle {
         this.color =
             palette[
                 Math.floor(
-                    Math.random()*palette.length
+                    Math.random()
+                    *
+                    palette.length
                 )
             ];
 
@@ -169,13 +181,15 @@ class Circle {
 
 
 
+        // slow playful movement
+
         this.vx =
-            random(-1,1);
+            random(-0.4,0.4);
 
 
 
         this.vy =
-            random(-1,1);
+            random(-0.4,0.4);
 
 
 
@@ -193,6 +207,7 @@ class Circle {
 
 
 
+
     update(){
 
 
@@ -202,56 +217,94 @@ class Circle {
 
 
 
-        // gentle attraction toward center
+        // natural slowdown
 
-        let centerX =
-            canvas.width/2;
+        this.vx *= 0.995;
 
-
-        let centerY =
-            canvas.height/2;
-
-
-
-        this.vx +=
-            (centerX-this.x)
-            *0.0008;
-
-
-
-        this.vy +=
-            (centerY-this.y)
-            *0.0008;
+        this.vy *= 0.995;
 
 
 
 
 
-        // speed limit
+        // prevent circles from stopping
 
-        let maxSpeed = 1.2;
+        if(
+            Math.abs(this.vx)<0.15
+        ){
 
+            this.vx +=
+                random(
+                    -0.05,
+                    0.05
+                );
 
-
-        this.vx =
-            Math.max(
-                Math.min(
-                    this.vx,
-                    maxSpeed
-                ),
-                -maxSpeed
-            );
-
+        }
 
 
-        this.vy =
-            Math.max(
-                Math.min(
-                    this.vy,
-                    maxSpeed
-                ),
-                -maxSpeed
-            );
+
+        if(
+            Math.abs(this.vy)<0.15
+        ){
+
+            this.vy +=
+                random(
+                    -0.05,
+                    0.05
+                );
+
+        }
+
+
+
+
+
+        // soft boundary push
+
+        let margin =
+            this.radius;
+
+
+
+        if(
+            this.x < margin
+        ){
+
+            this.vx += 0.02;
+
+        }
+
+
+
+        if(
+            this.x >
+            canvas.width-margin
+        ){
+
+            this.vx -= 0.02;
+
+        }
+
+
+
+        if(
+            this.y < margin
+        ){
+
+            this.vy += 0.02;
+
+        }
+
+
+
+        if(
+            this.y >
+            canvas.height-margin
+        ){
+
+            this.vy -= 0.02;
+
+        }
 
 
 
@@ -273,6 +326,7 @@ class Circle {
 
 
         ctx.fillStyle =
+
         `
         rgba(
         ${this.color[0]},
@@ -307,6 +361,7 @@ class Circle {
     }
 
 
+
 }
 
 
@@ -318,7 +373,7 @@ class Circle {
 
 
 // ==========================================
-// CREATE INITIAL COMPOSITION
+// CREATE CIRCLES
 // ==========================================
 
 
@@ -348,7 +403,6 @@ for(let i=0;i<10;i++){
 function animate(){
 
 
-
     ctx.clearRect(
 
         0,
@@ -360,8 +414,6 @@ function animate(){
         canvas.height
 
     );
-
-
 
 
 
@@ -377,10 +429,6 @@ function animate(){
 
 
         circle.draw();
-
-
-
-        drawSourceLabel(circle);
 
 
 
@@ -413,72 +461,182 @@ animate();
 
 
 // ==========================================
-// ORIGINAL COLOR LABELS
+// HOVER INTERACTION
 // ==========================================
 
 
-function drawSourceLabel(circle){
+canvas.addEventListener(
+"mousemove",
+function(event){
 
 
-    let existing =
-        document.getElementById(
-            "source-"+circle.name
+
+    let rect =
+        canvas.getBoundingClientRect();
+
+
+
+    let mouseX =
+        event.clientX -
+        rect.left;
+
+
+
+    let mouseY =
+        event.clientY -
+        rect.top;
+
+
+
+    let hovered = null;
+
+
+
+    circles.forEach(circle=>{
+
+
+        let distance =
+
+        Math.sqrt(
+
+            (mouseX-circle.x)**2 +
+
+            (mouseY-circle.y)**2
+
         );
 
 
 
-    if(!existing){
+        if(
+            distance <
+            circle.radius
+        ){
+
+            hovered = circle;
+
+        }
 
 
-        let label =
-            document.createElement("div");
-
-
-
-        label.className =
-            "source-label";
-
-
-
-        label.id =
-            "source-"+circle.name;
+    });
 
 
 
-        label.innerHTML =
-
-        `
-        <span>${circle.name}</span>
-        <span>
-        ${circle.color[0]}
-        /
-        ${circle.color[1]}
-        /
-        ${circle.color[2]}
-        </span>
-        `;
+    showHoverLabel(
+        hovered
+    );
 
 
 
-        sourceLabelContainer.appendChild(label);
+});
 
 
 
-        existing = label;
 
+
+
+
+
+canvas.addEventListener(
+"mouseleave",
+function(){
+
+
+    removeHoverLabel();
+
+
+});
+
+
+
+
+
+
+
+
+
+function showHoverLabel(circle){
+
+
+
+    removeHoverLabel();
+
+
+
+    if(!circle){
+
+        return;
 
     }
 
 
 
+    let label =
+        document.createElement("div");
 
-    existing.style.left =
+
+
+    label.className =
+        "source-label";
+
+
+
+    label.innerHTML =
+
+    `
+    <span>
+    ${circle.name}
+    </span>
+
+    <span>
+    RGB
+    ${circle.color[0]},
+    ${circle.color[1]},
+    ${circle.color[2]}
+    </span>
+
+    `;
+
+
+
+    label.style.left =
         circle.x+"px";
 
 
 
-    existing.style.top =
+    label.style.top =
         circle.y+"px";
+
+
+
+    sourceLabelContainer.appendChild(
+        label
+    );
+
+
+
+    hoverLabel = label;
+
+
+
+}
+
+
+
+
+
+
+
+
+function removeHoverLabel(){
+
+
+    if(hoverLabel){
+
+        hoverLabel.remove();
+
+        hoverLabel = null;
+
+    }
 
 
 }
@@ -507,6 +665,7 @@ function detectOverlaps(){
     ){
 
 
+
         for(
             let j=i+1;
             j<circles.length;
@@ -514,8 +673,10 @@ function detectOverlaps(){
         ){
 
 
+
             let a =
                 circles[i];
+
 
 
             let b =
@@ -541,6 +702,7 @@ function detectOverlaps(){
             ){
 
 
+
                 createDiscovery(
 
                     (a.x+b.x)/2,
@@ -553,10 +715,13 @@ function detectOverlaps(){
             }
 
 
+
         }
 
 
+
     }
+
 
 
 }
@@ -570,11 +735,14 @@ function detectOverlaps(){
 
 
 // ==========================================
-// CREATE DISCOVERED COLOR
+// DISCOVER NEW COLOR
 // ==========================================
 
 
-function createDiscovery(x,y){
+function createDiscovery(
+x,
+y
+){
 
 
 
@@ -615,7 +783,9 @@ function createDiscovery(x,y){
 
 
 
-    discoveredColors.push(key);
+    discoveredColors.push(
+        key
+    );
 
 
 
@@ -624,8 +794,7 @@ function createDiscovery(x,y){
 
 
 
-
-    createDiscoveryLabel(
+    showDiscoveryLabel(
         x,
         y,
         name,
@@ -634,10 +803,11 @@ function createDiscovery(x,y){
 
 
 
-    createArchiveCard(
+    addArchiveColor(
         name,
         rgb
     );
+
 
 
 }
@@ -651,16 +821,23 @@ function createDiscovery(x,y){
 
 
 // ==========================================
-// DISCOVERY LABEL
+// TEMPORARY DISCOVERY LABEL
 // ==========================================
 
 
-function createDiscoveryLabel(
-    x,
-    y,
-    name,
-    rgb
+function showDiscoveryLabel(
+x,
+y,
+name,
+rgb
 ){
+
+
+    if(discoveryLabel){
+
+        discoveryLabel.remove();
+
+    }
 
 
 
@@ -677,7 +854,9 @@ function createDiscoveryLabel(
     label.innerHTML =
 
     `
-    <strong>${name}</strong>
+    <strong>
+    ${name}
+    </strong>
 
     RGB
 
@@ -704,6 +883,27 @@ function createDiscoveryLabel(
     );
 
 
+
+    discoveryLabel = label;
+
+
+
+    setTimeout(()=>{
+
+
+        if(discoveryLabel){
+
+            discoveryLabel.remove();
+
+            discoveryLabel = null;
+
+        }
+
+
+    },4000);
+
+
+
 }
 
 
@@ -719,11 +919,10 @@ function createDiscoveryLabel(
 // ==========================================
 
 
-function createArchiveCard(
-    name,
-    rgb
+function addArchiveColor(
+name,
+rgb
 ){
-
 
 
     let card =
@@ -751,7 +950,11 @@ function createArchiveCard(
     card.innerHTML =
 
     `
-    <strong>${name}</strong>
+    <strong>
+    ${name}
+    </strong>
+
+    RGB
 
     ${rgb[0]},
     ${rgb[1]},
@@ -777,11 +980,12 @@ function createArchiveCard(
 
 
 // ==========================================
-// COLOR NAME FUNCTION
+// COLOR NAMING
 // ==========================================
 
 
 function getColorName(rgb){
+
 
 
     let colors = {
@@ -829,12 +1033,11 @@ function getColorName(rgb){
 
 
 
-
-    for(let c in colors){
+    for(let color in colors){
 
 
         let values =
-            c.split(",")
+            color.split(",")
             .map(Number);
 
 
@@ -861,7 +1064,7 @@ function getColorName(rgb){
 
 
             closest =
-                colors[c];
+                colors[color];
 
 
         }
@@ -872,6 +1075,7 @@ function getColorName(rgb){
 
 
     return closest;
+
 
 
 }
@@ -885,30 +1089,32 @@ function getColorName(rgb){
 
 
 // ==========================================
-// SPACEBAR OBSERVATION MODE
+// SPACEBAR PAUSE
 // ==========================================
 
 
 document.addEventListener(
-    "keydown",
-    function(event){
+"keydown",
+function(event){
 
 
-        if(event.code==="Space"){
+
+    if(event.code === "Space"){
 
 
-            event.preventDefault();
+        event.preventDefault();
 
 
-            paused =
-                !paused;
 
-
-        }
+        paused =
+            !paused;
 
 
     }
-);
+
+
+
+});
 
 
 
@@ -936,48 +1142,47 @@ tabs.forEach(tab=>{
 
 
     tab.addEventListener(
-        "click",
-        ()=>{
+    "click",
+    ()=>{
 
 
-            tabs.forEach(t=>
+        tabs.forEach(t=>
 
-                t.classList.remove(
-                    "active"
-                )
-
-            );
-
-
-
-            panels.forEach(panel=>
-
-                panel.classList.remove(
-                    "active"
-                )
-
-            );
-
-
-
-            tab.classList.add(
+            t.classList.remove(
                 "active"
-            );
-
-
-
-            document
-            .getElementById(
-                "exercise"+
-                tab.dataset.canvas
             )
-            .classList.add(
+
+        );
+
+
+
+        panels.forEach(panel=>
+
+            panel.classList.remove(
                 "active"
-            );
+            )
+
+        );
 
 
-        }
-    );
+
+        tab.classList.add(
+            "active"
+        );
+
+
+
+        document
+        .getElementById(
+            "exercise"+
+            tab.dataset.canvas
+        )
+        .classList.add(
+            "active"
+        );
+
+
+    });
 
 
 });
@@ -999,7 +1204,10 @@ function random(min,max){
 
 
     return Math.random()
-    *(max-min)+min;
+    *
+    (max-min)
+    +
+    min;
 
 
 }

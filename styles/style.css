@@ -1,26 +1,32 @@
 /* ==========================================
    TRANSPARENCY
-   Josef Albers inspired color study
+   Digital Color Study
 
-   Global styling
+   Inspired by Josef Albers'
+   Interaction of Color
+
 ========================================== */
+
 
 
 /* ==========================================
    VARIABLES
 ========================================== */
 
+
 :root {
 
     --black: #111111;
+
     --white: #ffffff;
 
     --gray: #777777;
-    --light-gray: #dddddd;
 
-    --border: #e5e5e5;
+    --border: #dddddd;
 
 }
+
+
 
 
 
@@ -32,7 +38,9 @@
 * {
 
     margin: 0;
+
     padding: 0;
+
     box-sizing: border-box;
 
 }
@@ -46,6 +54,7 @@ body {
     color: var(--black);
 
     font-family:
+
         Helvetica,
         Arial,
         sans-serif;
@@ -56,6 +65,9 @@ body {
 
 
 
+
+
+
 /* ==========================================
    HEADER
 ========================================== */
@@ -63,8 +75,11 @@ body {
 
 header {
 
+
     padding:
+
         45px 50px 20px;
+
 
 }
 
@@ -72,17 +87,26 @@ header {
 
 h1 {
 
+
     font-size:
+
         clamp(70px, 12vw, 160px);
 
+
     font-weight:
+
         900;
 
+
     letter-spacing:
+
         -0.08em;
 
+
     line-height:
+
         0.85;
+
 
 }
 
@@ -90,22 +114,35 @@ h1 {
 
 .subtitle {
 
+
     margin-top:
+
         30px;
 
+
     max-width:
+
         600px;
 
-    color:
-        var(--gray);
 
     font-size:
+
         18px;
 
+
     line-height:
+
         1.5;
 
+
+    color:
+
+        var(--gray);
+
+
 }
+
+
 
 
 
@@ -114,7 +151,7 @@ h1 {
 
 
 /* ==========================================
-   MAIN CANVAS
+   MAIN CANVAS AREA
 ========================================== */
 
 
@@ -122,18 +159,44 @@ h1 {
 
 
     width:
+
+        100%;
+
+
+    margin-top:
+
+        80px;
+
+
+    padding:
+
+        0 0;
+
+
+}
+
+
+
+.canvas-wrapper {
+
+
+    position:
+
+        relative;
+
+
+    width:
+
         100%;
 
 
     height:
+
         70vh;
 
 
-    margin-top:
-        50px;
-
-
 }
+
 
 
 
@@ -141,18 +204,22 @@ h1 {
 
 
     display:
+
         block;
 
 
     width:
+
         100%;
 
 
     height:
+
         100%;
 
 
     background:
+
         white;
 
 
@@ -163,33 +230,46 @@ h1 {
 
 
 
-/* ==========================================
-   ORIGINAL COLOR SOURCE LABELS
 
-   Attached to moving circles
+
+
+/* ==========================================
+   LABEL CONTAINERS
 ========================================== */
 
 
-#sourceLabelContainer {
+#sourceLabelContainer,
+
+#discoveredLabelContainer {
 
 
     position:
+
         absolute;
 
 
     top:
+
         0;
 
 
     left:
+
         0;
 
 
     width:
+
+        100%;
+
+
+    height:
+
         100%;
 
 
     pointer-events:
+
         none;
 
 
@@ -197,34 +277,67 @@ h1 {
 
 
 
+
+
+
+
+/* ==========================================
+   HOVER COLOR LABEL
+
+   Original circle information
+========================================== */
+
+
 .source-label {
 
 
     position:
+
         absolute;
 
 
     transform:
-        translate(-50%, -50%);
 
-
-    font-size:
-        12px;
-
-
-    line-height:
-        1.4;
+        translate(-50%, -130%);
 
 
     color:
-        rgba(0,0,0,0.55);
+
+        rgba(0,0,0,0.65);
+
+
+    font-size:
+
+        12px;
 
 
     letter-spacing:
+
         0.04em;
 
 
+    line-height:
+
+        1.5;
+
+
+    background:
+
+        rgba(255,255,255,0.8);
+
+
+    padding:
+
+        6px 10px;
+
+
+    border:
+
+        1px solid rgba(0,0,0,0.1);
+
+
     white-space:
+
         nowrap;
 
 
@@ -232,10 +345,14 @@ h1 {
 
 
 
+
+
+
 .source-label span {
 
 
     display:
+
         block;
 
 
@@ -247,78 +364,61 @@ h1 {
 
 
 
+
+
 /* ==========================================
-   DISCOVERED COLOR LABELS
+   DISCOVERED COLOR LABEL
 
-   Created through interaction
+   New color interaction
 ========================================== */
-
-
-#discoveredLabelContainer {
-
-
-    position:
-        absolute;
-
-
-    top:
-        0;
-
-
-    left:
-        0;
-
-
-    width:
-        100%;
-
-
-    pointer-events:
-        none;
-
-
-}
-
-
 
 
 .discovered-label {
 
 
     position:
+
         absolute;
 
 
     transform:
-        translate(-50%, -50%);
 
-
-    background:
-        rgba(255,255,255,0.92);
-
-
-    border:
-        1px solid var(--border);
-
-
-    padding:
-        14px 18px;
+        translate(-50%, -120%);
 
 
     min-width:
-        130px;
+
+        150px;
+
+
+    padding:
+
+        16px 20px;
+
+
+    background:
+
+        rgba(255,255,255,0.94);
+
+
+    border:
+
+        1px solid var(--border);
 
 
     font-size:
+
         13px;
 
 
     line-height:
+
         1.5;
 
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,0.08);
+
+        0 10px 25px rgba(0,0,0,0.08);
 
 
 }
@@ -329,18 +429,24 @@ h1 {
 
 
     display:
+
         block;
 
 
+    margin-bottom:
+
+        6px;
+
+
     font-size:
+
         15px;
 
 
-    margin-bottom:
-        5px;
-
-
 }
+
+
+
 
 
 
@@ -355,18 +461,22 @@ h1 {
 
 
     text-align:
+
         center;
 
 
     padding:
+
         35px 20px 50px;
 
 
     color:
+
         var(--gray);
 
 
     font-size:
+
         14px;
 
 
@@ -378,10 +488,14 @@ h1 {
 
 
     color:
+
         var(--black);
 
 
 }
+
+
+
 
 
 
@@ -397,6 +511,7 @@ h1 {
 
 
     padding:
+
         0 50px 60px;
 
 
@@ -408,22 +523,27 @@ h1 {
 
 
     font-size:
+
         14px;
 
 
     font-weight:
+
         600;
 
 
-    text-transform:
-        uppercase;
-
-
     letter-spacing:
+
         0.08em;
 
 
+    text-transform:
+
+        uppercase;
+
+
     margin-bottom:
+
         25px;
 
 
@@ -431,18 +551,23 @@ h1 {
 
 
 
+
+
 #colorArchiveContainer {
 
 
     display:
+
         flex;
 
 
     flex-wrap:
+
         wrap;
 
 
     gap:
+
         20px;
 
 
@@ -450,42 +575,53 @@ h1 {
 
 
 
+
+
 .color-swatch {
 
 
     width:
+
         150px;
 
 
     height:
+
         110px;
 
 
-    border:
-        1px solid var(--border);
-
-
     padding:
+
         12px;
 
 
+    border:
+
+        1px solid var(--border);
+
+
     display:
+
         flex;
 
 
     flex-direction:
+
         column;
 
 
     justify-content:
+
         flex-end;
 
 
     font-size:
+
         12px;
 
 
 }
+
 
 
 
@@ -493,10 +629,14 @@ h1 {
 
 
     font-size:
+
         14px;
 
 
 }
+
+
+
 
 
 
@@ -512,30 +652,33 @@ h1 {
 
 
     display:
+
         flex;
 
 
     justify-content:
+
         center;
 
 
     align-items:
+
         center;
 
 
-    width:
-        100%;
-
-
     border-top:
+
         1px solid var(--border);
 
 
     border-bottom:
+
         1px solid var(--border);
 
 
 }
+
+
 
 
 
@@ -543,39 +686,47 @@ h1 {
 
 
     background:
+
         transparent;
 
 
     border:
+
         none;
 
 
     border-right:
+
         1px solid var(--border);
 
 
     padding:
+
         18px 35px;
 
 
-    cursor:
-        pointer;
-
-
     font-family:
+
         inherit;
 
 
+    cursor:
+
+        pointer;
+
+
     font-size:
+
         14px;
 
 
     transition:
-        background .25s ease,
-        color .25s ease;
+
+        background .25s ease;
 
 
 }
+
 
 
 
@@ -583,6 +734,7 @@ h1 {
 
 
     border-left:
+
         1px solid var(--border);
 
 
@@ -590,10 +742,12 @@ h1 {
 
 
 
+
 .tab:hover {
 
 
     background:
+
         #f5f5f5;
 
 
@@ -601,18 +755,24 @@ h1 {
 
 
 
+
 .tab.active {
 
 
     background:
+
         var(--black);
 
 
     color:
+
         white;
 
 
 }
+
+
+
 
 
 
@@ -628,6 +788,7 @@ h1 {
 
 
     padding:
+
         60px 50px;
 
 
@@ -635,14 +796,18 @@ h1 {
 
 
 
+
+
 .exercise-panel {
 
 
     display:
+
         none;
 
 
     position:
+
         relative;
 
 
@@ -650,10 +815,12 @@ h1 {
 
 
 
+
 .exercise-panel.active {
 
 
     display:
+
         block;
 
 
@@ -661,22 +828,27 @@ h1 {
 
 
 
+
 .exerciseCanvas {
 
 
-    display:
-        block;
-
-
     width:
+
         100%;
 
 
     height:
+
         400px;
 
 
+    display:
+
+        block;
+
+
     border:
+
         1px solid var(--border);
 
 
@@ -684,34 +856,38 @@ h1 {
 
 
 
+
 .placeholder-text {
 
 
     position:
+
         absolute;
 
 
     top:
+
         50%;
 
 
     left:
+
         50%;
 
 
     transform:
+
         translate(-50%, -50%);
 
 
     color:
+
         #999;
 
 
-    font-size:
-        15px;
-
-
 }
+
+
 
 
 
@@ -727,22 +903,27 @@ footer {
 
 
     padding:
+
         40px 50px;
 
 
     border-top:
+
         1px solid var(--border);
 
 
     color:
+
         var(--gray);
 
 
     font-size:
+
         14px;
 
 
 }
+
 
 
 
@@ -762,64 +943,89 @@ footer {
 
 
         padding:
+
             30px 20px;
 
 
     }
+
 
 
     h1 {
 
 
         font-size:
+
             70px;
 
 
     }
 
 
+
+    .canvas-wrapper {
+
+
+        height:
+
+            60vh;
+
+
+    }
+
+
+
     .color-archive {
 
 
         padding:
+
             0 20px 40px;
 
 
     }
 
 
+
     .exercise-container {
 
 
         padding:
+
             30px 20px;
 
 
     }
 
 
+
     .exercise-tabs {
 
 
-        justify-content:
-            flex-start;
-
-
         overflow-x:
+
             auto;
 
 
+        justify-content:
+
+            flex-start;
+
+
     }
+
 
 
     .tab {
 
 
         white-space:
+
             nowrap;
 
 
         padding:
+
             16px 22px;
 
 
