@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transparency | Interaction of Color</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header>
+
+        <h1>TRANSPARENCY</h1>
+
+        <p class="subtitle">
+            Inspired by Josef Albers' <em>Interaction of Color</em>
+        </p>
+
+    </header>
+
+
+    <!-- ==========================================
+         MAIN INTERACTIVE CANVAS
+    =========================================== -->
+
+    <main>
+
+        <section class="main-canvas-section">
+
+            <canvas id="colorCanvas"></canvas>
+
+        </section>
+
+
+        <!-- Floating labels will be inserted here -->
+        <div id="labelContainer"></div>
+
+
+        <!-- Instructions -->
+
+        <section class="instructions">
+
+            <p>
+                Press <strong>SPACEBAR</strong> to pause or resume the animation.
+                Pause to observe how transparent colors interact and create new colors.
+            </p>
+
+        </section>
+
+
+        <!-- ==========================================
+             EXERCISE NAVIGATION
+        =========================================== -->
+
+        <nav class="exercise-tabs">
+
+            <button class="tab active" data-canvas="1">
+                Exercise 01
+            </button>
+
+            <button class="tab" data-canvas="2">
+                Exercise 02
+            </button>
+
+            <button class="tab" data-canvas="3">
+                Exercise 03
+            </button>
+
+            <button class="tab" data-canvas="4">
+                Exercise 04
+            </button>
+
+            <button class="tab" data-canvas="5">
+                Exercise 05
+            </button>
+
+            <button class="tab" data-canvas="6">
+                Exercise 06
+            </button>
+
+        </nav>
+
+
+        <!-- ==========================================
+             FUTURE ASSIGNMENT CANVASES
+        =========================================== -->
+
+        <section class="exercise-container">
+
+            <!-- Exercise 1 -->
+
+            <div class="exercise-panel active" id="exercise1">
+
+                <canvas class="exerciseCanvas"></canvas>
+
+                <div class="placeholder-text">
+
+                    Future Assignment Canvas
+
+                </div>
+
+            </div>
+
+
+            <!-- Exercise 2 -->
+
+            <div class="exercise-panel" id="exercise2">
+
+                <canvas class="exerciseCanvas"></canvas>
+
+                <div class="placeholder-text">
+
+                    Future Assignment Canvas
+
+                </div>
+
+            </div>
+
+
+            <!-- Exercise 3 -->
+
+            <div class="exercise-panel" id="exercise3">
+
+                <canvas class="exerciseCanvas"></canvas>
+
+                <div class="placeholder-text">
+
+                    Future Assignment Canvas
+
+                </div>
+
+            </div>
+
+
+            <!-- Exercise 4 -->
+
+            <div class="exercise-panel" id="exercise4">
+
+                <canvas class="exerciseCanvas"></canvas>
+
+                <div class="placeholder-text">
+
+                    Future Assignment Canvas
+
+                </div>
+
+            </div>
+
+
+            <!-- Exercise 5 -->
+
+            <div class="exercise-panel" id="exercise5">
+
+                <canvas class="exerciseCanvas"></canvas>
+
+                <div class="placeholder-text">
+
+                    Future Assignment Canvas
+
+                </div>
+
+            </div>
+
+
+            <!-- Exercise 6 -->
+
+            <div class="exercise-panel" id="exercise6">
+
+                <canvas class="exerciseCanvas"></canvas>
+
+                <div class="placeholder-text">
+
+                    Future Assignment Canvas
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <footer>
+
+        <p>
+            Transparency — an exploration of interaction, perception,
+            and overlapping color.
+        </p>
+
+    </footer>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script src="javascript/main.js"></script>
+
+</body>
+
+</html>

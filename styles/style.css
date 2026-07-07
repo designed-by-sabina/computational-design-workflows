@@ -1,0 +1,419 @@
+/* ==========================================
+   GLOBAL VARIABLES
+========================================== */
+
+:root {
+
+    --black: #111111;
+    --white: #ffffff;
+    --gray: #777777;
+    --light-gray: #e8e8e8;
+
+    --space-small: 10px;
+    --space-medium: 24px;
+    --space-large: 60px;
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+body {
+
+    background: var(--white);
+
+    color: var(--black);
+
+    font-family:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    overflow-x: hidden;
+
+}
+
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+
+header {
+
+    padding: 40px 50px 20px 50px;
+
+}
+
+
+h1 {
+
+    font-size: clamp(70px, 12vw, 160px);
+
+    font-weight: 900;
+
+    letter-spacing: -0.08em;
+
+    line-height: 0.85;
+
+}
+
+
+.subtitle {
+
+    margin-top: 25px;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    color: var(--gray);
+
+}
+
+
+
+/* ==========================================
+   MAIN CANVAS
+========================================== */
+
+
+main {
+
+    width: 100%;
+
+}
+
+
+
+.main-canvas-section {
+
+    width: 100%;
+
+    height: 70vh;
+
+    margin-top: 40px;
+
+}
+
+
+
+#colorCanvas {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    background: white;
+
+}
+
+
+
+/* ==========================================
+   COLOR LABELS
+========================================== */
+
+
+#labelContainer {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    pointer-events: none;
+
+}
+
+
+
+.color-label {
+
+    position: absolute;
+
+    background: rgba(255,255,255,0.95);
+
+    padding: 12px 18px;
+
+    border: 1px solid #ddd;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+    transition: opacity .3s ease;
+
+}
+
+
+
+.color-label strong {
+
+    display:block;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================================
+   INSTRUCTIONS
+========================================== */
+
+
+.instructions {
+
+    text-align:center;
+
+    padding:30px 20px 50px;
+
+    color:var(--gray);
+
+    font-size:14px;
+
+}
+
+
+
+.instructions strong {
+
+    color:var(--black);
+
+}
+
+
+
+/* ==========================================
+   HORIZONTAL EXERCISE TABS
+========================================== */
+
+
+.exercise-tabs {
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:row;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:0;
+
+    border-top:1px solid var(--light-gray);
+
+    border-bottom:1px solid var(--light-gray);
+
+}
+
+
+
+.tab {
+
+    background:none;
+
+    border:none;
+
+    border-right:1px solid var(--light-gray);
+
+    padding:18px 35px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-family:inherit;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+
+}
+
+
+
+.tab:first-child {
+
+    border-left:1px solid var(--light-gray);
+
+}
+
+
+
+.tab:hover {
+
+    background:#f5f5f5;
+
+}
+
+
+
+.tab.active {
+
+    background:var(--black);
+
+    color:white;
+
+}
+
+
+
+/* ==========================================
+   FUTURE ASSIGNMENT CANVASES
+========================================== */
+
+
+.exercise-container {
+
+    width:100%;
+
+    padding:60px 50px;
+
+}
+
+
+
+.exercise-panel {
+
+    display:none;
+
+    position:relative;
+
+    width:100%;
+
+}
+
+
+
+.exercise-panel.active {
+
+    display:block;
+
+}
+
+
+
+.exerciseCanvas {
+
+    width:100%;
+
+    height:400px;
+
+    border:1px solid var(--light-gray);
+
+    display:block;
+
+}
+
+
+
+.placeholder-text {
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color:#999;
+
+    font-size:16px;
+
+}
+
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+
+footer {
+
+    padding:40px 50px;
+
+    border-top:1px solid var(--light-gray);
+
+    color:var(--gray);
+
+    font-size:14px;
+
+}
+
+
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+
+@media(max-width:700px){
+
+
+    header {
+
+        padding:30px 20px;
+
+    }
+
+
+    h1 {
+
+        font-size:70px;
+
+    }
+
+
+    .exercise-tabs {
+
+        overflow-x:auto;
+
+        justify-content:flex-start;
+
+    }
+
+
+    .tab {
+
+        padding:
+            16px 20px;
+
+        white-space:nowrap;
+
+    }
+
+
+    .exercise-container {
+
+        padding:30px 20px;
+
+    }
+
+
+}
