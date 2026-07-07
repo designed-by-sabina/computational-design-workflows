@@ -145,17 +145,16 @@ class Circle{
 
         this.x =
             random(
-                this.radius,
-                canvas.width-this.radius
-            );
-
+    150,
+    canvas.width-150
+);
 
 
         this.y =
-            random(
-                this.radius,
-                canvas.height-this.radius
-            );
+                random(
+    150,
+    canvas.height-150
+);
 
 
 
@@ -194,7 +193,7 @@ class Circle{
             random(0,5000);
 
         this.speed =
-             random(0.8,1.1);
+            random(0.25,0.45);
 
         this.phase =
             random(0,1000);
@@ -231,34 +230,18 @@ class Circle{
 
 // floating movement
 
-this.driftX +=
+this.x +=
 
-    Math.cos(angle)
-    *
-    0.03;
-
-
-
-this.driftY +=
-
-    Math.sin(angle)
-    *
-    0.03;
+Math.cos(angle)
+*
+this.speed;
 
 
+this.y +=
 
-// limit accumulated movement
-
-this.driftX *= 0.98;
-
-this.driftY *= 0.98;
-
-
-
-this.x += this.driftX;
-
-this.y += this.driftY;
-
+Math.sin(angle)
+*
+this.speed;
 
 // =================================
 // SOFT PERSONAL SPACE
@@ -293,10 +276,10 @@ circles.forEach(other=>{
 
     let minimumDistance =
 
-        (this.radius +
-        other.radius)
-        *
-        0.55;
+    (this.radius +
+    other.radius)
+    *
+    0.85;
 
 
 
@@ -314,7 +297,7 @@ circles.forEach(other=>{
                 distance
             )
             *
-            0.002;
+            0.008;
 
 
 
