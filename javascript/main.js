@@ -52,6 +52,7 @@ let discoveredColors = [];
 
 let paused = false;
 
+let animationTime = 0;
 
 let hoverLabel = null;
 
@@ -182,13 +183,16 @@ class Circle {
 
         // slow playful movement
 
-        this.vx =
-            random(-0.4,0.4);
+        this.offsetX =
+        random(0,1000);
 
 
+        this.offsetY =
+        random(0,1000);
 
-        this.vy =
-            random(-0.4,0.4);
+
+        this.speed =
+        random(0.15,0.35);
 
 
 
@@ -207,107 +211,82 @@ class Circle {
 
 
 
-    update(){
+   update(){
 
 
-        this.x += this.vx;
-
-        this.y += this.vy;
-
-
-
-        // natural slowdown
-
-        this.vx *= 0.995;
-
-        this.vy *= 0.995;
+    let driftX =
+        noise(
+            animationTime + this.offsetX
+        );
 
 
+    let driftY =
+        noise(
+            animationTime + this.offsetY
+        );
 
 
 
-        // prevent circles from stopping
-
-        if(
-            Math.abs(this.vx)<0.15
-        ){
-
-            this.vx +=
-                random(
-                    -0.05,
-                    0.05
-                );
-
-        }
+    this.x +=
+        (driftX - 0.5)
+        *
+        this.speed;
 
 
 
-        if(
-            Math.abs(this.vy)<0.15
-        ){
-
-            this.vy +=
-                random(
-                    -0.05,
-                    0.05
-                );
-
-        }
+    this.y +=
+        (driftY - 0.5)
+        *
+        this.speed;
 
 
 
+    // soft boundary influence
 
 
-        // soft boundary push
-
-        let margin =
-            this.radius;
-
-
-
-        if(
-            this.x < margin
-        ){
-
-            this.vx += 0.02;
-
-        }
+    let margin =
+        this.radius;
 
 
 
-        if(
-            this.x >
-            canvas.width-margin
-        ){
+    if(this.x < margin){
 
-            this.vx -= 0.02;
-
-        }
-
-
-
-        if(
-            this.y < margin
-        ){
-
-            this.vy += 0.02;
-
-        }
-
-
-
-        if(
-            this.y >
-            canvas.height-margin
-        ){
-
-            this.vy -= 0.02;
-
-        }
-
-
+        this.x += 0.3;
 
     }
+
+
+    if(
+        this.x >
+        canvas.width-margin
+    ){
+
+        this.x -= 0.3;
+
+    }
+
+
+
+    if(this.y < margin){
+
+        this.y += 0.3;
+
+    }
+
+
+
+    if(
+        this.y >
+        canvas.height-margin
+    ){
+
+        this.y -= 0.3;
+
+    }
+
+
+
+}
 
 
 
@@ -414,6 +393,7 @@ function animate(){
 
     );
 
+animationTime += 0.003;
 
 
     circles.forEach(circle=>{
@@ -1242,6 +1222,27 @@ tabs.forEach(tab=>{
 // RANDOM NUMBER
 // ==========================================
 
+
+function noise(value){
+
+
+    return (
+        Math.sin(value)
+        +
+        Math.sin(value*0.37)
+        +
+        Math.sin(value*0.11)
+
+    )
+    /
+    3
+    *
+    0.5
+    +
+    0.5;
+
+
+}
 
 function random(min,max){
 
