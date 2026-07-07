@@ -194,10 +194,18 @@ class Circle{
             random(0,5000);
 
         this.speed =
-            random(0.5,0.9);
+             random(0.8,1.1);
 
         this.phase =
             random(0,1000);
+
+        this.homeX = this.x;
+
+        this.homeY = this.y;
+
+        this.driftX = 0;
+
+        this.driftY = 0;
 
     }
 
@@ -210,32 +218,123 @@ class Circle{
 
     let angle =
 
-        noise(
-            animationTime * 0.5 +
-            this.offsetX
-        )
+    noise(
+        animationTime * 0.35 +
+        this.offsetX
+    )
+    *
+    Math.PI
+    *
+    2;
+
+
+
+// floating movement
+
+this.driftX +=
+
+    Math.cos(angle)
+    *
+    0.03;
+
+
+
+this.driftY +=
+
+    Math.sin(angle)
+    *
+    0.03;
+
+
+
+// limit accumulated movement
+
+this.driftX *= 0.98;
+
+this.driftY *= 0.98;
+
+
+
+this.x += this.driftX;
+
+this.y += this.driftY;
+
+
+// =================================
+// SOFT PERSONAL SPACE
+// =================================
+
+
+circles.forEach(other=>{
+
+
+    if(other === this){
+
+        return;
+
+    }
+
+
+    let dx =
+        this.x - other.x;
+
+
+    let dy =
+        this.y - other.y;
+
+
+    let distance =
+        Math.sqrt(
+            dx*dx +
+            dy*dy
+        );
+
+
+
+    let minimumDistance =
+
+        (this.radius +
+        other.radius)
         *
-        Math.PI
-        *
-        2;
+        0.55;
 
 
 
-    // organic floating movement
-
-    this.x +=
-
-        Math.cos(angle)
-        *
-        this.speed;
+    if(
+        distance < minimumDistance
+        &&
+        distance > 0
+    ){
 
 
+        let push =
 
-    this.y +=
+            (
+                minimumDistance -
+                distance
+            )
+            *
+            0.002;
 
-        Math.sin(angle)
-        *
-        this.speed;
+
+
+        this.x +=
+            (dx/distance)
+            *
+            push;
+
+
+
+        this.y +=
+            (dy/distance)
+            *
+            push;
+
+
+    }
+
+
+});
 
 
 
