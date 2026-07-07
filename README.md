@@ -171,11 +171,6 @@ Potential additions include:
 
 ---
 
-# Author
-
-Created as an exploration of computational design, color perception, and interactive media.
-
-
 
 
 
