@@ -553,21 +553,21 @@ function detectOverlaps(){
 
             // sample actual color on canvas
 
-            let pixel =
-                ctx.getImageData(
-                    Math.round(x),
-                    Math.round(y),
-                    1,
-                    1
-                ).data;
-
             let rgb = [
 
-                pixel[0],
-                pixel[1],
-                pixel[2]
+Math.round(
+    (a.rgb[0]+b.rgb[0])/2
+),
 
-            ];
+Math.round(
+    (a.rgb[1]+b.rgb[1])/2
+),
+
+Math.round(
+    (a.rgb[2]+b.rgb[2])/2
+)
+
+];
 
             let region = {
 
@@ -579,10 +579,15 @@ function detectOverlaps(){
 
                 name:getColorName(rgb),
 
-                radius:Math.min(
-                    overlap*0.45,
-                    60
-                )
+                radius:
+
+Math.max(
+
+    overlap*0.7,
+
+    35
+
+)
 
             };
 
