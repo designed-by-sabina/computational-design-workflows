@@ -569,27 +569,27 @@ Math.round(
 
 ];
 
-            let region = {
+           let region = {
 
-                x,
 
-                y,
+    x,
 
-                rgb,
+    y,
 
-                name:getColorName(rgb),
 
-                radius:
+    rgb,
 
-Math.max(
 
-    overlap*0.7,
+    name:getColorName(rgb),
 
-    35
 
-)
+    circleA:a,
 
-            };
+
+    circleB:b
+
+
+};
 
             overlapRegions.push(
                 region
@@ -866,34 +866,67 @@ canvas.addEventListener(
         overlapRegions.forEach(region=>{
 
 
-            let d =
-                distance(
-
-                    mouseX,
-
-                    mouseY,
-
-                    region.x,
-
-                    region.y
-
-                );
+    let insideOverlap = false;
 
 
 
-            if(
-                d <
-                region.radius
-            ){
+    // check distance to both original circles
 
-                foundOverlap =
-                    region;
+    let d1 =
+        distance(
 
-            }
+            mouseX,
+
+            mouseY,
+
+            region.circleA.x,
+
+            region.circleA.y
+
+        );
 
 
-        });
 
+    let d2 =
+        distance(
+
+            mouseX,
+
+            mouseY,
+
+            region.circleB.x,
+
+            region.circleB.y
+
+        );
+
+
+
+    if(
+
+        d1 < region.circleA.radius + 5
+
+        &&
+
+        d2 < region.circleB.radius + 5
+
+    ){
+
+        insideOverlap = true;
+
+    }
+
+
+
+    if(insideOverlap){
+
+        foundOverlap =
+            region;
+
+    }
+
+
+});
 
 
 
