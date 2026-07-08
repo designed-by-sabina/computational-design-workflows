@@ -5,11 +5,18 @@
 
 const exercise02 = function(p) {
 
-    let paperY = -300;
+    // ======================================
+    // SETUP
+    // ======================================
 
     p.setup = function() {
+
         let canvas = p.createCanvas(800, 600);
+
         canvas.parent("canvas-container-2");
+
+        p.noLoop();
+
     };
 
     p.draw = function() {
