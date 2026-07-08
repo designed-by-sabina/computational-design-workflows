@@ -1863,10 +1863,63 @@ document.addEventListener(
 // ==========================================
 
 
-const tabs =
-document.querySelectorAll(
-    ".tab"
-);
+const buttons =
+document.querySelectorAll(".exercise-button");
+
+
+const panels =
+document.querySelectorAll(".exercise-panel");
+
+
+
+buttons.forEach(button=>{
+
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+
+            buttons.forEach(b=>{
+
+                b.classList.remove("active");
+
+            });
+
+
+            panels.forEach(panel=>{
+
+                panel.classList.remove("active");
+
+            });
+
+
+
+            button.classList.add("active");
+
+
+
+            let target =
+                document.getElementById(
+                    "exercise" +
+                    button.dataset.canvas
+                );
+
+
+
+            if(target){
+
+                target.classList.add("active");
+
+            }
+
+
+        }
+
+    );
+
+
+});
 
 
 

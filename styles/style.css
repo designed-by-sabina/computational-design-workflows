@@ -1019,3 +1019,76 @@ footer {
 
 
 }
+
+
+.exercise-buttons {
+
+    display:flex;
+
+    flex-direction:row;
+
+    gap:12px;
+
+    margin-top:40px;
+
+}
+
+
+.exercise-button {
+
+
+    background:white;
+
+    border:1px solid black;
+
+    padding:12px 28px;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.exercise-button:hover {
+
+
+    background:black;
+
+    color:white;
+
+}
+
+
+
+.exercise-button.active {
+
+
+    background:black;
+
+    color:white;
+
+}
+
+
+
+.exercise-panel {
+
+    display:none;
+
+    margin-top:30px;
+
+}
+
+
+
+.exercise-panel.active {
+
+    display:block;
+
+}
