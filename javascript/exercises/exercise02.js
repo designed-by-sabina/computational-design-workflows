@@ -1,155 +1,105 @@
 // ==========================================
 // EXERCISE 02
-// Long Paper Through Two Slots
+// Long Paper Through Two Color Fields
 // ==========================================
 
 const exercise02 = function(p) {
 
-    let paperY = -1200;
+    let paperY = -1600;
 
     p.setup = function() {
-
         let canvas = p.createCanvas(800, 600);
-
         canvas.parent("canvas-container-2");
-
     };
-
 
     p.draw = function() {
 
         p.background(219, 198, 255);
-
         p.noStroke();
 
-        // Move one very long white paper sheet downward
-        paperY += 2;
+        paperY += 3;
 
         if (paperY > 700) {
-            paperY = -1200;
+            paperY = -1600;
         }
 
-
-        // Shared geometry — same as Exercise 01
+        // Same composition coordinates as Exercise 01
         let x = 80;
         let w = 640;
 
         let topY = 140;
         let bottomY = 370;
-
         let rectH = 90;
 
-        let slitX = 220;
-        let slitW = 360;
-        let slitH = 12;
+        let paperX = 220;
+        let paperW = 360;
+        let paperH = 1600;
 
-        let topSlitY = 178;
-        let bottomSlitY = 408;
+        let windowH = 45;
 
-        let paperX = slitX;
-        let paperW = slitW;
+        let topWindowY = 140;
+        let bottomWindowY = 370;
 
-        // Very long paper
-        let paperH = 1200;
-
-
-        // Draw color fields
+        // Top color field
         p.fill(244, 239, 180);
         p.rect(x, topY, w, rectH);
 
+        // Bottom color field
         p.fill(185, 255, 215);
         p.rect(x, bottomY, w, rectH);
 
-
-        // Show paper only where it intersects each slit
-        drawPaperInSlit(
+        // Paper visible through top field opening
+        drawPaperWindow(
             paperX,
             paperY,
             paperW,
             paperH,
-            slitX,
-            topSlitY,
-            slitW,
-            slitH
+            paperX,
+            topWindowY,
+            paperW,
+            windowH
         );
 
-        drawPaperInSlit(
+        // Paper visible through bottom field opening
+        drawPaperWindow(
             paperX,
             paperY,
             paperW,
             paperH,
-            slitX,
-            bottomSlitY,
-            slitW,
-            slitH
+            paperX,
+            bottomWindowY,
+            paperW,
+            windowH
         );
 
-
-        // Draw lavender slit openings when paper is NOT there
-        drawSlitEdge(topSlitY);
-        drawSlitEdge(bottomSlitY);
-
+        // Draw thin lavender slit line over each field
+        p.fill(219, 198, 255);
+        p.rect(220, 178, 360, 12);
+        p.rect(220, 408, 360, 12);
     };
 
 
-    function drawPaperInSlit(
+    function drawPaperWindow(
         paperX,
         paperY,
         paperW,
         paperH,
-        slitX,
-        slitY,
-        slitW,
-        slitH
+        windowX,
+        windowY,
+        windowW,
+        windowH
     ) {
 
         let paperTop = paperY;
         let paperBottom = paperY + paperH;
 
-        if (
-            paperBottom > slitY &&
-            paperTop < slitY + slitH
-        ) {
+        let windowTop = windowY;
+        let windowBottom = windowY + windowH;
 
+        if (paperBottom > windowTop && paperTop < windowBottom) {
             p.fill(255);
-
-            p.rect(
-                slitX,
-                slitY,
-                slitW,
-                slitH
-            );
-
+            p.rect(windowX, windowY, windowW, windowH);
         }
-
-    }
-
-
-    function drawSlitEdge(slitY) {
-
-        let slitX = 220;
-        let slitW = 360;
-        let slitH = 12;
-
-        let paperTop = paperY;
-        let paperBottom = paperY + 1200;
-
-        if (
-            !(paperBottom > slitY &&
-            paperTop < slitY + slitH)
-        ) {
-
-            p.fill(219, 198, 255);
-
-            p.rect(
-                slitX,
-                slitY,
-                slitW,
-                slitH
-            );
-
-        }
-
     }
 
 };
