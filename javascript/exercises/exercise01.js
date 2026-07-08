@@ -9,7 +9,7 @@ const exercise01 = function(p) {
         p.noLoop();
 
     };
-}
+
 
 
 
@@ -72,3 +72,4 @@ p.draw = function() {
     );
 
 };
+}
