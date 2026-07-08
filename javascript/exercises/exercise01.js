@@ -1,6 +1,5 @@
 // ==========================================
 // EXERCISE 01
-// Symmetrical Albers-inspired composition
 // ==========================================
 
 const exercise01 = function(p) {
@@ -12,32 +11,28 @@ const exercise01 = function(p) {
         canvas.parent("canvas-container-1");
 
         p.noLoop();
-
     };
 
 
     p.draw = function() {
 
-        // Background
         p.background(219,198,255);
 
-        // Left large square
         p.fill(244,239,180);
         p.noStroke();
-        p.rect(140,200,200,200);
+        p.rect(166,225,200,200);
 
-        // Left inner cut-out
-        p.fill(185,255,215);
-        p.rect(170,265,80,80);
+        p.fill(219,198,255);
+        p.noStroke();
+        p.rect(180,300,70,70);
 
-        // Right large square
         p.fill(185,255,215);
         p.noStroke();
-        p.rect(460,200,200,200);
+        p.rect(482,225,200,200);
 
-        // Right inner cut-out
-        p.fill(244,239,180);
-        p.rect(550,265,80,80);
+        p.fill(219,198,255);
+        p.noStroke();
+        p.rect(598,300,70,70);
 
     };
 
