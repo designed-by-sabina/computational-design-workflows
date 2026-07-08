@@ -1,11 +1,11 @@
 // ==========================================
 // EXERCISE 02
-// Paper Sliding Through Slots
+// One Paper Through Two Slots
 // ==========================================
 
 const exercise02 = function(p) {
 
-    let paperY = -160;
+    let paperY = -260;
 
     p.setup = function() {
         let canvas = p.createCanvas(800, 600);
@@ -20,49 +20,80 @@ const exercise02 = function(p) {
         paperY += 2;
 
         if (paperY > 620) {
-            paperY = -160;
+            paperY = -260;
         }
 
-        // Color fields
+        // Shared geometry
+        let x = 80;
+        let w = 640;
+
+        let rectH = 90;
+        let cutoutH = 12;
+
+        let topY = 215;
+        let bottomY = 317; // almost touching: 317 - (215 + 90) = 12
+
+        let slitX = 220;
+        let slitW = 360;
+
+        let paperX = slitX;
+        let paperW = slitW;
+        let paperH = 260;
+
+        // Top color field
         p.fill(244, 239, 180);
-        p.rect(80, 140, 640, 90);
+        p.rect(x, topY, w, rectH);
 
+        // Bottom color field
         p.fill(185, 255, 215);
-        p.rect(80, 370, 640, 90);
+        p.rect(x, bottomY, w, rectH);
 
-        // Paper visible through each slot as it passes
-        drawPaperThroughSlot(178, paperY);
-        drawPaperThroughSlot(408, paperY - 230);
+        // One continuous paper sheet
+        p.fill(255);
+        p.rect(paperX, paperY, paperW, paperH);
 
-        // Slot lines on top
+        // Redraw the colored fields around the paper illusion
+        // by covering the paper except where the slits are
+
+        // Top field covers paper
+        p.fill(244, 239, 180);
+        p.rect(x, topY, w, rectH);
+
+        // Bottom field covers paper
+        p.fill(185, 255, 215);
+        p.rect(x, bottomY, w, rectH);
+
+        // Paper visible only through top slit
+        p.fill(255);
+        drawVisiblePaper(slitX, topY + 39, slitW, cutoutH, paperY, paperH);
+
+        // Paper visible only through bottom slit
+        drawVisiblePaper(slitX, bottomY + 39, slitW, cutoutH, paperY, paperH);
+
+        // Lavender slot openings / edges
         p.fill(219, 198, 255);
-        p.rect(220, 178, 360, 12);
+        p.rect(slitX, topY + 39, slitW, cutoutH);
 
         p.fill(219, 198, 255);
-        p.rect(220, 408, 360, 12);
+        p.rect(slitX, bottomY + 39, slitW, cutoutH);
+
+        // Thin white line inside each slot when paper is passing
+        p.fill(255);
+        drawVisiblePaper(slitX, topY + 39, slitW, cutoutH, paperY, paperH);
+        drawVisiblePaper(slitX, bottomY + 39, slitW, cutoutH, paperY, paperH);
+
     };
 
 
-    function drawPaperThroughSlot(slotY, currentY) {
+    function drawVisiblePaper(slotX, slotY, slotW, slotH, sheetY, sheetH) {
 
-        let paperX = 220;
-        let paperW = 360;
-        let paperH = 160;
+        let sheetTop = sheetY;
+        let sheetBottom = sheetY + sheetH;
 
-        let paperTop = currentY;
-        let paperBottom = currentY + paperH;
-
-        if (paperBottom > slotY && paperTop < slotY + 90) {
-
-            p.fill(255);
-
-            p.rect(
-                paperX,
-                Math.max(slotY, paperTop),
-                paperW,
-                Math.min(paperBottom, slotY + 90) - Math.max(slotY, paperTop)
-            );
+        if (sheetBottom > slotY && sheetTop < slotY + slotH) {
+            p.rect(slotX, slotY, slotW, slotH);
         }
+
     }
 
 };
