@@ -27,7 +27,7 @@ const exercise01 = function(p) {
         p.rect(140,200,200,200);
 
         // Left inner cut-out
-        p.fill(219,198,255);
+        p.fill(185,255,215);
         p.rect(170,265,80,80);
 
         // Right large square
@@ -36,7 +36,7 @@ const exercise01 = function(p) {
         p.rect(460,200,200,200);
 
         // Right inner cut-out
-        p.fill(219,198,255);
+        p.fill(244,239,180);
         p.rect(550,265,80,80);
 
     };
