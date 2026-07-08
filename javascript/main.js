@@ -1172,60 +1172,129 @@ function getColorName(rgb){
 
 
     // ----------------------------
+    // Saturation language
+    // ----------------------------
+if(s < 20){
+
+    intensity = "Cloud";
+
+}
+
+else if(s < 40){
+
+    intensity = "Dusty";
+
+}
+
+else if(s < 65){
+
+    intensity = "Soft";
+
+}
+
+    else{
+
+        intensity = "Vivid";
+
+    }
+
+
+
+    // ----------------------------
+    // Lightness language
+    // ----------------------------
+
+    if(l > 85){
+
+    brightness = "Pale";
+
+}
+
+else if(l > 75){
+
+    brightness = "Light";
+
+}
+
+else if(l < 30){
+
+    brightness = "Deep";
+
+}
+
+else if(l < 45){
+
+    brightness = "Dark";
+
+}
+
+
+
+    // ----------------------------
     // Hue families
     // ----------------------------
 
-
-    let family;
-
-
-// ----------------------------
-// Hue color families (~50)
-// ----------------------------
-
-if(h < 8){
+if(h < 6){
 
     family = "Crimson";
 
 }
 
-else if(h < 16){
+else if(h < 12){
 
-    family = "Rose";
+    family = "Scarlet";
+
+}
+
+else if(h < 18){
+
+    family = "Red";
 
 }
 
 else if(h < 24){
 
+    family = "Ruby";
+
+}
+
+else if(h < 30){
+
+    family = "Rose";
+
+}
+
+else if(h < 36){
+
     family = "Blush";
 
 }
 
-else if(h < 32){
+else if(h < 42){
 
     family = "Coral";
 
 }
 
-else if(h < 40){
+else if(h < 48){
 
     family = "Salmon";
 
 }
 
-else if(h < 48){
+else if(h < 54){
 
     family = "Peach";
 
 }
 
-else if(h < 56){
+else if(h < 60){
 
     family = "Apricot";
 
 }
 
-else if(h < 64){
+else if(h < 66){
 
     family = "Amber";
 
@@ -1233,127 +1302,289 @@ else if(h < 64){
 
 else if(h < 72){
 
-    family = "Golden";
+    family = "Gold";
 
 }
 
-else if(h < 80){
+else if(h < 78){
 
-    family = "Ochre";
+    family = "Yellow";
 
 }
 
-else if(h < 95){
+else if(h < 84){
 
     family = "Lemon";
 
 }
 
-else if(h < 110){
+else if(h < 90){
 
     family = "Chartreuse";
 
 }
 
-else if(h < 125){
+else if(h < 96){
 
     family = "Lime";
 
 }
 
-else if(h < 140){
+else if(h < 102){
+
+    family = "Spring Green";
+
+}
+
+else if(h < 108){
+
+    family = "Green";
+
+}
+
+else if(h < 114){
+
+    family = "Leaf";
+
+}
+
+else if(h < 120){
 
     family = "Olive";
 
 }
 
-else if(h < 155){
+else if(h < 126){
+
+    family = "Moss";
+
+}
+
+else if(h < 132){
 
     family = "Sage";
 
 }
 
-else if(h < 170){
+else if(h < 138){
+
+    family = "Fern";
+
+}
+
+else if(h < 144){
 
     family = "Mint";
 
 }
 
-else if(h < 185){
+else if(h < 150){
 
     family = "Seafoam";
 
 }
 
-else if(h < 200){
+else if(h < 156){
 
     family = "Aqua";
 
 }
 
-else if(h < 215){
+else if(h < 162){
 
     family = "Turquoise";
 
 }
 
-else if(h < 230){
+else if(h < 168){
 
-    family = "Cerulean";
+    family = "Teal";
 
 }
 
-else if(h < 245){
+else if(h < 174){
+
+    family = "Cyan";
+
+}
+
+else if(h < 180){
+
+    family = "Ice Blue";
+
+}
+
+else if(h < 186){
 
     family = "Sky Blue";
 
 }
 
-else if(h < 260){
+else if(h < 192){
 
     family = "Azure";
 
 }
 
-else if(h < 275){
+else if(h < 198){
+
+    family = "Cerulean";
+
+}
+
+else if(h < 204){
+
+    family = "Blue";
+
+}
+
+else if(h < 210){
 
     family = "Cobalt";
 
 }
 
-else if(h < 290){
+else if(h < 216){
+
+    family = "Royal Blue";
+
+}
+
+else if(h < 222){
+
+    family = "Ultramarine";
+
+}
+
+else if(h < 228){
 
     family = "Indigo";
 
 }
 
-else if(h < 305){
+else if(h < 234){
+
+    family = "Deep Blue";
+
+}
+
+else if(h < 240){
+
+    family = "Violet Blue";
+
+}
+
+else if(h < 246){
 
     family = "Periwinkle";
 
 }
 
-else if(h < 320){
+else if(h < 252){
 
     family = "Lavender";
 
 }
 
-else if(h < 335){
+else if(h < 258){
 
     family = "Lilac";
 
 }
 
-else if(h < 345){
+else if(h < 264){
+
+    family = "Purple";
+
+}
+
+else if(h < 270){
+
+    family = "Amethyst";
+
+}
+
+else if(h < 276){
+
+    family = "Orchid";
+
+}
+
+else if(h < 282){
+
+    family = "Plum";
+
+}
+
+else if(h < 288){
 
     family = "Mauve";
 
 }
 
-else if(h < 355){
+else if(h < 294){
 
-    family = "Rosewood";
+    family = "Magenta";
+
+}
+
+else if(h < 300){
+
+    family = "Fuchsia";
+
+}
+
+else if(h < 306){
+
+    family = "Pink";
+
+}
+
+else if(h < 312){
+
+    family = "Rose Pink";
+
+}
+
+else if(h < 318){
+
+    family = "Dusty Rose";
+
+}
+
+else if(h < 324){
+
+    family = "Berry";
+
+}
+
+else if(h < 330){
+
+    family = "Raspberry";
+
+}
+
+else if(h < 336){
+
+    family = "Wine";
+
+}
+
+else if(h < 342){
+
+    family = "Burgundy";
+
+}
+
+else if(h < 348){
+
+    family = "Garnet";
+
+}
+
+else if(h < 354){
+
+    family = "Ruby Red";
 
 }
 
@@ -1391,6 +1622,44 @@ else{
         }
 
     }
+
+
+
+    // ----------------------------
+    // Assemble name
+    // ----------------------------
+
+
+    let result = "";
+
+
+    if(brightness){
+
+        result += brightness + " ";
+
+    }
+
+
+    if(intensity){
+
+        result += intensity + " ";
+
+    }
+
+
+    result += family;
+
+
+
+    return result.trim();
+
+
+}
+
+
+
+
+
 
 
 
