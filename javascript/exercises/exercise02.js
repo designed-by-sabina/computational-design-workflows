@@ -1,10 +1,11 @@
 // ==========================================
 // EXERCISE 02
-// One Paper Through Two Slots
+// Long Paper Through Two Slots
 // ==========================================
 
 const exercise02 = function(p) {
 
+    let paperY = -1200;
 
     p.setup = function() {
 
@@ -21,111 +22,130 @@ const exercise02 = function(p) {
 
         p.noStroke();
 
-        // Animate one continuous paper downward
+        // Move one very long white paper sheet downward
         paperY += 2;
 
-        if (paperY > 620) {
-            paperY = -520;
+        if (paperY > 700) {
+            paperY = -1200;
         }
 
 
-        // Shared geometry
+        // Shared geometry — same as Exercise 01
         let x = 80;
         let w = 640;
 
-        let rectH = 90;
-        let cutoutH = 12;
-
-        // Previous larger spacing
         let topY = 140;
         let bottomY = 370;
 
+        let rectH = 90;
+
         let slitX = 220;
         let slitW = 360;
+        let slitH = 12;
+
+        let topSlitY = 178;
+        let bottomSlitY = 408;
 
         let paperX = slitX;
         let paperW = slitW;
 
-        // White rectangle height x2
-        let paperH = 520;
+        // Very long paper
+        let paperH = 1200;
 
 
-        // Top color field
+        // Draw color fields
         p.fill(244, 239, 180);
         p.rect(x, topY, w, rectH);
 
-        // Bottom color field
         p.fill(185, 255, 215);
         p.rect(x, bottomY, w, rectH);
 
 
-        // Paper visible only through top slit
-        p.fill(255);
-        drawVisiblePaper(
-            slitX,
-            topY + 39,
-            slitW,
-            cutoutH,
+        // Show paper only where it intersects each slit
+        drawPaperInSlit(
+            paperX,
             paperY,
-            paperH
+            paperW,
+            paperH,
+            slitX,
+            topSlitY,
+            slitW,
+            slitH
+        );
+
+        drawPaperInSlit(
+            paperX,
+            paperY,
+            paperW,
+            paperH,
+            slitX,
+            bottomSlitY,
+            slitW,
+            slitH
         );
 
 
-        // Paper visible only through bottom slit
-        p.fill(255);
-        drawVisiblePaper(
-            slitX,
-            bottomY + 39,
-            slitW,
-            cutoutH,
-            paperY,
-            paperH
-        );
-
-
-        // Lavender slot edges on top
-        p.fill(219, 198, 255);
-        p.rect(slitX, topY + 39, slitW, cutoutH);
-
-        p.fill(219, 198, 255);
-        p.rect(slitX, bottomY + 39, slitW, cutoutH);
-
-
-        // White paper appears again inside the slots
-        p.fill(255);
-        drawVisiblePaper(
-            slitX,
-            topY + 39,
-            slitW,
-            cutoutH,
-            paperY,
-            paperH
-        );
-
-        drawVisiblePaper(
-            slitX,
-            bottomY + 39,
-            slitW,
-            cutoutH,
-            paperY,
-            paperH
-        );
+        // Draw lavender slit openings when paper is NOT there
+        drawSlitEdge(topSlitY);
+        drawSlitEdge(bottomSlitY);
 
     };
 
 
-    function drawVisiblePaper(slotX, slotY, slotW, slotH, sheetY, sheetH) {
+    function drawPaperInSlit(
+        paperX,
+        paperY,
+        paperW,
+        paperH,
+        slitX,
+        slitY,
+        slitW,
+        slitH
+    ) {
 
-        let sheetTop = sheetY;
-        let sheetBottom = sheetY + sheetH;
+        let paperTop = paperY;
+        let paperBottom = paperY + paperH;
 
-        if (sheetBottom > slotY && sheetTop < slotY + slotH) {
+        if (
+            paperBottom > slitY &&
+            paperTop < slitY + slitH
+        ) {
+
+            p.fill(255);
 
             p.rect(
-                slotX,
-                slotY,
-                slotW,
-                slotH
+                slitX,
+                slitY,
+                slitW,
+                slitH
+            );
+
+        }
+
+    }
+
+
+    function drawSlitEdge(slitY) {
+
+        let slitX = 220;
+        let slitW = 360;
+        let slitH = 12;
+
+        let paperTop = paperY;
+        let paperBottom = paperY + 1200;
+
+        if (
+            !(paperBottom > slitY &&
+            paperTop < slitY + slitH)
+        ) {
+
+            p.fill(219, 198, 255);
+
+            p.rect(
+                slitX,
+                slitY,
+                slitW,
+                slitH
             );
 
         }
