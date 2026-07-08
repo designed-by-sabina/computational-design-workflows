@@ -698,6 +698,20 @@ h1 {
     margin: 0 auto;
 }
 
+#canvas-container-2 canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#canvas-container-3 canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#canvas-container-4 canvas {
+    display: block;
+    margin: 0 auto;
+}
 
 /* ==========================================
    FOOTER
