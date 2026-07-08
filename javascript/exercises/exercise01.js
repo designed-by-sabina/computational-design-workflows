@@ -20,7 +20,7 @@ const exercise01 = function(p) {
 
         p.fill(244,239,180);
         p.noStroke();
-        p.rect(166,225,200,200);
+        p.rect(166,225,200,250);
 
         p.fill(219,198,255);
         p.noStroke();
@@ -28,7 +28,7 @@ const exercise01 = function(p) {
 
         p.fill(185,255,215);
         p.noStroke();
-        p.rect(482,225,200,200);
+        p.rect(482,225,200,250);
 
         p.fill(219,198,255);
         p.noStroke();
