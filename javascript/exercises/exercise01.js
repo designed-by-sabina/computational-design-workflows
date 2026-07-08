@@ -49,10 +49,10 @@ const exercise01 = function(p) {
         p.fill(219, 198, 255);
 
         p.rect(
-           392,
-    155,
-    16,
-    60
+          220,   // x
+    178,   // y
+    360,   // width
+    12     // height
         );
 
 
@@ -74,10 +74,10 @@ const exercise01 = function(p) {
         p.fill(219, 198, 255);
 
         p.rect(
-             392,
-    385,
-    16,
-    60
+               220,   // x
+    408,   // y
+    360,   // width
+    12     // height
         );
 
     };
