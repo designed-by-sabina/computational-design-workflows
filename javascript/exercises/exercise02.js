@@ -5,7 +5,6 @@
 
 const exercise02 = function(p) {
 
-    let paperY = -520;
 
     p.setup = function() {
 
