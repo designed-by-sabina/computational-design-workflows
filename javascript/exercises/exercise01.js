@@ -1,5 +1,7 @@
 // ==========================================
 // EXERCISE 01
+// Interaction of Color
+// Horizontal Color Fields
 // ==========================================
 
 const exercise01 = function(p) {
@@ -11,28 +13,65 @@ const exercise01 = function(p) {
         canvas.parent("canvas-container-1");
 
         p.noLoop();
+
     };
 
 
     p.draw = function() {
 
+        // Background
         p.background(219,198,255);
 
-        p.fill(244,239,180);
         p.noStroke();
-        p.rect(166,225,200,250);
+
+        // =====================================
+        // TOP RECTANGLE
+        // =====================================
+
+        p.fill(244,239,180);
+
+        p.rect(
+            120,
+            170,
+            560,
+            90
+        );
+
+        // background cut-out
 
         p.fill(219,198,255);
-        p.noStroke();
-        p.rect(180,300,70,70);
+
+        p.rect(
+            300,
+            190,
+            180,
+            50
+        );
+
+
+        // =====================================
+        // BOTTOM RECTANGLE
+        // =====================================
 
         p.fill(185,255,215);
-        p.noStroke();
-        p.rect(482,225,200,250);
+
+        p.rect(
+            120,
+            340,
+            560,
+            90
+        );
+
+        // background cut-out
 
         p.fill(219,198,255);
-        p.noStroke();
-        p.rect(598,300,70,70);
+
+        p.rect(
+            300,
+            360,
+            180,
+            50
+        );
 
     };
 
