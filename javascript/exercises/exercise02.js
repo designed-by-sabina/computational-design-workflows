@@ -5,7 +5,7 @@
 
 const exercise02 = function(p) {
 
-    let sliderY = -120;
+    let sliderY = -300;
 
     p.setup = function() {
 
@@ -24,8 +24,8 @@ const exercise02 = function(p) {
         // Animate white rectangle downward
         sliderY += 2;
 
-        if (sliderY > p.height + 120) {
-            sliderY = -120;
+        if (sliderY > p.height + 300) {
+            sliderY = -300;
         }
 
         p.noStroke();
@@ -39,8 +39,9 @@ const exercise02 = function(p) {
         p.rect(80, 370, 640, 90);
 
         // Moving white rectangle
+        // Taller height creates the illusion of something being thrown/sliding through
         p.fill(255);
-        p.rect(220, sliderY, 360, 80);
+        p.rect(220, sliderY, 360, 240);
 
         // Top cut-out / slit
         p.fill(219, 198, 255);
