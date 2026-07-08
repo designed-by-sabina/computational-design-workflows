@@ -1172,65 +1172,6 @@ function getColorName(rgb){
 
 
     // ----------------------------
-    // Saturation language
-    // ----------------------------
-if(s < 20){
-
-    intensity = "Cloud";
-
-}
-
-else if(s < 40){
-
-    intensity = "Dusty";
-
-}
-
-else if(s < 65){
-
-    intensity = "Soft";
-
-}
-
-    else{
-
-        intensity = "Vivid";
-
-    }
-
-
-
-    // ----------------------------
-    // Lightness language
-    // ----------------------------
-
-    if(l > 85){
-
-    brightness = "Pale";
-
-}
-
-else if(l > 75){
-
-    brightness = "Light";
-
-}
-
-else if(l < 30){
-
-    brightness = "Deep";
-
-}
-
-else if(l < 45){
-
-    brightness = "Dark";
-
-}
-
-
-
-    // ----------------------------
     // Hue families
     // ----------------------------
 
@@ -1450,44 +1391,6 @@ else{
         }
 
     }
-
-
-
-    // ----------------------------
-    // Assemble name
-    // ----------------------------
-
-
-    let result = "";
-
-
-    if(brightness){
-
-        result += brightness + " ";
-
-    }
-
-
-    if(intensity){
-
-        result += intensity + " ";
-
-    }
-
-
-    result += family;
-
-
-
-    return result.trim();
-
-
-}
-
-
-
-
-
 
 
 
