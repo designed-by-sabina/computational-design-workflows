@@ -670,11 +670,9 @@ h1 {
 
 .exercise-panel.active {
 
+    display:block;
 
-    display:
-
-        block;
-
+    min-height:400px;
 
 }
 
