@@ -1155,162 +1155,206 @@ function removeHoverLabel(){
 
 function getColorName(rgb){
 
-
-    let hsl =
-        rgbToHsl(
-
-            rgb[0],
-
-            rgb[1],
-
-            rgb[2]
-
-        );
+    let hsl = rgbToHsl(
+        rgb[0],
+        rgb[1],
+        rgb[2]
+    );
 
 
-
-    let h =
-        hsl.h;
-
-
-
-    let s =
-        hsl.s;
+    let h = hsl.h;
+    let s = hsl.s;
+    let l = hsl.l;
 
 
-
-    let l =
-        hsl.l;
-
+    let intensity = "";
+    let brightness = "";
 
 
-    let prefix = "";
+    // ----------------------------
+    // Saturation language
+    // ----------------------------
 
+    if(s < 25){
 
-
-    // lightness description
-
-
-    if(l > 85){
-
-        prefix =
-            "Light ";
-
-    }
-
-    else if(l < 35){
-
-        prefix =
-            "Deep ";
+        intensity = "Neutral";
 
     }
 
     else if(s < 45){
 
-        prefix =
-            "Muted ";
+        intensity = "Muted";
+
+    }
+
+    else if(s < 70){
+
+        intensity = "Soft";
+
+    }
+
+    else{
+
+        intensity = "Vivid";
 
     }
 
 
 
+    // ----------------------------
+    // Lightness language
+    // ----------------------------
+
+    if(l > 82){
+
+        brightness = "Pale";
+
+    }
+
+    else if(l < 30){
+
+        brightness = "Deep";
+
+    }
+
+    else if(l < 45){
+
+        brightness = "Dark";
+
+    }
 
 
 
-    let name;
+    // ----------------------------
+    // Hue families
+    // ----------------------------
+
+
+    let family;
 
 
 
-    // hue families
+    if(h < 15){
+
+        family = "Rose";
+
+    }
+
+    else if(h < 35){
+
+        family = "Coral";
+
+    }
+
+    else if(h < 55){
+
+        family = "Peach";
+
+    }
+
+    else if(h < 75){
+
+        family = "Golden";
+
+    }
+
+    else if(h < 150){
+
+        family = "Sage";
+
+    }
+
+    else if(h < 190){
+
+        family = "Aqua";
+
+    }
+
+    else if(h < 230){
+
+        family = "Blue";
+
+    }
+
+    else if(h < 275){
+
+        family = "Lavender";
+
+    }
+
+    else if(h < 330){
+
+        family = "Rose";
+
+    }
+
+    else{
+
+        family = "Crimson";
+
+    }
+
+
+
+    // ----------------------------
+    // Special neutral handling
+    // ----------------------------
 
 
     if(s < 15){
 
-        name =
-            "Neutral Gray";
+        if(l > 90){
 
-    }
+            return "White";
 
+        }
 
-    else if(h < 15){
+        else if(l < 15){
 
-        name =
-            "Red";
+            return "Black";
 
-    }
+        }
 
+        else{
 
-    else if(h < 45){
+            return "Neutral Gray";
 
-        name =
-            "Peach";
-
-    }
-
-
-    else if(h < 70){
-
-        name =
-            "Yellow";
-
-    }
-
-
-    else if(h < 160){
-
-        name =
-            "Green";
-
-    }
-
-
-    else if(h < 200){
-
-        name =
-            "Turquoise";
-
-    }
-
-
-    else if(h < 250){
-
-        name =
-            "Blue";
-
-    }
-
-
-    else if(h < 290){
-
-        name =
-            "Lavender";
-
-    }
-
-
-    else if(h < 340){
-
-        name =
-            "Pink";
-
-    }
-
-
-    else{
-
-        name =
-            "Rose";
+        }
 
     }
 
 
 
-    return prefix + name;
+    // ----------------------------
+    // Assemble name
+    // ----------------------------
 
+
+    let result = "";
+
+
+    if(brightness){
+
+        result += brightness + " ";
+
+    }
+
+
+    if(intensity){
+
+        result += intensity + " ";
+
+    }
+
+
+    result += family;
+
+
+
+    return result.trim();
 
 
 }
-
 
 
 
