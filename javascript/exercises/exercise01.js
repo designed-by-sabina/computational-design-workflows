@@ -1,3 +1,20 @@
+const exercise01 = function(p) {
+
+    p.setup = function() {
+
+        let canvas = p.createCanvas(800, 600);
+
+        canvas.parent("canvas-container-1");
+
+        p.noLoop();
+
+    };
+}
+
+
+
+
+
 p.draw = function() {
 
     // Background
