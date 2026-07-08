@@ -628,300 +628,78 @@ h1 {
 
 
 
-
-
-
 /* ==========================================
    FUTURE ASSIGNMENT CANVASES
 ========================================== */
 
-
-.exercise-container {
-
-
-    padding:
-
-        60px 50px;
-
-
+.exercise-navigation {
+    padding: 60px 50px;
 }
 
+/* ==========================================
+   EXERCISE BUTTONS
+========================================== */
 
+.exercise-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+}
+
+.exercise-button {
+    background: white;
+    border: 1px solid var(--black);
+    padding: 14px 36px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.exercise-button:hover,
+.exercise-button.active {
+    background: var(--black);
+    color: white;
+}
+
+/* ==========================================
+   EXERCISE PANELS
+========================================== */
+
+.exercise-panel {
+    display: none;
+    position: relative;
+    margin-top: 40px;
+}
+
+.exercise-panel.active {
+    display: block;
+}
 
 .exerciseCanvas {
-
-
-    width:
-
-        100%;
-
-
-    height:
-
-        400px;
-
-
-    display:
-
-        block;
-
-
-    border:
-
-        1px solid var(--border);
-
-
+    width: 100%;
+    height: 400px;
+    display: block;
+    border: 1px solid var(--border);
 }
-
-
-
 
 .placeholder-text {
-
-
-    position:
-
-        absolute;
-
-
-    top:
-
-        50%;
-
-
-    left:
-
-        50%;
-
-
-    transform:
-
-        translate(-50%, -50%);
-
-
-    color:
-
-        #999;
-
-
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999;
 }
-
-
-
-
-
-
-
 
 /* ==========================================
    FOOTER
 ========================================== */
 
-
 footer {
-
-
-    padding:
-
-        40px 50px;
-
-
-    border-top:
-
-        1px solid var(--border);
-
-
-    color:
-
-        var(--gray);
-
-
-    font-size:
-
-        14px;
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
-
-
-@media(max-width:700px){
-
-
-    header {
-
-
-        padding:
-
-            30px 20px;
-
-
-    }
-
-
-
-    h1 {
-
-
-        font-size:
-
-            70px;
-
-
-    }
-
-
-
-    .canvas-wrapper {
-
-
-        height:
-
-            60vh;
-
-
-    }
-
-
-
-    .color-archive {
-
-
-        padding:
-
-            0 20px 40px;
-
-
-    }
-
-
-
-    .exercise-container {
-
-
-        padding:
-
-            30px 20px;
-
-
-    }
-
-
-
-    .exercise-tabs {
-
-
-        overflow-x:
-
-            auto;
-
-
-        justify-content:
-
-            flex-start;
-
-
-    }
-
-
-
-    .tab {
-
-
-        white-space:
-
-            nowrap;
-
-
-        padding:
-
-            16px 22px;
-
-
-    }
-
-
-}
-
-
-.exercise-buttons {
-
-    display:flex;
-
-    flex-direction:row;
-
-    gap:12px;
-
-    margin-top:40px;
-
-}
-
-
-.exercise-button {
-
-
-    background:white;
-
-    border:1px solid black;
-
-    padding:12px 28px;
-
-    font-family:inherit;
-
-    font-size:14px;
-
-    cursor:pointer;
-
-    transition:0.3s;
-
-}
-
-
-
-.exercise-button:hover {
-
-
-    background:black;
-
-    color:white;
-
-}
-
-
-
-.exercise-button.active {
-
-
-    background:black;
-
-    color:white;
-
-}
-
-
-
-.exercise-panel {
-
-    display:none;
-
-    margin-top:30px;
-
-}
-
-
-
-.exercise-panel.active {
-
-    display:block;
-
+    padding: 40px 50px;
+    border-top: 1px solid var(--border);
+    color: var(--gray);
+    font-size: 14px;
 }
