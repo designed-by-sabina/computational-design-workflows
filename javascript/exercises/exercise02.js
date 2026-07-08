@@ -1,67 +1,69 @@
 // ==========================================
 // EXERCISE 02
-// Josef Albers Inspired Animated Composition
+// Paper Sliding Through Slots
 // ==========================================
 
 const exercise02 = function(p) {
 
-    let sliderY = -80;
+    let paperY = -160;
 
     p.setup = function() {
-
         let canvas = p.createCanvas(800, 600);
-
         canvas.parent("canvas-container-2");
-
     };
-
 
     p.draw = function() {
 
-        // Background
         p.background(219, 198, 255);
-
-        // Animate downward
-        sliderY += 2;
-
-        if (sliderY > 230) {
-            sliderY = -80;
-        }
-
         p.noStroke();
 
-        // ==========================
-        // TOP COLOR FIELD
-        // ==========================
+        paperY += 2;
 
+        if (paperY > 620) {
+            paperY = -160;
+        }
+
+        // Color fields
         p.fill(244, 239, 180);
         p.rect(80, 140, 640, 90);
-
-        // White moving piece visible in top field
-        p.fill(255);
-        p.rect(220, 140 + sliderY, 360, 36);
-
-        // Lavender slit masks it
-        p.fill(219, 198, 255);
-        p.rect(220, 178, 360, 12);
-
-
-        // ==========================
-        // BOTTOM COLOR FIELD
-        // ==========================
 
         p.fill(185, 255, 215);
         p.rect(80, 370, 640, 90);
 
-        // White moving piece visible in bottom field
-        p.fill(255);
-        p.rect(220, 370 + sliderY, 360, 36);
+        // Paper visible through each slot as it passes
+        drawPaperThroughSlot(178, paperY);
+        drawPaperThroughSlot(408, paperY - 230);
 
-        // Lavender slit masks it
+        // Slot lines on top
+        p.fill(219, 198, 255);
+        p.rect(220, 178, 360, 12);
+
         p.fill(219, 198, 255);
         p.rect(220, 408, 360, 12);
-
     };
+
+
+    function drawPaperThroughSlot(slotY, currentY) {
+
+        let paperX = 220;
+        let paperW = 360;
+        let paperH = 160;
+
+        let paperTop = currentY;
+        let paperBottom = currentY + paperH;
+
+        if (paperBottom > slotY && paperTop < slotY + 90) {
+
+            p.fill(255);
+
+            p.rect(
+                paperX,
+                Math.max(slotY, paperTop),
+                paperW,
+                Math.min(paperBottom, slotY + 90) - Math.max(slotY, paperTop)
+            );
+        }
+    }
 
 };
 
