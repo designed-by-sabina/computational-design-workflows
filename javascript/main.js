@@ -1174,24 +1174,23 @@ function getColorName(rgb){
     // ----------------------------
     // Saturation language
     // ----------------------------
+if(s < 20){
 
-    if(s < 25){
+    intensity = "Cloud";
 
-        intensity = "Neutral";
+}
 
-    }
+else if(s < 40){
 
-    else if(s < 45){
+    intensity = "Dusty";
 
-        intensity = "Muted";
+}
 
-    }
+else if(s < 65){
 
-    else if(s < 70){
+    intensity = "Soft";
 
-        intensity = "Soft";
-
-    }
+}
 
     else{
 
@@ -1205,23 +1204,29 @@ function getColorName(rgb){
     // Lightness language
     // ----------------------------
 
-    if(l > 82){
+    if(l > 85){
 
-        brightness = "Pale";
+    brightness = "Pale";
 
-    }
+}
 
-    else if(l < 30){
+else if(l > 75){
 
-        brightness = "Deep";
+    brightness = "Light";
 
-    }
+}
 
-    else if(l < 45){
+else if(l < 30){
 
-        brightness = "Dark";
+    brightness = "Deep";
 
-    }
+}
+
+else if(l < 45){
+
+    brightness = "Dark";
+
+}
 
 
 
@@ -1233,66 +1238,189 @@ function getColorName(rgb){
     let family;
 
 
+// ----------------------------
+// Hue color families (~50)
+// ----------------------------
 
-    if(h < 15){
+if(h < 8){
 
-        family = "Rose";
+    family = "Crimson";
 
-    }
+}
 
-    else if(h < 35){
+else if(h < 16){
 
-        family = "Coral";
+    family = "Rose";
 
-    }
+}
 
-    else if(h < 55){
+else if(h < 24){
 
-        family = "Peach";
+    family = "Blush";
 
-    }
+}
 
-    else if(h < 75){
+else if(h < 32){
 
-        family = "Golden";
+    family = "Coral";
 
-    }
+}
 
-    else if(h < 150){
+else if(h < 40){
 
-        family = "Sage";
+    family = "Salmon";
 
-    }
+}
 
-    else if(h < 190){
+else if(h < 48){
 
-        family = "Aqua";
+    family = "Peach";
 
-    }
+}
 
-    else if(h < 230){
+else if(h < 56){
 
-        family = "Blue";
+    family = "Apricot";
 
-    }
+}
 
-    else if(h < 275){
+else if(h < 64){
 
-        family = "Lavender";
+    family = "Amber";
 
-    }
+}
 
-    else if(h < 330){
+else if(h < 72){
 
-        family = "Rose";
+    family = "Golden";
 
-    }
+}
 
-    else{
+else if(h < 80){
 
-        family = "Crimson";
+    family = "Ochre";
 
-    }
+}
+
+else if(h < 95){
+
+    family = "Lemon";
+
+}
+
+else if(h < 110){
+
+    family = "Chartreuse";
+
+}
+
+else if(h < 125){
+
+    family = "Lime";
+
+}
+
+else if(h < 140){
+
+    family = "Olive";
+
+}
+
+else if(h < 155){
+
+    family = "Sage";
+
+}
+
+else if(h < 170){
+
+    family = "Mint";
+
+}
+
+else if(h < 185){
+
+    family = "Seafoam";
+
+}
+
+else if(h < 200){
+
+    family = "Aqua";
+
+}
+
+else if(h < 215){
+
+    family = "Turquoise";
+
+}
+
+else if(h < 230){
+
+    family = "Cerulean";
+
+}
+
+else if(h < 245){
+
+    family = "Sky Blue";
+
+}
+
+else if(h < 260){
+
+    family = "Azure";
+
+}
+
+else if(h < 275){
+
+    family = "Cobalt";
+
+}
+
+else if(h < 290){
+
+    family = "Indigo";
+
+}
+
+else if(h < 305){
+
+    family = "Periwinkle";
+
+}
+
+else if(h < 320){
+
+    family = "Lavender";
+
+}
+
+else if(h < 335){
+
+    family = "Lilac";
+
+}
+
+else if(h < 345){
+
+    family = "Mauve";
+
+}
+
+else if(h < 355){
+
+    family = "Rosewood";
+
+}
+
+else{
+
+    family = "Crimson";
+
+}
 
 
 
