@@ -5,7 +5,7 @@
 
 const exercise02 = function(p) {
 
-    let sliderY = -300;
+    let sliderY = -80;
 
     p.setup = function() {
 
@@ -21,33 +21,43 @@ const exercise02 = function(p) {
         // Background
         p.background(219, 198, 255);
 
-        // Animate white rectangle downward
+        // Animate downward
         sliderY += 2;
 
-        if (sliderY > p.height + 300) {
-            sliderY = -300;
+        if (sliderY > 230) {
+            sliderY = -80;
         }
 
         p.noStroke();
 
-        // Top rectangle
+        // ==========================
+        // TOP COLOR FIELD
+        // ==========================
+
         p.fill(244, 239, 180);
         p.rect(80, 140, 640, 90);
 
-        // Bottom rectangle
-        p.fill(185, 255, 215);
-        p.rect(80, 370, 640, 90);
-
-        // Moving white rectangle
-        // Taller height creates the illusion of something being thrown/sliding through
+        // White moving piece visible in top field
         p.fill(255);
-        p.rect(220, sliderY, 360, 240);
+        p.rect(220, 140 + sliderY, 360, 36);
 
-        // Top cut-out / slit
+        // Lavender slit masks it
         p.fill(219, 198, 255);
         p.rect(220, 178, 360, 12);
 
-        // Bottom cut-out / slit
+
+        // ==========================
+        // BOTTOM COLOR FIELD
+        // ==========================
+
+        p.fill(185, 255, 215);
+        p.rect(80, 370, 640, 90);
+
+        // White moving piece visible in bottom field
+        p.fill(255);
+        p.rect(220, 370 + sliderY, 360, 36);
+
+        // Lavender slit masks it
         p.fill(219, 198, 255);
         p.rect(220, 408, 360, 12);
 
