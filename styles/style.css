@@ -648,37 +648,6 @@ h1 {
 
 
 
-
-
-.exercise-panel {
-
-
-    display:
-
-        none;
-
-
-    position:
-
-        relative;
-
-
-}
-
-
-
-
-.exercise-panel.active {
-
-    display:block;
-
-    min-height:400px;
-
-}
-
-
-
-
 .exerciseCanvas {
 
 
