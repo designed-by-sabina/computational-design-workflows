@@ -49,6 +49,5 @@ const exercise02 = function(p) {
     
     }
 
-};
 
 new p5(exercise02);
