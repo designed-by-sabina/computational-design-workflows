@@ -723,3 +723,187 @@ footer {
     color: var(--gray);
     font-size: 14px;
 }
+    
+
+    /* ==========================================
+PIGMENT ORIGINS MAP
+========================================== */
+
+.pigment-map-section {
+  width: 100%;
+  padding: 100px 50px 80px;
+  border-top: 1px solid var(--border);
+}
+
+.pigment-map-header {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  margin-bottom: 45px;
+}
+
+.pigment-map-number {
+  grid-column: 1 / 4;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+}
+
+.pigment-map-header h2 {
+  grid-column: 4 / 9;
+  font-size: clamp(42px, 7vw, 100px);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+}
+
+.pigment-map-description {
+  grid-column: 9 / 13;
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--gray);
+}
+
+.pigment-map-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Mapbox requires an explicit height */
+#pigment-map {
+  width: 700px;
+  height: 700px;
+  min-height: 560px;
+  position: absolute;
+  background: #171717;
+}
+
+/* Instruction card over the map */
+.pigment-map-instructions {
+  position: absolute;
+  left: 24px;
+  bottom: 34px;
+  z-index: 2;
+  padding: 12px 16px;
+  background: rgba(17, 17, 17, 0.88);
+  color: white;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Mapbox popup */
+.mapboxgl-popup {
+  max-width: 280px !important;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+  border-radius: 0;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.pigment-popup {
+  width: 260px;
+}
+
+.pigment-popup-color {
+  width: 100%;
+  height: 70px;
+}
+
+.pigment-popup-information {
+  padding: 18px;
+}
+
+.pigment-popup-category {
+  margin-bottom: 8px;
+  color: #777777;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pigment-popup h3 {
+  margin: 0 0 4px;
+  color: #111111;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.pigment-popup-mineral {
+  margin-bottom: 14px;
+  color: #777777;
+  font-size: 13px;
+}
+
+.pigment-popup-location {
+  margin-bottom: 10px;
+  color: #111111;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pigment-popup-description {
+  margin: 0;
+  color: #333333;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Remove rounded popup tip appearance */
+.mapboxgl-popup-tip {
+  border-top-color: white !important;
+}
+
+/* Make Mapbox attribution quieter */
+.mapboxgl-ctrl-attrib {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 9px;
+}
+
+
+/* ==========================================
+PIGMENT MAP — MOBILE
+========================================== */
+
+@media (max-width: 800px) {
+
+  .pigment-map-section {
+    padding: 70px 20px 50px;
+  }
+
+  .pigment-map-header {
+    display: block;
+  }
+
+  .pigment-map-number {
+    margin-bottom: 20px;
+  }
+
+  .pigment-map-header h2 {
+    margin-bottom: 24px;
+  }
+
+  .pigment-map-description {
+    max-width: 100%;
+  }
+
+  #pigment-map {
+    height: 70vh;
+    width: 70vh;
+    min-height: 500px;
+  }
+
+  .pigment-map-instructions {
+    left: 14px;
+    bottom: 30px;
+  }
+}

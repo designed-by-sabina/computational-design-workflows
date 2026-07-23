@@ -1,0 +1,155 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.75, 36.72]
+      },
+      "properties": {
+        "pigment": "Ultramarine",
+        "mineral": "Lapis lazuli",
+        "location": "Badakhshan, Afghanistan",
+        "category": "Blue pigment",
+        "color": "#2647A7",
+        "description": "Natural ultramarine was produced by grinding and refining lapis lazuli."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-4.83, 38.77]
+      },
+      "properties": {
+        "pigment": "Vermilion",
+        "mineral": "Cinnabar",
+        "location": "Almaden, Spain",
+        "category": "Red pigment",
+        "color": "#E34234",
+        "description": "Vermilion was traditionally produced from the mercury-bearing mineral cinnabar."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [29.1, -28.7]
+      },
+      "properties": {
+        "pigment": "Malachite Green",
+        "mineral": "Malachite",
+        "location": "Northern Cape, South Africa",
+        "category": "Green pigment",
+        "color": "#3C9D76",
+        "description": "Ground malachite produces a mineral green associated with copper deposits."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.76, 49.16]
+      },
+      "properties": {
+        "pigment": "Azurite",
+        "mineral": "Azurite",
+        "location": "Chessy-les-Mines, France",
+        "category": "Blue pigment",
+        "color": "#2457C5",
+        "description": "Azurite is a copper mineral that was ground into a deep blue pigment."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.33, 43.32]
+      },
+      "properties": {
+        "pigment": "Raw Sienna",
+        "mineral": "Iron and manganese earth",
+        "location": "Siena, Italy",
+        "category": "Earth pigment",
+        "color": "#B88746",
+        "description": "Sienna is a yellow-brown earth pigment traditionally associated with Tuscany."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.39, 42.72]
+      },
+      "properties": {
+        "pigment": "Raw Umber",
+        "mineral": "Iron and manganese oxides",
+        "location": "Umbria, Italy",
+        "category": "Earth pigment",
+        "color": "#826644",
+        "description": "Umber is a dark natural earth containing iron oxide and manganese compounds."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.99, 45.44]
+      },
+      "properties": {
+        "pigment": "Terre Verte",
+        "mineral": "Green earth",
+        "location": "Verona, Italy",
+        "category": "Green pigment",
+        "color": "#70866A",
+        "description": "Green earth pigments were used in painting, particularly beneath flesh tones."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.5, 41.9]
+      },
+      "properties": {
+        "pigment": "Red Ochre",
+        "mineral": "Hematite-rich earth",
+        "location": "Central Italy",
+        "category": "Earth pigment",
+        "color": "#A84932",
+        "description": "Red ochre receives its color primarily from iron oxide minerals such as hematite."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [34.8, 32.1]
+      },
+      "properties": {
+        "pigment": "Tyrian Purple",
+        "mineral": "Marine organic dye",
+        "location": "Eastern Mediterranean",
+        "category": "Purple colorant",
+        "color": "#6B245F",
+        "description": "Included as a contrast: Tyrian purple came from marine mollusks rather than a mineral."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [32.6, 25.7]
+      },
+      "properties": {
+        "pigment": "Egyptian Blue",
+        "mineral": "Synthetic copper calcium silicate",
+        "location": "Ancient Egypt",
+        "category": "Synthetic mineral pigment",
+        "color": "#2E63A6",
+        "description": "Egyptian blue was manufactured from materials including copper compounds, silica, and calcium."
+      }
+    }
+  ]
+}

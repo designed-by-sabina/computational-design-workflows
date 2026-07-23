@@ -15,6 +15,9 @@
 
     <link rel="stylesheet" href="styles/style.css">
 
+    <!-- Mapbox stylesheet -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+
 
 </head>
 
@@ -177,51 +180,92 @@
              FUTURE ASSIGNMENT CANVASES
         ======================================= -->
 
-<section class="exercise-navigation">
+        <section class="exercise-navigation">
 
-    <div class="exercise-buttons">
+            <div class="exercise-buttons">
 
-        <button class="exercise-button active" data-canvas="1">
-            Exercise 01
-        </button>
+                <button class="exercise-button active" data-canvas="1">
+                    Exercise 01
+                </button>
 
-        <button class="exercise-button" data-canvas="2">
-            Exercise 02
-        </button>
+                <button class="exercise-button" data-canvas="2">
+                    Exercise 02
+                </button>
 
-        <button class="exercise-button" data-canvas="3">
-            Exercise 03
-        </button>
+                <button class="exercise-button" data-canvas="3">
+                    Exercise 03
+                </button>
 
-        <button class="exercise-button" data-canvas="4">
-            Exercise 04
-        </button>
+                <button class="exercise-button" data-canvas="4">
+                    Exercise 04
+                </button>
 
-    </div>
+            </div>
 
 
-    <div class="exercise-panels">
+            <div class="exercise-panels">
 
-        <div id="exercise1" class="exercise-panel active">
-            <div id="canvas-container-1"></div>
-        </div>
+                <div id="exercise1" class="exercise-panel active">
+                    <div id="canvas-container-1"></div>
+                </div>
 
-        <div id="exercise2" class="exercise-panel">
-            <div id="canvas-container-2"></div>
-        </div>
+                <div id="exercise2" class="exercise-panel">
+                    <div id="canvas-container-2"></div>
+                </div>
 
-        <div id="exercise3" class="exercise-panel">
-            <div id="canvas-container-3"></div>
-        </div>
+                <div id="exercise3" class="exercise-panel">
+                    <div id="canvas-container-3"></div>
+                </div>
 
-        <div id="exercise4" class="exercise-panel">
-            <div id="canvas-container-4"></div>
-        </div>
+                <div id="exercise4" class="exercise-panel">
+                    <div id="canvas-container-4"></div>
+                </div>
 
-    </div>
+            </div>
 
-</section>
+        </section>
 
+
+<!-- ======================================
+PIGMENT ORIGINS MAP
+======================================= -->
+
+        <section class="pigment-map-section">
+
+            <div class="pigment-map-header">
+
+                <p class="pigment-map-number">
+                    GEOSPATIAL STRUCTURES
+                </p>
+
+                <h2>
+                    PIGMENT ORIGINS
+                </h2>
+
+                <p class="pigment-map-description">
+                    An exploration of minerals used to produce historical paint pigments
+                    and the geographical locations from which they originated.
+                    Inspired by Kassia St Clair's
+                    <em>The Secret Lives of Colour</em>.
+                </p>
+
+            </div>
+
+            <div class="pigment-map-wrapper">
+
+                <!-- Mapbox puts the interactive map inside this container -->
+                <div id="pigment-map" class="your-class-name"></div>
+                
+
+                <!-- Small instruction placed over the map -->
+                <div class="pigment-map-instructions">
+                    Hover to identify a pigment.<br>
+                    Click to learn more.
+                </div>
+
+            </div>
+
+        </section>
 
 
 
@@ -261,20 +305,26 @@
 
 
     <!-- JavaScript -->
+    <script src="hidden/config.js"></script>  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- <script src="3d-spatial-canvas.js"></script> -->
+
+    <script src="javascript/main.js"></script>
+
+    <script src="javascript/exercises/exercise01.js"></script>
+    <script src="javascript/exercises/exercise02.js"></script>
+    <script src="javascript/exercises/exercise03.js"></script>
+    <script src="javascript/exercises/exercise04.js"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="3d-spatial-canvas.js"></script>
-
-<script src="javascript/main.js"></script>
-
-<script src="javascript/exercises/exercise01.js"></script>
-<script src="javascript/exercises/exercise02.js"></script>
-<script src="javascript/exercises/exercise03.js"></script>
-<script src="javascript/exercises/exercise04.js"></script>
-
-
+    <!-- Mapbox JavaScript library -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <!-- Pigment origins map -->
+    <script src="javascript/pigment-map.js"></script>
+                
+    
 
 </body>
 
