@@ -37,8 +37,8 @@ function initExercise04() {
     group04 = new THREE.Group();
     scene04.add(group04);
 
-    createFrameBox04(0, 1.8, 0, 6.4, 0.9, 0.3, 0xf4efb4);
-    createFrameBox04(0, -1.8, 0, 6.4, 0.9, 0.3, 0xb9ffd7);
+    createFrameBox04(0, 1.2, 0, 6.4, 0.9, 0.3, 0xf4efb4);
+    createFrameBox04(0, -1.2, 0, 6.4, 0.9, 0.3, 0xb9ffd7);
 }
 
 // ==========================================

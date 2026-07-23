@@ -27,7 +27,7 @@ const exercise01 = function(p) {
     p.draw = function() {
 
         // Background
-        p.background(219, 198, 255);
+        p.background(193, 170, 162);
 
         p.noStroke();
 
@@ -46,7 +46,7 @@ const exercise01 = function(p) {
 
         // Background cut-out
 
-        p.fill(219, 198, 255);
+        p.fill(193, 170, 162);
 
         p.rect(
           220,   // x
@@ -71,7 +71,7 @@ const exercise01 = function(p) {
 
         // Background cut-out
 
-        p.fill(219, 198, 255);
+        p.fill(193, 170, 162);
 
         p.rect(
                220,   // x

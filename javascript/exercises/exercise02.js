@@ -9,7 +9,7 @@ const exercise02 = function(p) {
 
     p.draw = function() {
 
-        p.background(219, 198, 255);
+        p.background(193, 170, 162);
         p.noStroke();
 
         paperOffset += 2;
@@ -33,7 +33,7 @@ const exercise02 = function(p) {
         p.rect(80, 370, 640, 90);
 
         // Default lavender slots
-        p.fill(219, 198, 255);
+        p.fill(193, 170, 162);
         p.rect(slotX, 178, slotW, slotH);
         p.rect(slotX, 408, slotW, slotH);
 
