@@ -174,7 +174,27 @@
 
         </section>
 
+        <!-- ==========================================
+         HEADER
+    =========================================== -->
 
+
+        <header>
+
+
+            <h1>
+                DECEPTION
+            </h1>
+
+
+            <p class="subtitle">
+
+                Exploration of Color Deception
+
+            </p>
+
+
+        </header>
 
 
         <!-- ======================================
@@ -226,76 +246,75 @@
 
         </section>
 
-        
-            <!-- ==========================================
+
+        <!-- ======================================
+             INSTRUCTIONS
+        ======================================= -->
+
+
+        <section class="instructions">
+
+
+            <p>
+
+                Click <strong>BUTTONS</strong> to compare images. The top shape rgb is 244, 239, 180. The bottom one -
+                185, 255, 215. How are the shapes affecting various areas of backgrounds?
+
+            </p>
+
+
+        </section>
+        <!-- ==========================================
          FOOTER
     =========================================== -->
 
 
-    <footer>
+        <footer>
 
 
-        <p>
+            <p>
 
-            Inspired by Josef Albers' book
-            <em>Interaction of Color</em>
+                Inspired by Josef Albers' book
+                <em>Interaction of Color</em>
 
-        </p>
-
-
-    </footer>
+            </p>
 
 
-<!-- ======================================
+        </footer>
+
+
+        <!-- ======================================
 PIGMENT ORIGINS MAP
 ======================================= -->
 
         <section class="pigment-map-section">
 
-            <div class="pigment-map-header">
+    <h1>PIGMENT</h1>
 
-                <p class="pigment-map-number">
-                    GEOSPATIAL STRUCTURES
-                </p>
+    <p class="subtitle">
+        Exploration of minerals used to produce historical paint pigments <br><br>
+    </p>
 
-                <h2>
-                    PIGMENT ORIGINS
-                </h2>
+    <div class="pigment-map-wrapper">
+        <div id="pigment-map"></div>
+    </div>
 
-                <p class="pigment-map-description">
-                    An exploration of minerals used to produce historical paint pigments
-                    and the geographical locations from which they originated.
-                    Inspired by Kassia St Clair's
-                    <em>The Secret Lives of Colour</em>.
-                </p>
+    <section class="instructions">
+        <p>
+            Click <strong>COLOR DOTS</strong> to identify and learn more about
+            a pigment and its origins.
+        </p>
+    </section>
 
-            </div>
+    <footer>
+        <p>
+            Inspired by Kassia St. Clair's book
+            <em>The Secret Lives of Color</em>
+        </p>
+    </footer>
 
-            <div class="pigment-map-wrapper">
-
-                <!-- Mapbox puts the interactive map inside this container -->
-                <div id="pigment-map" class="your-class-name"></div>
-                
-
-                <!-- Small instruction placed over the map -->
-                <div class="pigment-map-instructions">
-                    Hover to identify a pigment.<br>
-                    Click to learn more.
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-    </main>
-
-
-
-
-
-
+</section>
+    
 
 
 
@@ -309,7 +328,7 @@ PIGMENT ORIGINS MAP
 
 
     <!-- JavaScript -->
-    <script src="hidden/config.js"></script>  
+    <script src="hidden/config.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -327,8 +346,9 @@ PIGMENT ORIGINS MAP
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <!-- Pigment origins map -->
     <script src="javascript/pigment-map.js"></script>
-                
-    
+
+</main>
+
 
 </body>
 
