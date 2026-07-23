@@ -11,9 +11,9 @@
         "pigment": "Ultramarine",
         "mineral": "Lapis lazuli",
         "location": "Badakhshan, Afghanistan",
-        "category": "Blue pigment",
+        "category": "Mineral pigment",
         "color": "#2647A7",
-        "description": "Natural ultramarine was produced by grinding and refining lapis lazuli."
+        "description": "Natural ultramarine was produced by grinding and refining lapis lazuli from the historically important deposits of Badakhshan."
       }
     },
     {
@@ -25,10 +25,10 @@
       "properties": {
         "pigment": "Vermilion",
         "mineral": "Cinnabar",
-        "location": "Almaden, Spain",
-        "category": "Red pigment",
+        "location": "Almadén, Spain",
+        "category": "Mineral pigment",
         "color": "#E34234",
-        "description": "Vermilion was traditionally produced from the mercury-bearing mineral cinnabar."
+        "description": "Vermilion was manufactured from cinnabar, a mercury-bearing mineral historically mined in large quantities at Almadén."
       }
     },
     {
@@ -41,9 +41,9 @@
         "pigment": "Malachite Green",
         "mineral": "Malachite",
         "location": "Northern Cape, South Africa",
-        "category": "Green pigment",
+        "category": "Mineral pigment",
         "color": "#3C9D76",
-        "description": "Ground malachite produces a mineral green associated with copper deposits."
+        "description": "Ground malachite produces a green mineral pigment associated with copper deposits."
       }
     },
     {
@@ -56,9 +56,9 @@
         "pigment": "Azurite",
         "mineral": "Azurite",
         "location": "Chessy-les-Mines, France",
-        "category": "Blue pigment",
+        "category": "Mineral pigment",
         "color": "#2457C5",
-        "description": "Azurite is a copper mineral that was ground into a deep blue pigment."
+        "description": "Azurite is a copper carbonate mineral that was ground and used as a deep blue pigment."
       }
     },
     {
@@ -69,11 +69,11 @@
       },
       "properties": {
         "pigment": "Raw Sienna",
-        "mineral": "Iron and manganese earth",
+        "mineral": "Iron and manganese-rich earth",
         "location": "Siena, Italy",
         "category": "Earth pigment",
         "color": "#B88746",
-        "description": "Sienna is a yellow-brown earth pigment traditionally associated with Tuscany."
+        "description": "Raw sienna is a yellow-brown earth pigment traditionally associated with deposits near Siena in Tuscany."
       }
     },
     {
@@ -88,7 +88,7 @@
         "location": "Umbria, Italy",
         "category": "Earth pigment",
         "color": "#826644",
-        "description": "Umber is a dark natural earth containing iron oxide and manganese compounds."
+        "description": "Raw umber is a dark natural earth containing iron oxide and manganese compounds and is historically associated with Umbria."
       }
     },
     {
@@ -99,11 +99,11 @@
       },
       "properties": {
         "pigment": "Terre Verte",
-        "mineral": "Green earth",
+        "mineral": "Celadonite and glauconite",
         "location": "Verona, Italy",
-        "category": "Green pigment",
+        "category": "Earth pigment",
         "color": "#70866A",
-        "description": "Green earth pigments were used in painting, particularly beneath flesh tones."
+        "description": "Green earth pigments contain minerals such as celadonite and glauconite and were widely used in painting, including beneath flesh tones."
       }
     },
     {
@@ -125,15 +125,15 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.8, 32.1]
+        "coordinates": [35.2, 33.27]
       },
       "properties": {
         "pigment": "Tyrian Purple",
         "mineral": "Marine mollusk secretion",
-        "location": "Eastern Mediterranean",
+        "location": "Tyre, Lebanon",
         "category": "Animal-based colorant",
         "color": "#6B245F",
-        "description": "Tyrian purple was produced from secretions obtained from several species of marine mollusks."
+        "description": "Tyrian purple was produced from secretions obtained from several species of marine mollusks and became closely associated with the Phoenician city of Tyre."
       }
     },
     {
@@ -145,10 +145,10 @@
       "properties": {
         "pigment": "Egyptian Blue",
         "mineral": "Synthetic copper calcium silicate",
-        "location": "Ancient Egypt",
+        "location": "Thebes, Egypt",
         "category": "Synthetic mineral pigment",
         "color": "#2E63A6",
-        "description": "Egyptian blue was manufactured from materials including copper compounds, silica, and calcium."
+        "description": "Egyptian blue was manufactured by heating materials including silica, calcium compounds, copper compounds, and an alkali flux."
       }
     },
     {
@@ -163,7 +163,7 @@
         "location": "Yucatán Peninsula, Mexico",
         "category": "Hybrid organic-mineral pigment",
         "color": "#4FA8C7",
-        "description": "Maya Blue was produced by combining indigo dye with palygorskite clay, creating a durable blue pigment associated with Maya art."
+        "description": "Maya Blue was produced by combining indigo colorant with palygorskite clay, creating a durable blue pigment associated with Maya art and ritual."
       }
     },
     {
@@ -178,7 +178,7 @@
         "location": "Blombos Cave, South Africa",
         "category": "Earth pigment",
         "color": "#9E3F2D",
-        "description": "Blombos Cave preserves very early evidence of people grinding and processing iron-rich ochre into colored mixtures."
+        "description": "Blombos Cave preserves exceptionally early evidence of people engraving, grinding, and processing iron-rich ochre."
       }
     },
     {
@@ -193,7 +193,7 @@
         "location": "Wilgie Mia, Western Australia",
         "category": "Earth pigment",
         "color": "#A73F28",
-        "description": "Wilgie Mia is a major Aboriginal ochre mine whose red ochre was used for painting, ceremony, medicine, and long-distance trade."
+        "description": "Wilgie Mia is an important Aboriginal ochre mine whose colored earth materials were used for painting, ceremony, medicine, and trade."
       }
     },
     {
@@ -208,7 +208,7 @@
         "location": "Indian Subcontinent",
         "category": "Plant-based dye",
         "color": "#273F87",
-        "description": "Indigo dye is extracted from processed plant leaves. It has been used in the Indian subcontinent for thousands of years."
+        "description": "Indigo dye was extracted from processed Indigofera plant leaves and has a long history of production and use across the Indian subcontinent."
       }
     },
     {
@@ -223,8 +223,129 @@
         "location": "Pernambuco, Brazil",
         "category": "Plant-based dye",
         "color": "#A62F39",
-        "description": "Brazilwood was harvested from Brazil's Atlantic coastal forests and historically exported as a source of deep red textile dye."
+        "description": "Brazilwood from the Atlantic coastal forests produced a valuable red dye and became a major commodity during the early colonial period."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-96.72, 17.07]
+      },
+      "properties": {
+        "pigment": "Cochineal Carmine",
+        "mineral": "Cochineal insects",
+        "location": "Oaxaca, Mexico",
+        "category": "Insect-based dye and lake pigment",
+        "color": "#B01C43",
+        "description": "Cochineal insects raised on prickly pear cacti produce carminic acid, which was used to create vivid crimson dyes and lake pigments."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.14, 25.6]
+      },
+      "properties": {
+        "pigment": "Indian Yellow",
+        "mineral": "Historical organic yellow colorant",
+        "location": "Bihar, India",
+        "category": "Organic pigment",
+        "color": "#E9B726",
+        "description": "Indian yellow was a luminous historical pigment associated with northern India. Accounts of its traditional manufacture are disputed, so its precise production history remains uncertain."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5, 27.7]
+      },
+      "properties": {
+        "pigment": "Orpiment",
+        "mineral": "Arsenic sulfide",
+        "location": "Guizhou, China",
+        "category": "Mineral pigment",
+        "color": "#F3C437",
+        "description": "Orpiment is a naturally occurring arsenic sulfide mineral that was used from antiquity as a brilliant yellow pigment."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.05, 37.72]
+      },
+      "properties": {
+        "pigment": "Lead White",
+        "mineral": "Basic lead carbonate made from metallic lead",
+        "location": "Laurion, Greece",
+        "category": "Synthetic mineral pigment",
+        "color": "#F1EBD8",
+        "description": "Lead white was manufactured by exposing metallic lead to vinegar vapors and carbon dioxide. Laurion is mapped as a major ancient Greek lead-mining region rather than as the sole place where the pigment originated."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.27, 40.85]
+      },
+      "properties": {
+        "pigment": "Naples Yellow",
+        "mineral": "Synthetic lead antimonate",
+        "location": "Naples, Italy",
+        "category": "Synthetic mineral pigment",
+        "color": "#F2D15D",
+        "description": "Naples yellow is a synthetic lead-antimonate pigment. The map marks the city associated with its later European name, although lead-antimonate yellows were produced much earlier in Egypt and Mesopotamia."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.86, 45.6]
+      },
+      "properties": {
+        "pigment": "Monte Baldo Green Earth",
+        "mineral": "Celadonite-rich earth",
+        "location": "Monte Baldo, Italy",
+        "category": "Earth pigment",
+        "color": "#73826A",
+        "description": "The Monte Baldo area near Verona is a documented historical source of green earth rich in celadonite, a mineral ground for use as a stable green pigment."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.34, 50.91]
+      },
+      "properties": {
+        "pigment": "Smalt",
+        "mineral": "Ground cobalt-colored potassium glass",
+        "location": "Saxony, Germany",
+        "category": "Glass-based pigment",
+        "color": "#526A9D",
+        "description": "Smalt was made by grinding cobalt-colored glass. The Ore Mountains of Saxony became an important European center for cobalt extraction, glassmaking, and blue pigment production."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.01, 59.97]
+      },
+      "properties": {
+        "pigment": "Cobalt Blue Materials",
+        "mineral": "Cobalt-bearing ore",
+        "location": "Skutterud, Norway",
+        "category": "Pigment raw-material source",
+        "color": "#3157A4",
+        "description": "The Skutterud mines supplied cobalt-bearing ores used to color glass and ceramics. The point represents a historic cobalt source rather than the invention site of synthetic cobalt blue."
       }
     }
   ]
 }
+
