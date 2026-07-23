@@ -129,11 +129,11 @@
       },
       "properties": {
         "pigment": "Tyrian Purple",
-        "mineral": "Marine organic dye",
+        "mineral": "Marine mollusk secretion",
         "location": "Eastern Mediterranean",
-        "category": "Purple colorant",
+        "category": "Animal-based colorant",
         "color": "#6B245F",
-        "description": "Included as a contrast: Tyrian purple came from marine mollusks rather than a mineral."
+        "description": "Tyrian purple was produced from secretions obtained from several species of marine mollusks."
       }
     },
     {
@@ -149,6 +149,81 @@
         "category": "Synthetic mineral pigment",
         "color": "#2E63A6",
         "description": "Egyptian blue was manufactured from materials including copper compounds, silica, and calcium."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-88.57, 20.68]
+      },
+      "properties": {
+        "pigment": "Maya Blue",
+        "mineral": "Palygorskite clay and indigo",
+        "location": "Yucatán Peninsula, Mexico",
+        "category": "Hybrid organic-mineral pigment",
+        "color": "#4FA8C7",
+        "description": "Maya Blue was produced by combining indigo dye with palygorskite clay, creating a durable blue pigment associated with Maya art."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [21.22, -34.41]
+      },
+      "properties": {
+        "pigment": "Blombos Ochre",
+        "mineral": "Iron-rich red ochre",
+        "location": "Blombos Cave, South Africa",
+        "category": "Earth pigment",
+        "color": "#9E3F2D",
+        "description": "Blombos Cave preserves very early evidence of people grinding and processing iron-rich ochre into colored mixtures."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [117.69, -27.15]
+      },
+      "properties": {
+        "pigment": "Wilgie Mia Ochre",
+        "mineral": "Iron-oxide ochre",
+        "location": "Wilgie Mia, Western Australia",
+        "category": "Earth pigment",
+        "color": "#A73F28",
+        "description": "Wilgie Mia is a major Aboriginal ochre mine whose red ochre was used for painting, ceremony, medicine, and long-distance trade."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [78.96, 20.59]
+      },
+      "properties": {
+        "pigment": "Indian Indigo",
+        "mineral": "Indigofera plant leaves",
+        "location": "Indian Subcontinent",
+        "category": "Plant-based dye",
+        "color": "#273F87",
+        "description": "Indigo dye is extracted from processed plant leaves. It has been used in the Indian subcontinent for thousands of years."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-35.0, -8.3]
+      },
+      "properties": {
+        "pigment": "Brazilwood Red",
+        "mineral": "Brazilwood heartwood",
+        "location": "Pernambuco, Brazil",
+        "category": "Plant-based dye",
+        "color": "#A62F39",
+        "description": "Brazilwood was harvested from Brazil's Atlantic coastal forests and historically exported as a source of deep red textile dye."
       }
     }
   ]
