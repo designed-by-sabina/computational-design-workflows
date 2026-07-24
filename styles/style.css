@@ -1183,3 +1183,516 @@ PIGMENT MAP — MOBILE
         height: 70px;
     }
 
+}
+
+
+
+
+/* ==========================================
+   MIXING — CMYK COLOR GENEALOGY
+========================================== */
+
+.mixing-section {
+    width: 100%;
+    margin-top: 160px;
+    padding-bottom: 0;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    color: var(--black);
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.mixing-header {
+    padding: 100px 50px 50px;
+}
+
+.mixing-header .subtitle {
+    max-width: 660px;
+}
+
+
+/* ==========================================
+   THREE-COLUMN LAYOUT
+========================================== */
+
+.mixing-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.85fr) minmax(520px, 2.4fr) minmax(230px, 0.9fr);
+    min-height: 760px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* ==========================================
+   LEFT INTRODUCTION
+========================================== */
+
+.mixing-introduction {
+    padding: 52px 40px 46px 50px;
+    border-right: 1px solid var(--border);
+}
+
+.mixing-rule {
+    width: 48px;
+    height: 1px;
+    margin-bottom: 28px;
+    background: var(--black);
+}
+
+.mixing-lead {
+    max-width: 270px;
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.mixing-lead strong {
+    color: var(--black);
+}
+
+.mixing-steps {
+    margin-top: 62px;
+    border: 1px solid var(--border);
+}
+
+.mixing-step {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 16px;
+    padding: 21px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.mixing-step:last-child {
+    border-bottom: none;
+}
+
+.mixing-step span {
+    color: var(--black);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+
+.mixing-step p {
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.mixing-reset-button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 15px 18px;
+    border: 1px solid var(--black);
+    border-radius: 0;
+    background: var(--white);
+    color: var(--black);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease;
+}
+
+.mixing-reset-button:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* ==========================================
+   D3 CANVAS
+========================================== */
+
+.mixing-canvas-column {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.cmyk-genealogy {
+    width: 100%;
+    height: 710px;
+}
+
+.cmyk-genealogy svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    cursor: grab;
+}
+
+.cmyk-genealogy svg:active {
+    cursor: grabbing;
+}
+
+.mixing-canvas-instruction {
+    position: absolute;
+    right: 30px;
+    bottom: 24px;
+    left: 30px;
+    color: var(--gray);
+    font-size: 9px;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   D3 LINKS
+========================================== */
+
+.genealogy-link {
+    fill: none;
+    stroke: #111111;
+    stroke-width: 1;
+    stroke-opacity: 0.22;
+}
+
+.genealogy-link.is-active {
+    stroke-opacity: 0.88;
+    stroke-width: 1.4;
+}
+
+
+/* ==========================================
+   D3 NODES
+========================================== */
+
+.genealogy-node {
+    cursor: pointer;
+}
+
+.genealogy-node circle {
+    stroke: #111111;
+    stroke-width: 1;
+    transition:
+        stroke-width 160ms ease,
+        opacity 160ms ease;
+}
+
+.genealogy-node:hover circle,
+.genealogy-node.is-selected circle {
+    stroke-width: 3;
+}
+
+.genealogy-node.is-muted {
+    opacity: 0.18;
+}
+
+.genealogy-node text {
+    fill: #111111;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    text-anchor: middle;
+    pointer-events: none;
+    paint-order: stroke;
+    stroke: #ffffff;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+}
+
+.genealogy-node .genealogy-primary-letter {
+    font-size: 21px;
+    font-weight: 500;
+    stroke-width: 0;
+}
+
+.genealogy-node .genealogy-primary-name {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    stroke-width: 0;
+}
+
+.genealogy-generation-label {
+    fill: #999999;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+}
+
+
+/* ==========================================
+   RIGHT INFORMATION PANEL
+========================================== */
+
+.mixing-information-panel {
+    padding: 52px 50px 44px 36px;
+    border-left: 1px solid var(--border);
+}
+
+.mixing-panel-label {
+    margin-bottom: 24px;
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.mixing-selection-section,
+.mixing-result-section {
+    padding-bottom: 38px;
+    border-bottom: 1px solid var(--border);
+}
+
+.mixing-result-section,
+.mixing-recipe-section {
+    padding-top: 38px;
+}
+
+.mixing-selected-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+}
+
+.mixing-selected-item {
+    min-width: 0;
+    text-align: center;
+}
+
+.mixing-selected-swatch {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 13px;
+    place-items: center;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+}
+
+.mixing-selected-swatch.is-empty {
+    border-style: dashed;
+    background: var(--white);
+}
+
+.mixing-selected-swatch span {
+    color: var(--gray);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.mixing-selected-item p {
+    overflow-wrap: anywhere;
+    color: var(--gray);
+    font-size: 9px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+
+.mixing-plus {
+    padding-top: 26px;
+    color: var(--gray);
+    font-size: 15px;
+    text-align: center;
+}
+
+.mixing-result-swatch {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 22px;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+}
+
+.mixing-result-swatch.is-empty {
+    border-style: dashed;
+    background: var(--white);
+}
+
+.mixing-result-section h2 {
+    max-width: 220px;
+    color: var(--black);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.mixing-result-generation {
+    margin-top: 9px;
+    color: var(--gray);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+
+.mixing-recipe-list > div {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.mixing-recipe-list dt,
+.mixing-recipe-list dd {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.mixing-recipe-list dt {
+    color: var(--gray);
+    letter-spacing: 0.06em;
+}
+
+.mixing-recipe-list dd {
+    color: var(--black);
+    text-align: right;
+}
+
+
+/* ==========================================
+   TOOLTIP
+========================================== */
+
+.genealogy-tooltip {
+    position: fixed;
+    z-index: 1000;
+    width: 230px;
+    padding: 16px 18px;
+    color: #ffffff;
+    background: #111111;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+}
+
+.genealogy-tooltip.is-visible {
+    opacity: 1;
+}
+
+.genealogy-tooltip strong {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.genealogy-tooltip span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.mixing-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1050px) {
+
+    .mixing-layout {
+        grid-template-columns: 230px minmax(420px, 1fr);
+    }
+
+    .mixing-information-panel {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 38px;
+        padding: 40px 50px;
+        border-top: 1px solid var(--border);
+        border-left: none;
+    }
+
+    .mixing-selection-section,
+    .mixing-result-section {
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .mixing-result-section,
+    .mixing-recipe-section {
+        padding-top: 0;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .mixing-section {
+        margin-top: 100px;
+    }
+
+    .mixing-header {
+        padding: 70px 20px 35px;
+    }
+
+    .mixing-layout {
+        display: block;
+        min-height: 0;
+    }
+
+    .mixing-introduction {
+        padding: 36px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mixing-lead {
+        max-width: 100%;
+    }
+
+    .mixing-steps {
+        margin-top: 35px;
+    }
+
+    .cmyk-genealogy {
+        height: 620px;
+    }
+
+    .mixing-information-panel {
+        display: block;
+        padding: 38px 20px;
+    }
+
+    .mixing-selection-section,
+    .mixing-result-section {
+        padding-bottom: 34px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mixing-result-section,
+    .mixing-recipe-section {
+        padding-top: 34px;
+    }
+
+    .mixing-footer {
+        display: block;
+        padding: 32px 20px;
+    }
+
+    .mixing-footer p + p {
+        margin-top: 12px;
+    }
+
+}

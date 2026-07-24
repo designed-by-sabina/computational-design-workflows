@@ -289,319 +289,299 @@ PIGMENT ORIGINS MAP
 
         <section class="pigment-map-section">
 
-    <h1>PIGMENT</h1>
+            <h1>PIGMENT</h1>
 
-    <p class="subtitle">
-        Exploration of minerals used to produce historical paint pigments <br><br>
-    </p>
+            <p class="subtitle">
+                Exploration of minerals used to produce historical paint pigments <br><br>
+            </p>
 
-    <div class="pigment-map-wrapper">
-        <div id="pigment-map"></div>
-    </div>
+            <div class="pigment-map-wrapper">
+                <div id="pigment-map"></div>
+            </div>
 
-    <section class="instructions">
-        <p>
-            Click <strong>COLOR DOTS</strong> to identify and learn more about
-            a pigment and its origins.
-        </p>
-    </section>
+            <section class="instructions">
+                <p>
+                    Click <strong>COLOR DOTS</strong> to identify and learn more about
+                    a pigment and its origins.
+                </p>
+            </section>
 
-    <footer>
-        <p>
-            Inspired by Kassia St. Clair's book
-            <em>The Secret Lives of Color</em>
-        </p>
-    </footer>
+            <footer>
+                <p>
+                    Inspired by Kassia St. Clair's book
+                    <em>The Secret Lives of Color</em>
+                </p>
+            </footer>
 
-</section>
-    
+        </section>
 
 
-<!-- ==========================================
+
+        <!-- ==========================================
      COLOR FORECAST TIMELINE
 =========================================== -->
 
-<section class="color-timeline-section">
+        <section class="color-timeline-section">
 
-    <header class="color-timeline-header">
+            <header class="color-timeline-header">
 
-        <h1>TRENDS</h1>
+                <h1>TRENDS</h1>
 
-        <p class="subtitle">
-            Annual color selections and forecasts across cultural, architectural, and fashion sources
-        </p>
+                <p class="subtitle">
+                    Annual color selections and forecasts across cultural, architectural, and fashion sources
+                </p>
 
-    </header>
+            </header>
 
 
-<!-- ==========================================
+            <!-- ==========================================
      HOVERED COLOR COMPARISON PANEL
 =========================================== -->
 
-<div
-    id="color-comparison-panel"
-    class="color-comparison-panel"
-    aria-live="polite"
->
+            <div id="color-comparison-panel" class="color-comparison-panel" aria-live="polite">
 
-    <div class="comparison-year-column">
+                <div class="comparison-year-column">
 
-        <p
-            id="comparison-year"
-            class="comparison-year"
-        >
-            2026
-        </p>
+                    <p id="comparison-year" class="comparison-year">
+                        2026
+                    </p>
 
-        <p class="comparison-year-label">
-            YEAR SELECTED
-        </p>
+                    <p class="comparison-year-label">
+                        YEAR SELECTED
+                    </p>
 
-    </div>
+                </div>
 
 
-    <div
-        id="comparison-colors"
-        class="comparison-colors"
-    ></div>
+                <div id="comparison-colors" class="comparison-colors"></div>
 
-</div>
+            </div>
 
 
-    <div id="color-timeline"></div>
+            <div id="color-timeline"></div>
 
-</section>
-
-
-    <!-- D3 timeline -->
-    <div id="color-timeline"></div>
+        </section>
 
 
-    <section class="instructions">
-
-        <p>
-            Click a <strong>COLOR SWATCH</strong> to learn more and compare color selections from the same year.
-        </p>
-
-    </section>
+        <!-- D3 timeline -->
+        <div id="color-timeline"></div>
 
 
-    <footer class="color-timeline-footer">
+        <section class="instructions">
 
-        <p>
-            Digital colors are visual approximations.
-            Manufacturer and color-system codes are provided as references.
-        </p>
+            <p>
+                Click a <strong>COLOR SWATCH</strong> to learn more and compare color selections from the same year.
+            </p>
 
-    </footer>
-
-</section>
+        </section>
 
 
-<!-- ==========================================
+        <footer class="color-timeline-footer">
+
+            <p>
+                Digital colors are visual approximations.
+                Manufacturer and color-system codes are provided as references.
+            </p>
+
+        </footer>
+
+        </section>
+
+
+        <!-- ==========================================
      MIXING — CMYK COLOR GENEALOGY
      Paste after your TRENDS section
 ========================================== -->
 
-<section class="mixing-section" id="mixing">
+        <section class="mixing-section" id="mixing">
 
-    <header class="mixing-header">
+            <header class="mixing-header">
 
-        <h1>
-            MIXING
-        </h1>
+                <h1>
+                    MIXING
+                </h1>
 
-        <p class="subtitle">
-            Build a relational color structure through subtractive CMYK mixing
-        </p>
+                <p class="subtitle">
+                    Build a relational color structure through subtractive CMYK mixing
+                </p>
 
-    </header>
+            </header>
 
 
-    <div class="mixing-layout">
+            <div class="mixing-layout">
 
-        <!-- LEFT: INSTRUCTIONS -->
-        <aside class="mixing-introduction">
+                <!-- LEFT: INSTRUCTIONS -->
+                <aside class="mixing-introduction">
 
-            <div class="mixing-rule"></div>
+                    <div class="mixing-rule"></div>
 
-            <p class="mixing-lead">
-                Click any two <strong>COLOR SWATCHES</strong> to create a new hue.
-                Continue selecting colors to build a growing color genealogy.
-            </p>
+                    <p class="mixing-lead">
+                        Click any two <strong>COLOR SWATCHES</strong> to create a new hue.
+                        Continue selecting colors to build a growing color genealogy.
+                    </p>
 
-            <div class="mixing-steps">
+                    <div class="mixing-steps">
 
-                <div class="mixing-step">
-                    <span>01</span>
-                    <p>Select the first color.</p>
+                        <div class="mixing-step">
+                            <span>01</span>
+                            <p>Select the first color.</p>
+                        </div>
+
+                        <div class="mixing-step">
+                            <span>02</span>
+                            <p>Select the second color.</p>
+                        </div>
+
+                        <div class="mixing-step">
+                            <span>03</span>
+                            <p>A smaller child color appears.</p>
+                        </div>
+
+                        <div class="mixing-step">
+                            <span>04</span>
+                            <p>Use the new hue in another mix.</p>
+                        </div>
+
+                    </div>
+
+                    <button id="resetMixingButton" class="mixing-reset-button" type="button">
+                        RESET STRUCTURE
+                    </button>
+
+                </aside>
+
+
+                <!-- CENTER: SINGLE D3 CANVAS -->
+                <div class="mixing-canvas-column">
+
+                    <div id="cmykGenealogy" class="cmyk-genealogy"
+                        aria-label="Interactive CMYK relational color mixing structure"></div>
+
+                    <section class="instructions">
+
+                        <p>
+                            Click <strong>TWO CIRCLES</strong> to mix. Scroll to zoom. Drag empty space to pan
+                        </p>
+
+                    </section>
+                    
+                
+
                 </div>
 
-                <div class="mixing-step">
-                    <span>02</span>
-                    <p>Select the second color.</p>
-                </div>
 
-                <div class="mixing-step">
-                    <span>03</span>
-                    <p>A smaller child color appears.</p>
-                </div>
+                <!-- RIGHT: CURRENT SELECTION + RECIPE -->
+                <aside class="mixing-information-panel">
 
-                <div class="mixing-step">
-                    <span>04</span>
-                    <p>Use the new hue in another mix.</p>
-                </div>
+                    <section class="mixing-selection-section">
+
+                        <p class="mixing-panel-label">
+                            YOUR MIX
+                        </p>
+
+                        <div class="mixing-selected-row">
+
+                            <div class="mixing-selected-item">
+                                <div id="firstSelectedSwatch" class="mixing-selected-swatch is-empty">
+                                    <span>+</span>
+                                </div>
+
+                                <p id="firstSelectedName">
+                                    SELECT COLOR
+                                </p>
+                            </div>
+
+                            <div class="mixing-plus">
+                                +
+                            </div>
+
+                            <div class="mixing-selected-item">
+                                <div id="secondSelectedSwatch" class="mixing-selected-swatch is-empty">
+                                    <span>+</span>
+                                </div>
+
+                                <p id="secondSelectedName">
+                                    SELECT COLOR
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <section class="mixing-result-section">
+
+                        <p class="mixing-panel-label">
+                            NEW COLOR
+                        </p>
+
+                        <div id="mixingResultSwatch" class="mixing-result-swatch is-empty"></div>
+
+                        <h2 id="mixingResultName">
+                            WAITING FOR TWO COLORS
+                        </h2>
+
+                        <p id="mixingResultGeneration" class="mixing-result-generation">
+                            —
+                        </p>
+
+                    </section>
+
+
+                    <section class="mixing-recipe-section">
+
+                        <p class="mixing-panel-label">
+                            COLOR RECIPE
+                        </p>
+
+                        <dl class="mixing-recipe-list">
+
+                            <div>
+                                <dt>CYAN</dt>
+                                <dd id="recipeCyan">—</dd>
+                            </div>
+
+                            <div>
+                                <dt>MAGENTA</dt>
+                                <dd id="recipeMagenta">—</dd>
+                            </div>
+
+                            <div>
+                                <dt>YELLOW</dt>
+                                <dd id="recipeYellow">—</dd>
+                            </div>
+
+                            <div>
+                                <dt>BLACK</dt>
+                                <dd id="recipeBlack">—</dd>
+                            </div>
+
+                        </dl>
+
+                    </section>
+
+                </aside>
 
             </div>
 
-            <button id="resetMixingButton" class="mixing-reset-button" type="button">
-                RESET STRUCTURE
-            </button>
 
-        </aside>
+            <footer class="mixing-footer">
 
-
-        <!-- CENTER: SINGLE D3 CANVAS -->
-        <div class="mixing-canvas-column">
-
-            <div
-                id="cmykGenealogy"
-                class="cmyk-genealogy"
-                aria-label="Interactive CMYK relational color mixing structure"
-            ></div>
-
-            <p class="mixing-canvas-instruction">
-                CLICK TWO CIRCLES TO MIX · SCROLL TO ZOOM · DRAG EMPTY SPACE TO PAN
-            </p>
-
-        </div>
-
-
-        <!-- RIGHT: CURRENT SELECTION + RECIPE -->
-        <aside class="mixing-information-panel">
-
-            <section class="mixing-selection-section">
-
-                <p class="mixing-panel-label">
-                    YOUR MIX
+                <p>
+                    Digital colors are visual approximations of CMYK mixtures.
                 </p>
 
-                <div class="mixing-selected-row">
+            </footer>
 
-                    <div class="mixing-selected-item">
-                        <div
-                            id="firstSelectedSwatch"
-                            class="mixing-selected-swatch is-empty"
-                        >
-                            <span>+</span>
-                        </div>
-
-                        <p id="firstSelectedName">
-                            SELECT COLOR
-                        </p>
-                    </div>
-
-                    <div class="mixing-plus">
-                        +
-                    </div>
-
-                    <div class="mixing-selected-item">
-                        <div
-                            id="secondSelectedSwatch"
-                            class="mixing-selected-swatch is-empty"
-                        >
-                            <span>+</span>
-                        </div>
-
-                        <p id="secondSelectedName">
-                            SELECT COLOR
-                        </p>
-                    </div>
-
-                </div>
-
-            </section>
+        </section>
 
 
-            <section class="mixing-result-section">
+        <!-- Include D3 only once on the page -->
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
-                <p class="mixing-panel-label">
-                    NEW COLOR
-                </p>
-
-                <div
-                    id="mixingResultSwatch"
-                    class="mixing-result-swatch is-empty"
-                ></div>
-
-                <h2 id="mixingResultName">
-                    WAITING FOR TWO COLORS
-                </h2>
-
-                <p id="mixingResultGeneration" class="mixing-result-generation">
-                    —
-                </p>
-
-            </section>
-
-
-            <section class="mixing-recipe-section">
-
-                <p class="mixing-panel-label">
-                    COLOR RECIPE
-                </p>
-
-                <dl class="mixing-recipe-list">
-
-                    <div>
-                        <dt>CYAN</dt>
-                        <dd id="recipeCyan">—</dd>
-                    </div>
-
-                    <div>
-                        <dt>MAGENTA</dt>
-                        <dd id="recipeMagenta">—</dd>
-                    </div>
-
-                    <div>
-                        <dt>YELLOW</dt>
-                        <dd id="recipeYellow">—</dd>
-                    </div>
-
-                    <div>
-                        <dt>BLACK</dt>
-                        <dd id="recipeBlack">—</dd>
-                    </div>
-
-                </dl>
-
-            </section>
-
-        </aside>
-
-    </div>
-
-
-    <footer class="mixing-footer">
-
-        <p>
-            Inspired by Josef Albers’ exploration of color relationships.
-        </p>
-
-        <p>
-            Digital colors are visual approximations of CMYK mixtures.
-        </p>
-
-    </footer>
-
-</section>
-
-
-<!-- Include D3 only once on the page -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-
-<!-- Add this after the D3 script and after your other project scripts -->
-<script src="javascript/cmyk-genealogy.js"></script>
+        <!-- Add this after the D3 script and after your other project scripts -->
+        <script src="javascript/cmyk-genealogy.js"></script>
 
 
 
@@ -612,33 +592,33 @@ PIGMENT ORIGINS MAP
 
 
 
-    <!-- JavaScript -->
-    <script src="hidden/config.js"></script>
+        <!-- JavaScript -->
+        <script src="hidden/config.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- <script src="3d-spatial-canvas.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <!-- <script src="3d-spatial-canvas.js"></script> -->
 
-    <script src="javascript/main.js"></script>
+        <script src="javascript/main.js"></script>
 
-    <script src="javascript/exercises/exercise01.js"></script>
-    <script src="javascript/exercises/exercise02.js"></script>
-    <script src="javascript/exercises/exercise03.js"></script>
-    <script src="javascript/exercises/exercise04.js"></script>
+        <script src="javascript/exercises/exercise01.js"></script>
+        <script src="javascript/exercises/exercise02.js"></script>
+        <script src="javascript/exercises/exercise03.js"></script>
+        <script src="javascript/exercises/exercise04.js"></script>
 
 
-    <!-- Mapbox JavaScript library -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-    <!-- Pigment origins map -->
-    <script src="javascript/pigment-map.js"></script>
+        <!-- Mapbox JavaScript library -->
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+        <!-- Pigment origins map -->
+        <script src="javascript/pigment-map.js"></script>
 
-    <!-- D3.js -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+        <!-- D3.js -->
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
-<!-- Color timeline -->
-<script src="javascript/color-timeline.js"></script>
+        <!-- Color timeline -->
+        <script src="javascript/color-timeline.js"></script>
 
-</main>
+    </main>
 
 
 </body>

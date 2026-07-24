@@ -202,7 +202,7 @@
 
             c: Number(d.c),
             m: Number(d.m),
-            y: Number(d.y),
+            yellow: Number(d.y),
             k: Number(d.k),
 
             color: d.color,
@@ -210,7 +210,7 @@
             parentTwo: d.parentTwo || "",
 
             x: null,
-            yPosition: null
+            y: null
         };
 
     }
@@ -797,13 +797,13 @@
 
             c: recipe.c,
             m: recipe.m,
-            y: recipe.y,
+            yellow: recipe.yellow,
             k: recipe.k,
 
             color: cmykToHex(
                 recipe.c,
                 recipe.m,
-                recipe.y,
+                recipe.yellow,
                 recipe.k
             ),
 
@@ -859,7 +859,7 @@
         return normalizeRecipe({
             c: (first.c + second.c) / 2,
             m: (first.m + second.m) / 2,
-            y: (first.y + second.y) / 2,
+            yellow: (first.yellow + second.yellow) / 2,
             k: (first.k + second.k) / 2
         });
 
@@ -871,7 +871,7 @@
         return {
             c: roundToOneDecimal(recipe.c),
             m: roundToOneDecimal(recipe.m),
-            y: roundToOneDecimal(recipe.y),
+            yellow: roundToOneDecimal(recipe.yellow),
             k: roundToOneDecimal(recipe.k)
         };
 
@@ -892,7 +892,7 @@
             return (
                 Math.abs(node.c - recipe.c) < 0.05 &&
                 Math.abs(node.m - recipe.m) < 0.05 &&
-                Math.abs(node.y - recipe.y) < 0.05 &&
+                Math.abs(node.yellow - recipe.yellow) < 0.05 &&
                 Math.abs(node.k - recipe.k) < 0.05
             );
 
@@ -905,13 +905,13 @@
     // DIGITAL CMYK APPROXIMATION
     // ==========================================
 
-    function cmykToHex(c, m, y, k) {
 
-        const cyan = c / 100;
-        const magenta = m / 100;
-        const yellow = y / 100;
-        const black = k / 100;
 
+    function cmykToHex(c, m, yellowValue, k) {
+        const cyan = clampPercentage(c) / 100;
+        const magenta = clampPercentage(m) / 100;
+        const yellow = clampPercentage(yellowValue) / 100;
+        const black = clampPercentage(k) / 100;
 
         const red = Math.round(
             255 * (1 - cyan) * (1 - black)
@@ -925,9 +925,11 @@
             255 * (1 - yellow) * (1 - black)
         );
 
-
         return rgbToHex(red, green, blue);
+    }
 
+    function clampPercentage(value) {
+        return Math.max(0, Math.min(100, Number(value) || 0));
     }
 
 
@@ -959,7 +961,7 @@
             cmykToHex(
                 recipe.c,
                 recipe.m,
-                recipe.y,
+                recipe.yellow,
                 recipe.k
             )
         );
@@ -1213,7 +1215,7 @@
 
         recipeCyan.textContent = formatPercentage(node.c);
         recipeMagenta.textContent = formatPercentage(node.m);
-        recipeYellow.textContent = formatPercentage(node.y);
+        recipeYellow.textContent = formatPercentage(node.yellow);
         recipeBlack.textContent = formatPercentage(node.k);
 
     }
@@ -1370,7 +1372,7 @@
                     <span>${parentsText}</span>
                     <span>Generation ${node.generation}</span>
                     <span>C ${formatPercentage(node.c)} · M ${formatPercentage(node.m)}</span>
-                    <span>Y ${formatPercentage(node.y)} · K ${formatPercentage(node.k)}</span>
+                    <span>Y ${formatPercentage(node.yellow)} · K ${formatPercentage(node.k)}</span>
                     <span>${node.color}</span>
                 `
             )
