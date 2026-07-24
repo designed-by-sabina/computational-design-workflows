@@ -904,9 +904,8 @@ PIGMENT MAP — MOBILE
   min-height: 0;
 }
 
-
 /* ==========================================
-   COLOR TIMELINE SECTION
+   COLOR TIME
 ========================================== */
 
 .color-timeline-section {
@@ -922,67 +921,90 @@ PIGMENT MAP — MOBILE
 
 
 /* ==========================================
-   COMPARISON PANEL
+   HOVERED YEAR COMPARISON PANEL
 ========================================== */
 
 .color-comparison-panel {
     display: grid;
-    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
+
     width: 100%;
-    min-height: 290px;
+    min-height: 270px;
+
     margin-bottom: 34px;
+
     color: #ffffff;
     background-color: #111111;
-    border: 1px solid #111111;
+
+    border-top: 1px solid #111111;
+    border-bottom: 1px solid #111111;
 }
 
 
 /* ==========================================
-   YEAR COLUMN
+   YEAR
 ========================================== */
 
 .comparison-year-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 40px;
-    border-right:
-        1px solid
-        rgba(255, 255, 255, 0.28);
+
+    padding: 36px;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 
 .comparison-year {
     margin: 0;
+
     font-size: clamp(54px, 5vw, 82px);
     font-weight: 400;
     line-height: 0.95;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
 }
 
 
 .comparison-year-label {
-    margin: 22px 0 0;
-    font-size: 11px;
-    font-weight: 500;
+    margin: 20px 0 0;
+
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: 0.12em;
 }
 
 
 /* ==========================================
-   COLOR COMPARISON LINE
+   COLOR COMPARISON ROW
 ========================================== */
 
 .comparison-colors {
     display: flex;
     align-items: stretch;
+
     min-width: 0;
+
     overflow-x: auto;
     overflow-y: hidden;
+
     scrollbar-width: thin;
-    scrollbar-color:
-        rgba(255, 255, 255, 0.4)
-        transparent;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+
+.comparison-colors::-webkit-scrollbar {
+    height: 8px;
+}
+
+
+.comparison-colors::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.comparison-colors::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.35);
 }
 
 
@@ -994,12 +1016,14 @@ PIGMENT MAP — MOBILE
     display: flex;
     flex: 0 0 auto;
     align-items: flex-start;
-    gap: 20px;
-    min-width: 300px;
-    padding: 36px;
-    border-right:
-        1px solid
-        rgba(255, 255, 255, 0.25);
+
+    gap: 18px;
+
+    min-width: 290px;
+
+    padding: 34px;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 
@@ -1009,45 +1033,40 @@ PIGMENT MAP — MOBILE
 
 
 .comparison-color-card-primary {
-    min-width: 430px;
-    outline:
-        1px solid
-        rgba(255, 255, 255, 0.85);
+    min-width: 420px;
+
+    outline: 1px solid rgba(255, 255, 255, 0.8);
     outline-offset: -14px;
 }
 
 
 .comparison-color-card-secondary {
-    min-width: 310px;
+    min-width: 300px;
 }
 
 
 /* ==========================================
-   SQUARE SWATCHES
+   TRUE SQUARE SWATCHES
 ========================================== */
 
 .comparison-swatch {
     flex: 0 0 auto;
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.55);
+
+    aspect-ratio: 1 / 1;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
 
-/*
-The height and width are identical,
-so every swatch is a true square.
-*/
-
 .comparison-swatch-primary {
-    width: 150px;
-    height: 150px;
+    width: 148px;
+    height: 148px;
 }
 
 
 .comparison-swatch-secondary {
-    width: 84px;
-    height: 84px;
+    width: 82px;
+    height: 82px;
 }
 
 
@@ -1061,25 +1080,27 @@ so every swatch is a true square.
 
 
 .comparison-source {
-    margin: 2px 0 11px;
-    font-size: 11px;
+    margin: 2px 0 10px;
+
+    font-size: 10px;
     font-weight: 600;
     line-height: 1.2;
+
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
 }
 
 
 .comparison-color-name {
     margin: 0 0 14px;
-    font-size: 20px;
+
+    font-size: 19px;
     font-weight: 500;
     line-height: 1.1;
 }
 
 
-.comparison-color-card-primary
-.comparison-color-name {
+.comparison-color-card-primary .comparison-color-name {
     font-size: 26px;
 }
 
@@ -1087,31 +1108,32 @@ so every swatch is a true square.
 .comparison-color-details {
     margin: 0;
     padding-top: 11px;
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.28);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 
 .comparison-color-details div {
     display: grid;
-    grid-template-columns: 52px minmax(0, 1fr);
-    gap: 9px;
-    margin-top: 8px;
+    grid-template-columns: 48px minmax(0, 1fr);
+
+    gap: 8px;
+
+    margin-top: 7px;
 }
 
 
 .comparison-color-details dt,
 .comparison-color-details dd {
     margin: 0;
-    font-size: 11px;
-    line-height: 1.3;
+
+    font-size: 10px;
+    line-height: 1.35;
 }
 
 
 .comparison-color-details dt {
-    color:
-        rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -1121,12 +1143,14 @@ so every swatch is a true square.
 
 
 /* ==========================================
-   TIMELINE
+   TIMELINE CONTAINER
 ========================================== */
 
 #color-timeline {
     width: 100%;
+
     overflow: hidden;
+
     border-top: 1px solid #111111;
     border-bottom: 1px solid #111111;
 }
@@ -1134,20 +1158,24 @@ so every swatch is a true square.
 
 .color-timeline-svg {
     display: block;
+
     width: 100%;
     max-width: 100%;
+
     font-family: "Inter", sans-serif;
 }
 
 
 /* ==========================================
-   YEAR LABELS
+   TIMELINE YEARS
 ========================================== */
 
 .timeline-year-label {
     fill: #111111;
-    font-size: 9px;
+
+    font-size: 8px;
     font-weight: 500;
+
     transition:
         fill 150ms ease,
         font-weight 150ms ease;
@@ -1157,16 +1185,27 @@ so every swatch is a true square.
 .timeline-year-label.is-selected {
     fill: #ffffff;
     font-weight: 700;
+
     paint-order: stroke;
     stroke: #111111;
-    stroke-width: 8px;
+    stroke-width: 7px;
     stroke-linejoin: round;
 }
 
 
 /* ==========================================
-   SOURCE ROWS
+   TIMELINE SOURCE LABELS
 ========================================== */
+
+.timeline-source-label {
+    fill: #111111;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 0.035em;
+}
+
 
 .timeline-row-divider {
     stroke: #111111;
@@ -1175,33 +1214,30 @@ so every swatch is a true square.
 }
 
 
-.timeline-source-label {
-    fill: #111111;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-
 /* ==========================================
-   SQUARE TIMELINE SWATCHES
+   TIMELINE SQUARE SWATCHES
 ========================================== */
 
 .timeline-placeholder {
-    fill: #f1f1f1;
+    fill: #f2f2f2;
+
     transition: opacity 150ms ease;
 }
 
 
 .timeline-swatch-outline {
     fill: none;
+
     stroke: #111111;
     stroke-width: 0.5;
+
     pointer-events: none;
 }
 
 
 .timeline-color-swatch {
     cursor: crosshair;
+
     transition:
         opacity 150ms ease,
         filter 150ms ease;
@@ -1216,7 +1252,7 @@ so every swatch is a true square.
 
 .timeline-color-swatch.is-muted,
 .timeline-placeholder.is-muted {
-    opacity: 0.32;
+    opacity: 0.3;
 }
 
 
@@ -1242,6 +1278,7 @@ so every swatch is a true square.
 
 .color-timeline-footer p {
     max-width: 720px;
+
     font-size: 11px;
     line-height: 1.5;
 }
@@ -1249,6 +1286,7 @@ so every swatch is a true square.
 
 .timeline-error-message {
     padding: 50px 20px;
+
     font-size: 14px;
 }
 
@@ -1260,7 +1298,7 @@ so every swatch is a true square.
 @media (max-width: 1100px) {
 
     .color-comparison-panel {
-        grid-template-columns: 190px minmax(0, 1fr);
+        grid-template-columns: 180px minmax(0, 1fr);
     }
 
 
@@ -1270,13 +1308,19 @@ so every swatch is a true square.
 
 
     .comparison-color-card-primary {
-        min-width: 390px;
+        min-width: 380px;
     }
 
 
     .comparison-swatch-primary {
-        width: 130px;
-        height: 130px;
+        width: 126px;
+        height: 126px;
+    }
+
+
+    .comparison-swatch-secondary {
+        width: 76px;
+        height: 76px;
     }
 
 }
@@ -1295,11 +1339,8 @@ so every swatch is a true square.
 
 
     .comparison-year-column {
-        min-height: auto;
         border-right: none;
-        border-bottom:
-            1px solid
-            rgba(255, 255, 255, 0.28);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     }
 
 
@@ -1309,55 +1350,28 @@ so every swatch is a true square.
 
 
     .comparison-colors {
-        min-height: 250px;
+        min-height: 240px;
     }
 
 
     .comparison-color-card {
-        padding: 28px;
+        padding: 26px;
     }
 
 
     .comparison-color-card-primary {
-        min-width: 360px;
+        min-width: 340px;
     }
 
 
     .comparison-color-card-secondary {
-        min-width: 280px;
+        min-width: 270px;
     }
 
 
     .comparison-swatch-primary {
-        width: 120px;
-        height: 120px;
-    }
-
-
-    .comparison-swatch-secondary {
-        width: 72px;
-        height: 72px;
-    }
-
-}
-
-
-@media (max-width: 520px) {
-
-    .comparison-color-card {
-        min-width: 260px;
-        flex-direction: column;
-    }
-
-
-    .comparison-color-card-primary {
-        min-width: 300px;
-    }
-
-
-    .comparison-swatch-primary {
-        width: 110px;
-        height: 110px;
+        width: 112px;
+        height: 112px;
     }
 
 
@@ -1369,468 +1383,29 @@ so every swatch is a true square.
 }
 
 
-/* ==========================================
-   COLOR TIMELINE SECTION
-========================================== */
-
-.color-timeline-section {
-    width: 100%;
-    margin-top: 160px;
-    padding-bottom: 80px;
-}
-
-
-.color-timeline-header {
-    margin-bottom: 46px;
-}
-
-
-/* ==========================================
-   COMPARISON PANEL
-========================================== */
-
-.color-comparison-panel {
-    display: grid;
-    grid-template-columns: 250px minmax(0, 1fr);
-    width: 100%;
-    min-height: 290px;
-    margin-bottom: 34px;
-    color: #ffffff;
-    background-color: #111111;
-    border: 1px solid #111111;
-}
-
-
-/* ==========================================
-   YEAR COLUMN
-========================================== */
-
-.comparison-year-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px;
-    border-right:
-        1px solid
-        rgba(255, 255, 255, 0.28);
-}
-
-
-.comparison-year {
-    margin: 0;
-    font-size: clamp(54px, 5vw, 82px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-}
-
-
-.comparison-year-label {
-    margin: 22px 0 0;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-}
-
-
-/* ==========================================
-   COLOR COMPARISON LINE
-========================================== */
-
-.comparison-colors {
-    display: flex;
-    align-items: stretch;
-    min-width: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: thin;
-    scrollbar-color:
-        rgba(255, 255, 255, 0.4)
-        transparent;
-}
-
-
-/* ==========================================
-   COLOR CARDS
-========================================== */
-
-.comparison-color-card {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: flex-start;
-    gap: 20px;
-    min-width: 300px;
-    padding: 36px;
-    border-right:
-        1px solid
-        rgba(255, 255, 255, 0.25);
-}
-
-
-.comparison-color-card:last-child {
-    border-right: none;
-}
-
-
-.comparison-color-card-primary {
-    min-width: 430px;
-    outline:
-        1px solid
-        rgba(255, 255, 255, 0.85);
-    outline-offset: -14px;
-}
-
-
-.comparison-color-card-secondary {
-    min-width: 310px;
-}
-
-
-/* ==========================================
-   SQUARE SWATCHES
-========================================== */
-
-.comparison-swatch {
-    flex: 0 0 auto;
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.55);
-}
-
-
-/*
-The height and width are identical,
-so every swatch is a true square.
-*/
-
-.comparison-swatch-primary {
-    width: 150px;
-    height: 150px;
-}
-
-
-.comparison-swatch-secondary {
-    width: 84px;
-    height: 84px;
-}
-
-
-/* ==========================================
-   COLOR INFORMATION
-========================================== */
-
-.comparison-color-information {
-    min-width: 0;
-}
-
-
-.comparison-source {
-    margin: 2px 0 11px;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-
-
-.comparison-color-name {
-    margin: 0 0 14px;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.1;
-}
-
-
-.comparison-color-card-primary
-.comparison-color-name {
-    font-size: 26px;
-}
-
-
-.comparison-color-details {
-    margin: 0;
-    padding-top: 11px;
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.28);
-}
-
-
-.comparison-color-details div {
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr);
-    gap: 9px;
-    margin-top: 8px;
-}
-
-
-.comparison-color-details dt,
-.comparison-color-details dd {
-    margin: 0;
-    font-size: 11px;
-    line-height: 1.3;
-}
-
-
-.comparison-color-details dt {
-    color:
-        rgba(255, 255, 255, 0.55);
-}
-
-
-.comparison-color-details dd {
-    overflow-wrap: anywhere;
-}
-
-
-/* ==========================================
-   TIMELINE
-========================================== */
-
-#color-timeline {
-    width: 100%;
-    overflow: hidden;
-    border-top: 1px solid #111111;
-    border-bottom: 1px solid #111111;
-}
-
-
-.color-timeline-svg {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    font-family: "Inter", sans-serif;
-}
-
-
-/* ==========================================
-   YEAR LABELS
-========================================== */
-
-.timeline-year-label {
-    fill: #111111;
-    font-size: 9px;
-    font-weight: 500;
-    transition:
-        fill 150ms ease,
-        font-weight 150ms ease;
-}
-
-
-.timeline-year-label.is-selected {
-    fill: #ffffff;
-    font-weight: 700;
-    paint-order: stroke;
-    stroke: #111111;
-    stroke-width: 8px;
-    stroke-linejoin: round;
-}
-
-
-/* ==========================================
-   SOURCE ROWS
-========================================== */
-
-.timeline-row-divider {
-    stroke: #111111;
-    stroke-width: 0.5;
-    stroke-opacity: 0.18;
-}
-
-
-.timeline-source-label {
-    fill: #111111;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-
-/* ==========================================
-   SQUARE TIMELINE SWATCHES
-========================================== */
-
-.timeline-placeholder {
-    fill: #f1f1f1;
-    transition: opacity 150ms ease;
-}
-
-
-.timeline-swatch-outline {
-    fill: none;
-    stroke: #111111;
-    stroke-width: 0.5;
-    pointer-events: none;
-}
-
-
-.timeline-color-swatch {
-    cursor: crosshair;
-    transition:
-        opacity 150ms ease,
-        filter 150ms ease;
-}
-
-
-.timeline-color-swatch:hover {
-    opacity: 1;
-    filter: brightness(1.08);
-}
-
-
-.timeline-color-swatch.is-muted,
-.timeline-placeholder.is-muted {
-    opacity: 0.32;
-}
-
-
-.timeline-color-swatch.is-selected {
-    opacity: 1;
-    filter: brightness(1.08);
-}
-
-
-/* ==========================================
-   INSTRUCTIONS AND FOOTER
-========================================== */
-
-.color-timeline-section .instructions {
-    margin-top: 24px;
-}
-
-
-.color-timeline-footer {
-    margin-top: 34px;
-}
-
-
-.color-timeline-footer p {
-    max-width: 720px;
-    font-size: 11px;
-    line-height: 1.5;
-}
-
-
-.timeline-error-message {
-    padding: 50px 20px;
-    font-size: 14px;
-}
-
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
-
-@media (max-width: 1100px) {
-
-    .color-comparison-panel {
-        grid-template-columns: 190px minmax(0, 1fr);
-    }
-
-
-    .comparison-year-column {
-        padding: 28px;
-    }
-
-
-    .comparison-color-card-primary {
-        min-width: 390px;
-    }
-
-
-    .comparison-swatch-primary {
-        width: 130px;
-        height: 130px;
-    }
-
-}
-
-
-@media (max-width: 760px) {
-
-    .color-timeline-section {
-        margin-top: 100px;
-    }
-
-
-    .color-comparison-panel {
-        display: block;
-    }
-
-
-    .comparison-year-column {
-        min-height: auto;
-        border-right: none;
-        border-bottom:
-            1px solid
-            rgba(255, 255, 255, 0.28);
-    }
-
-
-    .comparison-year {
-        font-size: 54px;
-    }
-
-
-    .comparison-colors {
-        min-height: 250px;
-    }
-
-
-    .comparison-color-card {
-        padding: 28px;
-    }
-
-
-    .comparison-color-card-primary {
-        min-width: 360px;
-    }
-
-
-    .comparison-color-card-secondary {
-        min-width: 280px;
-    }
-
-
-    .comparison-swatch-primary {
-        width: 120px;
-        height: 120px;
-    }
-
-
-    .comparison-swatch-secondary {
-        width: 72px;
-        height: 72px;
-    }
-
-}
-
-
 @media (max-width: 520px) {
 
     .comparison-color-card {
-        min-width: 260px;
         flex-direction: column;
+
+        min-width: 250px;
     }
 
 
     .comparison-color-card-primary {
-        min-width: 300px;
+        min-width: 290px;
     }
 
 
     .comparison-swatch-primary {
-        width: 110px;
-        height: 110px;
+        width: 104px;
+        height: 104px;
     }
 
 
     .comparison-swatch-secondary {
-        width: 70px;
-        height: 70px;
+        width: 68px;
+        height: 68px;
     }
 
 }
-
-
-
