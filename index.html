@@ -398,6 +398,211 @@ PIGMENT ORIGINS MAP
 </section>
 
 
+<!-- ==========================================
+     MIXING — CMYK COLOR GENEALOGY
+     Paste after your TRENDS section
+========================================== -->
+
+<section class="mixing-section" id="mixing">
+
+    <header class="mixing-header">
+
+        <h1>
+            MIXING
+        </h1>
+
+        <p class="subtitle">
+            Build a relational color structure through subtractive CMYK mixing
+        </p>
+
+    </header>
+
+
+    <div class="mixing-layout">
+
+        <!-- LEFT: INSTRUCTIONS -->
+        <aside class="mixing-introduction">
+
+            <div class="mixing-rule"></div>
+
+            <p class="mixing-lead">
+                Click any two <strong>COLOR SWATCHES</strong> to create a new hue.
+                Continue selecting colors to build a growing color genealogy.
+            </p>
+
+            <div class="mixing-steps">
+
+                <div class="mixing-step">
+                    <span>01</span>
+                    <p>Select the first color.</p>
+                </div>
+
+                <div class="mixing-step">
+                    <span>02</span>
+                    <p>Select the second color.</p>
+                </div>
+
+                <div class="mixing-step">
+                    <span>03</span>
+                    <p>A smaller child color appears.</p>
+                </div>
+
+                <div class="mixing-step">
+                    <span>04</span>
+                    <p>Use the new hue in another mix.</p>
+                </div>
+
+            </div>
+
+            <button id="resetMixingButton" class="mixing-reset-button" type="button">
+                RESET STRUCTURE
+            </button>
+
+        </aside>
+
+
+        <!-- CENTER: SINGLE D3 CANVAS -->
+        <div class="mixing-canvas-column">
+
+            <div
+                id="cmykGenealogy"
+                class="cmyk-genealogy"
+                aria-label="Interactive CMYK relational color mixing structure"
+            ></div>
+
+            <p class="mixing-canvas-instruction">
+                CLICK TWO CIRCLES TO MIX · SCROLL TO ZOOM · DRAG EMPTY SPACE TO PAN
+            </p>
+
+        </div>
+
+
+        <!-- RIGHT: CURRENT SELECTION + RECIPE -->
+        <aside class="mixing-information-panel">
+
+            <section class="mixing-selection-section">
+
+                <p class="mixing-panel-label">
+                    YOUR MIX
+                </p>
+
+                <div class="mixing-selected-row">
+
+                    <div class="mixing-selected-item">
+                        <div
+                            id="firstSelectedSwatch"
+                            class="mixing-selected-swatch is-empty"
+                        >
+                            <span>+</span>
+                        </div>
+
+                        <p id="firstSelectedName">
+                            SELECT COLOR
+                        </p>
+                    </div>
+
+                    <div class="mixing-plus">
+                        +
+                    </div>
+
+                    <div class="mixing-selected-item">
+                        <div
+                            id="secondSelectedSwatch"
+                            class="mixing-selected-swatch is-empty"
+                        >
+                            <span>+</span>
+                        </div>
+
+                        <p id="secondSelectedName">
+                            SELECT COLOR
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="mixing-result-section">
+
+                <p class="mixing-panel-label">
+                    NEW COLOR
+                </p>
+
+                <div
+                    id="mixingResultSwatch"
+                    class="mixing-result-swatch is-empty"
+                ></div>
+
+                <h2 id="mixingResultName">
+                    WAITING FOR TWO COLORS
+                </h2>
+
+                <p id="mixingResultGeneration" class="mixing-result-generation">
+                    —
+                </p>
+
+            </section>
+
+
+            <section class="mixing-recipe-section">
+
+                <p class="mixing-panel-label">
+                    COLOR RECIPE
+                </p>
+
+                <dl class="mixing-recipe-list">
+
+                    <div>
+                        <dt>CYAN</dt>
+                        <dd id="recipeCyan">—</dd>
+                    </div>
+
+                    <div>
+                        <dt>MAGENTA</dt>
+                        <dd id="recipeMagenta">—</dd>
+                    </div>
+
+                    <div>
+                        <dt>YELLOW</dt>
+                        <dd id="recipeYellow">—</dd>
+                    </div>
+
+                    <div>
+                        <dt>BLACK</dt>
+                        <dd id="recipeBlack">—</dd>
+                    </div>
+
+                </dl>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+
+    <footer class="mixing-footer">
+
+        <p>
+            Inspired by Josef Albers’ exploration of color relationships.
+        </p>
+
+        <p>
+            Digital colors are visual approximations of CMYK mixtures.
+        </p>
+
+    </footer>
+
+</section>
+
+
+<!-- Include D3 only once on the page -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+<!-- Add this after the D3 script and after your other project scripts -->
+<script src="javascript/cmyk-genealogy.js"></script>
+
 
 
 

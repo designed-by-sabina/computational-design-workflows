@@ -1,0 +1,5 @@
+id,name,shortLabel,generation,c,m,y,k,color,parentOne,parentTwo
+cyan,Cyan,C,0,100,0,0,0,#00FFFF,,
+magenta,Magenta,M,0,0,100,0,0,#FF00FF,,
+yellow,Yellow,Y,0,0,0,100,0,#FFFF00,,
+black,Black,K,0,0,0,0,100,#000000,,
