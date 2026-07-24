@@ -1,0 +1,93 @@
+year,source,domain,color_name,color_group,hex,color_code,rank,selection_type
+2000,Pantone,Cultural,Cerulean,Blue,#9BB7D4,PANTONE 15-4020,1,single
+2001,Pantone,Cultural,Fuchsia Rose,Pink,#C74375,PANTONE 17-2031,1,single
+2002,Pantone,Cultural,True Red,Red,#BF1932,PANTONE 19-1664,1,single
+2003,Pantone,Cultural,Aqua Sky,Blue,#7BC4C4,PANTONE 14-4811,1,single
+2004,Pantone,Cultural,Tigerlily,Orange,#E2583E,PANTONE 17-1456,1,single
+2005,Pantone,Cultural,Blue Turquoise,Blue,#53B0AE,PANTONE 15-5217,1,single
+2006,Pantone,Cultural,Sand Dollar,Neutral,#DECDBE,PANTONE 13-1106,1,single
+2007,Pantone,Cultural,Chili Pepper,Red,#9B1B30,PANTONE 19-1557,1,single
+2008,Pantone,Cultural,Blue Iris,Blue,#5A5B9F,PANTONE 18-3943,1,single
+2009,Pantone,Cultural,Mimosa,Yellow,#F0C05A,PANTONE 14-0848,1,single
+2010,Pantone,Cultural,Turquoise,Blue,#45B5AA,PANTONE 15-5519,1,single
+2011,Pantone,Cultural,Honeysuckle,Pink,#D94F70,PANTONE 18-2120,1,single
+2012,Pantone,Cultural,Tangerine Tango,Orange,#DD4124,PANTONE 17-1463,1,single
+2013,Pantone,Cultural,Emerald,Green,#009473,PANTONE 17-5641,1,single
+2014,Pantone,Cultural,Radiant Orchid,Purple,#B163A3,PANTONE 18-3224,1,single
+2015,Pantone,Cultural,Marsala,Red,#955251,PANTONE 18-1438,1,single
+2016,Pantone,Cultural,Rose Quartz,Pink,#F7CAC9,PANTONE 13-1520,1,duo
+2016,Pantone,Cultural,Serenity,Blue,#92A8D1,PANTONE 15-3919,2,duo
+2017,Pantone,Cultural,Greenery,Green,#88B04B,PANTONE 15-0343,1,single
+2018,Pantone,Cultural,Ultra Violet,Purple,#5F4B8B,PANTONE 18-3838,1,single
+2019,Pantone,Cultural,Living Coral,Orange,#FF6F61,PANTONE 16-1546,1,single
+2020,Pantone,Cultural,Classic Blue,Blue,#0F4C81,PANTONE 19-4052,1,single
+2021,Pantone,Cultural,Ultimate Gray,Neutral,#939597,PANTONE 17-5104,1,duo
+2021,Pantone,Cultural,Illuminating,Yellow,#F5DF4D,PANTONE 13-0647,2,duo
+2022,Pantone,Cultural,Very Peri,Purple,#6667AB,PANTONE 17-3938,1,single
+2023,Pantone,Cultural,Viva Magenta,Red,#BB2649,PANTONE 18-1750,1,single
+2024,Pantone,Cultural,Peach Fuzz,Orange,#FFBE98,PANTONE 13-1023,1,single
+2025,Pantone,Cultural,Mocha Mousse,Brown,#A47864,PANTONE 17-1230,1,single
+2026,Pantone,Cultural,Cloud Dancer,Neutral,#F0EEE9,PANTONE 11-4201,1,single
+2011,Benjamin Moore,Paint / Interiors,Vintage Wine,Purple,#604B62,2116-20,1,single
+2012,Benjamin Moore,Paint / Interiors,Wythe Blue,Blue,#A5B5AD,HC-143,1,single
+2013,Benjamin Moore,Paint / Interiors,Lemon Sorbet,Yellow,#F4E7B2,2019-60,1,single
+2014,Benjamin Moore,Paint / Interiors,Breath of Fresh Air,Blue,#C8D8E1,806,1,single
+2015,Benjamin Moore,Paint / Interiors,Guilford Green,Green,#A8B59A,HC-116,1,single
+2016,Benjamin Moore,Paint / Interiors,Simply White,Neutral,#F4F1E8,OC-117,1,single
+2017,Benjamin Moore,Paint / Interiors,Shadow,Purple,#554B58,2117-30,1,single
+2018,Benjamin Moore,Paint / Interiors,Caliente,Red,#8C3232,AF-290,1,single
+2019,Benjamin Moore,Paint / Interiors,Metropolitan,Neutral,#AAA9A2,AF-690,1,single
+2020,Benjamin Moore,Paint / Interiors,First Light,Pink,#E4C6C6,2102-70,1,single
+2021,Benjamin Moore,Paint / Interiors,Aegean Teal,Blue,#708A89,2136-40,1,single
+2022,Benjamin Moore,Paint / Interiors,October Mist,Green,#B7B9A6,1495,1,single
+2023,Benjamin Moore,Paint / Interiors,Raspberry Blush,Red,#D25F55,2008-30,1,single
+2024,Benjamin Moore,Paint / Interiors,Blue Nova,Blue,#5B6D92,825,1,single
+2025,Benjamin Moore,Paint / Interiors,Cinnamon Slate,Purple,#8A6C73,2113-40,1,single
+2026,Benjamin Moore,Paint / Interiors,Silhouette,Brown,#574C49,AF-655,1,single
+2012,Sherwin-Williams,Paint / Interiors,Argyle,Green,#348A5B,SW 6747,1,single
+2013,Sherwin-Williams,Paint / Interiors,Aloe,Green,#ACCABC,SW 6464,1,single
+2014,Sherwin-Williams,Paint / Interiors,Exclusive Plum,Purple,#73626F,SW 6263,1,single
+2015,Sherwin-Williams,Paint / Interiors,Coral Reef,Orange,#D9766C,SW 6606,1,single
+2016,Sherwin-Williams,Paint / Interiors,Alabaster,Neutral,#EDEAE0,SW 7008,1,single
+2017,Sherwin-Williams,Paint / Interiors,Poised Taupe,Brown,#8C7E78,SW 6039,1,single
+2018,Sherwin-Williams,Paint / Interiors,Oceanside,Blue,#015A6B,SW 6496,1,single
+2019,Sherwin-Williams,Paint / Interiors,Cavern Clay,Orange,#AC6B53,SW 7701,1,single
+2020,Sherwin-Williams,Paint / Interiors,Naval,Blue,#2F3D4C,SW 6244,1,single
+2021,Sherwin-Williams,Paint / Interiors,Urbane Bronze,Brown,#54504A,SW 7048,1,single
+2022,Sherwin-Williams,Paint / Interiors,Evergreen Fog,Green,#95978A,SW 9130,1,single
+2023,Sherwin-Williams,Paint / Interiors,Redend Point,Neutral,#AE8E7E,SW 9081,1,single
+2024,Sherwin-Williams,Paint / Interiors,Upward,Blue,#BFC9D0,SW 6239,1,single
+2025,Sherwin-Williams,Paint / Interiors,Grounded,Brown,#785B47,SW 6089,1,palette
+2025,Sherwin-Williams,Paint / Interiors,Sunbleached,Neutral,#D5BFA8,SW 9585,2,palette
+2025,Sherwin-Williams,Paint / Interiors,Chartreuse,Green,#B5A642,SW 0073,3,palette
+2025,Sherwin-Williams,Paint / Interiors,Bosc Pear,Yellow,#C09056,SW 6390,4,palette
+2025,Sherwin-Williams,Paint / Interiors,White Snow,Neutral,#F5F4ED,SW 9541,5,palette
+2025,Sherwin-Williams,Paint / Interiors,Rain Cloud,Blue,#5F6D72,SW 9639,6,palette
+2025,Sherwin-Williams,Paint / Interiors,Clove,Brown,#604E47,SW 9605,7,palette
+2025,Sherwin-Williams,Paint / Interiors,Malabar,Neutral,#CFBEA9,SW 9110,8,palette
+2025,Sherwin-Williams,Paint / Interiors,Mauve Finery,Purple,#C3A0AD,SW 6282,9,palette
+2026,Sherwin-Williams,Paint / Interiors,Universal Khaki,Neutral,#B8A992,SW 6150,1,single
+2021,Coloro × WGSN,Forecasting / Fashion,A.I. Aqua,Blue,#4CC9D6,Coloro 098-59-30,1,forecast
+2022,Coloro × WGSN,Forecasting / Fashion,Orchid Flower,Pink,#D14D8B,Coloro 150-38-31,1,forecast
+2023,Coloro × WGSN,Forecasting / Fashion,Digital Lavender,Purple,#B7A0D7,Coloro 134-67-16,1,forecast
+2024,Coloro × WGSN,Forecasting / Fashion,Apricot Crush,Orange,#F6A578,Coloro 024-65-27,1,forecast
+2025,Coloro × WGSN,Forecasting / Fashion,Future Dusk,Purple,#4C5578,Coloro 129-35-18,1,forecast
+2026,Coloro × WGSN,Forecasting / Fashion,Transformative Teal,Green,#006B69,Coloro 092-37-14,1,forecast
+2024,Vogue,Forecasting / Fashion,Porcelain White,Neutral,#F2F0E9,Editorial approximation,1,editorial trend
+2024,Vogue,Forecasting / Fashion,Cherry Red,Red,#B8202E,Editorial approximation,2,editorial trend
+2024,Vogue,Forecasting / Fashion,Sky Blue,Blue,#87BBD8,Editorial approximation,3,editorial trend
+2024,Vogue,Forecasting / Fashion,Pastel Lilac,Purple,#C8B4D9,Editorial approximation,4,editorial trend
+2024,Vogue,Forecasting / Fashion,Liquid Gold,Yellow,#C9A227,Editorial approximation,5,editorial trend
+2025,Vogue,Forecasting / Fashion,Butter Yellow,Yellow,#F5E6A7,Editorial approximation,1,editorial trend
+2025,Vogue,Forecasting / Fashion,Wispy Pink,Pink,#E7C7CD,Editorial approximation,2,editorial trend
+2025,Vogue,Forecasting / Fashion,Moody Plum,Purple,#59344F,Editorial approximation,3,editorial trend
+2025,Vogue,Forecasting / Fashion,Crisp Blue,Blue,#6F9EC6,Editorial approximation,4,editorial trend
+2025,Vogue,Forecasting / Fashion,Mocha Mousse,Brown,#A47864,Editorial approximation,5,editorial trend
+2026,Vogue,Forecasting / Fashion,Tomato Red,Red,#D84432,Editorial approximation,1,editorial trend
+2026,Vogue,Forecasting / Fashion,Lime Green,Green,#B6D52E,Editorial approximation,2,editorial trend
+2026,Vogue,Forecasting / Fashion,Emerald Green,Green,#128A5A,Editorial approximation,3,editorial trend
+2026,Vogue,Forecasting / Fashion,Klein Blue,Blue,#1646A0,Editorial approximation,4,editorial trend
+2026,Vogue,Forecasting / Fashion,Fuchsia,Pink,#C62A7C,Editorial approximation,5,editorial trend
+2026,Vogue,Forecasting / Fashion,Pale Pink,Pink,#EAC6CF,Editorial approximation,6,editorial trend
+2026,Vogue,Forecasting / Fashion,Cloud Dancer,Neutral,#F0EEE9,Editorial approximation,7,editorial trend
+2026,Vogue,Forecasting / Fashion,Purple,Purple,#754C91,Editorial approximation,8,editorial trend

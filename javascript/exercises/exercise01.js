@@ -72,7 +72,6 @@ const exercise01 = function(p) {
         // Background cut-out
 
         p.fill(193, 170, 162);
-
         p.rect(
                220,   // x
     408,   // y

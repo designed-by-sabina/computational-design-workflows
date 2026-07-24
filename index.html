@@ -317,6 +317,79 @@ PIGMENT ORIGINS MAP
     
 
 
+<!-- ==========================================
+     COLOR FORECAST TIMELINE
+=========================================== -->
+
+<section class="color-timeline-section">
+
+    <header class="color-timeline-header">
+
+        <h1>TRENDS</h1>
+
+        <p class="subtitle">
+            Annual color selections and forecasts across cultural, architectural, and fashion sources
+        </p>
+
+    </header>
+
+
+    <!-- Hover comparison display -->
+    <div
+        id="color-comparison-panel"
+        class="color-comparison-panel"
+        aria-live="polite"
+    >
+
+        <div class="comparison-year-column">
+
+            <p
+                id="comparison-year"
+                class="comparison-year"
+            >
+                2026
+            </p>
+
+            <p class="comparison-year-label">
+                YEAR SELECTED
+            </p>
+
+        </div>
+
+
+        <div
+            id="comparison-colors"
+            class="comparison-colors"
+        ></div>
+
+    </div>
+
+
+    <!-- D3 timeline -->
+    <div id="color-timeline"></div>
+
+
+    <section class="instructions">
+
+        <p>
+            Hover over a <strong>COLOR SWATCH</strong> to compare
+            all selections from the same year.
+        </p>
+
+    </section>
+
+
+    <footer class="color-timeline-footer">
+
+        <p>
+            Digital colors are visual approximations.
+            Manufacturer and color-system codes are provided as references.
+        </p>
+
+    </footer>
+
+</section>
+
 
 
 
@@ -346,6 +419,12 @@ PIGMENT ORIGINS MAP
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <!-- Pigment origins map -->
     <script src="javascript/pigment-map.js"></script>
+
+    <!-- D3.js -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+<!-- Color timeline -->
+<script src="javascript/color-timeline.js"></script>
 
 </main>
 

@@ -111,37 +111,8 @@ console.log("Pigment source added successfully");
       // 7. ADD LARGE TRANSPARENT HALOS
       // ------------------------------------
 
-    //   pigmentMap.addLayer({
-
-    //     id: "pigment-halos",
-
-    //     type: "circle",
-
-    //     source: "pigment-locations",
-
-    //     paint: {
-
-    //       // Each point uses its GeoJSON color property
-    //       "circle-color": ["get", "color"],
-
-    //       // Large transparent area behind the point
-    //       "circle-radius": [
-    //         "interpolate",
-    //         ["linear"],
-    //         ["zoom"],
-
-    //         1, 14,
-    //         4, 25,
-    //         8, 45
-    //       ],
-
-    //       "circle-opacity": 0.13,
-
-    //       "circle-blur": 0.7
-
-    //     }
-
-    //   });
+    
+      
 
 
       // ------------------------------------
@@ -189,48 +160,48 @@ console.log("Pigment source added successfully");
       // 9. ADD PIGMENT NAME LABELS
       // ------------------------------------
 
-    //   pigmentMap.addLayer({
+      pigmentMap.addLayer({
 
-    //     id: "pigment-labels",
+        id: "pigment-labels",
 
-    //     type: "symbol",
+        type: "symbol",
 
-    //     source: "pigment-locations",
+        source: "pigment-locations",
 
-    //     layout: {
+        layout: {
 
-    //       // Use the pigment property as the label
-    //       "text-field": ["get", "pigment"],
+          // Use the pigment property as the label
+          "text-field": ["get", "pigment"],
 
-    //       "text-font": ["Open Sans Regular"],
+          "text-font": ["Open Sans Regular"],
 
-    //       "text-size": 11,
+          "text-size": 11,
 
-    //       // Move label slightly above the point
-    //       "text-offset": [0, -1.4],
+          // Move label slightly above the point
+          "text-offset": [0, -1.4],
 
-    //       "text-anchor": "bottom",
+          "text-anchor": "bottom",
 
-    //       // Reduce collisions between labels
-    //       "text-allow-overlap": false,
+          // Reduce collisions between labels
+          "text-allow-overlap": false,
 
-    //       "text-ignore-placement": false
+          "text-ignore-placement": false
 
-    //     },
+        },
 
-    //     paint: {
+        paint: {
 
-    //       "text-color": "#ffffff",
+          "text-color": "#ffffff",
 
-    //       "text-opacity": 0.85,
+          "text-opacity": 0.85,
 
-    //       "text-halo-color": "#171717",
+          "text-halo-color": "#171717",
 
-    //       "text-halo-width": 1.5
+          "text-halo-width": 1.5
 
-    //     }
+        }
 
-    //   });
+      });
 
 
       // ------------------------------------
