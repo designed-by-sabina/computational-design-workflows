@@ -343,9 +343,9 @@ function isValidTimelineEntry(entry) {
     return (
         Number.isFinite(entry.year) &&
         entry.year >=
-            COLOR_TIMELINE_START_YEAR &&
+        COLOR_TIMELINE_START_YEAR &&
         entry.year <=
-            COLOR_TIMELINE_END_YEAR &&
+        COLOR_TIMELINE_END_YEAR &&
         entry.source.length > 0 &&
         entry.colorName.length > 0
     );
@@ -659,7 +659,7 @@ function drawTimelineSourceRows(
 ) {
 
     COLOR_TIMELINE_SOURCES.forEach(
-        function(source) {
+        function (source) {
 
             const rowY =
                 yScale(source);
@@ -693,7 +693,7 @@ function drawTimelineSourceRows(
 
 
             years.forEach(
-                function(year) {
+                function (year) {
 
                     const cellX =
                         xScale(year);
@@ -1002,208 +1002,205 @@ function drawTimelineYearSwatches(
             entry =>
                 `${entry.year}, ${entry.source}, ${entry.colorName}`
         )
-        .on(
-            "pointerenter",
-            function(event, entry) {
 
-                activateTimelineEntry(
-                    entry
-                );
-
-            }
-        )
-        .on(
-            "focus",
-            function(event, entry) {
-
-                activateTimelineEntry(
-                    entry
-                );
-
-            }
-        )
         .on(
             "click",
-            function(event, entry) {
+            function (event, entry) {
 
-                activateTimelineEntry(
-                    entry
-                );
+                activateTimelineEntry(entry);
+
+            }
+        )
+        .attr("tabindex", 0)
+        .on(
+            "keydown",
+            function (event, entry) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    activateTimelineEntry(entry);
+
+                }
 
             }
         );
 
-}
-
-
-// ==========================================
-// COMPARISON PANEL
-// ==========================================
-
-function updateColorComparisonPanel(
-    hoveredEntry,
-    data
-) {
-
-    ensureComparisonPanelElements();
-
-
-    const yearElement =
-        document.querySelector(
-            "#comparison-year"
-        );
-
-
-    const colorsContainer =
-        document.querySelector(
-            "#comparison-colors"
-        );
-
-
-    if (!yearElement) {
-
-        console.error(
-            "Missing HTML element: #comparison-year"
-        );
-
-        return;
-
     }
 
 
-    if (!colorsContainer) {
+    // ==========================================
+    // COMPARISON PANEL
+    // ==========================================
 
-        console.error(
-            "Missing HTML element: #comparison-colors"
-        );
-
-        return;
-
-    }
-
-
-    yearElement.textContent =
-        hoveredEntry.year;
-
-
-    const yearEntries =
+    function updateColorComparisonPanel(
+        hoveredEntry,
         data
-            .filter(
-                entry =>
-                    entry.year ===
-                    hoveredEntry.year
-            )
-            .sort(
-                compareTimelineEntries
+    ) {
+
+        ensureComparisonPanelElements();
+
+
+        const yearElement =
+            document.querySelector(
+                "#comparison-year"
             );
 
 
-    const remainingEntries =
-        yearEntries.filter(
-            entry =>
-                !isSameTimelineEntry(
-                    entry,
-                    hoveredEntry
+        const colorsContainer =
+            document.querySelector(
+                "#comparison-colors"
+            );
+
+
+        if (!yearElement) {
+
+            console.error(
+                "Missing HTML element: #comparison-year"
+            );
+
+            return;
+
+        }
+
+
+        if (!colorsContainer) {
+
+            console.error(
+                "Missing HTML element: #comparison-colors"
+            );
+
+            return;
+
+        }
+
+
+        yearElement.textContent =
+            hoveredEntry.year;
+
+
+        const yearEntries =
+            data
+                .filter(
+                    entry =>
+                        entry.year ===
+                        hoveredEntry.year
                 )
-        );
+                .sort(
+                    compareTimelineEntries
+                );
 
 
-    const orderedEntries = [
-        hoveredEntry,
-        ...remainingEntries
-    ];
-
-
-    colorsContainer.innerHTML =
-        orderedEntries
-            .map(
-                function(entry, index) {
-
-                    return createComparisonCard(
+        const remainingEntries =
+            yearEntries.filter(
+                entry =>
+                    !isSameTimelineEntry(
                         entry,
-                        index === 0
-                    );
-
-                }
-            )
-            .join("");
+                        hoveredEntry
+                    )
+            );
 
 
-    colorsContainer.scrollLeft = 0;
+        const orderedEntries = [
+            hoveredEntry,
+            ...remainingEntries
+        ];
 
-}
+
+        colorsContainer.innerHTML =
+            orderedEntries
+                .map(
+                    function (entry, index) {
+
+                        return createComparisonCard(
+                            entry,
+                            index === 0
+                        );
+
+                    }
+                )
+                .join("");
 
 
-// ==========================================
-// COMPARISON CARD
-// ==========================================
+        colorsContainer.scrollLeft = 0;
 
-function createComparisonCard(
-    entry,
-    isPrimary
-) {
+    }
 
-    const cardClass =
+
+    // ==========================================
+    // COMPARISON CARD
+    // ==========================================
+
+    function createComparisonCard(
+        entry,
         isPrimary
-            ? "comparison-color-card-primary"
-            : "comparison-color-card-secondary";
+    ) {
+
+        const cardClass =
+            isPrimary
+                ? "comparison-color-card-primary"
+                : "comparison-color-card-secondary";
 
 
-    const swatchClass =
-        isPrimary
-            ? "comparison-swatch-primary"
-            : "comparison-swatch-secondary";
+        const swatchClass =
+            isPrimary
+                ? "comparison-swatch-primary"
+                : "comparison-swatch-secondary";
 
 
-    const safeSource =
-        escapeTimelineHTML(
-            entry.source ||
-            "Unknown source"
-        );
+        const safeSource =
+            escapeTimelineHTML(
+                entry.source ||
+                "Unknown source"
+            );
 
 
-    const safeName =
-        escapeTimelineHTML(
-            entry.colorName ||
-            "Unnamed color"
-        );
+        const safeName =
+            escapeTimelineHTML(
+                entry.colorName ||
+                "Unnamed color"
+            );
 
 
-    const safeFamily =
-        escapeTimelineHTML(
-            entry.colorGroup ||
-            "Not available"
-        );
+        const safeFamily =
+            escapeTimelineHTML(
+                entry.colorGroup ||
+                "Not available"
+            );
 
 
-    const safeCode =
-        escapeTimelineHTML(
-            entry.colorCode ||
-            "Not available"
-        );
+        const safeCode =
+            escapeTimelineHTML(
+                entry.colorCode ||
+                "Not available"
+            );
 
 
-    const safeHex =
-        normalizeHex(
-            entry.hex
-        );
+        const safeHex =
+            normalizeHex(
+                entry.hex
+            );
 
 
-    const safeDomain =
-        escapeTimelineHTML(
-            entry.domain ||
-            "Not available"
-        );
+        const safeDomain =
+            escapeTimelineHTML(
+                entry.domain ||
+                "Not available"
+            );
 
 
-    const safeSelectionType =
-        escapeTimelineHTML(
-            entry.selectionType ||
-            "Not available"
-        );
+        const safeSelectionType =
+            escapeTimelineHTML(
+                entry.selectionType ||
+                "Not available"
+            );
 
 
-    return `
+        return `
         <article
             class="
                 comparison-color-card
@@ -1271,253 +1268,253 @@ function createComparisonCard(
         </article>
     `;
 
-}
-
-
-// ==========================================
-// ESCAPE HTML
-// ==========================================
-
-function escapeTimelineHTML(value) {
-
-    return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            "\"",
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-// ==========================================
-// SORT ENTRIES
-// ==========================================
-
-function compareTimelineEntries(
-    first,
-    second
-) {
-
-    const firstSourceIndex =
-        COLOR_TIMELINE_SOURCES.indexOf(
-            first.source
-        );
-
-
-    const secondSourceIndex =
-        COLOR_TIMELINE_SOURCES.indexOf(
-            second.source
-        );
-
-
-    const normalizedFirstIndex =
-        firstSourceIndex === -1
-            ? COLOR_TIMELINE_SOURCES.length
-            : firstSourceIndex;
-
-
-    const normalizedSecondIndex =
-        secondSourceIndex === -1
-            ? COLOR_TIMELINE_SOURCES.length
-            : secondSourceIndex;
-
-
-    if (
-        normalizedFirstIndex !==
-        normalizedSecondIndex
-    ) {
-
-        return (
-            normalizedFirstIndex -
-            normalizedSecondIndex
-        );
-
     }
 
 
-    return (
-        first.rank -
-        second.rank
-    );
+    // ==========================================
+    // ESCAPE HTML
+    // ==========================================
 
-}
+    function escapeTimelineHTML(value) {
 
-
-// ==========================================
-// HIGHLIGHT TIMELINE
-// ==========================================
-
-function highlightTimelineSelection(
-    activeEntry
-) {
-
-    d3
-        .selectAll(
-            ".timeline-color-swatch"
-        )
-        .classed(
-            "is-muted",
-            function() {
-
-                return (
-                    Number(
-                        this.dataset.year
-                    ) !==
-                    activeEntry.year
-                );
-
-            }
-        )
-        .classed(
-            "is-selected",
-            function() {
-
-                return (
-                    Number(
-                        this.dataset.year
-                    ) ===
-                        activeEntry.year &&
-
-                    this.dataset.source ===
-                        activeEntry.source &&
-
-                    this.dataset.colorName ===
-                        activeEntry.colorName &&
-
-                    Number(
-                        this.dataset.rank
-                    ) ===
-                        activeEntry.rank
-                );
-
-            }
-        );
-
-
-    d3
-        .selectAll(
-            ".timeline-placeholder"
-        )
-        .classed(
-            "is-muted",
-            function() {
-
-                return (
-                    Number(
-                        this.dataset.year
-                    ) !==
-                    activeEntry.year
-                );
-
-            }
-        );
-
-
-    d3
-        .selectAll(
-            ".timeline-year-label"
-        )
-        .classed(
-            "is-selected",
-            function() {
-
-                return (
-                    Number(
-                        this.dataset.year
-                    ) ===
-                    activeEntry.year
-                );
-
-            }
-        );
-
-}
-
-
-// ==========================================
-// ENTRY COMPARISON
-// ==========================================
-
-function isSameTimelineEntry(
-    first,
-    second
-) {
-
-    return (
-        first.year ===
-            second.year &&
-
-        first.source ===
-            second.source &&
-
-        first.colorName ===
-            second.colorName &&
-
-        first.rank ===
-            second.rank
-    );
-
-}
-
-
-// ==========================================
-// RESPONSIVE REDRAW
-// ==========================================
-
-window.addEventListener(
-    "resize",
-    function() {
-
-        clearTimeout(
-            colorTimelineResizeTimer
-        );
-
-
-        colorTimelineResizeTimer =
-            setTimeout(
-                function() {
-
-                    if (
-                        colorTimelineData.length >
-                        0
-                    ) {
-
-                        drawColorTimeline(
-                            colorTimelineData
-                        );
-
-                    }
-
-
-                    if (
-                        activeTimelineEntry
-                    ) {
-
-                        activateTimelineEntry(
-                            activeTimelineEntry
-                        );
-
-                    }
-
-                },
-                200
+        return String(value)
+            .replaceAll(
+                "&",
+                "&amp;"
+            )
+            .replaceAll(
+                "<",
+                "&lt;"
+            )
+            .replaceAll(
+                ">",
+                "&gt;"
+            )
+            .replaceAll(
+                "\"",
+                "&quot;"
+            )
+            .replaceAll(
+                "'",
+                "&#039;"
             );
 
     }
-);
+
+
+    // ==========================================
+    // SORT ENTRIES
+    // ==========================================
+
+    function compareTimelineEntries(
+        first,
+        second
+    ) {
+
+        const firstSourceIndex =
+            COLOR_TIMELINE_SOURCES.indexOf(
+                first.source
+            );
+
+
+        const secondSourceIndex =
+            COLOR_TIMELINE_SOURCES.indexOf(
+                second.source
+            );
+
+
+        const normalizedFirstIndex =
+            firstSourceIndex === -1
+                ? COLOR_TIMELINE_SOURCES.length
+                : firstSourceIndex;
+
+
+        const normalizedSecondIndex =
+            secondSourceIndex === -1
+                ? COLOR_TIMELINE_SOURCES.length
+                : secondSourceIndex;
+
+
+        if (
+            normalizedFirstIndex !==
+            normalizedSecondIndex
+        ) {
+
+            return (
+                normalizedFirstIndex -
+                normalizedSecondIndex
+            );
+
+        }
+
+
+        return (
+            first.rank -
+            second.rank
+        );
+
+    }
+
+
+    // ==========================================
+    // HIGHLIGHT TIMELINE
+    // ==========================================
+
+    function highlightTimelineSelection(
+        activeEntry
+    ) {
+
+        d3
+            .selectAll(
+                ".timeline-color-swatch"
+            )
+            .classed(
+                "is-muted",
+                function () {
+
+                    return (
+                        Number(
+                            this.dataset.year
+                        ) !==
+                        activeEntry.year
+                    );
+
+                }
+            )
+            .classed(
+                "is-selected",
+                function () {
+
+                    return (
+                        Number(
+                            this.dataset.year
+                        ) ===
+                        activeEntry.year &&
+
+                        this.dataset.source ===
+                        activeEntry.source &&
+
+                        this.dataset.colorName ===
+                        activeEntry.colorName &&
+
+                        Number(
+                            this.dataset.rank
+                        ) ===
+                        activeEntry.rank
+                    );
+
+                }
+            );
+
+
+        d3
+            .selectAll(
+                ".timeline-placeholder"
+            )
+            .classed(
+                "is-muted",
+                function () {
+
+                    return (
+                        Number(
+                            this.dataset.year
+                        ) !==
+                        activeEntry.year
+                    );
+
+                }
+            );
+
+
+        d3
+            .selectAll(
+                ".timeline-year-label"
+            )
+            .classed(
+                "is-selected",
+                function () {
+
+                    return (
+                        Number(
+                            this.dataset.year
+                        ) ===
+                        activeEntry.year
+                    );
+
+                }
+            );
+
+    }
+
+
+    // ==========================================
+    // ENTRY COMPARISON
+    // ==========================================
+
+    function isSameTimelineEntry(
+        first,
+        second
+    ) {
+
+        return (
+            first.year ===
+            second.year &&
+
+            first.source ===
+            second.source &&
+
+            first.colorName ===
+            second.colorName &&
+
+            first.rank ===
+            second.rank
+        );
+
+    }
+
+
+    // ==========================================
+    // RESPONSIVE REDRAW
+    // ==========================================
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            clearTimeout(
+                colorTimelineResizeTimer
+            );
+
+
+            colorTimelineResizeTimer =
+                setTimeout(
+                    function () {
+
+                        if (
+                            colorTimelineData.length >
+                            0
+                        ) {
+
+                            drawColorTimeline(
+                                colorTimelineData
+                            );
+
+                        }
+
+
+                        if (
+                            activeTimelineEntry
+                        ) {
+
+                            activateTimelineEntry(
+                                activeTimelineEntry
+                            );
+
+                        }
+
+                    },
+                    200
+                );
+
+        }
+    );

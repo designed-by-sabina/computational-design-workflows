@@ -466,6 +466,8 @@ h1 {
         14px;
 
 
+
+
 }
 
 
@@ -480,8 +482,10 @@ h1 {
 
 }
 
+.instructionstrends {
 
-
+     margin-top: 0;
+}
 
 
 
@@ -899,10 +903,12 @@ PIGMENT MAP — MOBILE
 }
 
 #pigment-map {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
 }
+
+} /* CLOSES @media (max-width: 800px) */
 
 /* ==========================================
    COLOR TIME
@@ -921,7 +927,7 @@ PIGMENT MAP — MOBILE
 
 
 /* ==========================================
-   HOVERED YEAR COMPARISON PANEL
+   COLOR COMPARISON PANEL
 ========================================== */
 
 .color-comparison-panel {
@@ -931,18 +937,18 @@ PIGMENT MAP — MOBILE
     width: 100%;
     min-height: 270px;
 
-    margin-bottom: 34px;
+    margin: 0 0 36px;
 
     color: #ffffff;
     background-color: #111111;
 
-    border-top: 1px solid #111111;
-    border-bottom: 1px solid #111111;
+
+    border: 1px solid #111111;
 }
 
 
 /* ==========================================
-   YEAR
+   YEAR COLUMN
 ========================================== */
 
 .comparison-year-column {
@@ -950,6 +956,7 @@ PIGMENT MAP — MOBILE
     flex-direction: column;
     justify-content: center;
 
+    min-width: 0;
     padding: 36px;
 
     border-right: 1px solid rgba(255, 255, 255, 0.25);
@@ -958,6 +965,8 @@ PIGMENT MAP — MOBILE
 
 .comparison-year {
     margin: 0;
+
+    color: #ffffff;
 
     font-size: clamp(54px, 5vw, 82px);
     font-weight: 400;
@@ -969,42 +978,28 @@ PIGMENT MAP — MOBILE
 .comparison-year-label {
     margin: 20px 0 0;
 
+    color: #ffffff;
+
     font-size: 10px;
     font-weight: 600;
+    line-height: 1.2;
     letter-spacing: 0.12em;
 }
 
 
 /* ==========================================
-   COLOR COMPARISON ROW
+   HORIZONTAL COLOR ROW
 ========================================== */
 
 .comparison-colors {
     display: flex;
+    flex-direction: row;
     align-items: stretch;
 
     min-width: 0;
 
     overflow-x: auto;
     overflow-y: hidden;
-
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
-}
-
-
-.comparison-colors::-webkit-scrollbar {
-    height: 8px;
-}
-
-
-.comparison-colors::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-.comparison-colors::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.35);
 }
 
 
@@ -1014,14 +1009,16 @@ PIGMENT MAP — MOBILE
 
 .comparison-color-card {
     display: flex;
-    flex: 0 0 auto;
+    flex-direction: row;
     align-items: flex-start;
+    flex: 0 0 auto;
 
     gap: 18px;
 
     min-width: 290px;
-
     padding: 34px;
+
+    color: #ffffff;
 
     border-right: 1px solid rgba(255, 255, 255, 0.22);
 }
@@ -1046,10 +1043,11 @@ PIGMENT MAP — MOBILE
 
 
 /* ==========================================
-   TRUE SQUARE SWATCHES
+   SQUARE COLOR SWATCHES
 ========================================== */
 
 .comparison-swatch {
+    display: block;
     flex: 0 0 auto;
 
     aspect-ratio: 1 / 1;
@@ -1071,7 +1069,7 @@ PIGMENT MAP — MOBILE
 
 
 /* ==========================================
-   COLOR INFORMATION
+   COLOR TEXT
 ========================================== */
 
 .comparison-color-information {
@@ -1081,6 +1079,8 @@ PIGMENT MAP — MOBILE
 
 .comparison-source {
     margin: 2px 0 10px;
+
+    color: #ffffff;
 
     font-size: 10px;
     font-weight: 600;
@@ -1093,6 +1093,8 @@ PIGMENT MAP — MOBILE
 
 .comparison-color-name {
     margin: 0 0 14px;
+
+    color: #ffffff;
 
     font-size: 19px;
     font-weight: 500;
@@ -1118,7 +1120,6 @@ PIGMENT MAP — MOBILE
     grid-template-columns: 48px minmax(0, 1fr);
 
     gap: 8px;
-
     margin-top: 7px;
 }
 
@@ -1127,13 +1128,15 @@ PIGMENT MAP — MOBILE
 .comparison-color-details dd {
     margin: 0;
 
+    color: #ffffff;
+
     font-size: 10px;
     line-height: 1.35;
 }
 
 
 .comparison-color-details dt {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 
@@ -1143,195 +1146,10 @@ PIGMENT MAP — MOBILE
 
 
 /* ==========================================
-   TIMELINE CONTAINER
-========================================== */
-
-#color-timeline {
-    width: 100%;
-
-    overflow: hidden;
-
-    border-top: 1px solid #111111;
-    border-bottom: 1px solid #111111;
-}
-
-
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    max-width: 100%;
-
-    font-family: "Inter", sans-serif;
-}
-
-
-/* ==========================================
-   TIMELINE YEARS
-========================================== */
-
-.timeline-year-label {
-    fill: #111111;
-
-    font-size: 8px;
-    font-weight: 500;
-
-    transition:
-        fill 150ms ease,
-        font-weight 150ms ease;
-}
-
-
-.timeline-year-label.is-selected {
-    fill: #ffffff;
-    font-weight: 700;
-
-    paint-order: stroke;
-    stroke: #111111;
-    stroke-width: 7px;
-    stroke-linejoin: round;
-}
-
-
-/* ==========================================
-   TIMELINE SOURCE LABELS
-========================================== */
-
-.timeline-source-label {
-    fill: #111111;
-
-    font-size: 10px;
-    font-weight: 600;
-
-    letter-spacing: 0.035em;
-}
-
-
-.timeline-row-divider {
-    stroke: #111111;
-    stroke-width: 0.5;
-    stroke-opacity: 0.18;
-}
-
-
-/* ==========================================
-   TIMELINE SQUARE SWATCHES
-========================================== */
-
-.timeline-placeholder {
-    fill: #f2f2f2;
-
-    transition: opacity 150ms ease;
-}
-
-
-.timeline-swatch-outline {
-    fill: none;
-
-    stroke: #111111;
-    stroke-width: 0.5;
-
-    pointer-events: none;
-}
-
-
-.timeline-color-swatch {
-    cursor: crosshair;
-
-    transition:
-        opacity 150ms ease,
-        filter 150ms ease;
-}
-
-
-.timeline-color-swatch:hover {
-    opacity: 1;
-    filter: brightness(1.08);
-}
-
-
-.timeline-color-swatch.is-muted,
-.timeline-placeholder.is-muted {
-    opacity: 0.3;
-}
-
-
-.timeline-color-swatch.is-selected {
-    opacity: 1;
-    filter: brightness(1.08);
-}
-
-
-/* ==========================================
-   INSTRUCTIONS AND FOOTER
-========================================== */
-
-.color-timeline-section .instructions {
-    margin-top: 24px;
-}
-
-
-.color-timeline-footer {
-    margin-top: 34px;
-}
-
-
-.color-timeline-footer p {
-    max-width: 720px;
-
-    font-size: 11px;
-    line-height: 1.5;
-}
-
-
-.timeline-error-message {
-    padding: 50px 20px;
-
-    font-size: 14px;
-}
-
-
-/* ==========================================
    RESPONSIVE
 ========================================== */
 
-@media (max-width: 1100px) {
-
-    .color-comparison-panel {
-        grid-template-columns: 180px minmax(0, 1fr);
-    }
-
-
-    .comparison-year-column {
-        padding: 28px;
-    }
-
-
-    .comparison-color-card-primary {
-        min-width: 380px;
-    }
-
-
-    .comparison-swatch-primary {
-        width: 126px;
-        height: 126px;
-    }
-
-
-    .comparison-swatch-secondary {
-        width: 76px;
-        height: 76px;
-    }
-
-}
-
-
 @media (max-width: 760px) {
-
-    .color-timeline-section {
-        margin-top: 100px;
-    }
-
 
     .color-comparison-panel {
         display: block;
@@ -1341,21 +1159,6 @@ PIGMENT MAP — MOBILE
     .comparison-year-column {
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-
-    .comparison-year {
-        font-size: 54px;
-    }
-
-
-    .comparison-colors {
-        min-height: 240px;
-    }
-
-
-    .comparison-color-card {
-        padding: 26px;
     }
 
 
@@ -1380,32 +1183,3 @@ PIGMENT MAP — MOBILE
         height: 70px;
     }
 
-}
-
-
-@media (max-width: 520px) {
-
-    .comparison-color-card {
-        flex-direction: column;
-
-        min-width: 250px;
-    }
-
-
-    .comparison-color-card-primary {
-        min-width: 290px;
-    }
-
-
-    .comparison-swatch-primary {
-        width: 104px;
-        height: 104px;
-    }
-
-
-    .comparison-swatch-secondary {
-        width: 68px;
-        height: 68px;
-    }
-
-}
