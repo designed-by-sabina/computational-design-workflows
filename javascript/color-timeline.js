@@ -4,6 +4,11 @@
 // Sherwin-Williams, Coloro × WGSN, Vogue
 // ==========================================
 
+
+// ==========================================
+// SETTINGS
+// ==========================================
+
 const COLOR_TIMELINE_DATA_PATH =
     "data/color-timeline.csv";
 
@@ -21,11 +26,15 @@ const COLOR_TIMELINE_SOURCES = [
 ];
 
 
+// ==========================================
+// GLOBAL VARIABLES
+// ==========================================
+
 let colorTimelineData = [];
 
 let activeTimelineEntry = null;
 
-let colorTimelineResizeTimer;
+let colorTimelineResizeTimer = null;
 
 
 // ==========================================
@@ -41,13 +50,15 @@ document.addEventListener(
 async function initializeColorTimeline() {
 
     const timelineContainer =
-        document.querySelector("#color-timeline");
+        document.querySelector(
+            "#color-timeline"
+        );
 
 
     if (!timelineContainer) {
 
-        console.warn(
-            "The #color-timeline element was not found."
+        console.error(
+            "Missing HTML element: #color-timeline"
         );
 
         return;
@@ -55,12 +66,51 @@ async function initializeColorTimeline() {
     }
 
 
+    if (typeof d3 === "undefined") {
+
+        console.error(
+            "D3 is not loaded. Load D3 before color-timeline.js."
+        );
+
+
+        timelineContainer.innerHTML = `
+            <p class="timeline-error-message">
+                D3 could not be loaded.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    ensureComparisonPanelElements();
+
+
     try {
 
-        colorTimelineData = await d3.csv(
-            COLOR_TIMELINE_DATA_PATH,
-            parseColorTimelineRow
-        );
+        colorTimelineData =
+            await d3.csv(
+                COLOR_TIMELINE_DATA_PATH,
+                parseColorTimelineRow
+            );
+
+
+        colorTimelineData =
+            colorTimelineData.filter(
+                isValidTimelineEntry
+            );
+
+
+        if (
+            colorTimelineData.length === 0
+        ) {
+
+            throw new Error(
+                "The CSV contains no valid color entries."
+            );
+
+        }
 
 
         drawColorTimeline(
@@ -76,17 +126,7 @@ async function initializeColorTimeline() {
 
         if (initialEntry) {
 
-            activeTimelineEntry =
-                initialEntry;
-
-
-            updateColorComparisonPanel(
-                initialEntry,
-                colorTimelineData
-            );
-
-
-            highlightTimelineSelection(
+            activateTimelineEntry(
                 initialEntry
             );
 
@@ -104,9 +144,98 @@ async function initializeColorTimeline() {
             <p class="timeline-error-message">
                 The color timeline could not be loaded.
                 Check that data/color-timeline.csv exists
-                and run the project through a local server.
+                and that the page is running through a server.
             </p>
         `;
+
+    }
+
+}
+
+
+// ==========================================
+// CONFIRM COMPARISON PANEL ELEMENTS
+// ==========================================
+
+function ensureComparisonPanelElements() {
+
+    const comparisonPanel =
+        document.querySelector(
+            "#color-comparison-panel"
+        );
+
+
+    if (!comparisonPanel) {
+
+        console.error(
+            "Missing HTML element: #color-comparison-panel"
+        );
+
+        return;
+
+    }
+
+
+    let yearElement =
+        document.querySelector(
+            "#comparison-year"
+        );
+
+
+    if (!yearElement) {
+
+        const yearColumn =
+            document.createElement("div");
+
+
+        yearColumn.className =
+            "comparison-year-column";
+
+
+        yearColumn.innerHTML = `
+            <p
+                id="comparison-year"
+                class="comparison-year"
+            >
+                ${COLOR_TIMELINE_END_YEAR}
+            </p>
+
+            <p class="comparison-year-label">
+                YEAR SELECTED
+            </p>
+        `;
+
+
+        comparisonPanel.prepend(
+            yearColumn
+        );
+
+    }
+
+
+    let colorsContainer =
+        document.querySelector(
+            "#comparison-colors"
+        );
+
+
+    if (!colorsContainer) {
+
+        colorsContainer =
+            document.createElement("div");
+
+
+        colorsContainer.id =
+            "comparison-colors";
+
+
+        colorsContainer.className =
+            "comparison-colors";
+
+
+        comparisonPanel.appendChild(
+            colorsContainer
+        );
 
     }
 
@@ -120,17 +249,106 @@ async function initializeColorTimeline() {
 function parseColorTimelineRow(row) {
 
     return {
-        year: Number(row.year),
-        source: row.source.trim(),
-        domain: row.domain.trim(),
-        colorName: row.color_name.trim(),
-        colorGroup: row.color_group.trim(),
-        hex: row.hex.trim(),
-        colorCode: row.color_code.trim(),
-        rank: Number(row.rank),
+        year:
+            Number(row.year),
+
+        source:
+            cleanText(row.source),
+
+        domain:
+            cleanText(row.domain),
+
+        colorName:
+            cleanText(row.color_name),
+
+        colorGroup:
+            cleanText(row.color_group),
+
+        hex:
+            normalizeHex(row.hex),
+
+        colorCode:
+            cleanText(row.color_code),
+
+        rank:
+            Number(row.rank) || 1,
+
         selectionType:
-            row.selection_type.trim()
+            cleanText(
+                row.selection_type
+            )
     };
+
+}
+
+
+// ==========================================
+// CLEAN TEXT
+// ==========================================
+
+function cleanText(value) {
+
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value).trim();
+
+}
+
+
+// ==========================================
+// NORMALIZE HEX
+// ==========================================
+
+function normalizeHex(value) {
+
+    const cleanedValue =
+        cleanText(value);
+
+
+    if (!cleanedValue) {
+
+        return "#cccccc";
+
+    }
+
+
+    if (
+        cleanedValue.startsWith("#")
+    ) {
+
+        return cleanedValue;
+
+    }
+
+
+    return `#${cleanedValue}`;
+
+}
+
+
+// ==========================================
+// VALIDATE DATA ENTRY
+// ==========================================
+
+function isValidTimelineEntry(entry) {
+
+    return (
+        Number.isFinite(entry.year) &&
+        entry.year >=
+            COLOR_TIMELINE_START_YEAR &&
+        entry.year <=
+            COLOR_TIMELINE_END_YEAR &&
+        entry.source.length > 0 &&
+        entry.colorName.length > 0
+    );
 
 }
 
@@ -141,22 +359,53 @@ function parseColorTimelineRow(row) {
 
 function getInitialTimelineEntry(data) {
 
-    const latestYearEntries =
-        data.filter(
-            entry =>
-                entry.year ===
-                COLOR_TIMELINE_END_YEAR
+    const latestYear =
+        d3.max(
+            data,
+            entry => entry.year
         );
 
 
-    if (latestYearEntries.length > 0) {
+    const latestEntries =
+        data
+            .filter(
+                entry =>
+                    entry.year ===
+                    latestYear
+            )
+            .sort(
+                compareTimelineEntries
+            );
 
-        return latestYearEntries[0];
 
-    }
+    return (
+        latestEntries[0] ||
+        data[0] ||
+        null
+    );
+
+}
 
 
-    return data[data.length - 1] || null;
+// ==========================================
+// ACTIVATE ENTRY
+// ==========================================
+
+function activateTimelineEntry(entry) {
+
+    activeTimelineEntry =
+        entry;
+
+
+    updateColorComparisonPanel(
+        entry,
+        colorTimelineData
+    );
+
+
+    highlightTimelineSelection(
+        entry
+    );
 
 }
 
@@ -168,7 +417,16 @@ function getInitialTimelineEntry(data) {
 function drawColorTimeline(data) {
 
     const container =
-        d3.select("#color-timeline");
+        d3.select(
+            "#color-timeline"
+        );
+
+
+    if (container.empty()) {
+
+        return;
+
+    }
 
 
     container
@@ -176,29 +434,36 @@ function drawColorTimeline(data) {
         .remove();
 
 
-    const containerWidth =
-        container
-            .node()
+    const containerNode =
+        container.node();
+
+
+    const measuredWidth =
+        containerNode
             .getBoundingClientRect()
             .width;
 
 
-    const years = d3.range(
-        COLOR_TIMELINE_START_YEAR,
-        COLOR_TIMELINE_END_YEAR + 1
-    );
+    const width =
+        Math.max(
+            measuredWidth,
+            700
+        );
+
+
+    const years =
+        d3.range(
+            COLOR_TIMELINE_START_YEAR,
+            COLOR_TIMELINE_END_YEAR + 1
+        );
 
 
     const margin = {
-    top: 58,
-    right: 8,
-    bottom: 20,
-    left: 240
-};
-
-
-    const width =
-        Math.max(containerWidth, 700);
+        top: 58,
+        right: 8,
+        bottom: 20,
+        left: 240
+    };
 
 
     const innerWidth =
@@ -208,14 +473,10 @@ function drawColorTimeline(data) {
 
 
     const yearColumnWidth =
-        innerWidth / years.length;
+        innerWidth /
+        years.length;
 
 
-    /*
-    The square size is calculated from the
-    available width. The maximum keeps the
-    swatches visually controlled on large screens.
-    */
     const squareSize =
         Math.max(
             12,
@@ -244,52 +505,69 @@ function drawColorTimeline(data) {
         margin.bottom;
 
 
-    const svg = container
-        .append("svg")
-        .attr(
-            "class",
-            "color-timeline-svg"
-        )
-        .attr("width", "100%")
-        .attr("height", height)
-        .attr(
-            "viewBox",
-            `0 0 ${width} ${height}`
-        )
-        .attr(
-            "preserveAspectRatio",
-            "xMidYMid meet"
+    const svg =
+        container
+            .append("svg")
+            .attr(
+                "class",
+                "color-timeline-svg"
+            )
+            .attr(
+                "width",
+                "100%"
+            )
+            .attr(
+                "height",
+                height
+            )
+            .attr(
+                "viewBox",
+                `0 0 ${width} ${height}`
+            )
+            .attr(
+                "preserveAspectRatio",
+                "xMidYMid meet"
+            );
+
+
+    const chart =
+        svg
+            .append("g")
+            .attr(
+                "transform",
+                `translate(${margin.left}, ${margin.top})`
+            );
+
+
+    const xScale =
+        d3
+            .scaleBand()
+            .domain(years)
+            .range(
+                [0, innerWidth]
+            )
+            .paddingInner(0)
+            .paddingOuter(0);
+
+
+    const yScale =
+        d3
+            .scaleBand()
+            .domain(
+                COLOR_TIMELINE_SOURCES
+            )
+            .range(
+                [0, innerHeight]
+            )
+            .paddingInner(0);
+
+
+    const groupedData =
+        d3.group(
+            data,
+            entry => entry.source,
+            entry => entry.year
         );
-
-
-    const chart = svg
-        .append("g")
-        .attr(
-            "transform",
-            `translate(${margin.left}, ${margin.top})`
-        );
-
-
-    const xScale = d3
-        .scaleBand()
-        .domain(years)
-        .range([0, innerWidth])
-        .paddingInner(0)
-        .paddingOuter(0);
-
-
-    const yScale = d3
-        .scaleBand()
-        .domain(COLOR_TIMELINE_SOURCES)
-        .range([0, innerHeight])
-        .paddingInner(0);
-
-
-    const groupedData = d3.group(
-        data,
-        entry => entry.source,
-        entry => entry.year
-    );
 
 
     drawTimelineYearLabels(
@@ -332,7 +610,9 @@ function drawTimelineYearLabels(
 ) {
 
     chart
-        .selectAll(".timeline-year-label")
+        .selectAll(
+            ".timeline-year-label"
+        )
         .data(years)
         .join("text")
         .attr(
@@ -349,12 +629,17 @@ function drawTimelineYearLabels(
                 xScale(year) +
                 xScale.bandwidth() / 2
         )
-        .attr("y", -22)
+        .attr(
+            "y",
+            -22
+        )
         .attr(
             "text-anchor",
             "middle"
         )
-        .text(year => year);
+        .text(
+            year => year
+        );
 
 }
 
@@ -392,43 +677,19 @@ function drawTimelineSourceRows(
                 ) / 2;
 
 
-            // Row divider
-            chart
-                .append("line")
-                .attr(
-                    "class",
-                    "timeline-row-divider"
-                )
-                .attr("x1", -240)
-                .attr("x2", xScale.range()[1])
-                .attr("y1", rowY)
-                .attr("y2", rowY);
+            drawTimelineRowDivider(
+                chart,
+                rowY,
+                xScale.range()[1]
+            );
 
 
-            // Source label
-            chart
-                .append("text")
-                .attr(
-                    "class",
-                    "timeline-source-label"
-                )
-                .attr("x", -24)
-                .attr(
-                    "y",
-                    rowY +
-                    rowHeight / 2
-                )
-                .attr(
-                    "text-anchor",
-                    "end"
-                )
-                .attr(
-                    "dominant-baseline",
-                    "middle"
-                )
-                .text(
-                    source.toUpperCase()
-                );
+            drawTimelineSourceLabel(
+                chart,
+                source,
+                rowY,
+                rowHeight
+            );
 
 
             years.forEach(
@@ -452,34 +713,20 @@ function drawTimelineSourceRows(
                             ?.get(year);
 
 
-                    if (!entries) {
+                    if (
+                        !entries ||
+                        entries.length === 0
+                    ) {
 
-                        chart
-                            .append("rect")
-                            .attr(
-                                "class",
-                                "timeline-placeholder"
-                            )
-                            .attr(
-                                "data-year",
-                                year
-                            )
-                            .attr(
-                                "x",
-                                squareX
-                            )
-                            .attr(
-                                "y",
-                                squareY
-                            )
-                            .attr(
-                                "width",
-                                squareSize
-                            )
-                            .attr(
-                                "height",
-                                squareSize
-                            );
+                        drawTimelinePlaceholder(
+                            chart,
+                            year,
+                            source,
+                            squareX,
+                            squareY,
+                            squareSize
+                        );
+
 
                         return;
 
@@ -487,8 +734,9 @@ function drawTimelineSourceRows(
 
 
                     entries.sort(
-                        (a, b) =>
-                            a.rank - b.rank
+                        (first, second) =>
+                            first.rank -
+                            second.rank
                     );
 
 
@@ -508,9 +756,24 @@ function drawTimelineSourceRows(
     );
 
 
-    const finalRowY =
-        yScale.range()[1];
+    drawTimelineRowDivider(
+        chart,
+        yScale.range()[1],
+        xScale.range()[1]
+    );
 
+}
+
+
+// ==========================================
+// ROW DIVIDER
+// ==========================================
+
+function drawTimelineRowDivider(
+    chart,
+    y,
+    chartWidth
+) {
 
     chart
         .append("line")
@@ -518,16 +781,116 @@ function drawTimelineSourceRows(
             "class",
             "timeline-row-divider"
         )
-        .attr("x1", -240)
-        .attr("x2", xScale.range()[1])
-        .attr("y1", finalRowY)
-        .attr("y2", finalRowY);
+        .attr(
+            "x1",
+            -240
+        )
+        .attr(
+            "x2",
+            chartWidth
+        )
+        .attr(
+            "y1",
+            y
+        )
+        .attr(
+            "y2",
+            y
+        );
 
 }
 
 
 // ==========================================
-// DRAW YEAR SWATCH
+// SOURCE LABEL
+// ==========================================
+
+function drawTimelineSourceLabel(
+    chart,
+    source,
+    rowY,
+    rowHeight
+) {
+
+    chart
+        .append("text")
+        .attr(
+            "class",
+            "timeline-source-label"
+        )
+        .attr(
+            "x",
+            -220
+        )
+        .attr(
+            "y",
+            rowY +
+            rowHeight / 2
+        )
+        .attr(
+            "text-anchor",
+            "start"
+        )
+        .attr(
+            "dominant-baseline",
+            "middle"
+        )
+        .text(
+            source.toUpperCase()
+        );
+
+}
+
+
+// ==========================================
+// PLACEHOLDER CELL
+// ==========================================
+
+function drawTimelinePlaceholder(
+    chart,
+    year,
+    source,
+    x,
+    y,
+    squareSize
+) {
+
+    chart
+        .append("rect")
+        .attr(
+            "class",
+            "timeline-placeholder"
+        )
+        .attr(
+            "data-year",
+            year
+        )
+        .attr(
+            "data-source",
+            source
+        )
+        .attr(
+            "x",
+            x
+        )
+        .attr(
+            "y",
+            y
+        )
+        .attr(
+            "width",
+            squareSize
+        )
+        .attr(
+            "height",
+            squareSize
+        );
+
+}
+
+
+// ==========================================
+// DRAW COLOR SWATCHES
 // ==========================================
 
 function drawTimelineYearSwatches(
@@ -539,22 +902,18 @@ function drawTimelineYearSwatches(
     fullData
 ) {
 
-    /*
-    A year can contain more than one color.
-    The square remains square and is divided
-    vertically between all entries.
-    */
-
     const segmentWidth =
-        squareSize / entries.length;
+        squareSize /
+        entries.length;
 
 
-    const group = chart
-        .append("g")
-        .attr(
-            "class",
-            "timeline-swatch-group"
-        );
+    const group =
+        chart
+            .append("g")
+            .attr(
+                "class",
+                "timeline-swatch-group"
+            );
 
 
     group
@@ -563,8 +922,14 @@ function drawTimelineYearSwatches(
             "class",
             "timeline-swatch-outline"
         )
-        .attr("x", x)
-        .attr("y", y)
+        .attr(
+            "x",
+            x
+        )
+        .attr(
+            "y",
+            y
+        )
         .attr(
             "width",
             squareSize
@@ -598,13 +963,20 @@ function drawTimelineYearSwatches(
             entry => entry.colorName
         )
         .attr(
+            "data-rank",
+            entry => entry.rank
+        )
+        .attr(
             "x",
             (entry, index) =>
                 x +
                 index *
                 segmentWidth
         )
-        .attr("y", y)
+        .attr(
+            "y",
+            y
+        )
         .attr(
             "width",
             segmentWidth
@@ -617,21 +989,44 @@ function drawTimelineYearSwatches(
             "fill",
             entry => entry.hex
         )
+        .attr(
+            "tabindex",
+            0
+        )
+        .attr(
+            "role",
+            "button"
+        )
+        .attr(
+            "aria-label",
+            entry =>
+                `${entry.year}, ${entry.source}, ${entry.colorName}`
+        )
         .on(
-            "mouseenter",
+            "pointerenter",
             function(event, entry) {
 
-                activeTimelineEntry =
-                    entry;
-
-
-                updateColorComparisonPanel(
-                    entry,
-                    fullData
+                activateTimelineEntry(
+                    entry
                 );
 
+            }
+        )
+        .on(
+            "focus",
+            function(event, entry) {
 
-                highlightTimelineSelection(
+                activateTimelineEntry(
+                    entry
+                );
+
+            }
+        )
+        .on(
+            "click",
+            function(event, entry) {
+
+                activateTimelineEntry(
                     entry
                 );
 
@@ -650,6 +1045,9 @@ function updateColorComparisonPanel(
     data
 ) {
 
+    ensureComparisonPanelElements();
+
+
     const yearElement =
         document.querySelector(
             "#comparison-year"
@@ -662,11 +1060,25 @@ function updateColorComparisonPanel(
         );
 
 
-    if (
-        !yearElement ||
-        !colorsContainer
-    ) {
+    if (!yearElement) {
+
+        console.error(
+            "Missing HTML element: #comparison-year"
+        );
+
         return;
+
+    }
+
+
+    if (!colorsContainer) {
+
+        console.error(
+            "Missing HTML element: #comparison-colors"
+        );
+
+        return;
+
     }
 
 
@@ -674,31 +1086,31 @@ function updateColorComparisonPanel(
         hoveredEntry.year;
 
 
-    const yearEntries = data
-        .filter(
-            entry =>
-                entry.year ===
-                hoveredEntry.year
-        )
-        .sort(
-            compareTimelineEntries
-        );
+    const yearEntries =
+        data
+            .filter(
+                entry =>
+                    entry.year ===
+                    hoveredEntry.year
+            )
+            .sort(
+                compareTimelineEntries
+            );
 
 
-    /*
-    Put the hovered entry first.
-    All remaining colors follow in source order.
-    */
-
-    const orderedEntries = [
-        hoveredEntry,
-        ...yearEntries.filter(
+    const remainingEntries =
+        yearEntries.filter(
             entry =>
                 !isSameTimelineEntry(
                     entry,
                     hoveredEntry
                 )
-        )
+        );
+
+
+    const orderedEntries = [
+        hoveredEntry,
+        ...remainingEntries
     ];
 
 
@@ -707,18 +1119,17 @@ function updateColorComparisonPanel(
             .map(
                 function(entry, index) {
 
-                    const primary =
-                        index === 0;
-
-
                     return createComparisonCard(
                         entry,
-                        primary
+                        index === 0
                     );
 
                 }
             )
             .join("");
+
+
+    colorsContainer.scrollLeft = 0;
 
 }
 
@@ -729,62 +1140,128 @@ function updateColorComparisonPanel(
 
 function createComparisonCard(
     entry,
-    primary
+    isPrimary
 ) {
+
+    const cardClass =
+        isPrimary
+            ? "comparison-color-card-primary"
+            : "comparison-color-card-secondary";
+
+
+    const swatchClass =
+        isPrimary
+            ? "comparison-swatch-primary"
+            : "comparison-swatch-secondary";
+
+
+    const safeSource =
+        escapeTimelineHTML(
+            entry.source ||
+            "Unknown source"
+        );
+
+
+    const safeName =
+        escapeTimelineHTML(
+            entry.colorName ||
+            "Unnamed color"
+        );
+
+
+    const safeFamily =
+        escapeTimelineHTML(
+            entry.colorGroup ||
+            "Not available"
+        );
+
+
+    const safeCode =
+        escapeTimelineHTML(
+            entry.colorCode ||
+            "Not available"
+        );
+
+
+    const safeHex =
+        normalizeHex(
+            entry.hex
+        );
+
+
+    const safeDomain =
+        escapeTimelineHTML(
+            entry.domain ||
+            "Not available"
+        );
+
+
+    const safeSelectionType =
+        escapeTimelineHTML(
+            entry.selectionType ||
+            "Not available"
+        );
+
 
     return `
         <article
             class="
                 comparison-color-card
-                ${
-                    primary
-                        ? "comparison-color-card-primary"
-                        : "comparison-color-card-secondary"
-                }
+                ${cardClass}
             "
         >
 
             <div
                 class="
                     comparison-swatch
-                    ${
-                        primary
-                            ? "comparison-swatch-primary"
-                            : "comparison-swatch-secondary"
-                    }
+                    ${swatchClass}
                 "
                 style="
-                    background-color:
-                    ${entry.hex};
+                    background-color: ${safeHex};
                 "
+                aria-label="${safeName}"
             ></div>
 
 
-            <div class="comparison-color-information">
+            <div
+                class="comparison-color-information"
+            >
 
                 <p class="comparison-source">
-                    ${entry.source}
+                    ${safeSource}
                 </p>
 
+
                 <h2 class="comparison-color-name">
-                    ${entry.colorName}
+                    ${safeName}
                 </h2>
+
 
                 <dl class="comparison-color-details">
 
                     <div>
                         <dt>Family</dt>
-                        <dd>${entry.colorGroup}</dd>
+                        <dd>${safeFamily}</dd>
                     </div>
 
                     <div>
                         <dt>Code</dt>
-                        <dd>${entry.colorCode}</dd>
+                        <dd>${safeCode}</dd>
                     </div>
 
                     <div>
                         <dt>Hex</dt>
-                        <dd>${entry.hex}</dd>
+                        <dd>${safeHex}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Domain</dt>
+                        <dd>${safeDomain}</dd>
+                    </div>
+
+                    <div>
+                        <dt>Type</dt>
+                        <dd>${safeSelectionType}</dd>
                     </div>
 
                 </dl>
@@ -793,6 +1270,37 @@ function createComparisonCard(
 
         </article>
     `;
+
+}
+
+
+// ==========================================
+// ESCAPE HTML
+// ==========================================
+
+function escapeTimelineHTML(value) {
+
+    return String(value)
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            "\"",
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -818,20 +1326,35 @@ function compareTimelineEntries(
         );
 
 
+    const normalizedFirstIndex =
+        firstSourceIndex === -1
+            ? COLOR_TIMELINE_SOURCES.length
+            : firstSourceIndex;
+
+
+    const normalizedSecondIndex =
+        secondSourceIndex === -1
+            ? COLOR_TIMELINE_SOURCES.length
+            : secondSourceIndex;
+
+
     if (
-        firstSourceIndex !==
-        secondSourceIndex
+        normalizedFirstIndex !==
+        normalizedSecondIndex
     ) {
 
         return (
-            firstSourceIndex -
-            secondSourceIndex
+            normalizedFirstIndex -
+            normalizedSecondIndex
         );
 
     }
 
 
-    return first.rank - second.rank;
+    return (
+        first.rank -
+        second.rank
+    );
 
 }
 
@@ -844,9 +1367,10 @@ function highlightTimelineSelection(
     activeEntry
 ) {
 
-    d3.selectAll(
-        ".timeline-color-swatch"
-    )
+    d3
+        .selectAll(
+            ".timeline-color-swatch"
+        )
         .classed(
             "is-muted",
             function() {
@@ -869,19 +1393,27 @@ function highlightTimelineSelection(
                         this.dataset.year
                     ) ===
                         activeEntry.year &&
+
                     this.dataset.source ===
                         activeEntry.source &&
+
                     this.dataset.colorName ===
-                        activeEntry.colorName
+                        activeEntry.colorName &&
+
+                    Number(
+                        this.dataset.rank
+                    ) ===
+                        activeEntry.rank
                 );
 
             }
         );
 
 
-    d3.selectAll(
-        ".timeline-placeholder"
-    )
+    d3
+        .selectAll(
+            ".timeline-placeholder"
+        )
         .classed(
             "is-muted",
             function() {
@@ -897,9 +1429,10 @@ function highlightTimelineSelection(
         );
 
 
-    d3.selectAll(
-        ".timeline-year-label"
-    )
+    d3
+        .selectAll(
+            ".timeline-year-label"
+        )
         .classed(
             "is-selected",
             function() {
@@ -927,11 +1460,17 @@ function isSameTimelineEntry(
 ) {
 
     return (
-        first.year === second.year &&
-        first.source === second.source &&
+        first.year ===
+            second.year &&
+
+        first.source ===
+            second.source &&
+
         first.colorName ===
             second.colorName &&
-        first.rank === second.rank
+
+        first.rank ===
+            second.rank
     );
 
 }
@@ -961,6 +1500,17 @@ window.addEventListener(
 
                         drawColorTimeline(
                             colorTimelineData
+                        );
+
+                    }
+
+
+                    if (
+                        activeTimelineEntry
+                    ) {
+
+                        activateTimelineEntry(
+                            activeTimelineEntry
                         );
 
                     }
