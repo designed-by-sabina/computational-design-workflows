@@ -974,6 +974,26 @@ function createColorName(recipe) {
 
 }
 
+
+
+// ==========================================
+// NODE SIZE
+// ==========================================
+
+function getNodeRadius(node) {
+
+    if (GENERATION_RADIUS[node.generation]) {
+
+        return GENERATION_RADIUS[node.generation];
+
+    }
+
+    return 11;
+
+}
+
+
+
     // ==========================================
     // INTERFACE PANEL
     // ==========================================
