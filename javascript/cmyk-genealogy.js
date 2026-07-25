@@ -952,199 +952,27 @@
 
 
     // ==========================================
-    // COLOR NAME
-    // ==========================================
-
-    function createColorName(recipe) {
-
-        const rgb = hexToRgb(
-            cmykToHex(
-                recipe.c,
-                recipe.m,
-                recipe.yellow,
-                recipe.k
-            )
-        );
-
-        const hsl = rgbToHsl(
-            rgb.r,
-            rgb.g,
-            rgb.b
-        );
-
-
-        let family;
-
-
-        if (hsl.s < 0.09) {
-
-            family = "Neutral";
-
-        } else if (hsl.h < 15 || hsl.h >= 345) {
-
-            family = "Red";
-
-        } else if (hsl.h < 40) {
-
-            family = "Orange";
-
-        } else if (hsl.h < 70) {
-
-            family = "Yellow";
-
-        } else if (hsl.h < 155) {
-
-            family = "Green";
-
-        } else if (hsl.h < 190) {
-
-            family = "Teal";
-
-        } else if (hsl.h < 250) {
-
-            family = "Blue";
-
-        } else if (hsl.h < 290) {
-
-            family = "Violet";
-
-        } else if (hsl.h < 330) {
-
-            family = "Magenta";
-
-        } else {
-
-            family = "Rose";
-
-        }
-
-
-        let modifier;
-
-
-        if (recipe.k >= 55 || hsl.l < 0.22) {
-
-            modifier = "Deep";
-
-        } else if (hsl.s < 0.2) {
-
-            modifier = "Muted";
-
-        } else if (hsl.l > 0.72) {
-
-            modifier = "Pale";
-
-        } else if (hsl.l > 0.58) {
-
-            modifier = "Light";
-
-        } else if (hsl.s > 0.7) {
-
-            modifier = "Vivid";
-
-        } else {
-
-            modifier = "Soft";
-
-        }
-
-
-        return `${modifier} ${family}`;
-
-    }
-
-
-    function hexToRgb(hex) {
-
-        const value = hex.replace("#", "");
-
-        return {
-            r: parseInt(value.substring(0, 2), 16),
-            g: parseInt(value.substring(2, 4), 16),
-            b: parseInt(value.substring(4, 6), 16)
-        };
-
-    }
-
-
-    function rgbToHsl(red, green, blue) {
-
-        let r = red / 255;
-        let g = green / 255;
-        let b = blue / 255;
-
-        const max = Math.max(r, g, b);
-        const min = Math.min(r, g, b);
-
-        let hue = 0;
-        let saturation = 0;
-
-        const lightness = (max + min) / 2;
-        const difference = max - min;
-
-
-        if (difference !== 0) {
-
-            saturation =
-                lightness > 0.5
-                    ? difference / (2 - max - min)
-                    : difference / (max + min);
-
-
-            if (max === r) {
-
-                hue = (
-                    (g - b) / difference +
-                    (g < b ? 6 : 0)
-                );
-
-            } else if (max === g) {
-
-                hue = (
-                    (b - r) / difference +
-                    2
-                );
-
-            } else {
-
-                hue = (
-                    (r - g) / difference +
-                    4
-                );
-
-            }
-
-
-            hue *= 60;
-
-        }
-
-
-        return {
-            h: hue,
-            s: saturation,
-            l: lightness
-        };
-
-    }
-
-
-    // ==========================================
-    // NODE SIZE
-    // ==========================================
-
-    function getNodeRadius(node) {
-
-        if (GENERATION_RADIUS[node.generation]) {
-
-            return GENERATION_RADIUS[node.generation];
-
-        }
-
-        return 11;
-
-    }
-
+// COLOR NAME
+// ==========================================
+
+function createColorName(recipe) {
+
+    const rgb = hexToRgb(
+        cmykToHex(
+            recipe.c,
+            recipe.m,
+            recipe.yellow,
+            recipe.k
+        )
+    );
+
+    // getColorName() comes from color-naming.js — same
+    // OKLab / CSS147 nearest-match logic used for the
+    // TRANSPARENCY bubbles, so naming is consistent
+    // across the whole site.
+    return getColorName([rgb.r, rgb.g, rgb.b]);
+
+}
 
     // ==========================================
     // INTERFACE PANEL
