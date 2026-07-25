@@ -1781,8 +1781,6 @@ PIGMENT MAP — MOBILE
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: #111;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, .4);
   font-size: .75rem;
   text-transform: lowercase;
   letter-spacing: .02em;
