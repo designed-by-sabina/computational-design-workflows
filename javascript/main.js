@@ -1148,512 +1148,132 @@ function removeHoverLabel(){
 
 
 
-// ==========================================
-// COLOR NAMING USING HSL PERCEPTION
-// ==========================================
+/* ==========================================
+   COLOR NAMING — via W3C CSS Color Module Level 4
+   Replaces ad-hoc RGB-distance naming with:
+     1. sRGB -> OKLab conversion (per CSS Color 4 spec)
+     2. Nearest-match against the 147 standard CSS
+        named colors, compared perceptually in OKLab
 
+   Drop this in ABOVE where getColorName() is currently
+   defined in main.js, then delete the old getColorName
+   function — this one is a straight replacement with
+   the same signature: getColorName(rgb) -> string
+   ========================================== */
 
-function getColorName(rgb){
+// ------------------------------------------
+// 1. CSS Level 4 named colors (the 147 keywords)
+//    Source of truth: https://www.w3.org/TR/css-color-4/#named-colors
+// ------------------------------------------
+const CSS_NAMED_COLORS = {
+  aliceblue:"#f0f8ff", antiquewhite:"#faebd7", aqua:"#00ffff", aquamarine:"#7fffd4",
+  azure:"#f0ffff", beige:"#f5f5dc", bisque:"#ffe4c4", black:"#000000",
+  blanchedalmond:"#ffebcd", blue:"#0000ff", blueviolet:"#8a2be2", brown:"#a52a2a",
+  burlywood:"#deb887", cadetblue:"#5f9ea0", chartreuse:"#7fff00", chocolate:"#d2691e",
+  coral:"#ff7f50", cornflowerblue:"#6495ed", cornsilk:"#fff8dc", crimson:"#dc143c",
+  cyan:"#00ffff", darkblue:"#00008b", darkcyan:"#008b8b", darkgoldenrod:"#b8860b",
+  darkgray:"#a9a9a9", darkgreen:"#006400", darkgrey:"#a9a9a9", darkkhaki:"#bdb76b",
+  darkmagenta:"#8b008b", darkolivegreen:"#556b2f", darkorange:"#ff8c00", darkorchid:"#9932cc",
+  darkred:"#8b0000", darksalmon:"#e9967a", darkseagreen:"#8fbc8f", darkslateblue:"#483d8b",
+  darkslategray:"#2f4f4f", darkslategrey:"#2f4f4f", darkturquoise:"#00ced1", darkviolet:"#9400d3",
+  deeppink:"#ff1493", deepskyblue:"#00bfff", dimgray:"#696969", dimgrey:"#696969",
+  dodgerblue:"#1e90ff", firebrick:"#b22222", floralwhite:"#fffaf0", forestgreen:"#228b22",
+  fuchsia:"#ff00ff", gainsboro:"#dcdcdc", ghostwhite:"#f8f8ff", gold:"#ffd700",
+  goldenrod:"#daa520", gray:"#808080", green:"#008000", greenyellow:"#adff2f",
+  grey:"#808080", honeydew:"#f0fff0", hotpink:"#ff69b4", indianred:"#cd5c5c",
+  indigo:"#4b0082", ivory:"#fffff0", khaki:"#f0e68c", lavender:"#e6e6fa",
+  lavenderblush:"#fff0f5", lawngreen:"#7cfc00", lemonchiffon:"#fffacd", lightblue:"#add8e6",
+  lightcoral:"#f08080", lightcyan:"#e0ffff", lightgoldenrodyellow:"#fafad2", lightgray:"#d3d3d3",
+  lightgreen:"#90ee90", lightgrey:"#d3d3d3", lightpink:"#ffb6c1", lightsalmon:"#ffa07a",
+  lightseagreen:"#20b2aa", lightskyblue:"#87cefa", lightslategray:"#778899", lightslategrey:"#778899",
+  lightsteelblue:"#b0c4de", lightyellow:"#ffffe0", lime:"#00ff00", limegreen:"#32cd32",
+  linen:"#faf0e6", magenta:"#ff00ff", maroon:"#800000", mediumaquamarine:"#66cdaa",
+  mediumblue:"#0000cd", mediumorchid:"#ba55d3", mediumpurple:"#9370db", mediumseagreen:"#3cb371",
+  mediumslateblue:"#7b68ee", mediumspringgreen:"#00fa9a", mediumturquoise:"#48d1cc", mediumvioletred:"#c71585",
+  midnightblue:"#191970", mintcream:"#f5fffa", mistyrose:"#ffe4e1", moccasin:"#ffe4b5",
+  navajowhite:"#ffdead", navy:"#000080", oldlace:"#fdf5e6", olive:"#808000",
+  olivedrab:"#6b8e23", orange:"#ffa500", orangered:"#ff4500", orchid:"#da70d6",
+  palegoldenrod:"#eee8aa", palegreen:"#98fb98", paleturquoise:"#afeeee", palevioletred:"#db7093",
+  papayawhip:"#ffefd5", peachpuff:"#ffdab9", peru:"#cd853f", pink:"#ffc0cb",
+  plum:"#dda0dd", powderblue:"#b0e0e6", purple:"#800080", rebeccapurple:"#663399",
+  red:"#ff0000", rosybrown:"#bc8f8f", royalblue:"#4169e1", saddlebrown:"#8b4513",
+  salmon:"#fa8072", sandybrown:"#f4a460", seagreen:"#2e8b57", seashell:"#fff5ee",
+  sienna:"#a0522d", silver:"#c0c0c0", skyblue:"#87ceeb", slateblue:"#6a5acd",
+  slategray:"#708090", slategrey:"#708090", snow:"#fffafa", springgreen:"#00ff7f",
+  steelblue:"#4682b4", tan:"#d2b48c", teal:"#008080", thistle:"#d8bfd8",
+  tomato:"#ff6347", turquoise:"#40e0d0", violet:"#ee82ee", wheat:"#f5deb3",
+  white:"#ffffff", whitesmoke:"#f5f5f5", yellow:"#ffff00", yellowgreen:"#9acd32"
+};
 
-    let hsl = rgbToHsl(
-        rgb[0],
-        rgb[1],
-        rgb[2]
-    );
-
-
-    let h = hsl.h;
-    let s = hsl.s;
-    let l = hsl.l;
-
-
-    let intensity = "";
-    let brightness = "";
-
-
-    // ----------------------------
-    // Saturation language
-    // ----------------------------
-if(s < 20){
-
-    intensity = "Cloud";
-
+// ------------------------------------------
+// 2. sRGB -> OKLab conversion
+//    (matrices per the CSS Color Module Level 4 spec,
+//    https://www.w3.org/TR/css-color-4/#color-conversion-code)
+// ------------------------------------------
+function srgbToLinear(c) {
+  c = c / 255;
+  return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 }
 
-else if(s < 40){
+function rgbToOklab([r, g, b]) {
+  const lr = srgbToLinear(r);
+  const lg = srgbToLinear(g);
+  const lb = srgbToLinear(b);
 
-    intensity = "Dusty";
+  // linear sRGB -> LMS
+  const l = 0.4122214708 * lr + 0.5363325363 * lg + 0.0514459929 * lb;
+  const m = 0.2119034982 * lr + 0.6806995451 * lg + 0.1073969566 * lb;
+  const s = 0.0883024619 * lr + 0.2817188376 * lg + 0.6299787005 * lb;
 
+  const l_ = Math.cbrt(l);
+  const m_ = Math.cbrt(m);
+  const s_ = Math.cbrt(s);
+
+  return [
+    0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_, // L
+    1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_, // a
+    0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_  // b
+  ];
 }
 
-else if(s < 65){
-
-    intensity = "Soft";
-
+function hexToRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
-    else{
+// ------------------------------------------
+// 3. Precompute OKLab for every named color once
+// ------------------------------------------
+const NAMED_COLORS_OKLAB = Object.entries(CSS_NAMED_COLORS).map(
+  ([name, hex]) => ({ name, oklab: rgbToOklab(hexToRgb(hex)) })
+);
 
-        intensity = "Vivid";
+// ------------------------------------------
+// 4. Public function — same signature as before
+// ------------------------------------------
+function getColorName(rgb) {
+  const target = rgbToOklab(rgb);
+  let closest = null;
+  let closestDist = Infinity;
 
+  for (const entry of NAMED_COLORS_OKLAB) {
+    const dL = target[0] - entry.oklab[0];
+    const da = target[1] - entry.oklab[1];
+    const db = target[2] - entry.oklab[2];
+    const dist = dL * dL + da * da + db * db;
+    if (dist < closestDist) {
+      closestDist = dist;
+      closest = entry.name;
     }
+  }
 
-
-
-    // ----------------------------
-    // Lightness language
-    // ----------------------------
-
-    if(l > 85){
-
-    brightness = "Pale";
-
-}
-
-else if(l > 75){
-
-    brightness = "Light";
-
-}
-
-else if(l < 30){
-
-    brightness = "Deep";
-
-}
-
-else if(l < 45){
-
-    brightness = "Dark";
-
-}
-
-
-
-    // ----------------------------
-    // Hue families
-    // ----------------------------
-
-if(h < 6){
-
-    family = "Crimson";
-
-}
-
-else if(h < 12){
-
-    family = "Scarlet";
-
-}
-
-else if(h < 18){
-
-    family = "Red";
-
-}
-
-else if(h < 24){
-
-    family = "Ruby";
-
-}
-
-else if(h < 30){
-
-    family = "Rose";
-
-}
-
-else if(h < 36){
-
-    family = "Blush";
-
-}
-
-else if(h < 42){
-
-    family = "Coral";
-
-}
-
-else if(h < 48){
-
-    family = "Salmon";
-
-}
-
-else if(h < 54){
-
-    family = "Peach";
-
-}
-
-else if(h < 60){
-
-    family = "Apricot";
-
-}
-
-else if(h < 66){
-
-    family = "Amber";
-
-}
-
-else if(h < 72){
-
-    family = "Gold";
-
-}
-
-else if(h < 78){
-
-    family = "Yellow";
-
-}
-
-else if(h < 84){
-
-    family = "Lemon";
-
-}
-
-else if(h < 90){
-
-    family = "Chartreuse";
-
-}
-
-else if(h < 96){
-
-    family = "Lime";
-
-}
-
-else if(h < 102){
-
-    family = "Spring Green";
-
-}
-
-else if(h < 108){
-
-    family = "Green";
-
-}
-
-else if(h < 114){
-
-    family = "Leaf";
-
-}
-
-else if(h < 120){
-
-    family = "Olive";
-
-}
-
-else if(h < 126){
-
-    family = "Moss";
-
-}
-
-else if(h < 132){
-
-    family = "Sage";
-
-}
-
-else if(h < 138){
-
-    family = "Fern";
-
-}
-
-else if(h < 144){
-
-    family = "Mint";
-
-}
-
-else if(h < 150){
-
-    family = "Seafoam";
-
-}
-
-else if(h < 156){
-
-    family = "Aqua";
-
-}
-
-else if(h < 162){
-
-    family = "Turquoise";
-
-}
-
-else if(h < 168){
-
-    family = "Teal";
-
-}
-
-else if(h < 174){
-
-    family = "Cyan";
-
-}
-
-else if(h < 180){
-
-    family = "Ice Blue";
-
-}
-
-else if(h < 186){
-
-    family = "Sky Blue";
-
-}
-
-else if(h < 192){
-
-    family = "Azure";
-
-}
-
-else if(h < 198){
-
-    family = "Cerulean";
-
-}
-
-else if(h < 204){
-
-    family = "Blue";
-
-}
-
-else if(h < 210){
-
-    family = "Cobalt";
-
-}
-
-else if(h < 216){
-
-    family = "Royal Blue";
-
-}
-
-else if(h < 222){
-
-    family = "Ultramarine";
-
-}
-
-else if(h < 228){
-
-    family = "Indigo";
-
-}
-
-else if(h < 234){
-
-    family = "Deep Blue";
-
-}
-
-else if(h < 240){
-
-    family = "Violet Blue";
-
-}
-
-else if(h < 246){
-
-    family = "Periwinkle";
-
-}
-
-else if(h < 252){
-
-    family = "Lavender";
-
-}
-
-else if(h < 258){
-
-    family = "Lilac";
-
-}
-
-else if(h < 264){
-
-    family = "Purple";
-
-}
-
-else if(h < 270){
-
-    family = "Amethyst";
-
-}
-
-else if(h < 276){
-
-    family = "Orchid";
-
-}
-
-else if(h < 282){
-
-    family = "Plum";
-
-}
-
-else if(h < 288){
-
-    family = "Mauve";
-
-}
-
-else if(h < 294){
-
-    family = "Magenta";
-
-}
-
-else if(h < 300){
-
-    family = "Fuchsia";
-
+  return titleCase(closest);
 }
-
-else if(h < 306){
-
-    family = "Pink";
-
-}
-
-else if(h < 312){
-
-    family = "Rose Pink";
-
-}
-
-else if(h < 318){
-
-    family = "Dusty Rose";
-
-}
-
-else if(h < 324){
-
-    family = "Berry";
-
-}
-
-else if(h < 330){
-
-    family = "Raspberry";
-
-}
-
-else if(h < 336){
-
-    family = "Wine";
-
-}
-
-else if(h < 342){
-
-    family = "Burgundy";
-
-}
-
-else if(h < 348){
-
-    family = "Garnet";
-
-}
-
-else if(h < 354){
-
-    family = "Ruby Red";
-
-}
-
-else{
-
-    family = "Crimson";
-
-}
-
-
-
-    // ----------------------------
-    // Special neutral handling
-    // ----------------------------
-
-
-    if(s < 15){
-
-        if(l > 90){
-
-            return "White";
-
-        }
-
-        else if(l < 15){
-
-            return "Black";
-
-        }
-
-        else{
-
-            return "Neutral Gray";
-
-        }
-
-    }
-
-
-
-    // ----------------------------
-    // Assemble name
-    // ----------------------------
-
-
-    let result = "";
-
-
-    if(brightness){
-
-        result += brightness + " ";
-
-    }
-
-
-    if(intensity){
-
-        result += intensity + " ";
-
-    }
-
-
-    result += family;
-
-
-
-    return result.trim();
-
 
+function titleCase(str) {
+  // splits camel-ish CSS names like "cornflowerblue" -> "Cornflowerblue"
+  // (CSS names are single words, so this just capitalizes)
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 
