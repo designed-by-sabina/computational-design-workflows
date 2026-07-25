@@ -67,3 +67,61 @@ form.addEventListener("submit", async (e) => {
   const color = normalizeColor(input.value);
 
   if (!isValidCssColor(color)) {
+    statusEl.textContent = "That doesn't look like a color — try 'coral' or '#ff6b6b'.";
+    return;
+  }
+  if (submittedRecently()) {
+    statusEl.textContent = "You already submitted — thanks! Watch the bubbles update.";
+    return;
+  }
+
+  try {
+    await addDoc(responsesRef, { color, createdAt: serverTimestamp() });
+    localStorage.setItem("colorPollLastSubmit", Date.now().toString());
+    statusEl.textContent = "Added to the bubbles below!";
+    form.reset();
+  } catch (err) {
+    console.error("Error submitting color:", err);
+    statusEl.textContent = "Something went wrong — try again.";
+  }
+});
+
+// --- 5. Live aggregation + bubble rendering ---
+const recentQuery = query(responsesRef, orderBy("createdAt", "desc"), limit(500));
+
+onSnapshot(recentQuery, (snapshot) => {
+  const counts = {};
+  snapshot.forEach((doc) => {
+    const c = doc.data().color;
+    if (c) counts[c] = (counts[c] || 0) + 1;
+  });
+  renderBubbles(counts);
+});
+
+function renderBubbles(counts) {
+  bubbleContainer.innerHTML = "";
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+  if (entries.length === 0) {
+    bubbleContainer.innerHTML = "<p class='color-poll-empty'>No colors yet — be the first!</p>";
+    return;
+  }
+
+  const maxCount = Math.max(...entries.map(([, c]) => c));
+  entries.forEach(([color, count], i) => {
+    const bubble = document.createElement("div");
+    bubble.className = "color-poll-bubble";
+    const size = 60 + (180 - 60) * (count / maxCount);
+    const textColor = getContrastTextColor(color);
+
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.background = color;
+    bubble.style.color = textColor;
+    bubble.style.animationDelay = `${i * 0.3}s`;
+
+    bubble.innerHTML = `<span class="count">${count}</span><span class="label">${color}</span>`;
+    bubbleContainer.appendChild(bubble);
+  });
+}
+
