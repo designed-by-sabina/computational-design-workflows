@@ -101,12 +101,45 @@ const NAMED_COLORS_OKLAB = Object.entries(CSS_NAMED_COLORS).map(
 // ------------------------------------------
 // 4. Public function — same signature as before
 // ------------------------------------------
+// ------------------------------------------
+// 3. Precompute OKLab + chroma for every named color once
+//    Chroma = distance from the neutral gray axis (a=0, b=0)
+// ------------------------------------------
+const NAMED_COLORS_OKLAB = Object.entries(CSS_NAMED_COLORS).map(
+  ([name, hex]) => {
+    const oklab = rgbToOklab(hexToRgb(hex));
+    const chroma = Math.hypot(oklab[1], oklab[2]);
+    return { name, oklab, chroma };
+  }
+);
+
+// Named colors sitting essentially on the neutral axis
+// (gainsboro, silver, lightgray, whitesmoke, gray, white, black, etc.)
+const GRAYSCALE_CHROMA_CUTOFF = 0.004;
+
+// How close a mixed bubble color has to be to neutral before
+// we let it match one of those grayscale names at all
+const NEAR_NEUTRAL_TARGET_CUTOFF = 0.01;
+
+// ------------------------------------------
+// 4. Public function — same signature as before
+// ------------------------------------------
 function getColorName(rgb) {
   const target = rgbToOklab(rgb);
+  const targetChroma = Math.hypot(target[1], target[2]);
+  const targetIsNearNeutral = targetChroma < NEAR_NEUTRAL_TARGET_CUTOFF;
+
   let closest = null;
   let closestDist = Infinity;
 
   for (const entry of NAMED_COLORS_OKLAB) {
+    // Skip true-gray names unless the bubble color is itself
+    // essentially gray — otherwise a faint pink/blue tint keeps
+    // getting swallowed by "Gainsboro".
+    if (!targetIsNearNeutral && entry.chroma < GRAYSCALE_CHROMA_CUTOFF) {
+      continue;
+    }
+
     const dL = target[0] - entry.oklab[0];
     const da = target[1] - entry.oklab[1];
     const db = target[2] - entry.oklab[2];
