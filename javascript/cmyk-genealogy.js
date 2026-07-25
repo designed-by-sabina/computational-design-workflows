@@ -950,6 +950,16 @@
 
     }
 
+function hexToRgbArray(hex) {
+        const value = hex.replace("#", "");
+        return {
+            r: parseInt(value.substring(0, 2), 16),
+            g: parseInt(value.substring(2, 4), 16),
+            b: parseInt(value.substring(4, 6), 16)
+        };
+    }
+
+
 
     // ==========================================
 // COLOR NAME
@@ -957,7 +967,7 @@
 
 function createColorName(recipe) {
 
-    const rgb = hexToRgb(
+    const rgb = hexToRgbArray(
         cmykToHex(
             recipe.c,
             recipe.m,
@@ -1468,7 +1478,7 @@ function getNodeRadius(node) {
 
     function getReadableTextColor(hexColor) {
 
-        const rgb = hexToRgb(hexColor);
+        const rgb = hexToRgbArray(hexColor);
 
         const luminance =
             (
