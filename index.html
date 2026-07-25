@@ -464,8 +464,8 @@ PIGMENT ORIGINS MAP
                         </p>
 
                     </section>
-                    
-                
+
+
 
                 </div>
 
@@ -577,11 +577,50 @@ PIGMENT ORIGINS MAP
         </section>
 
 
+        <!-- ==========================================
+     FAVORITE — live color poll
+========================================== -->
+        <section class="color-poll-section" id="colorPoll">
+            <header class="color-poll-header">
+                <h1>FAVORITE</h1>
+                <p class="subtitle">What color speaks to you? See everyone's answer, live.</p>
+            </header>
+
+            <form id="colorPollForm" class="color-poll-form">
+                <label for="colorPollInput" class="color-poll-label">TYPE A COLOR</label>
+                <input type="text" id="colorPollInput" class="color-poll-input" placeholder="e.g. teal, coral, #ff6b6b"
+                    maxlength="30" autocomplete="off" required />
+                <button type="submit" class="color-poll-submit">SUBMIT</button>
+            </form>
+
+            <p id="colorPollStatus" class="color-poll-status" aria-live="polite"></p>
+
+            <div id="colorPollBubbles" class="color-poll-bubbles" aria-label="Live results of favorite colors"></div>
+
+            <section class="instructions">
+                <p>Bubble size reflects how many people chose that color. Results update live for everyone viewing the
+                    page.</p>
+            </section>
+
+            <footer class="color-poll-footer">
+                <p>Responses are anonymous — only the color text is stored, no names or accounts.</p>
+            </footer>
+        </section>
+
+
+
+
+
+
+
+
         <!-- Include D3 only once on the page -->
         <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
         <!-- Add this after the D3 script and after your other project scripts -->
         <script src="javascript/cmyk-genealogy.js"></script>
+
+
 
 
 
@@ -617,6 +656,9 @@ PIGMENT ORIGINS MAP
 
         <!-- Color timeline -->
         <script src="javascript/color-timeline.js"></script>
+
+        <script type="module" src="javascript/color-poll.js"></script>
+
 
     </main>
 
