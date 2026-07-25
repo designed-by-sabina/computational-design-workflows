@@ -41,9 +41,8 @@ function normalizeColor(value) {
   return value.trim().toLowerCase().replace(/\s+/g, "");
 }
 
-function submittedRecently() {
-  const last = localStorage.getItem("colorPollLastSubmit");
-  return last && Date.now() - Number(last) < 30000;
+function alreadySubmitted() {
+  return localStorage.getItem("colorPollSubmitted") === "true";
 }
 
 // Figures out if a color is "light" or "dark" so we know
@@ -70,16 +69,18 @@ form.addEventListener("submit", async (e) => {
     statusEl.textContent = "That doesn't look like a color — try 'coral' or '#ff6b6b'.";
     return;
   }
-  if (submittedRecently()) {
-    statusEl.textContent = "You already submitted — thanks! Watch the bubbles update.";
+  if (alreadySubmitted()) {
+    statusEl.textContent = "You've already submitted your color — thanks for voting!";
     return;
   }
 
   try {
     await addDoc(responsesRef, { color, createdAt: serverTimestamp() });
-    localStorage.setItem("colorPollLastSubmit", Date.now().toString());
+    localStorage.setItem("colorPollSubmitted", "true");
     statusEl.textContent = "Added to the bubbles below!";
     form.reset();
+    input.disabled = true;
+    form.querySelector(".color-poll-submit").disabled = true;
   } catch (err) {
     console.error("Error submitting color:", err);
     statusEl.textContent = "Something went wrong — try again.";

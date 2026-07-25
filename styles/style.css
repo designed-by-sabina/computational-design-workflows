@@ -1809,4 +1809,11 @@ PIGMENT MAP — MOBILE
   opacity: .7;
 }
 
-
+#colorPollStatus {
+  text-align: center !important;
+  width: 100%;
+  display: block;
+  min-height: 1.2em;
+  font-size: .85rem;
+  opacity: .75;
+}
