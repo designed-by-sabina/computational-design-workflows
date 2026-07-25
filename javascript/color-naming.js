@@ -92,16 +92,6 @@ function hexToRgb(hex) {
 }
 
 // ------------------------------------------
-// 3. Precompute OKLab for every named color once
-// ------------------------------------------
-const NAMED_COLORS_OKLAB = Object.entries(CSS_NAMED_COLORS).map(
-  ([name, hex]) => ({ name, oklab: rgbToOklab(hexToRgb(hex)) })
-);
-
-// ------------------------------------------
-// 4. Public function — same signature as before
-// ------------------------------------------
-// ------------------------------------------
 // 3. Precompute OKLab + chroma for every named color once
 //    Chroma = distance from the neutral gray axis (a=0, b=0)
 // ------------------------------------------
