@@ -2600,7 +2600,7 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
 }
 
 
- ==========================================
+/* ==========================================
    TRANSPARENCY — SHORTER DISCOVERED COLORS AREA
    ========================================== */
 
@@ -2884,6 +2884,133 @@ section to be exactly one viewport tall.
     --navigation-safe-area: clamp(52px, 5vw, 82px);
 }
 
+/* ==========================================
+   COLOR PLAYGROUND SECTION
+   ========================================== */
+
+.playground-intro-section {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 100svh;
+
+    padding:
+        clamp(30px, 5vh, 60px)
+        calc(var(--page-gutter) + var(--navigation-safe-area))
+        clamp(30px, 5vh, 60px)
+        var(--page-gutter);
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+
+.playground-title {
+    display: inline-grid;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin: 0;
+   
+
+    font-weight: 900;
+    line-height: 0.72;
+  
+}
+
+
+.playground-title-color {
+    display: block;
+
+    color: var(--black);
+
+    font-size:
+        clamp(
+            120px,
+            min(27vw, 38vh),
+            410px
+        );
+ letter-spacing: -0.09em;
+    white-space: nowrap;
+}
+
+
+.playground-title-word {
+    display: block;
+
+    width: max-content;
+
+    margin-top:
+        clamp(
+            24px,
+            5vh,
+            70px
+        );
+
+    /*
+    Aligns the p approximately beneath
+    the left edge of the L in COLOR.
+    */
+
+    margin-left: 50%;
+
+    font-size:
+        clamp(
+            78px,
+            min(17vw, 25vh),
+            265px
+        );
+
+    font-weight: 500;
+    letter-spacing: -0.075em;
+
+    animation:
+        playground-color-cycle
+        12s
+        linear
+        infinite;
+}
+
+
+@keyframes playground-color-cycle {
+
+    0% {
+        color: #ff7a8a;
+    }
+
+    16% {
+        color: #ffb347;
+    }
+
+    32% {
+        color: #d3c94e;
+    }
+
+    48% {
+        color: #61c99a;
+    }
+
+    64% {
+        color: #5b9df9;
+    }
+
+    80% {
+        color: #9b78e8;
+    }
+
+    100% {
+        color: #ff7a8a;
+    }
+
+}
 
 /* ==========================================
    COLOR PLAYGROUND TITLE
@@ -2939,7 +3066,7 @@ rendered width aligns it with the L.
         );
 
     margin-left:
-        40%;
+        50%;
 
     font-size:
         clamp(
