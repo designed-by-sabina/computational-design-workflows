@@ -740,12 +740,6 @@ function drawTimelineSourceRows(
                 ) / 2;
 
 
-            drawTimelineRowDivider(
-                chart,
-                rowY,
-                xScale.range()[1]
-            );
-
 
             drawTimelineSourceLabel(
                 chart,
@@ -818,13 +812,6 @@ function drawTimelineSourceRows(
     );
 
 
-    drawTimelineRowDivider(
-        chart,
-        yScale.range()[1],
-        xScale.range()[1]
-    );
-
-}
 
 
 
