@@ -6486,3 +6486,110 @@ body > main > section > header .subtitle,
 .pigment-popup strong {
     color: #111;
 }
+
+/* ==========================================
+   PIGMENT POPUP — EXTRA COMPACT
+   Keep this at the end of style.css
+   ========================================== */
+
+.mapboxgl-popup {
+    width: 170px;
+    max-width: 170px;
+}
+
+.mapboxgl-popup-content {
+    width: 170px;
+    max-width: 170px;
+
+    padding: 0;
+    overflow: hidden;
+
+    border-radius: 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+
+    box-sizing: border-box;
+}
+
+.pigment-popup {
+    width: 170px;
+    max-width: 170px;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+.pigment-popup-color {
+    display: block;
+
+    width: 170px;
+    height: 26px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+.pigment-popup-information {
+    width: 100%;
+
+    padding: 8px 10px 10px;
+
+    box-sizing: border-box;
+}
+
+.pigment-popup-category {
+    margin: 0 0 4px;
+
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.07em;
+}
+
+.pigment-popup h3 {
+    margin: 0 0 2px;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.pigment-popup-mineral {
+    margin: 0 0 5px;
+
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+.pigment-popup-location {
+    margin: 0 0 5px;
+
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.pigment-popup-description {
+    margin: 0;
+
+    font-size: 8px;
+    line-height: 1.3;
+}
+
+.mapboxgl-popup-close-button {
+    width: 20px;
+    height: 20px;
+
+    padding: 0;
+
+    color: #111111;
+    font-size: 15px;
+    line-height: 20px;
+}

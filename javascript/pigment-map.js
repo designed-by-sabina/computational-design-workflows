@@ -342,16 +342,17 @@ pigmentMap.on(
     `;
 
 
-    // Place the popup on the map
-    new mapboxgl.Popup({
+new mapboxgl.Popup({
 
-      closeButton: true,
+  closeButton: true,
 
-      closeOnClick: true,
+  closeOnClick: true,
 
-      offset: 12
+  offset: 10,
 
-    })
+  maxWidth: "170px"
+
+})
 
       .setLngLat(coordinates)
 
@@ -361,6 +362,8 @@ pigmentMap.on(
 
   }
 );
+
+
 
 
 // ------------------------------------------
