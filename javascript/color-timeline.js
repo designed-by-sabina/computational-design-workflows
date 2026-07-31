@@ -414,6 +414,11 @@ function activateTimelineEntry(entry) {
 // DRAW TIMELINE
 // ==========================================
 
+// ==========================================
+// DRAW TIMELINE
+// Readable year columns + horizontal scroll
+// ==========================================
+
 function drawColorTimeline(data) {
 
     const container =
@@ -444,13 +449,6 @@ function drawColorTimeline(data) {
             .width;
 
 
-    const width =
-        Math.max(
-            measuredWidth,
-            700
-        );
-
-
     const years =
         d3.range(
             COLOR_TIMELINE_START_YEAR,
@@ -460,10 +458,41 @@ function drawColorTimeline(data) {
 
     const margin = {
         top: 58,
-        right: 8,
+        right: 24,
         bottom: 20,
         left: 240
     };
+
+
+    /*
+    Every year keeps enough horizontal room
+    for its label and color swatch.
+
+    The SVG becomes wider than the container
+    when necessary, and the container scrolls.
+    */
+
+    const minimumYearColumnWidth =
+        window.innerWidth <= 800
+            ? 44
+            : 52;
+
+
+    const minimumTimelineWidth =
+
+        margin.left +
+
+        margin.right +
+
+        years.length *
+        minimumYearColumnWidth;
+
+
+    const width =
+        Math.max(
+            measuredWidth,
+            minimumTimelineWidth
+        );
 
 
     const innerWidth =
@@ -478,19 +507,16 @@ function drawColorTimeline(data) {
 
 
     const squareSize =
-        Math.max(
-            12,
-            Math.min(
-                32,
-                yearColumnWidth * 0.68
-            )
+        Math.min(
+            32,
+            yearColumnWidth * 0.66
         );
 
 
     const rowHeight =
         Math.max(
-            60,
-            squareSize + 30
+            58,
+            squareSize + 28
         );
 
 
@@ -512,9 +538,16 @@ function drawColorTimeline(data) {
                 "class",
                 "color-timeline-svg"
             )
+
+            /*
+            Use a real pixel width rather than 100%.
+            This is what prevents D3 from squeezing
+            the full timeline back into the viewport.
+            */
+
             .attr(
                 "width",
-                "100%"
+                width
             )
             .attr(
                 "height",
@@ -526,7 +559,7 @@ function drawColorTimeline(data) {
             )
             .attr(
                 "preserveAspectRatio",
-                "xMidYMid meet"
+                "xMinYMin meet"
             );
 
 
@@ -595,6 +628,22 @@ function drawColorTimeline(data) {
         );
 
     }
+
+
+    /*
+    The initial selected year is 2026, so begin
+    near the most recent years instead of 2000.
+    */
+
+    requestAnimationFrame(
+        function () {
+
+            containerNode.scrollLeft =
+                containerNode.scrollWidth -
+                containerNode.clientWidth;
+
+        }
+    );
 
 }
 

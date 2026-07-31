@@ -659,6 +659,36 @@ function registerDiscovery(region){
 
 }
 
+
+// ==========================================
+// RGB TO HEX
+// ==========================================
+
+function rgbToHex(rgb) {
+
+    return (
+        "#" +
+        rgb
+            .map(function (value) {
+
+                return Math
+                    .max(
+                        0,
+                        Math.min(
+                            255,
+                            Math.round(value)
+                        )
+                    )
+                    .toString(16)
+                    .padStart(2, "0");
+
+            })
+            .join("")
+            .toUpperCase()
+    );
+
+}
+
 // ==========================================
 // DISCOVERY LABEL
 // ==========================================
@@ -671,7 +701,9 @@ function renderDiscoveryLabel(){
 
     }
 
+
     discoveredLabelContainer.innerHTML = "";
+
 
     let age =
 
@@ -681,7 +713,8 @@ function renderDiscoveryLabel(){
 
         discoveryLabel.created;
 
-    if(age>8000){
+
+    if(age > 8000){
 
         discoveryLabel = null;
 
@@ -689,51 +722,75 @@ function renderDiscoveryLabel(){
 
     }
 
+
     let opacity = 1;
 
-    if(age>7000){
+
+    if(age > 7000){
 
         opacity =
-            1-
+
+            1 -
+
             (
-                age-7000
-            )/1000;
+                age - 7000
+            )
+
+            /
+
+            1000;
 
     }
 
+
     let label =
-        document.createElement("div");
+
+        document.createElement(
+            "div"
+        );
+
 
     label.className =
+
         "discovered-label";
 
+
     label.style.left =
-        discoveryLabel.x+"px";
+
+        discoveryLabel.x +
+        "px";
+
 
     label.style.top =
-        discoveryLabel.y+"px";
+
+        discoveryLabel.y +
+        "px";
+
 
     label.style.opacity =
+
         opacity;
+
+
+    const hexColor =
+
+        rgbToHex(
+            discoveryLabel.rgb
+        );
+
 
     label.innerHTML =
 
     `
-    <strong>
+        <strong>
+            ${discoveryLabel.name}
+        </strong>
 
-    ${discoveryLabel.name}
-
-    </strong>
-
-    <br>
-
-    RGB
-
-    ${discoveryLabel.rgb[0]},
-    ${discoveryLabel.rgb[1]},
-    ${discoveryLabel.rgb[2]}
-
+        <span>
+            ${hexColor}
+        </span>
     `;
+
 
     discoveredLabelContainer.appendChild(
         label
@@ -749,41 +806,44 @@ function renderDiscoveryLabel(){
 function addArchiveSwatch(region){
 
     let swatch =
-        document.createElement("div");
+
+        document.createElement(
+            "div"
+        );
+
 
     swatch.className =
+
         "color-swatch";
+
+
+    const hexColor =
+
+        rgbToHex(
+            region.rgb
+        );
+
 
     swatch.style.background =
 
-        `rgb(
-            ${region.rgb[0]},
-            ${region.rgb[1]},
-            ${region.rgb[2]}
-        )`;
+        hexColor;
+
 
     swatch.innerHTML =
 
     `
-    <strong>
+        <strong>
+            ${region.name}
+        </strong>
 
-    ${region.name}
-
-    </strong>
-
-    <br>
-
-    RGB
-
-    ${region.rgb[0]},
-    ${region.rgb[1]},
-    ${region.rgb[2]}
-
+        <span>
+            ${hexColor}
+        </span>
     `;
+
 
     archiveContainer.appendChild(
         swatch
-
     );
 
 }
@@ -1056,50 +1116,51 @@ canvas.addEventListener(
 
 function showHoverLabel(item){
 
-
     removeHoverLabel();
 
 
-
     let label =
-        document.createElement("div");
 
+        document.createElement(
+            "div"
+        );
 
 
     label.className =
+
         "source-label";
 
+
+    const hexColor =
+
+        rgbToHex(
+            item.rgb
+        );
 
 
     label.innerHTML =
 
-
     `
+        <strong>
+            ${item.name}
+        </strong>
 
-    <strong>
-    ${item.name}
-    </strong>
-
-    <br>
-
-    RGB
-
-    ${item.rgb[0]},
-    ${item.rgb[1]},
-    ${item.rgb[2]}
-
+        <span>
+            ${hexColor}
+        </span>
     `;
 
 
-
     label.style.left =
-        item.x+"px";
 
+        item.x +
+        "px";
 
 
     label.style.top =
-        item.y+"px";
 
+        item.y +
+        "px";
 
 
     sourceLabelContainer.appendChild(
@@ -1107,11 +1168,9 @@ function showHoverLabel(item){
     );
 
 
-
     hoverLabel =
+
         label;
-
-
 
 }
 

@@ -598,22 +598,86 @@
                 return node.name.toUpperCase();
             });
 
+            nodeEnter
+    .filter(function (node) {
+        return node.generation === 0;
+    })
+    .append("text")
+    .attr(
+        "class",
+        "genealogy-primary-hex"
+    )
+    .attr(
+        "dy",
+        "2.85em"
+    )
+    .attr(
+        "fill",
+        function (node) {
+            return getReadableTextColor(
+                node.color
+            );
+        }
+    )
+    .text(function (node) {
+        return formatNodeHex(
+            node.color
+        );
+    });
+
 
         nodeEnter
-            .filter(function (node) {
-                return node.generation > 0;
-            })
-            .append("text")
-            .attr("class", "genealogy-child-label")
+    .filter(function (node) {
+        return node.generation > 0;
+    })
+    .append("text")
+    .attr(
+        "class",
+        "genealogy-child-label"
+    )
+    .attr(
+        "dy",
+        function (node) {
+            return (
+                getNodeRadius(node) +
+                16
+            );
+        }
+    )
+    .each(function (node) {
+
+        const label =
+            d3.select(this);
+
+
+        label
+            .append("tspan")
+            .attr("x", 0)
             .attr(
-                "dy",
-                function (node) {
-                    return getNodeRadius(node) + 17;
-                }
+                "class",
+                "genealogy-child-name"
             )
-            .text(function (node) {
-                return node.name.toUpperCase();
-            });
+            .text(
+                node.name.toUpperCase()
+            );
+
+
+        label
+            .append("tspan")
+            .attr("x", 0)
+            .attr("dy", "1.35em")
+            .attr(
+                "class",
+                "genealogy-child-hex"
+            )
+            .text(
+                formatNodeHex(
+                    node.color
+                )
+            );
+
+    });
+
 
 
         nodeEnter
@@ -984,7 +1048,26 @@ function createColorName(recipe) {
 
 }
 
+// ==========================================
+// FORMAT NODE HEX
+// ==========================================
 
+function formatNodeHex(color) {
+
+    if (!color) {
+        return "#CCCCCC";
+    }
+
+
+    const normalizedColor =
+        color.startsWith("#")
+            ? color
+            : `#${color}`;
+
+
+    return normalizedColor.toUpperCase();
+
+}
 
 // ==========================================
 // NODE SIZE

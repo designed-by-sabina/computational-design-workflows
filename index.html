@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="styles/style.css">
 
     <!-- Mapbox stylesheet -->
-    <link
-        href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
-        rel="stylesheet"
-    >
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
 </head>
 
 <body>
@@ -105,35 +102,19 @@
 
                 <div class="exercise-buttons">
 
-                    <button
-                        class="exercise-button active"
-                        data-canvas="1"
-                        type="button"
-                    >
+                    <button class="exercise-button active" data-canvas="1" type="button">
                         Exercise 01
                     </button>
 
-                    <button
-                        class="exercise-button"
-                        data-canvas="2"
-                        type="button"
-                    >
+                    <button class="exercise-button" data-canvas="2" type="button">
                         Exercise 02
                     </button>
 
-                    <button
-                        class="exercise-button"
-                        data-canvas="3"
-                        type="button"
-                    >
+                    <button class="exercise-button" data-canvas="3" type="button">
                         Exercise 03
                     </button>
 
-                    <button
-                        class="exercise-button"
-                        data-canvas="4"
-                        type="button"
-                    >
+                    <button class="exercise-button" data-canvas="4" type="button">
                         Exercise 04
                     </button>
 
@@ -142,31 +123,19 @@
 
                 <div class="exercise-panels">
 
-                    <div
-                        id="exercise1"
-                        class="exercise-panel active"
-                    >
+                    <div id="exercise1" class="exercise-panel active">
                         <div id="canvas-container-1"></div>
                     </div>
 
-                    <div
-                        id="exercise2"
-                        class="exercise-panel"
-                    >
+                    <div id="exercise2" class="exercise-panel">
                         <div id="canvas-container-2"></div>
                     </div>
 
-                    <div
-                        id="exercise3"
-                        class="exercise-panel"
-                    >
+                    <div id="exercise3" class="exercise-panel">
                         <div id="canvas-container-3"></div>
                     </div>
 
-                    <div
-                        id="exercise4"
-                        class="exercise-panel"
-                    >
+                    <div id="exercise4" class="exercise-panel">
                         <div id="canvas-container-4"></div>
                     </div>
 
@@ -178,10 +147,8 @@
             <section class="instructions">
 
                 <p>
-                    Click <strong>BUTTONS</strong> to compare images.
-                    The top shape RGB is 244, 239, 180. The bottom one is
-                    185, 255, 215. How are the shapes affecting various
-                    areas of the backgrounds?
+                    Click <strong>BUTTONS</strong> to compare images. The color of the top shape is <strong>#F4EFB4</strong>, and the
+                    bottom shape is <strong>#B9FFD7</strong>. How are the shapes affecting various areas of the backgrounds?
                 </p>
 
             </section>
@@ -267,18 +234,11 @@
             </header>
 
 
-            <div
-                id="color-comparison-panel"
-                class="color-comparison-panel"
-                aria-live="polite"
-            >
+            <div id="color-comparison-panel" class="color-comparison-panel" aria-live="polite">
 
                 <div class="comparison-year-column">
 
-                    <p
-                        id="comparison-year"
-                        class="comparison-year"
-                    >
+                    <p id="comparison-year" class="comparison-year">
                         2026
                     </p>
 
@@ -289,10 +249,7 @@
                 </div>
 
 
-                <div
-                    id="comparison-colors"
-                    class="comparison-colors"
-                ></div>
+                <div id="comparison-colors" class="comparison-colors"></div>
 
             </div>
 
@@ -327,10 +284,7 @@
              SECTION 05 — MIXING
         =========================================== -->
 
-        <section
-            class="mixing-section"
-            id="mixing"
-        >
+        <section class="mixing-section" id="mixing">
 
             <header class="mixing-header">
 
@@ -383,11 +337,7 @@
                     </div>
 
 
-                    <button
-                        id="resetMixingButton"
-                        class="mixing-reset-button"
-                        type="button"
-                    >
+                    <button id="resetMixingButton" class="mixing-reset-button" type="button">
                         RESET STRUCTURE
                     </button>
 
@@ -397,11 +347,8 @@
                 <!-- CENTER: D3 canvas -->
                 <div class="mixing-canvas-column">
 
-                    <div
-                        id="cmykGenealogy"
-                        class="cmyk-genealogy"
-                        aria-label="Interactive CMYK relational color mixing structure"
-                    ></div>
+                    <div id="cmykGenealogy" class="cmyk-genealogy"
+                        aria-label="Interactive CMYK relational color mixing structure"></div>
 
 
                     <section class="instructions">
@@ -430,10 +377,7 @@
 
                             <div class="mixing-selected-item">
 
-                                <div
-                                    id="firstSelectedSwatch"
-                                    class="mixing-selected-swatch is-empty"
-                                >
+                                <div id="firstSelectedSwatch" class="mixing-selected-swatch is-empty">
                                     <span>+</span>
                                 </div>
 
@@ -451,10 +395,7 @@
 
                             <div class="mixing-selected-item">
 
-                                <div
-                                    id="secondSelectedSwatch"
-                                    class="mixing-selected-swatch is-empty"
-                                >
+                                <div id="secondSelectedSwatch" class="mixing-selected-swatch is-empty">
                                     <span>+</span>
                                 </div>
 
@@ -475,19 +416,13 @@
                             NEW COLOR
                         </p>
 
-                        <div
-                            id="mixingResultSwatch"
-                            class="mixing-result-swatch is-empty"
-                        ></div>
+                        <div id="mixingResultSwatch" class="mixing-result-swatch is-empty"></div>
 
                         <h2 id="mixingResultName">
                             WAITING FOR TWO COLORS
                         </h2>
 
-                        <p
-                            id="mixingResultGeneration"
-                            class="mixing-result-generation"
-                        >
+                        <p id="mixingResultGeneration" class="mixing-result-generation">
                             —
                         </p>
 
@@ -547,10 +482,7 @@
              SECTION 06 — FAVORITE
         =========================================== -->
 
-        <section
-            class="color-poll-section"
-            id="colorPoll"
-        >
+        <section class="color-poll-section" id="colorPoll">
 
             <header class="color-poll-header">
 
@@ -565,50 +497,26 @@
             </header>
 
 
-            <form
-                id="colorPollForm"
-                class="color-poll-form"
-            >
+            <form id="colorPollForm" class="color-poll-form">
 
-                <label
-                    for="colorPollInput"
-                    class="color-poll-label"
-                >
+                <label for="colorPollInput" class="color-poll-label">
                     TYPE A COLOR
                 </label>
 
-                <input
-                    type="text"
-                    id="colorPollInput"
-                    class="color-poll-input"
-                    placeholder="e.g. teal, coral, #ff6b6b"
-                    maxlength="30"
-                    autocomplete="off"
-                    required
-                >
+                <input type="text" id="colorPollInput" class="color-poll-input" placeholder="e.g. teal, coral, #ff6b6b"
+                    maxlength="30" autocomplete="off" required>
 
-                <button
-                    type="submit"
-                    class="color-poll-submit"
-                >
+                <button type="submit" class="color-poll-submit">
                     SUBMIT
                 </button>
 
             </form>
 
 
-            <p
-                id="colorPollStatus"
-                class="color-poll-status"
-                aria-live="polite"
-            ></p>
+            <p id="colorPollStatus" class="color-poll-status" aria-live="polite"></p>
 
 
-            <div
-                id="colorPollBubbles"
-                class="color-poll-bubbles"
-                aria-label="Live results of favorite colors"
-            ></div>
+            <div id="colorPollBubbles" class="color-poll-bubbles" aria-label="Live results of favorite colors"></div>
 
 
             <section class="instructions">
@@ -668,10 +576,7 @@
     <script src="javascript/cmyk-genealogy.js"></script>
 
     <!-- Favorite color poll -->
-    <script
-        type="module"
-        src="javascript/color-poll.js"
-    ></script>
+    <script type="module" src="javascript/color-poll.js"></script>
 
 </body>
 
