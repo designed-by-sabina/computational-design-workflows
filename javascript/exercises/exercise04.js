@@ -1,61 +1,433 @@
 // ==========================================
 // EXERCISE 04
 // 3D Josef Albers Composition
-// Diagonal Striped Background + Transparent Slots
+// Responsive 4:3 Three.js canvas
 // ==========================================
 
-let scene04, camera04, renderer04;
+let scene04;
+let camera04;
+let renderer04;
 let group04;
+let container04;
+let resizeObserver04;
+
+
+// ==========================================
+// SETTINGS
+// ==========================================
+
+const EXERCISE_04_DESIGN_WIDTH = 800;
+const EXERCISE_04_DESIGN_HEIGHT = 600;
+
+const EXERCISE_04_ASPECT_RATIO =
+    EXERCISE_04_DESIGN_WIDTH /
+    EXERCISE_04_DESIGN_HEIGHT;
+
+
+// ==========================================
+// INITIALIZE
+// ==========================================
 
 function initExercise04() {
-    scene04 = new THREE.Scene();
-    scene04.background = new THREE.Color(0xffffff);
 
-    camera04 = new THREE.PerspectiveCamera(
-        50,
-        800 / 600,
-        0.1,
-        1000
+    container04 =
+        document.getElementById(
+            "canvas-container-4"
+        );
+
+
+    if (!container04) {
+
+        console.error(
+            "Missing HTML element: #canvas-container-4"
+        );
+
+        return;
+
+    }
+
+
+    // ======================================
+    // SCENE
+    // ======================================
+
+    scene04 =
+        new THREE.Scene();
+
+
+    scene04.background =
+        new THREE.Color(
+            0xffffff
+        );
+
+
+    // ======================================
+    // CAMERA
+    // ======================================
+
+    camera04 =
+        new THREE.PerspectiveCamera(
+            50,
+            EXERCISE_04_ASPECT_RATIO,
+            0.1,
+            1000
+        );
+
+
+    camera04.position.set(
+        0,
+        0,
+        8
     );
 
-    camera04.position.z = 8;
 
-    renderer04 = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-    });
+    camera04.lookAt(
+        0,
+        0,
+        0
+    );
 
-    renderer04.setSize(800, 600);
-    renderer04.setClearColor(0xffffff, 0);
 
-    document
-        .getElementById("canvas-container-4")
-        .appendChild(renderer04.domElement);
+    // ======================================
+    // RENDERER
+    // ======================================
+
+    renderer04 =
+        new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true
+        });
+
+
+    renderer04.setPixelRatio(
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        )
+    );
+
+
+    /*
+    Start with a valid size because Exercise 04
+    initially loads inside a hidden tab.
+    */
+
+    renderer04.setSize(
+        EXERCISE_04_DESIGN_WIDTH,
+        EXERCISE_04_DESIGN_HEIGHT
+    );
+
+
+    renderer04.setClearColor(
+        0xffffff,
+        0
+    );
+
+
+    renderer04.domElement.style.display =
+        "block";
+
+
+    renderer04.domElement.style.maxWidth =
+        "100%";
+
+
+    renderer04.domElement.style.maxHeight =
+        "100%";
+
+
+    renderer04.domElement.style.margin =
+        "0 auto";
+
+
+    container04.appendChild(
+        renderer04.domElement
+    );
+
+
+    // ======================================
+    // BACKGROUND
+    // ======================================
 
     createStripedBackground04();
 
-    group04 = new THREE.Group();
-    scene04.add(group04);
 
-    createFrameBox04(0, 1.2, 0, 6.4, 0.9, 0.3, 0xf4efb4);
-    createFrameBox04(0, -1.2, 0, 6.4, 0.9, 0.3, 0xb9ffd7);
+    // ======================================
+    // COMPOSITION GROUP
+    // ======================================
+
+    group04 =
+        new THREE.Group();
+
+
+    scene04.add(
+        group04
+    );
+
+
+    createFrameBox04(
+        0,
+        1.2,
+        0,
+        6.4,
+        0.9,
+        0.3,
+        0xf4efb4
+    );
+
+
+    createFrameBox04(
+        0,
+        -1.2,
+        0,
+        6.4,
+        0.9,
+        0.3,
+        0xb9ffd7
+    );
+
+
+    // ======================================
+    // RESIZE EVENTS
+    // ======================================
+
+    window.addEventListener(
+        "resize",
+        resizeExercise04
+    );
+
+
+    if (
+        typeof ResizeObserver !==
+        "undefined"
+    ) {
+
+        resizeObserver04 =
+            new ResizeObserver(
+                function () {
+
+                    resizeExercise04();
+
+                }
+            );
+
+
+        resizeObserver04.observe(
+            container04
+        );
+
+    }
+
+
+    /*
+    Exercise 04 starts inside a hidden panel.
+    Resize it after its button is selected.
+    */
+
+    const exerciseButtons =
+        document.querySelectorAll(
+            ".exercise-button"
+        );
+
+
+    exerciseButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        button.dataset.canvas ===
+                        "4"
+                    ) {
+
+                        requestAnimationFrame(
+                            function () {
+
+                                requestAnimationFrame(
+                                    resizeExercise04
+                                );
+
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+    Try once more after the page layout
+    has been calculated.
+    */
+
+    requestAnimationFrame(
+        function () {
+
+            requestAnimationFrame(
+                resizeExercise04
+            );
+
+        }
+    );
+
 }
 
+
 // ==========================================
-// CREATE RECTANGLE WITH TRANSPARENT SLOT
+// RESPONSIVE SIZE
+// Preserves the original 4:3 proportion
 // ==========================================
 
-function createFrameBox04(x, y, z, width, height, depth, color) {
-    let slotWidth = 3.6;
-    let slotHeight = 0.12;
+function resizeExercise04() {
 
-    let topBottomHeight = (height - slotHeight) / 2;
-    let sideWidth = (width - slotWidth) / 2;
+    if (
+        !container04 ||
+        !renderer04 ||
+        !camera04
+    ) {
 
-    // top piece
+        return;
+
+    }
+
+
+    const availableWidth =
+        container04.clientWidth;
+
+
+    const availableHeight =
+        container04.clientHeight;
+
+
+    /*
+    The tab may currently be hidden.
+    Keep the current valid renderer size.
+    */
+
+    if (
+        availableWidth <= 0 ||
+        availableHeight <= 0
+    ) {
+
+        return;
+
+    }
+
+
+    let canvasWidth =
+        availableWidth;
+
+
+    let canvasHeight =
+        canvasWidth /
+        EXERCISE_04_ASPECT_RATIO;
+
+
+    if (
+        canvasHeight >
+        availableHeight
+    ) {
+
+        canvasHeight =
+            availableHeight;
+
+
+        canvasWidth =
+            canvasHeight *
+            EXERCISE_04_ASPECT_RATIO;
+
+    }
+
+
+    canvasWidth =
+        Math.max(
+            1,
+            Math.floor(
+                canvasWidth
+            )
+        );
+
+
+    canvasHeight =
+        Math.max(
+            1,
+            Math.floor(
+                canvasHeight
+            )
+        );
+
+
+    renderer04.setSize(
+        canvasWidth,
+        canvasHeight,
+        true
+    );
+
+
+    camera04.aspect =
+        EXERCISE_04_ASPECT_RATIO;
+
+
+    camera04.updateProjectionMatrix();
+
+
+    renderer04.render(
+        scene04,
+        camera04
+    );
+
+}
+
+
+// ==========================================
+// CREATE RECTANGLE WITH OPEN SLOT
+// ==========================================
+
+function createFrameBox04(
+    x,
+    y,
+    z,
+    width,
+    height,
+    depth,
+    color
+) {
+
+    const slotWidth =
+        3.6;
+
+
+    const slotHeight =
+        0.12;
+
+
+    const topBottomHeight =
+        (
+            height -
+            slotHeight
+        ) / 2;
+
+
+    const sideWidth =
+        (
+            width -
+            slotWidth
+        ) / 2;
+
+
+    // Top
+
     createBox04(
         x,
-        y + slotHeight / 2 + topBottomHeight / 2,
+        y +
+            slotHeight / 2 +
+            topBottomHeight / 2,
         z,
         width,
         topBottomHeight,
@@ -63,10 +435,14 @@ function createFrameBox04(x, y, z, width, height, depth, color) {
         color
     );
 
-    // bottom piece
+
+    // Bottom
+
     createBox04(
         x,
-        y - slotHeight / 2 - topBottomHeight / 2,
+        y -
+            slotHeight / 2 -
+            topBottomHeight / 2,
         z,
         width,
         topBottomHeight,
@@ -74,9 +450,13 @@ function createFrameBox04(x, y, z, width, height, depth, color) {
         color
     );
 
-    // left piece
+
+    // Left
+
     createBox04(
-        x - slotWidth / 2 - sideWidth / 2,
+        x -
+            slotWidth / 2 -
+            sideWidth / 2,
         y,
         z,
         sideWidth,
@@ -85,9 +465,13 @@ function createFrameBox04(x, y, z, width, height, depth, color) {
         color
     );
 
-    // right piece
+
+    // Right
+
     createBox04(
-        x + slotWidth / 2 + sideWidth / 2,
+        x +
+            slotWidth / 2 +
+            sideWidth / 2,
         y,
         z,
         sideWidth,
@@ -95,80 +479,227 @@ function createFrameBox04(x, y, z, width, height, depth, color) {
         depth,
         color
     );
+
 }
 
-function createBox04(x, y, z, width, height, depth, color) {
-    let geometry = new THREE.BoxGeometry(width, height, depth);
 
-    let material = new THREE.MeshBasicMaterial({
-        color: color
-    });
+// ==========================================
+// CREATE BOX
+// ==========================================
 
-    let box = new THREE.Mesh(geometry, material);
-    box.position.set(x, y, z);
+function createBox04(
+    x,
+    y,
+    z,
+    width,
+    height,
+    depth,
+    color
+) {
 
-    group04.add(box);
+    const geometry =
+        new THREE.BoxGeometry(
+            width,
+            height,
+            depth
+        );
+
+
+    const material =
+        new THREE.MeshBasicMaterial({
+            color: color
+        });
+
+
+    const box =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    box.position.set(
+        x,
+        y,
+        z
+    );
+
+
+    group04.add(
+        box
+    );
+
 }
+
 
 // ==========================================
 // DIAGONAL STRIPED BACKGROUND
 // ==========================================
 
 function createStripedBackground04() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 800;
-    canvas.height = 600;
 
-    const ctx = canvas.getContext("2d");
+    const backgroundCanvas =
+        document.createElement(
+            "canvas"
+        );
 
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, 800, 600);
 
-    ctx.save();
+    backgroundCanvas.width =
+        EXERCISE_04_DESIGN_WIDTH;
 
-    // rotate canvas drawing for diagonal stripes
-    ctx.translate(400, 300);
-    ctx.rotate(-Math.PI / 4);
-    ctx.translate(-400, -300);
 
-    ctx.fillStyle = "#000000";
+    backgroundCanvas.height =
+        EXERCISE_04_DESIGN_HEIGHT;
 
-    // very wide diagonal stripes
-    for (let x = -800; x < 1600; x += 420) {
-        ctx.fillRect(x, -600, 210, 1800);
+
+    const context =
+        backgroundCanvas.getContext(
+            "2d"
+        );
+
+
+    context.fillStyle =
+        "#ffffff";
+
+
+    context.fillRect(
+        0,
+        0,
+        EXERCISE_04_DESIGN_WIDTH,
+        EXERCISE_04_DESIGN_HEIGHT
+    );
+
+
+    context.save();
+
+
+    context.translate(
+        EXERCISE_04_DESIGN_WIDTH / 2,
+        EXERCISE_04_DESIGN_HEIGHT / 2
+    );
+
+
+    context.rotate(
+        -Math.PI / 4
+    );
+
+
+    context.translate(
+        -EXERCISE_04_DESIGN_WIDTH / 2,
+        -EXERCISE_04_DESIGN_HEIGHT / 2
+    );
+
+
+    context.fillStyle =
+        "#000000";
+
+
+    for (
+        let x = -800;
+        x < 1600;
+        x += 420
+    ) {
+
+        context.fillRect(
+            x,
+            -600,
+            210,
+            1800
+        );
+
     }
 
-    ctx.restore();
 
-    let texture = new THREE.CanvasTexture(canvas);
+    context.restore();
 
-    let material = new THREE.MeshBasicMaterial({
-        map: texture
-    });
 
-    let geometry = new THREE.PlaneGeometry(11, 8.25);
+    const texture =
+        new THREE.CanvasTexture(
+            backgroundCanvas
+        );
 
-    let plane = new THREE.Mesh(geometry, material);
-    plane.position.z = -2;
 
-    scene04.add(plane);
+    texture.needsUpdate =
+        true;
+
+
+    const material =
+        new THREE.MeshBasicMaterial({
+            map: texture
+        });
+
+
+    const geometry =
+        new THREE.PlaneGeometry(
+            11,
+            8.25
+        );
+
+
+    const plane =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    plane.position.z =
+        -2;
+
+
+    scene04.add(
+        plane
+    );
+
 }
+
 
 // ==========================================
 // ANIMATION
 // ==========================================
 
 function animateExercise04() {
-    requestAnimationFrame(animateExercise04);
+
+    requestAnimationFrame(
+        animateExercise04
+    );
+
+
+    if (
+        !renderer04 ||
+        !scene04 ||
+        !camera04 ||
+        !group04
+    ) {
+
+        return;
+
+    }
+
 
     group04.rotation.y =
-        Math.sin(Date.now() * 0.001) * 0.15;
+        Math.sin(
+            Date.now() *
+            0.001
+        ) *
+        0.15;
+
 
     group04.rotation.x =
-        Math.cos(Date.now() * 0.001) * 0.05;
+        Math.cos(
+            Date.now() *
+            0.001
+        ) *
+        0.05;
 
-    renderer04.render(scene04, camera04);
+
+    renderer04.render(
+        scene04,
+        camera04
+    );
+
 }
+
 
 // ==========================================
 // START
