@@ -740,7 +740,6 @@ function drawTimelineSourceRows(
                 ) / 2;
 
 
-
             drawTimelineSourceLabel(
                 chart,
                 source,
@@ -811,10 +810,12 @@ function drawTimelineSourceRows(
         }
     );
 
+}
 
 
-
-
+// ==========================================
+// SOURCE LABEL
+// ==========================================
 
 function drawTimelineSourceLabel(
     chart,
@@ -853,6 +854,7 @@ function drawTimelineSourceLabel(
         );
 
 }
+
 
 // ==========================================
 // PLACEHOLDER CELL
