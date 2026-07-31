@@ -16,13 +16,67 @@
 
 <body>
 
+    <nav
+    class="section-navigation"
+    aria-label="Project section navigation"
+>
+    <div class="section-navigation-line"></div>
+
+    <button
+        class="section-navigation-dot active"
+        type="button"
+        data-section="transparency"
+        aria-label="Go to Transparency"
+    ></button>
+
+    <button
+        class="section-navigation-dot"
+        type="button"
+        data-section="deception"
+        aria-label="Go to Deception"
+    ></button>
+
+    <button
+        class="section-navigation-dot"
+        type="button"
+        data-section="pigment"
+        aria-label="Go to Pigment"
+    ></button>
+
+    <button
+        class="section-navigation-dot"
+        type="button"
+        data-section="trends"
+        aria-label="Go to Trends"
+    ></button>
+
+    <button
+        class="section-navigation-dot"
+        type="button"
+        data-section="mixing"
+        aria-label="Go to Mixing"
+    ></button>
+
+    <button
+        class="section-navigation-dot"
+        type="button"
+        data-section="favorite"
+        aria-label="Go to Favorite"
+    ></button>
+</nav>
+
     <main>
 
         <!-- ==========================================
              SECTION 01 — TRANSPARENCY
         =========================================== -->
 
-        <section class="transparency-section">
+        
+
+            <section
+    class="transparency-section"
+    id="transparency"
+>
 
             <header class="transparency-header">
 
@@ -83,8 +137,10 @@
              SECTION 02 — DECEPTION
         =========================================== -->
 
-        <section class="deception-section">
-
+        <section
+    class="deception-section"
+    id="deception"
+>
             <header class="deception-header">
 
                 <h1>
@@ -170,7 +226,10 @@
              SECTION 03 — PIGMENT
         =========================================== -->
 
-        <section class="pigment-map-section">
+        <section
+    class="pigment-map-section"
+    id="pigment"
+>
 
             <header class="pigment-map-header">
 
@@ -218,7 +277,10 @@
              SECTION 04 — TRENDS
         =========================================== -->
 
-        <section class="color-timeline-section">
+        <section
+    class="color-timeline-section"
+    id="trends"
+>
 
             <header class="color-timeline-header">
 
@@ -284,7 +346,10 @@
              SECTION 05 — MIXING
         =========================================== -->
 
-        <section class="mixing-section" id="mixing">
+        <section
+    class="mixing-section"
+    id="mixing"
+>
 
             <header class="mixing-header">
 
@@ -482,7 +547,11 @@
              SECTION 06 — FAVORITE
         =========================================== -->
 
-        <section class="color-poll-section" id="colorPoll">
+        <section
+    class="color-poll-section"
+    id="colorPoll"
+    data-navigation-id="favorite"
+>
 
             <header class="color-poll-header">
 
@@ -549,6 +618,7 @@
 
     <!-- Project configuration -->
     <script src="hidden/config.js"></script>
+    <script src="javascript/section-navigation.js"></script>
 
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
