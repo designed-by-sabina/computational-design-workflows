@@ -13,8 +13,12 @@ const COLOR_TIMELINE_DATA_PATH =
     "data/color-timeline.csv";
 
 
-const COLOR_TIMELINE_START_YEAR = 2000;
-const COLOR_TIMELINE_END_YEAR = 2026;
+const COLOR_TIMELINE_START_YEAR =
+    2000;
+
+
+const COLOR_TIMELINE_END_YEAR =
+    2026;
 
 
 const COLOR_TIMELINE_SOURCES = [
@@ -27,7 +31,7 @@ const COLOR_TIMELINE_SOURCES = [
 
 
 // ==========================================
-// GLOBAL VARIABLES
+// GLOBAL STATE
 // ==========================================
 
 let colorTimelineData = [];
@@ -113,11 +117,6 @@ async function initializeColorTimeline() {
         }
 
 
-        drawColorTimeline(
-            colorTimelineData
-        );
-
-
         const initialEntry =
             getInitialTimelineEntry(
                 colorTimelineData
@@ -126,8 +125,21 @@ async function initializeColorTimeline() {
 
         if (initialEntry) {
 
+            activeTimelineEntry =
+                initialEntry;
+
+        }
+
+
+        drawColorTimeline(
+            colorTimelineData
+        );
+
+
+        if (activeTimelineEntry) {
+
             activateTimelineEntry(
-                initialEntry
+                activeTimelineEntry
             );
 
         }
@@ -185,7 +197,9 @@ function ensureComparisonPanelElements() {
     if (!yearElement) {
 
         const yearColumn =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         yearColumn.className =
@@ -222,7 +236,9 @@ function ensureComparisonPanelElements() {
     if (!colorsContainer) {
 
         colorsContainer =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         colorsContainer.id =
@@ -315,27 +331,24 @@ function normalizeHex(value) {
 
     if (!cleanedValue) {
 
-        return "#cccccc";
+        return "#CCCCCC";
 
     }
 
 
-    if (
+    const normalizedValue =
         cleanedValue.startsWith("#")
-    ) {
-
-        return cleanedValue;
-
-    }
+            ? cleanedValue
+            : `#${cleanedValue}`;
 
 
-    return `#${cleanedValue}`;
+    return normalizedValue.toUpperCase();
 
 }
 
 
 // ==========================================
-// VALIDATE DATA ENTRY
+// VALIDATE ENTRY
 // ==========================================
 
 function isValidTimelineEntry(entry) {
@@ -343,9 +356,9 @@ function isValidTimelineEntry(entry) {
     return (
         Number.isFinite(entry.year) &&
         entry.year >=
-        COLOR_TIMELINE_START_YEAR &&
+            COLOR_TIMELINE_START_YEAR &&
         entry.year <=
-        COLOR_TIMELINE_END_YEAR &&
+            COLOR_TIMELINE_END_YEAR &&
         entry.source.length > 0 &&
         entry.colorName.length > 0
     );
@@ -412,11 +425,8 @@ function activateTimelineEntry(entry) {
 
 // ==========================================
 // DRAW TIMELINE
-// ==========================================
-
-// ==========================================
-// DRAW TIMELINE
-// Readable year columns + horizontal scroll
+// All years fit within the visible container.
+// No horizontal scrolling is required.
 // ==========================================
 
 function drawColorTimeline(data) {
@@ -444,9 +454,12 @@ function drawColorTimeline(data) {
 
 
     const measuredWidth =
-        containerNode
-            .getBoundingClientRect()
-            .width;
+        Math.max(
+            containerNode
+                .getBoundingClientRect()
+                .width,
+            320
+        );
 
 
     const years =
@@ -456,49 +469,47 @@ function drawColorTimeline(data) {
         );
 
 
-    const margin = {
-        top: 58,
-        right: 24,
-        bottom: 20,
-        left: 240
-    };
+    const isMobile =
+        window.innerWidth <= 800;
 
 
     /*
-    Every year keeps enough horizontal room
-    for its label and color swatch.
-
-    The SVG becomes wider than the container
-    when necessary, and the container scrolls.
+    Keep enough room for source labels while
+    allowing every year to remain visible.
     */
 
-    const minimumYearColumnWidth =
-        window.innerWidth <= 800
-            ? 44
-            : 52;
+    const margin = {
+        top:
+            isMobile
+                ? 58
+                : 64,
 
+        right:
+            isMobile
+                ? 10
+                : 20,
 
-    const minimumTimelineWidth =
+        bottom:
+            20,
 
-        margin.left +
-
-        margin.right +
-
-        years.length *
-        minimumYearColumnWidth;
+        left:
+            isMobile
+                ? 92
+                : 150
+    };
 
 
     const width =
-        Math.max(
-            measuredWidth,
-            minimumTimelineWidth
-        );
+        measuredWidth;
 
 
     const innerWidth =
-        width -
-        margin.left -
-        margin.right;
+        Math.max(
+            width -
+                margin.left -
+                margin.right,
+            180
+        );
 
 
     const yearColumnWidth =
@@ -506,17 +517,27 @@ function drawColorTimeline(data) {
         years.length;
 
 
+    /*
+    Swatches shrink responsively so all
+    27 years remain inside the screen.
+    */
+
     const squareSize =
-        Math.min(
-            32,
-            yearColumnWidth * 0.66
+        Math.max(
+            5,
+            Math.min(
+                24,
+                yearColumnWidth * 0.68
+            )
         );
 
 
     const rowHeight =
         Math.max(
-            58,
-            squareSize + 28
+            isMobile
+                ? 42
+                : 48,
+            squareSize + 22
         );
 
 
@@ -538,13 +559,6 @@ function drawColorTimeline(data) {
                 "class",
                 "color-timeline-svg"
             )
-
-            /*
-            Use a real pixel width rather than 100%.
-            This is what prevents D3 from squeezing
-            the full timeline back into the viewport.
-            */
-
             .attr(
                 "width",
                 width
@@ -560,6 +574,14 @@ function drawColorTimeline(data) {
             .attr(
                 "preserveAspectRatio",
                 "xMinYMin meet"
+            )
+            .attr(
+                "role",
+                "img"
+            )
+            .attr(
+                "aria-label",
+                `Color forecast timeline from ${COLOR_TIMELINE_START_YEAR} to ${COLOR_TIMELINE_END_YEAR}`
             );
 
 
@@ -616,8 +638,7 @@ function drawColorTimeline(data) {
         groupedData,
         xScale,
         yScale,
-        squareSize,
-        data
+        squareSize
     );
 
 
@@ -629,27 +650,12 @@ function drawColorTimeline(data) {
 
     }
 
-
-    /*
-    The initial selected year is 2026, so begin
-    near the most recent years instead of 2000.
-    */
-
-    requestAnimationFrame(
-        function () {
-
-            containerNode.scrollLeft =
-                containerNode.scrollWidth -
-                containerNode.clientWidth;
-
-        }
-    );
-
 }
 
 
 // ==========================================
 // YEAR LABELS
+// Full years are rotated so all 27 fit.
 // ==========================================
 
 function drawTimelineYearLabels(
@@ -680,11 +686,26 @@ function drawTimelineYearLabels(
         )
         .attr(
             "y",
-            -22
+            -10
         )
         .attr(
             "text-anchor",
-            "middle"
+            "end"
+        )
+        .attr(
+            "transform",
+            year => {
+
+                const x =
+                    xScale(year) +
+                    xScale.bandwidth() / 2;
+
+
+                return (
+                    `rotate(-90, ${x}, -10)`
+                );
+
+            }
         )
         .text(
             year => year
@@ -703,8 +724,7 @@ function drawTimelineSourceRows(
     groupedData,
     xScale,
     yScale,
-    squareSize,
-    fullData
+    squareSize
 ) {
 
     COLOR_TIMELINE_SOURCES.forEach(
@@ -794,8 +814,7 @@ function drawTimelineSourceRows(
                         entries,
                         squareX,
                         squareY,
-                        squareSize,
-                        fullData
+                        squareSize
                     );
 
                 }
@@ -832,7 +851,7 @@ function drawTimelineRowDivider(
         )
         .attr(
             "x1",
-            -240
+            -150
         )
         .attr(
             "x2",
@@ -869,12 +888,14 @@ function drawTimelineSourceLabel(
         )
         .attr(
             "x",
-            -220
+            window.innerWidth <= 800
+                ? -86
+                : -140
         )
         .attr(
             "y",
             rowY +
-            rowHeight / 2
+                rowHeight / 2
         )
         .attr(
             "text-anchor",
@@ -947,8 +968,7 @@ function drawTimelineYearSwatches(
     entries,
     x,
     y,
-    squareSize,
-    fullData
+    squareSize
 ) {
 
     const segmentWidth =
@@ -1051,16 +1071,16 @@ function drawTimelineYearSwatches(
             entry =>
                 `${entry.year}, ${entry.source}, ${entry.colorName}`
         )
-
         .on(
             "click",
             function (event, entry) {
 
-                activateTimelineEntry(entry);
+                activateTimelineEntry(
+                    entry
+                );
 
             }
         )
-        .attr("tabindex", 0)
         .on(
             "keydown",
             function (event, entry) {
@@ -1072,184 +1092,188 @@ function drawTimelineYearSwatches(
 
                     event.preventDefault();
 
-                    activateTimelineEntry(entry);
+
+                    activateTimelineEntry(
+                        entry
+                    );
 
                 }
 
             }
         );
 
+}
+
+
+// ==========================================
+// COMPARISON PANEL
+// ==========================================
+
+function updateColorComparisonPanel(
+    selectedEntry,
+    data
+) {
+
+    ensureComparisonPanelElements();
+
+
+    const yearElement =
+        document.querySelector(
+            "#comparison-year"
+        );
+
+
+    const colorsContainer =
+        document.querySelector(
+            "#comparison-colors"
+        );
+
+
+    if (!yearElement) {
+
+        console.error(
+            "Missing HTML element: #comparison-year"
+        );
+
+        return;
+
     }
 
 
-    // ==========================================
-    // COMPARISON PANEL
-    // ==========================================
+    if (!colorsContainer) {
 
-    function updateColorComparisonPanel(
-        hoveredEntry,
+        console.error(
+            "Missing HTML element: #comparison-colors"
+        );
+
+        return;
+
+    }
+
+
+    yearElement.textContent =
+        selectedEntry.year;
+
+
+    const yearEntries =
         data
-    ) {
-
-        ensureComparisonPanelElements();
-
-
-        const yearElement =
-            document.querySelector(
-                "#comparison-year"
-            );
-
-
-        const colorsContainer =
-            document.querySelector(
-                "#comparison-colors"
-            );
-
-
-        if (!yearElement) {
-
-            console.error(
-                "Missing HTML element: #comparison-year"
-            );
-
-            return;
-
-        }
-
-
-        if (!colorsContainer) {
-
-            console.error(
-                "Missing HTML element: #comparison-colors"
-            );
-
-            return;
-
-        }
-
-
-        yearElement.textContent =
-            hoveredEntry.year;
-
-
-        const yearEntries =
-            data
-                .filter(
-                    entry =>
-                        entry.year ===
-                        hoveredEntry.year
-                )
-                .sort(
-                    compareTimelineEntries
-                );
-
-
-        const remainingEntries =
-            yearEntries.filter(
+            .filter(
                 entry =>
-                    !isSameTimelineEntry(
-                        entry,
-                        hoveredEntry
-                    )
+                    entry.year ===
+                    selectedEntry.year
+            )
+            .sort(
+                compareTimelineEntries
             );
 
 
-        const orderedEntries = [
-            hoveredEntry,
-            ...remainingEntries
-        ];
-
-
-        colorsContainer.innerHTML =
-            orderedEntries
-                .map(
-                    function (entry, index) {
-
-                        return createComparisonCard(
-                            entry,
-                            index === 0
-                        );
-
-                    }
+    const remainingEntries =
+        yearEntries.filter(
+            entry =>
+                !isSameTimelineEntry(
+                    entry,
+                    selectedEntry
                 )
-                .join("");
+        );
 
 
-        colorsContainer.scrollLeft = 0;
+    const orderedEntries = [
+        selectedEntry,
+        ...remainingEntries
+    ];
 
-    }
+
+    colorsContainer.innerHTML =
+        orderedEntries
+            .map(
+                function (entry, index) {
+
+                    return createComparisonCard(
+                        entry,
+                        index === 0
+                    );
+
+                }
+            )
+            .join("");
 
 
-    // ==========================================
-    // COMPARISON CARD
-    // ==========================================
+    colorsContainer.scrollLeft =
+        0;
 
-    function createComparisonCard(
-        entry,
+}
+
+
+// ==========================================
+// COMPARISON CARD
+// ==========================================
+
+function createComparisonCard(
+    entry,
+    isPrimary
+) {
+
+    const cardClass =
         isPrimary
-    ) {
-
-        const cardClass =
-            isPrimary
-                ? "comparison-color-card-primary"
-                : "comparison-color-card-secondary";
+            ? "comparison-color-card-primary"
+            : "comparison-color-card-secondary";
 
 
-        const swatchClass =
-            isPrimary
-                ? "comparison-swatch-primary"
-                : "comparison-swatch-secondary";
+    const swatchClass =
+        isPrimary
+            ? "comparison-swatch-primary"
+            : "comparison-swatch-secondary";
 
 
-        const safeSource =
-            escapeTimelineHTML(
-                entry.source ||
-                "Unknown source"
-            );
+    const safeSource =
+        escapeTimelineHTML(
+            entry.source ||
+            "Unknown source"
+        );
 
 
-        const safeName =
-            escapeTimelineHTML(
-                entry.colorName ||
-                "Unnamed color"
-            );
+    const safeName =
+        escapeTimelineHTML(
+            entry.colorName ||
+            "Unnamed color"
+        );
 
 
-        const safeFamily =
-            escapeTimelineHTML(
-                entry.colorGroup ||
-                "Not available"
-            );
+    const safeFamily =
+        escapeTimelineHTML(
+            entry.colorGroup ||
+            "Not available"
+        );
 
 
-        const safeCode =
-            escapeTimelineHTML(
-                entry.colorCode ||
-                "Not available"
-            );
+    const safeCode =
+        escapeTimelineHTML(
+            entry.colorCode ||
+            "Not available"
+        );
 
 
-        const safeHex =
-            normalizeHex(
-                entry.hex
-            );
+    const safeHex =
+        normalizeHex(
+            entry.hex
+        );
 
 
-        const safeDomain =
-            escapeTimelineHTML(
-                entry.domain ||
-                "Not available"
-            );
+    const safeDomain =
+        escapeTimelineHTML(
+            entry.domain ||
+            "Not available"
+        );
 
 
-        const safeSelectionType =
-            escapeTimelineHTML(
-                entry.selectionType ||
-                "Not available"
-            );
+    const safeSelectionType =
+        escapeTimelineHTML(
+            entry.selectionType ||
+            "Not available"
+        );
 
 
-        return `
+    return `
         <article
             class="
                 comparison-color-card
@@ -1317,253 +1341,253 @@ function drawTimelineYearSwatches(
         </article>
     `;
 
-    }
+}
 
 
-    // ==========================================
-    // ESCAPE HTML
-    // ==========================================
+// ==========================================
+// ESCAPE HTML
+// ==========================================
 
-    function escapeTimelineHTML(value) {
+function escapeTimelineHTML(value) {
 
-        return String(value)
-            .replaceAll(
-                "&",
-                "&amp;"
-            )
-            .replaceAll(
-                "<",
-                "&lt;"
-            )
-            .replaceAll(
-                ">",
-                "&gt;"
-            )
-            .replaceAll(
-                "\"",
-                "&quot;"
-            )
-            .replaceAll(
-                "'",
-                "&#039;"
-            );
+    return String(value)
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            "\"",
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
-    }
+}
 
 
-    // ==========================================
-    // SORT ENTRIES
-    // ==========================================
+// ==========================================
+// SORT ENTRIES
+// ==========================================
 
-    function compareTimelineEntries(
-        first,
-        second
+function compareTimelineEntries(
+    first,
+    second
+) {
+
+    const firstSourceIndex =
+        COLOR_TIMELINE_SOURCES.indexOf(
+            first.source
+        );
+
+
+    const secondSourceIndex =
+        COLOR_TIMELINE_SOURCES.indexOf(
+            second.source
+        );
+
+
+    const normalizedFirstIndex =
+        firstSourceIndex === -1
+            ? COLOR_TIMELINE_SOURCES.length
+            : firstSourceIndex;
+
+
+    const normalizedSecondIndex =
+        secondSourceIndex === -1
+            ? COLOR_TIMELINE_SOURCES.length
+            : secondSourceIndex;
+
+
+    if (
+        normalizedFirstIndex !==
+        normalizedSecondIndex
     ) {
 
-        const firstSourceIndex =
-            COLOR_TIMELINE_SOURCES.indexOf(
-                first.source
-            );
-
-
-        const secondSourceIndex =
-            COLOR_TIMELINE_SOURCES.indexOf(
-                second.source
-            );
-
-
-        const normalizedFirstIndex =
-            firstSourceIndex === -1
-                ? COLOR_TIMELINE_SOURCES.length
-                : firstSourceIndex;
-
-
-        const normalizedSecondIndex =
-            secondSourceIndex === -1
-                ? COLOR_TIMELINE_SOURCES.length
-                : secondSourceIndex;
-
-
-        if (
-            normalizedFirstIndex !==
+        return (
+            normalizedFirstIndex -
             normalizedSecondIndex
-        ) {
-
-            return (
-                normalizedFirstIndex -
-                normalizedSecondIndex
-            );
-
-        }
-
-
-        return (
-            first.rank -
-            second.rank
         );
 
     }
 
 
-    // ==========================================
-    // HIGHLIGHT TIMELINE
-    // ==========================================
+    return (
+        first.rank -
+        second.rank
+    );
 
-    function highlightTimelineSelection(
-        activeEntry
-    ) {
-
-        d3
-            .selectAll(
-                ".timeline-color-swatch"
-            )
-            .classed(
-                "is-muted",
-                function () {
-
-                    return (
-                        Number(
-                            this.dataset.year
-                        ) !==
-                        activeEntry.year
-                    );
-
-                }
-            )
-            .classed(
-                "is-selected",
-                function () {
-
-                    return (
-                        Number(
-                            this.dataset.year
-                        ) ===
-                        activeEntry.year &&
-
-                        this.dataset.source ===
-                        activeEntry.source &&
-
-                        this.dataset.colorName ===
-                        activeEntry.colorName &&
-
-                        Number(
-                            this.dataset.rank
-                        ) ===
-                        activeEntry.rank
-                    );
-
-                }
-            );
+}
 
 
-        d3
-            .selectAll(
-                ".timeline-placeholder"
-            )
-            .classed(
-                "is-muted",
-                function () {
+// ==========================================
+// HIGHLIGHT TIMELINE
+// ==========================================
 
-                    return (
-                        Number(
-                            this.dataset.year
-                        ) !==
-                        activeEntry.year
-                    );
+function highlightTimelineSelection(
+    selectedEntry
+) {
 
-                }
-            );
+    d3
+        .selectAll(
+            ".timeline-color-swatch"
+        )
+        .classed(
+            "is-muted",
+            function () {
 
-
-        d3
-            .selectAll(
-                ".timeline-year-label"
-            )
-            .classed(
-                "is-selected",
-                function () {
-
-                    return (
-                        Number(
-                            this.dataset.year
-                        ) ===
-                        activeEntry.year
-                    );
-
-                }
-            );
-
-    }
-
-
-    // ==========================================
-    // ENTRY COMPARISON
-    // ==========================================
-
-    function isSameTimelineEntry(
-        first,
-        second
-    ) {
-
-        return (
-            first.year ===
-            second.year &&
-
-            first.source ===
-            second.source &&
-
-            first.colorName ===
-            second.colorName &&
-
-            first.rank ===
-            second.rank
-        );
-
-    }
-
-
-    // ==========================================
-    // RESPONSIVE REDRAW
-    // ==========================================
-
-    window.addEventListener(
-        "resize",
-        function () {
-
-            clearTimeout(
-                colorTimelineResizeTimer
-            );
-
-
-            colorTimelineResizeTimer =
-                setTimeout(
-                    function () {
-
-                        if (
-                            colorTimelineData.length >
-                            0
-                        ) {
-
-                            drawColorTimeline(
-                                colorTimelineData
-                            );
-
-                        }
-
-
-                        if (
-                            activeTimelineEntry
-                        ) {
-
-                            activateTimelineEntry(
-                                activeTimelineEntry
-                            );
-
-                        }
-
-                    },
-                    200
+                return (
+                    Number(
+                        this.dataset.year
+                    ) !==
+                    selectedEntry.year
                 );
 
-        }
+            }
+        )
+        .classed(
+            "is-selected",
+            function () {
+
+                return (
+                    Number(
+                        this.dataset.year
+                    ) ===
+                        selectedEntry.year &&
+
+                    this.dataset.source ===
+                        selectedEntry.source &&
+
+                    this.dataset.colorName ===
+                        selectedEntry.colorName &&
+
+                    Number(
+                        this.dataset.rank
+                    ) ===
+                        selectedEntry.rank
+                );
+
+            }
+        );
+
+
+    d3
+        .selectAll(
+            ".timeline-placeholder"
+        )
+        .classed(
+            "is-muted",
+            function () {
+
+                return (
+                    Number(
+                        this.dataset.year
+                    ) !==
+                    selectedEntry.year
+                );
+
+            }
+        );
+
+
+    d3
+        .selectAll(
+            ".timeline-year-label"
+        )
+        .classed(
+            "is-selected",
+            function () {
+
+                return (
+                    Number(
+                        this.dataset.year
+                    ) ===
+                    selectedEntry.year
+                );
+
+            }
+        );
+
+}
+
+
+// ==========================================
+// ENTRY COMPARISON
+// ==========================================
+
+function isSameTimelineEntry(
+    first,
+    second
+) {
+
+    return (
+        first.year ===
+            second.year &&
+
+        first.source ===
+            second.source &&
+
+        first.colorName ===
+            second.colorName &&
+
+        first.rank ===
+            second.rank
     );
+
+}
+
+
+// ==========================================
+// RESPONSIVE REDRAW
+// ==========================================
+
+window.addEventListener(
+    "resize",
+    function () {
+
+        clearTimeout(
+            colorTimelineResizeTimer
+        );
+
+
+        colorTimelineResizeTimer =
+            setTimeout(
+                function () {
+
+                    if (
+                        colorTimelineData.length >
+                        0
+                    ) {
+
+                        drawColorTimeline(
+                            colorTimelineData
+                        );
+
+                    }
+
+
+                    if (
+                        activeTimelineEntry
+                    ) {
+
+                        activateTimelineEntry(
+                            activeTimelineEntry
+                        );
+
+                    }
+
+                },
+                200
+            );
+
+    }
+);

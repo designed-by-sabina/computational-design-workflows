@@ -2873,3 +2873,330 @@ section to be exactly one viewport tall.
     }
 
 }
+
+
+
+/* ==========================================================
+   PLAYGROUND, PALETTE, DECEPTION, TRENDS, MIXING
+   ========================================================== */
+
+:root {
+    --navigation-safe-area: clamp(52px, 5vw, 82px);
+}
+
+
+/* ==========================================
+   COLOR PLAYGROUND TITLE
+   ========================================== */
+
+.playground-title {
+    display: inline-grid;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+
+    font-weight: 900;
+    line-height: 0.72;
+    letter-spacing: -0.09em;
+}
+
+
+.playground-title-color {
+    display: block;
+
+    color: var(--black);
+
+    font-size:
+        clamp(
+            120px,
+            min(27vw, 38vh),
+            410px
+        );
+
+    white-space: nowrap;
+}
+
+
+/*
+"playground" starts under the left edge
+of the L in COLOR.
+
+COLOR has five letters, so placing the
+word at approximately 40% of COLOR's
+rendered width aligns it with the L.
+*/
+
+.playground-title-word {
+    display: block;
+
+    width: max-content;
+
+    margin-top:
+        clamp(
+            24px,
+            5vh,
+            70px
+        );
+
+    margin-left:
+        40%;
+
+    font-size:
+        clamp(
+            78px,
+            min(17vw, 25vh),
+            265px
+        );
+
+    font-weight: 500;
+    letter-spacing: -0.075em;
+
+    animation:
+        playground-color-cycle
+        12s
+        linear
+        infinite;
+}
+
+/* ==========================================
+   PALETTE PLACEHOLDER
+   ========================================== */
+
+.palette-section {
+    width: 100%;
+    min-height: 100svh;
+
+    padding-right: var(--navigation-safe-area);
+
+    background: var(--white);
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+
+.palette-section > header {
+    min-height: 0;
+}
+
+
+/* ==========================================
+   DECEPTION — SAME CANVAS SIZE FOR ALL FOUR
+   ========================================== */
+
+.deception-section .exercise-panels {
+    width: 100%;
+}
+
+
+.deception-section .exercise-panel.active {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.deception-section .exercise-panel > div {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width:
+        min(
+            calc(100vw - 2 * var(--page-gutter) - var(--navigation-safe-area)),
+            760px
+        );
+
+    max-width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+.deception-section .exercise-panel canvas,
+.deception-section .exerciseCanvas,
+#canvas-container-1 canvas,
+#canvas-container-2 canvas,
+#canvas-container-3 canvas,
+#canvas-container-4 canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   TRENDS — RESERVE NAVIGATION SPACE
+   ========================================== */
+
+.color-timeline-section {
+    padding-right: var(--navigation-safe-area);
+}
+
+
+/* Center the year in its black column */
+
+.color-timeline-section .comparison-year-column {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.color-timeline-section .comparison-year,
+.color-timeline-section .comparison-year-label {
+    width: 100%;
+
+    text-align: center;
+}
+
+
+/*
+The timeline should fit the available screen.
+JavaScript will assign an SVG width equal to
+the visible container width.
+*/
+
+.color-timeline-section > #color-timeline {
+    width: 100%;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    padding-right: 0;
+    padding-bottom: 14px;
+}
+
+
+.color-timeline-section
+#color-timeline
+.color-timeline-svg {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+}
+
+
+/* ==========================================
+   MIXING — RESERVE NAVIGATION SPACE
+   ========================================== */
+
+.mixing-section {
+    padding-right: var(--navigation-safe-area);
+}
+
+
+.mixing-section > header,
+.mixing-section > footer {
+    padding-right:
+        calc(
+            var(--page-gutter) +
+            var(--navigation-safe-area)
+        );
+}
+
+
+.mixing-section > .mixing-layout {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 800px) {
+
+    :root {
+        --navigation-safe-area: 34px;
+    }
+
+
+    .playground-title-color {
+        font-size:
+            clamp(
+                72px,
+                25vw,
+                155px
+            );
+    }
+
+
+    .playground-title-word {
+        margin-top: 34px;
+        margin-left: 16%;
+
+        font-size:
+            clamp(
+                52px,
+                17vw,
+                110px
+            );
+    }
+
+
+    .deception-section .exercise-panel > div {
+        width:
+            calc(
+                100vw -
+                40px -
+                var(--navigation-safe-area)
+            );
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    :root {
+        --navigation-safe-area: 0px;
+    }
+
+
+    .playground-intro-section,
+    .palette-section,
+    .color-timeline-section,
+    .mixing-section {
+        padding-right: 0;
+    }
+
+
+    .playground-title-word {
+        margin-left: 10%;
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .playground-title-word {
+        animation: none;
+
+        color: #9b78e8;
+    }
+
+}
