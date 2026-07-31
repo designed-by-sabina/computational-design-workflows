@@ -1817,3 +1817,410 @@ PIGMENT MAP — MOBILE
   font-size: .85rem;
   opacity: .75;
 }
+
+
+/* ==========================================
+   VIEWPORT-FIT LAYOUT OVERRIDES
+   Added to keep each major project section
+   visually contained within the screen.
+========================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+}
+
+/* Shared full-screen behavior */
+header,
+.exercise-navigation,
+.pigment-map-section,
+.color-timeline-section,
+.mixing-section {
+    min-height: 100svh;
+}
+
+/* ==========================================
+   TRANSPARENCY / FIRST PROJECT
+========================================== */
+
+header {
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    align-content: start;
+    padding: clamp(28px, 5vh, 45px) 50px clamp(20px, 3vh, 35px);
+}
+
+header .main-canvas-section,
+.main-canvas-section {
+    min-height: 0;
+    margin-top: clamp(24px, 5vh, 60px);
+}
+
+.canvas-wrapper {
+    height: clamp(340px, 58svh, 680px);
+    max-height: 58svh;
+}
+
+.instructions {
+    padding: clamp(16px, 2.5vh, 28px) 20px clamp(20px, 3vh, 36px);
+}
+
+/* ==========================================
+   DECEPTION / EXERCISE SECTION
+========================================== */
+
+.exercise-navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(30px, 5vh, 60px) 50px;
+}
+
+.exercise-buttons {
+    flex-wrap: wrap;
+    padding: clamp(16px, 2.5vh, 24px) 0;
+}
+
+.exercise-panel {
+    min-height: 0;
+    margin-top: clamp(20px, 4vh, 40px);
+}
+
+.exerciseCanvas,
+#canvas-container-1 canvas,
+#canvas-container-2 canvas,
+#canvas-container-3 canvas,
+#canvas-container-4 canvas {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 58svh;
+    object-fit: contain;
+}
+
+/* ==========================================
+   PIGMENT MAP
+========================================== */
+
+.pigment-map-section {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    align-content: start;
+    padding: clamp(30px, 5vh, 70px) 50px clamp(24px, 4vh, 50px);
+}
+
+.pigment-map-header {
+    margin-bottom: clamp(18px, 3vh, 36px);
+}
+
+.pigment-map-wrapper {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: clamp(12px, 2vh, 24px) 0;
+}
+
+#pigment-map {
+    width: min(58svh, 650px, 100%);
+    height: min(58svh, 650px);
+    min-height: 320px;
+}
+
+/* ==========================================
+   COLOR TIMELINE
+========================================== */
+
+.color-timeline-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0;
+    padding: clamp(30px, 5vh, 70px) 0 clamp(24px, 4vh, 50px);
+}
+
+.color-timeline-header {
+    flex: 0 0 auto;
+    margin-bottom: clamp(18px, 3vh, 34px);
+}
+
+.color-comparison-panel {
+    flex: 0 0 auto;
+    min-height: clamp(210px, 27svh, 270px);
+    margin-bottom: clamp(18px, 3vh, 34px);
+}
+
+/* Common timeline containers */
+#colorTimeline,
+#color-timeline,
+.color-timeline-container,
+.timeline-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 48svh;
+    overflow: auto;
+}
+
+/* ==========================================
+   CMYK MIXING SECTION
+========================================== */
+
+.mixing-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+}
+
+.mixing-header {
+    flex: 0 0 auto;
+    padding: clamp(30px, 5vh, 70px) 50px clamp(24px, 4vh, 40px);
+}
+
+.mixing-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    grid-template-columns:
+        minmax(200px, 0.8fr)
+        minmax(460px, 2.4fr)
+        minmax(210px, 0.9fr);
+}
+
+.mixing-introduction {
+    padding: clamp(28px, 4vh, 46px) 32px clamp(26px, 4vh, 42px) 50px;
+}
+
+.mixing-steps {
+    margin-top: clamp(24px, 4vh, 48px);
+}
+
+.mixing-canvas-column,
+.mixing-information-panel {
+    min-height: 0;
+}
+
+/* ==========================================
+   SHORT LAPTOP SCREENS
+========================================== */
+
+@media (max-height: 820px) and (min-width: 801px) {
+    header {
+        padding-top: 24px;
+        padding-bottom: 18px;
+    }
+
+    h1,
+    .pigment-map-header h2 {
+        font-size: clamp(58px, 9vw, 118px);
+    }
+
+    .subtitle {
+        margin-top: 16px;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .main-canvas-section {
+        margin-top: 22px;
+    }
+
+    .canvas-wrapper {
+        height: 51svh;
+        max-height: 51svh;
+    }
+
+    .exercise-navigation {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+    .exercise-panel {
+        margin-top: 22px;
+    }
+
+    .exerciseCanvas,
+    #canvas-container-1 canvas,
+    #canvas-container-2 canvas,
+    #canvas-container-3 canvas,
+    #canvas-container-4 canvas {
+        max-height: 50svh;
+    }
+
+    .pigment-map-section {
+        padding-top: 28px;
+        padding-bottom: 26px;
+    }
+
+    #pigment-map {
+        width: min(52svh, 580px, 100%);
+        height: min(52svh, 580px);
+    }
+
+    .color-timeline-section {
+        padding-top: 28px;
+    }
+
+    .color-comparison-panel {
+        min-height: 210px;
+    }
+
+    .comparison-year-column,
+    .comparison-color-card {
+        padding: 26px;
+    }
+
+    .mixing-header {
+        padding-top: 28px;
+        padding-bottom: 24px;
+    }
+
+    .mixing-layout {
+        min-height: 0;
+    }
+
+    .mixing-introduction {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1050px) {
+    header,
+    .exercise-navigation,
+    .pigment-map-section,
+    .color-timeline-section,
+    .mixing-section {
+        min-height: auto;
+    }
+
+    .mixing-layout {
+        min-height: auto;
+    }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 800px) {
+    header,
+    .exercise-navigation,
+    .pigment-map-section,
+    .color-timeline-section,
+    .mixing-section {
+        min-height: 100svh;
+        height: auto;
+    }
+
+    header {
+        display: block;
+        padding: 36px 20px 24px;
+    }
+
+    h1,
+    .pigment-map-header h2 {
+        font-size: clamp(58px, 19vw, 100px);
+    }
+
+    .subtitle {
+        margin-top: 22px;
+        font-size: 16px;
+    }
+
+    .main-canvas-section {
+        margin-top: 34px;
+    }
+
+    .canvas-wrapper {
+        height: 56svh;
+        min-height: 380px;
+        max-height: none;
+    }
+
+    .exercise-navigation {
+        justify-content: flex-start;
+        padding: 50px 20px;
+    }
+
+    .exercise-buttons {
+        gap: 10px;
+    }
+
+    .exercise-button {
+        flex: 1 1 140px;
+        padding: 12px 18px;
+    }
+
+    .exerciseCanvas,
+    #canvas-container-1 canvas,
+    #canvas-container-2 canvas,
+    #canvas-container-3 canvas,
+    #canvas-container-4 canvas {
+        width: 100%;
+        max-height: none;
+    }
+
+    .pigment-map-section {
+        display: block;
+        padding: 55px 20px 40px;
+    }
+
+    .pigment-map-wrapper {
+        height: min(62svh, 600px);
+        min-height: 440px;
+        margin-top: 28px;
+        margin-bottom: 24px;
+    }
+
+    #pigment-map {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+    }
+
+    .color-timeline-section {
+        display: block;
+        padding-top: 55px;
+    }
+
+    .color-comparison-panel {
+        min-height: 0;
+    }
+
+    #colorTimeline,
+    #color-timeline,
+    .color-timeline-container,
+    .timeline-container {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .mixing-section {
+        display: block;
+    }
+
+    .mixing-header {
+        padding: 55px 20px 35px;
+    }
+
+    .mixing-layout {
+        display: block;
+        min-height: 0;
+    }
+
+    .mixing-introduction {
+        padding: 36px 20px;
+    }
+
+    footer,
+    .mixing-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
