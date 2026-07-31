@@ -5418,3 +5418,491 @@ body > main > section > header .subtitle,
     }
 
 }
+
+
+/* ==========================================================
+   FINAL MIXING VIEWPORT FIT
+   Keep H1, interface, instructions, and footer in one screen
+   ========================================================== */
+
+@media (min-width: 801px) {
+
+    .mixing-section {
+        display: grid;
+
+        grid-template-rows:
+            auto
+            minmax(0, 1fr)
+            auto;
+
+        width:
+            calc(
+                100% -
+                var(--navigation-rail-space, 72px)
+            );
+
+        max-width:
+            calc(
+                100% -
+                var(--navigation-rail-space, 72px)
+            );
+
+        height: 100svh;
+        min-height: 600px;
+
+        margin:
+            0
+            var(--navigation-rail-space, 72px)
+            0
+            0;
+
+        padding: 0;
+
+        overflow: hidden;
+    }
+
+
+    /* ======================================
+       HEADER
+       ====================================== */
+
+    .mixing-section > .mixing-header {
+        display: block;
+
+        min-height: 0;
+
+        margin: 0;
+
+        padding:
+            clamp(12px, 2vh, 22px)
+            var(--page-gutter)
+            clamp(7px, 1vh, 12px);
+    }
+
+
+    .mixing-section > .mixing-header h1 {
+        margin: 0;
+
+        font-size:
+            clamp(
+                58px,
+                min(11vw, 14vh),
+                124px
+            );
+
+        line-height: 0.76;
+    }
+
+
+    .mixing-section > .mixing-header .subtitle {
+        margin:
+            clamp(5px, 0.8vh, 9px)
+            0
+            0
+            var(--subtitle-offset, 18px);
+
+        max-width:
+            calc(
+                100% -
+                var(--subtitle-offset, 18px)
+            );
+
+        font-size:
+            clamp(
+                11px,
+                1.35vh,
+                15px
+            );
+
+        line-height: 1.3;
+    }
+
+
+    /* ======================================
+       MAIN LAYOUT
+       ====================================== */
+
+    .mixing-section > .mixing-layout {
+        display: grid;
+
+        grid-template-columns:
+            minmax(150px, 0.76fr)
+            minmax(320px, 2.2fr)
+            minmax(175px, 0.9fr);
+
+        grid-template-rows:
+            minmax(0, 1fr);
+
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        margin: 0;
+
+        overflow: hidden;
+
+        border-top:
+            1px solid
+            var(--border);
+
+        border-bottom:
+            1px solid
+            var(--border);
+    }
+
+
+    /* ======================================
+       LEFT PANEL
+       ====================================== */
+
+    .mixing-section .mixing-introduction {
+        min-width: 0;
+        min-height: 0;
+
+        padding:
+            clamp(12px, 1.7vh, 20px)
+            clamp(12px, 1.6vw, 22px);
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        border-right:
+            1px solid
+            var(--border);
+    }
+
+
+    .mixing-section .mixing-rule {
+        margin-bottom:
+            clamp(8px, 1vh, 13px);
+    }
+
+
+    .mixing-section .mixing-lead {
+        font-size:
+            clamp(
+                10px,
+                1.2vh,
+                12px
+            );
+
+        line-height: 1.4;
+    }
+
+
+    .mixing-section .mixing-steps {
+        margin-top:
+            clamp(9px, 1.3vh, 16px);
+    }
+
+
+    .mixing-section .mixing-step {
+        grid-template-columns:
+            24px
+            minmax(0, 1fr);
+
+        gap: 8px;
+
+        padding:
+            clamp(5px, 0.75vh, 8px)
+            10px;
+    }
+
+
+    .mixing-section .mixing-step p,
+    .mixing-section .mixing-step span {
+        font-size:
+            clamp(
+                9px,
+                1.05vh,
+                11px
+            );
+
+        line-height: 1.3;
+    }
+
+
+    .mixing-section .mixing-reset-button {
+        margin-top:
+            clamp(8px, 1.1vh, 13px);
+
+        padding:
+            7px
+            10px;
+
+        font-size: 9px;
+    }
+
+
+    /* ======================================
+       CENTER CANVAS
+       ====================================== */
+
+    .mixing-section .mixing-canvas-column {
+        display: grid;
+
+        grid-template-rows:
+            minmax(0, 1fr)
+            auto;
+
+        min-width: 0;
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+
+    .mixing-section .cmyk-genealogy {
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+
+    .mixing-section .cmyk-genealogy svg {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+
+    .mixing-section
+    .mixing-canvas-column
+    > .instructions {
+        min-height: 0;
+
+        margin: 0;
+
+        padding:
+            clamp(5px, 0.8vh, 8px)
+            14px;
+
+        font-size:
+            clamp(
+                8px,
+                1vh,
+                10px
+            );
+
+        line-height: 1.25;
+    }
+
+
+    /* ======================================
+       RIGHT PANEL
+       ====================================== */
+
+    .mixing-section .mixing-information-panel {
+        display: block;
+
+        grid-column: auto;
+
+        min-width: 0;
+        min-height: 0;
+
+        padding:
+            clamp(10px, 1.5vh, 18px)
+            clamp(12px, 1.5vw, 21px);
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        border-top: 0;
+
+        border-left:
+            1px solid
+            var(--border);
+    }
+
+
+    .mixing-section
+    .mixing-information-panel
+    > section {
+        min-width: 0;
+
+        border-right: 0;
+    }
+
+
+    .mixing-section .mixing-panel-label {
+        margin-bottom:
+            clamp(6px, 0.9vh, 10px);
+
+        font-size: 9px;
+    }
+
+
+    .mixing-section .mixing-selection-section,
+    .mixing-section .mixing-result-section {
+        padding-bottom:
+            clamp(8px, 1.2vh, 14px);
+    }
+
+
+    .mixing-section .mixing-result-section,
+    .mixing-section .mixing-recipe-section {
+        padding-top:
+            clamp(8px, 1.2vh, 14px);
+    }
+
+
+    .mixing-section .mixing-selected-swatch {
+        width:
+            clamp(
+                34px,
+                4.8vh,
+                50px
+            );
+
+        height:
+            clamp(
+                34px,
+                4.8vh,
+                50px
+            );
+
+        margin-bottom: 6px;
+    }
+
+
+    .mixing-section .mixing-selected-item p {
+        font-size: 8px;
+        line-height: 1.25;
+    }
+
+
+    .mixing-section .mixing-plus {
+        padding-top:
+            clamp(
+                14px,
+                2vh,
+                22px
+            );
+    }
+
+
+    .mixing-section .mixing-result-swatch {
+        width:
+            clamp(
+                46px,
+                6.5vh,
+                68px
+            );
+
+        height:
+            clamp(
+                46px,
+                6.5vh,
+                68px
+            );
+
+        margin-bottom: 8px;
+    }
+
+
+    .mixing-section .mixing-result-section h2 {
+        font-size:
+            clamp(
+                12px,
+                1.5vh,
+                15px
+            );
+    }
+
+
+    .mixing-section .mixing-result-generation {
+        margin-top: 5px;
+        font-size: 8px;
+    }
+
+
+    .mixing-section .mixing-recipe-list > div {
+        grid-template-columns:
+            minmax(52px, 1fr)
+            minmax(42px, auto);
+
+        gap: 8px;
+
+        padding:
+            clamp(4px, 0.6vh, 6px)
+            0;
+    }
+
+
+    .mixing-section .mixing-recipe-list dt,
+    .mixing-section .mixing-recipe-list dd {
+        font-size: 8px;
+        line-height: 1.25;
+    }
+
+
+    /* ======================================
+       FOOTER
+       ====================================== */
+
+    .mixing-section > .mixing-footer {
+        display: block;
+
+        min-height: 0;
+
+        margin: 0;
+
+        padding:
+            clamp(6px, 0.9vh, 9px)
+            var(--page-gutter);
+
+        font-size:
+            clamp(
+                8px,
+                1vh,
+                10px
+            );
+
+        line-height: 1.25;
+    }
+
+}
+
+
+
+/* ==========================================
+   MIXING — BALANCED CANVAS HEIGHT
+   ========================================== */
+
+@media (min-width: 801px) {
+
+    .mixing-section .cmyk-genealogy {
+        width: 100%;
+
+        height: clamp(420px, 54svh, 560px);
+        min-height: 0;
+        max-height: 560px;
+
+        overflow: hidden;
+    }
+
+}
+
+@media
+    (min-width: 801px)
+    and
+    (max-height: 760px) {
+
+    .mixing-section .cmyk-genealogy {
+        height: clamp(360px, 48svh, 460px);
+        max-height: 460px;
+    }
+
+}
+
+
