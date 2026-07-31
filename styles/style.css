@@ -6432,5 +6432,38 @@ body > main > section > header .subtitle,
 }
 
 
+/* ==========================================
+   PIGMENT POPUP — FIT COLOR SWATCH
+   ========================================== */
 
+.mapboxgl-popup-content {
+    overflow: hidden;
+}
+
+.pigment-popup {
+    width: 100%;
+    max-width: 260px;
+
+    overflow: hidden;
+}
+
+.pigment-popup-color {
+    display: block;
+
+    width: 100%;
+    height: 64px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+.pigment-popup-information {
+    width: 100%;
+
+    padding: 16px;
+
+    box-sizing: border-box;
+}
 
