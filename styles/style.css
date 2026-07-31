@@ -6197,6 +6197,176 @@ body > main > section > header .subtitle,
 
 }
 
+/* ==========================================================
+   TRENDS — FIT ALL ROWS, NO VERTICAL SCROLL
+   ========================================================== */
+
+.color-timeline-section > #color-timeline {
+    width: 100%;
+    min-width: 0;
+
+    height: auto;
+    min-height: 0;
+    max-height: none;
+
+    margin: 0;
+    padding:
+        16px
+        0
+        12px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+/* Keep the SVG fully visible inside the section */
+
+.color-timeline-section
+#color-timeline
+.color-timeline-svg {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+    max-height: none;
+}
+
+
+/* Make source labels clearly readable */
+
+.color-timeline-section
+.timeline-source-label {
+    fill: #111111;
+
+    font-family:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.055em;
+}
+
+
+/* Keep year labels compact but legible */
+
+.color-timeline-section
+.timeline-year-label {
+    fill: #777777;
+
+    font-family:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+    font-weight: 500;
+
+    letter-spacing: 0.02em;
+}
+
+
+/* Active year remains easy to identify */
+
+.color-timeline-section
+.timeline-year-label.is-selected {
+    fill: #111111;
+
+    font-weight: 800;
+}
+
+
+
+/* Prevent any old scrolling behavior */
+
+.color-timeline-section
+#color-timeline,
+.color-timeline-section
+#color-timeline svg {
+    overflow: visible;
+}
+
+
+/* ==========================================================
+   TRENDS — FOUR-DIGIT YEARS + SINGLE-LINE SOURCES
+   ========================================================== */
+
+.color-timeline-section .timeline-source-label {
+    fill: #111111;
+
+    font-family:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    font-size: 8.5px;
+    font-weight: 700;
+
+    letter-spacing: 0.025em;
+
+    white-space: nowrap;
+}
+
+
+.color-timeline-section .timeline-year-label {
+    fill: #777777;
+
+    font-family:
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    font-size: 7.5px;
+    font-weight: 500;
+
+    letter-spacing: 0;
+}
+
+
+.color-timeline-section
+.timeline-year-label.is-selected {
+    fill: #111111;
+    font-weight: 800;
+}
+
+
+.color-timeline-section > #color-timeline {
+    width: 100%;
+    min-width: 0;
+
+    min-height: 0;
+    max-height: none;
+
+    margin: 0;
+
+    padding:
+        8px
+        0
+        8px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+.color-timeline-section
+#color-timeline
+.color-timeline-svg {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+    max-height: none;
+}
+
+
 
 
 

@@ -481,21 +481,21 @@ function drawColorTimeline(data) {
    const margin = {
     top:
         isMobile
-            ? 50
-            : 56,
+            ? 74
+            : 82,
 
     right:
         isMobile
-            ? 10
-            : 16,
+            ? 8
+            : 14,
 
     bottom:
-        16,
+        14,
 
     left:
         isMobile
-            ? 105
-            : 175
+            ? 108
+            : 160
 };
 
 
@@ -532,14 +532,13 @@ function drawColorTimeline(data) {
         );
 
 
-   const rowHeight =
+ const rowHeight =
     Math.max(
         isMobile
-            ? 38
-            : 42,
-        squareSize + 16
+            ? 34
+            : 36,
+        squareSize + 8
     );
-
 
     const innerHeight =
         COLOR_TIMELINE_SOURCES.length *
@@ -653,11 +652,6 @@ function drawColorTimeline(data) {
 }
 
 
-// ==========================================
-// YEAR LABELS
-// Full years are rotated so all 27 fit.
-// ==========================================
-
 function drawTimelineYearLabels(
     chart,
     years,
@@ -686,7 +680,7 @@ function drawTimelineYearLabels(
         )
         .attr(
             "y",
-            -10
+            -24
         )
         .attr(
             "text-anchor",
@@ -702,7 +696,7 @@ function drawTimelineYearLabels(
 
 
                 return (
-                    `rotate(-90, ${x}, -10)`
+                    `rotate(-90, ${x}, -24)`
                 );
 
             }
@@ -833,45 +827,7 @@ function drawTimelineSourceRows(
 }
 
 
-// ==========================================
-// ROW DIVIDER
-// ==========================================
 
-function drawTimelineRowDivider(
-    chart,
-    y,
-    chartWidth
-) {
-
-    chart
-        .append("line")
-        .attr(
-            "class",
-            "timeline-row-divider"
-        )
-        .attr(
-            "x1",
-            -150
-        )
-        .attr(
-            "x2",
-            chartWidth
-        )
-        .attr(
-            "y1",
-            y
-        )
-        .attr(
-            "y2",
-            y
-        );
-
-}
-
-
-// ==========================================
-// SOURCE LABEL
-// ==========================================
 
 function drawTimelineSourceLabel(
     chart,
@@ -889,8 +845,8 @@ function drawTimelineSourceLabel(
         .attr(
             "x",
             window.innerWidth <= 800
-                ? -86
-                : -140
+                ? -100
+                : -142
         )
         .attr(
             "y",
@@ -910,7 +866,6 @@ function drawTimelineSourceLabel(
         );
 
 }
-
 
 // ==========================================
 // PLACEHOLDER CELL
