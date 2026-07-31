@@ -6433,37 +6433,56 @@ body > main > section > header .subtitle,
 
 
 /* ==========================================
-   PIGMENT POPUP — FIT COLOR SWATCH
+   PIGMENT POPUP
    ========================================== */
 
+.mapboxgl-popup {
+    max-width: 220px !important;
+}
+
 .mapboxgl-popup-content {
+    padding: 0;
     overflow: hidden;
+
+    border-radius: 10px;
 }
 
 .pigment-popup {
-    width: 100%;
-    max-width: 260px;
+    width: 220px;
 
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
 }
 
 .pigment-popup-color {
-    display: block;
-
     width: 100%;
-    height: 64px;
-
-    margin: 0;
-    padding: 0;
-
-    box-sizing: border-box;
+    height: 44px;
 }
 
 .pigment-popup-information {
-    width: 100%;
-
-    padding: 16px;
-
-    box-sizing: border-box;
+    padding: 12px 14px;
 }
 
+.pigment-popup h3 {
+    margin: 0 0 6px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+.pigment-popup p {
+    margin: 4px 0;
+
+    font-size: 11px;
+    line-height: 1.35;
+
+    color: #555;
+}
+
+.pigment-popup strong {
+    color: #111;
+}
