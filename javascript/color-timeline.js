@@ -478,25 +478,25 @@ function drawColorTimeline(data) {
     allowing every year to remain visible.
     */
 
-    const margin = {
-        top:
-            isMobile
-                ? 58
-                : 64,
+   const margin = {
+    top:
+        isMobile
+            ? 50
+            : 56,
 
-        right:
-            isMobile
-                ? 10
-                : 20,
+    right:
+        isMobile
+            ? 10
+            : 16,
 
-        bottom:
-            20,
+    bottom:
+        16,
 
-        left:
-            isMobile
-                ? 92
-                : 150
-    };
+    left:
+        isMobile
+            ? 105
+            : 175
+};
 
 
     const width =
@@ -532,13 +532,13 @@ function drawColorTimeline(data) {
         );
 
 
-    const rowHeight =
-        Math.max(
-            isMobile
-                ? 42
-                : 48,
-            squareSize + 22
-        );
+   const rowHeight =
+    Math.max(
+        isMobile
+            ? 38
+            : 42,
+        squareSize + 16
+    );
 
 
     const innerHeight =

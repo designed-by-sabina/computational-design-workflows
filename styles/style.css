@@ -5906,3 +5906,297 @@ body > main > section > header .subtitle,
 }
 
 
+/* ==========================================================
+   TRENDS — CONSISTENT COMPARISON CARDS
+   Selected text matches the other cards
+   ========================================================== */
+
+
+/* Keep every card vertically consistent */
+
+.color-timeline-section .comparison-color-card {
+    display: flex;
+    align-items: flex-start;
+
+    flex: 0 0 auto;
+
+    min-width: 255px;
+
+    gap: 16px;
+    padding: 0;
+
+    color: var(--white);
+}
+
+
+/* Selected card may remain wider because its swatch is larger */
+
+.color-timeline-section .comparison-color-card-primary {
+    min-width: 385px;
+
+    opacity: 1;
+
+    background: transparent;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+/* Secondary cards */
+
+.color-timeline-section .comparison-color-card-secondary {
+    min-width: 255px;
+
+    opacity: 0.72;
+}
+
+
+/* ==========================================
+   SWATCHES
+   ========================================== */
+
+.color-timeline-section .comparison-swatch {
+    display: block;
+
+    flex: 0 0 auto;
+
+    aspect-ratio: 1 / 1;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+
+/* Selected color remains visually identifiable by size */
+
+.color-timeline-section .comparison-swatch-primary {
+    width: 126px;
+    height: 126px;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+
+/* Fix the small swatches */
+
+.color-timeline-section .comparison-swatch-secondary {
+    width: 72px;
+    height: 72px;
+
+    min-width: 72px;
+    min-height: 72px;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+
+/* ==========================================
+   TEXT — SAME SIZE FOR ALL CARDS
+   ========================================== */
+
+.color-timeline-section
+.comparison-color-information,
+.color-timeline-section
+.comparison-color-card-primary
+.comparison-color-information,
+.color-timeline-section
+.comparison-color-card-secondary
+.comparison-color-information {
+    min-width: 0;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+}
+
+
+/* Source */
+
+.color-timeline-section
+.comparison-source,
+.color-timeline-section
+.comparison-color-card-primary
+.comparison-source,
+.color-timeline-section
+.comparison-color-card-secondary
+.comparison-source {
+    margin: 2px 0 9px;
+
+    color: var(--white);
+
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    opacity: 0.8;
+}
+
+
+/* Color name */
+
+.color-timeline-section
+.comparison-color-name,
+.color-timeline-section
+.comparison-color-card-primary
+.comparison-color-name,
+.color-timeline-section
+.comparison-color-card-secondary
+.comparison-color-name {
+    margin: 0 0 12px;
+
+    color: var(--white);
+
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.1;
+
+    letter-spacing: -0.015em;
+}
+
+
+/* Details */
+
+.color-timeline-section
+.comparison-color-details,
+.color-timeline-section
+.comparison-color-card-primary
+.comparison-color-details,
+.color-timeline-section
+.comparison-color-card-secondary
+.comparison-color-details {
+    margin: 0;
+    padding-top: 10px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.25);
+
+    font-size: 10px;
+    font-weight: 400;
+
+    opacity: 1;
+}
+
+
+.color-timeline-section
+.comparison-color-details div {
+    display: grid;
+
+    grid-template-columns:
+        46px
+        minmax(0, 1fr);
+
+    gap: 7px;
+
+    margin-top: 6px;
+}
+
+
+.color-timeline-section
+.comparison-color-details dt,
+.color-timeline-section
+.comparison-color-details dd,
+.color-timeline-section
+.comparison-color-card-primary
+.comparison-color-details dt,
+.color-timeline-section
+.comparison-color-card-primary
+.comparison-color-details dd,
+.color-timeline-section
+.comparison-color-card-secondary
+.comparison-color-details dt,
+.color-timeline-section
+.comparison-color-card-secondary
+.comparison-color-details dd {
+    margin: 0;
+
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+
+.color-timeline-section
+.comparison-color-details dt {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+
+.color-timeline-section
+.comparison-color-details dd {
+    color: var(--white);
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================
+   BLACK BAND SPACING
+   ========================================== */
+
+.color-timeline-section .comparison-colors {
+    align-items: flex-start;
+
+    gap: clamp(24px, 2.5vw, 38px);
+
+    padding:
+        clamp(24px, 3vh, 34px)
+        clamp(20px, 2.5vw, 34px)
+        28px;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 800px) {
+
+    .color-timeline-section
+    .comparison-color-card,
+    .color-timeline-section
+    .comparison-color-card-primary,
+    .color-timeline-section
+    .comparison-color-card-secondary {
+        min-width: 250px;
+    }
+
+
+    .color-timeline-section
+    .comparison-swatch-primary {
+        width: 90px;
+        height: 90px;
+    }
+
+
+    .color-timeline-section
+    .comparison-swatch-secondary {
+        width: 64px;
+        height: 64px;
+
+        min-width: 64px;
+        min-height: 64px;
+    }
+
+
+    .color-timeline-section
+    .comparison-color-name,
+    .color-timeline-section
+    .comparison-color-card-primary
+    .comparison-color-name,
+    .color-timeline-section
+    .comparison-color-card-secondary
+    .comparison-color-name {
+        font-size: 16px;
+    }
+
+}
+
+
+
+
