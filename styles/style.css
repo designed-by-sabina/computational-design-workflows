@@ -1,4 +1,3205 @@
 /* ==========================================================
+   COMPUTATIONAL DESIGN WORKFLOWS
+   Consolidated stylesheet
+   ========================================================== */
+
+
+@keyframes color-poll-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+
+:root {
+    --black: #111111;
+    --white: #ffffff;
+    --gray: #777777;
+    --border: #dddddd;
+    --page-gutter: clamp(20px, 3.5vw, 50px);
+    --section-block-gap: clamp(18px, 3vh, 38px);
+    --section-border: 1px solid var(--border);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    font-family: Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    min-width: 320px;
+    width: 100%;
+    min-height: 100%;
+}
+
+header {
+    padding: clamp(28px, 5vh, 45px) 50px clamp(20px, 3vh, 35px);
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    align-content: start;
+}
+
+h1 {
+    font-size: clamp(70px, 12vw, 160px);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    line-height: 0.85;
+}
+
+.subtitle {
+    margin-top: clamp(16px, 2.7vh, 30px);
+    max-width: 900px;
+    font-size: clamp(14px, 1.25vw, 18px);
+    line-height: 1.5;
+    color: var(--gray);
+}
+
+.main-canvas-section {
+    width: 100%;
+    margin-top: 80px;
+    padding: 0 0;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: clamp(340px, 58svh, 680px);
+    max-height: 58svh;
+}
+
+#colorCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+#sourceLabelContainer , #discoveredLabelContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.source-label {
+    position: absolute;
+    max-width: 180px;
+    transform: translate(-50%, -130%);
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 30;
+    color: rgba(0,0,0,0.65);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    background: rgba(255,255,255,0.8);
+    padding: 6px 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    white-space: nowrap;
+}
+
+.source-label span {
+    display: block;
+}
+
+.discovered-label {
+    position: absolute;
+    z-index: 25;
+    transform: translate(-50%, -120%);
+    min-width: 150px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: opacity 1s ease,
+        transform .3s ease;
+}
+
+.discovered-label strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.instructions {
+    text-align: center;
+    padding: clamp(14px, 2vh, 24px) clamp(20px, 3.5vw, 50px);
+    color: var(--gray);
+    font-size: clamp(11px, 1.35vh, 14px);
+    line-height: 1.5;
+}
+
+.instructions strong {
+    color: var(--black);
+}
+
+.instructionstrends {
+    margin-top: 0;
+}
+
+.color-archive {
+    padding: 0 50px 60px;
+}
+
+.color-archive h2 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+#colorArchiveContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.color-swatch {
+    width: 150px;
+    height: 110px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 12px;
+}
+
+.color-swatch strong {
+    font-size: 14px;
+}
+
+.exercise-navigation {
+    padding: clamp(30px, 5vh, 60px) 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.exercise-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: clamp(16px, 2.5vh, 24px) 0;
+    flex-wrap: wrap;
+}
+
+.exercise-button {
+    background: white;
+    border: 1px solid var(--black);
+    padding: 14px 36px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.exercise-button:hover , .exercise-button.active {
+    background: var(--black);
+    color: white;
+}
+
+.exercise-panel {
+    display: none;
+    position: relative;
+    margin-top: clamp(20px, 4vh, 40px);
+    min-height: 0;
+}
+
+.exercise-panel.active {
+    display: block;
+}
+
+.exerciseCanvas {
+    width: 100%;
+    height: 400px;
+    display: block;
+    border: 1px solid var(--border);
+}
+
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999;
+}
+
+#canvas-container-1 canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#canvas-container-2 canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#canvas-container-3 canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#canvas-container-4 canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+footer {
+    position: relative;
+    width: 100%;
+    padding: clamp(16px, 2.2vh, 28px) clamp(20px, 3.5vw, 50px);
+    border-top: 1px solid var(--border);
+    color: var(--gray);
+    font-size: clamp(11px, 1.35vh, 14px);
+    background: var(--white);
+    z-index: 2;
+    line-height: 1.45;
+}
+
+.pigment-map-section {
+    width: 100%;
+    padding: clamp(28px, 5vh, 58px) var(--page-gutter) 0;
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto auto minmax(320px, 1fr) auto auto;
+    align-content: start;
+}
+
+.pigment-map-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    margin-bottom: clamp(18px, 3vh, 36px);
+}
+
+.pigment-map-number {
+    grid-column: 1 / 4;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+}
+
+.pigment-map-header h2 {
+    font-size: clamp(70px, 12vw, 160px);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    line-height: 0.85;
+}
+
+.pigment-map-description {
+    max-width: 420px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--gray);
+}
+
+.pigment-map-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: clamp(12px, 2vh, 22px) 0;
+    min-height: 0;
+}
+
+#pigment-map {
+    width: min(62svh, 680px, 100%);
+    height: min(62svh, 680px);
+    position: relative;
+    min-height: 320px;
+}
+
+.mapboxgl-popup {
+    max-width: 280px;
+}
+
+.mapboxgl-popup-content {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.pigment-popup {
+    width: 260px;
+}
+
+.pigment-popup-color {
+    width: 100%;
+    height: 70px;
+}
+
+.pigment-popup-information {
+    padding: 18px;
+}
+
+.pigment-popup-category {
+    margin-bottom: 8px;
+    color: #777777;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.pigment-popup h3 {
+    margin: 0 0 4px;
+    color: #111111;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.pigment-popup-mineral {
+    margin-bottom: 14px;
+    color: #777777;
+    font-size: 13px;
+}
+
+.pigment-popup-location {
+    margin-bottom: 10px;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pigment-popup-description {
+    margin: 0;
+    color: #333333;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.mapboxgl-popup-tip {
+    border-top-color: white;
+}
+
+.mapboxgl-ctrl-attrib {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 9px;
+}
+
+.color-timeline-section {
+    width: 100%;
+    margin-top: 0;
+    padding-bottom: 80px;
+    display: grid;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+    grid-template-rows: auto auto minmax(280px, 1fr) auto auto;
+    overflow: hidden;
+}
+
+.color-timeline-header {
+    margin-bottom: clamp(18px, 3vh, 34px);
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+.color-comparison-panel {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    width: 100%;
+    min-height: clamp(210px, 27svh, 270px);
+    margin: 0 0 clamp(18px, 2.5vh, 32px);
+    color: #ffffff;
+    background-color: #111111;
+    border: 1px solid #111111;
+    flex: 0 0 auto;
+    margin-bottom: clamp(18px, 3vh, 34px);
+}
+
+.comparison-year-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding: 36px;
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.comparison-year {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(54px, 5vw, 82px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+}
+
+.comparison-year-label {
+    margin: 20px 0 0;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+}
+
+.comparison-colors {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.comparison-color-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    gap: 18px;
+    min-width: 290px;
+    padding: 34px;
+    color: #ffffff;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.comparison-color-card:last-child {
+    border-right: none;
+}
+
+.comparison-color-card-primary {
+    min-width: 420px;
+    outline: 1px solid rgba(255, 255, 255, 0.8);
+    outline-offset: -14px;
+}
+
+.comparison-color-card-secondary {
+    min-width: 300px;
+}
+
+.comparison-swatch {
+    display: block;
+    flex: 0 0 auto;
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.comparison-swatch-primary {
+    width: 148px;
+    height: 148px;
+}
+
+.comparison-swatch-secondary {
+    width: 82px;
+    height: 82px;
+}
+
+.comparison-color-information {
+    min-width: 0;
+}
+
+.comparison-source {
+    margin: 2px 0 10px;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.comparison-color-name {
+    margin: 0 0 14px;
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.comparison-color-card-primary .comparison-color-name {
+    font-size: 26px;
+}
+
+.comparison-color-details {
+    margin: 0;
+    padding-top: 11px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.comparison-color-details div {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 7px;
+}
+
+.comparison-color-details dt , .comparison-color-details dd {
+    margin: 0;
+    color: #ffffff;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.comparison-color-details dt {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.comparison-color-details dd {
+    overflow-wrap: anywhere;
+}
+
+.mixing-section {
+    width: 100%;
+    margin-top: 0;
+    padding-bottom: 0;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    color: var(--black);
+    display: grid;
+    flex-direction: column;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: 0;
+}
+
+.mixing-header {
+    padding: clamp(30px, 5vh, 70px) 50px clamp(24px, 4vh, 40px);
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+.mixing-header .subtitle {
+    max-width: 660px;
+}
+
+.mixing-layout {
+    display: grid;
+    grid-template-columns: minmax(190px, 0.8fr) minmax(420px, 2.3fr) minmax(210px, 0.9fr);
+    min-height: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    flex: 1 1 auto;
+}
+
+.mixing-introduction {
+    padding: clamp(28px, 4vh, 46px) 32px clamp(26px, 4vh, 42px) 50px;
+    border-right: 1px solid var(--border);
+}
+
+.mixing-rule {
+    width: 48px;
+    height: 1px;
+    margin-bottom: 28px;
+    background: var(--black);
+}
+
+.mixing-lead {
+    max-width: 270px;
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.mixing-lead strong {
+    color: var(--black);
+}
+
+.mixing-steps {
+    margin-top: clamp(28px, 5vh, 58px);
+    border: 1px solid var(--border);
+}
+
+.mixing-step {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 16px;
+    padding: 21px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.mixing-step:last-child {
+    border-bottom: none;
+}
+
+.mixing-step span {
+    color: var(--black);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+
+.mixing-step p {
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.mixing-reset-button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 15px 18px;
+    border: 1px solid var(--black);
+    border-radius: 0;
+    background: var(--white);
+    color: var(--black);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    cursor: pointer;
+    transition: background-color 180ms ease,
+        color 180ms ease;
+}
+
+.mixing-reset-button:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.mixing-canvas-column {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.cmyk-genealogy {
+    width: 100%;
+    height: clamp(500px, 66svh, 710px);
+}
+
+.cmyk-genealogy svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    cursor: grab;
+}
+
+.cmyk-genealogy svg:active {
+    cursor: grabbing;
+}
+
+.mixing-canvas-instruction {
+    position: absolute;
+    right: 30px;
+    bottom: 24px;
+    left: 30px;
+    color: var(--gray);
+    font-size: 9px;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+}
+
+.genealogy-link {
+    fill: none;
+    stroke: #111111;
+    stroke-width: 1;
+    stroke-opacity: 0.22;
+}
+
+.genealogy-link.is-active {
+    stroke-opacity: 0.88;
+    stroke-width: 1.4;
+}
+
+.genealogy-node {
+    cursor: pointer;
+}
+
+.genealogy-node circle {
+    stroke: #111111;
+    stroke-width: 1;
+    transition: stroke-width 160ms ease,
+        opacity 160ms ease;
+}
+
+.genealogy-node:hover circle , .genealogy-node.is-selected circle {
+    stroke-width: 3;
+}
+
+.genealogy-node.is-muted {
+    opacity: 0.18;
+}
+
+.genealogy-node text {
+    fill: #111111;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    text-anchor: middle;
+    pointer-events: none;
+    paint-order: stroke;
+    stroke: #ffffff;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+}
+
+.genealogy-node .genealogy-primary-letter {
+    font-size: 21px;
+    font-weight: 500;
+    stroke-width: 0;
+    fill: #ffffff;
+    stroke: none;
+    paint-order: normal;
+}
+
+.genealogy-node .genealogy-primary-name {
+    font-size: 8px;
+    letter-spacing: 0.07em;
+    stroke-width: 0;
+    fill: #ffffff;
+    stroke: none;
+    paint-order: normal;
+    font-weight: 700;
+    transform: translateY(-2px);
+}
+
+.genealogy-generation-label {
+    fill: #999999;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+}
+
+.mixing-information-panel {
+    padding: 52px 50px 44px 36px;
+    border-left: 1px solid var(--border);
+}
+
+.mixing-panel-label {
+    margin-bottom: 24px;
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.mixing-selection-section , .mixing-result-section {
+    padding-bottom: 38px;
+    border-bottom: 1px solid var(--border);
+}
+
+.mixing-result-section , .mixing-recipe-section {
+    padding-top: 38px;
+}
+
+.mixing-selected-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+}
+
+.mixing-selected-item {
+    min-width: 0;
+    text-align: center;
+}
+
+.mixing-selected-swatch {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 13px;
+    place-items: center;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+}
+
+.mixing-selected-swatch.is-empty {
+    border-style: dashed;
+    background: var(--white);
+}
+
+.mixing-selected-swatch span {
+    color: var(--gray);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.mixing-selected-item p {
+    overflow-wrap: anywhere;
+    color: var(--gray);
+    font-size: 9px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+
+.mixing-plus {
+    padding-top: 26px;
+    color: var(--gray);
+    font-size: 15px;
+    text-align: center;
+}
+
+.mixing-result-swatch {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 22px;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+}
+
+.mixing-result-swatch.is-empty {
+    border-style: dashed;
+    background: var(--white);
+}
+
+.mixing-result-section h2 {
+    max-width: 220px;
+    color: var(--black);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.mixing-result-generation {
+    margin-top: 9px;
+    color: var(--gray);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+
+.mixing-recipe-list > div {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.mixing-recipe-list dt , .mixing-recipe-list dd {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.mixing-recipe-list dt {
+    color: var(--gray);
+    letter-spacing: 0.06em;
+}
+
+.mixing-recipe-list dd {
+    color: var(--black);
+    text-align: right;
+}
+
+.genealogy-tooltip {
+    position: fixed;
+    z-index: 1000;
+    width: 230px;
+    padding: 16px 18px;
+    color: #ffffff;
+    background: #111111;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+}
+
+.genealogy-tooltip.is-visible {
+    opacity: 1;
+}
+
+.genealogy-tooltip strong {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.genealogy-tooltip span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+.mixing-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.color-poll-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+    margin: 2rem 0 1rem;
+}
+
+.color-poll-label , .color-poll-input , .color-poll-submit {
+    box-sizing: border-box;
+    height: 48px;
+    font-size: .85rem;
+    line-height: 1;
+    margin: 0;
+}
+
+.color-poll-label {
+    display: flex;
+    align-items: center;
+    letter-spacing: .08em;
+    white-space: nowrap;
+}
+
+.color-poll-input {
+    padding: 0 1rem;
+    border: 2px solid currentColor;
+    background: transparent;
+    min-width: 220px;
+    font-size: 1rem;
+}
+
+.color-poll-submit {
+    padding: 0 1.5rem;
+    border: 2px solid currentColor;
+    background: transparent;
+    cursor: pointer;
+    letter-spacing: .08em;
+    transition: background .2s, color .2s;
+}
+
+.color-poll-submit:hover {
+    background: currentColor;
+    color: #fff;
+}
+
+.color-poll-status {
+    min-height: 1.2em;
+    font-size: .85rem;
+    opacity: .75;
+}
+
+.color-poll-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    min-height: clamp(360px, 55svh, 660px);
+    padding: 2rem 0;
+}
+
+.color-poll-bubble {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: .75rem;
+    text-transform: lowercase;
+    letter-spacing: .02em;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
+    animation: color-poll-float 6s ease-in-out infinite;
+}
+
+.color-poll-bubble .count {
+    font-weight: 700;
+    font-size: .95em;
+}
+
+.color-poll-empty {
+    opacity: .6;
+    font-style: italic;
+}
+
+.color-poll-footer p {
+    font-size: .8rem;
+    opacity: .7;
+}
+
+#colorPollStatus {
+    text-align: center;
+    width: 100%;
+    display: block;
+    min-height: 1.2em;
+    font-size: .85rem;
+    opacity: .75;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    min-height: 100%;
+    min-width: 320px;
+}
+
+header , .exercise-navigation , .pigment-map-section , .color-timeline-section , .mixing-section {
+    min-height: 100svh;
+}
+
+header .main-canvas-section , .main-canvas-section {
+    min-height: 0;
+    margin-top: clamp(24px, 5vh, 60px);
+}
+
+.exerciseCanvas , #canvas-container-1 canvas , #canvas-container-2 canvas , #canvas-container-3 canvas , #canvas-container-4 canvas {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 58svh;
+    object-fit: contain;
+}
+
+#colorTimeline , #color-timeline , .color-timeline-container , .timeline-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 48svh;
+    overflow: auto;
+}
+
+.mixing-canvas-column , .mixing-information-panel {
+    min-height: 0;
+}
+
+img , svg , canvas {
+    max-width: 100%;
+}
+
+.transparency-section , .deception-section , .pigment-map-section , .color-timeline-section , .mixing-section , .color-poll-section {
+    width: 100%;
+    min-height: 100svh;
+    margin: 0;
+    border-top: var(--section-border);
+    background: var(--white);
+}
+
+.transparency-section {
+    border-top: 0;
+    display: grid;
+    grid-template-rows: auto minmax(320px, 1fr) auto auto;
+}
+
+.transparency-section > header , .deception-section > header , .color-timeline-header , .mixing-header , .color-poll-header {
+    padding: clamp(28px, 5vh, 58px) var(--page-gutter) clamp(14px, 2.5vh, 28px);
+}
+
+.transparency-section h1 , .deception-section h1 , .pigment-map-section > h1 , .color-timeline-section h1 , .mixing-section h1 , .color-poll-section h1 {
+    font-size: clamp(58px, 11vw, 150px);
+    line-height: 0.82;
+}
+
+footer , .color-timeline-footer , .mixing-footer , .color-poll-footer {
+    padding: clamp(20px, 3vh, 38px) var(--page-gutter);
+}
+
+.transparency-section > main {
+    display: contents;
+}
+
+.transparency-section .main-canvas-section {
+    min-height: 0;
+    margin: 0;
+}
+
+.transparency-section .canvas-wrapper {
+    width: 100%;
+    height: clamp(360px, 56svh, 680px);
+    min-height: 0;
+}
+
+.transparency-section .instructions {
+    align-self: end;
+}
+
+.transparency-section .color-archive {
+    padding: 0 var(--page-gutter) clamp(32px, 5vh, 60px);
+}
+
+.transparency-section #colorArchiveContainer {
+    gap: clamp(12px, 1.5vw, 20px);
+    display: flex;
+    flex-wrap: wrap;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0;
+    overflow: visible;
+}
+
+.deception-section {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+
+.deception-section .exercise-navigation {
+    min-height: 0;
+    padding: clamp(18px, 3vh, 36px) var(--page-gutter);
+}
+
+.deception-section .exercise-buttons {
+    padding: clamp(7px, 1.2vh, 14px) 0;
+    gap: clamp(6px, 1vw, 16px);
+    flex-wrap: nowrap;
+    display: flex;
+}
+
+.deception-section .exercise-button {
+    padding: clamp(7px, 1.1vh, 11px)
+        clamp(9px, 1.8vw, 28px);
+    font-size: clamp(10px, 1.3vh, 13px);
+}
+
+.deception-section .exercise-panel {
+    margin-top: clamp(18px, 2.5vh, 34px);
+    min-height: 0;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+}
+
+.deception-section .exercise-panel canvas , .deception-section .exerciseCanvas {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}
+
+.pigment-map-section > h1 , .pigment-map-section > .subtitle {
+    width: 100%;
+}
+
+.pigment-map-section > .subtitle {
+    margin-bottom: clamp(8px, 1.5vh, 18px);
+}
+
+.pigment-map-section > .instructions , .pigment-map-section > footer {
+    margin-right: calc(-1 * var(--page-gutter));
+    margin-left: calc(-1 * var(--page-gutter));
+}
+
+.color-timeline-section > #color-timeline {
+    width: 100%;
+    min-height: 380px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    margin: 0;
+    overflow: auto hidden;
+    min-width: 0;
+    scrollbar-gutter: stable;
+    padding-bottom: 18px;
+    margin-bottom: clamp(
+            16px,
+            2.5vh,
+            30px
+        );
+}
+
+.color-timeline-section > .instructions {
+    margin: 0;
+}
+
+.color-timeline-section > .color-timeline-footer {
+    margin: 0;
+}
+
+.mixing-introduction , .mixing-information-panel {
+    padding-top: clamp(28px, 4vh, 50px);
+    padding-bottom: clamp(28px, 4vh, 46px);
+}
+
+.mixing-canvas-column .instructions {
+    padding-top: 14px;
+    padding-bottom: 18px;
+}
+
+.color-poll-section {
+    display: grid;
+    grid-template-rows: auto auto auto minmax(320px, 1fr) auto auto;
+    padding: 0;
+}
+
+.color-poll-form , .color-poll-status {
+    margin-right: var(--page-gutter);
+    margin-left: var(--page-gutter);
+}
+
+body > main {
+    width: 100%;
+}
+
+body > main > .transparency-section , body > main > .deception-section , body > main > .pigment-map-section , body > main > .color-timeline-section , body > main > .mixing-section , body > main > .color-poll-section {
+    width: 100%;
+    height: 100dvh;
+    min-height: 560px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+}
+
+body > main > section > header {
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: clamp(26px, 4.2vh, 50px) clamp(20px, 3.5vw, 50px) clamp(14px, 2vh, 24px);
+}
+
+body > main > section > header h1 {
+    margin: 0;
+    font-size: clamp(72px, min(14vw, 19vh), 188px);
+    line-height: 0.76;
+    letter-spacing: -0.085em;
+    font-weight: 900;
+}
+
+body > main > section > header .subtitle {
+    margin-top: clamp(10px, 1.5vh, 18px);
+    max-width: 900px;
+    font-size: clamp(13px, 1.6vh, 18px);
+    line-height: 1.45;
+    color: var(--gray);
+}
+
+body > main > section > .instructions , body > main > section .mixing-canvas-column > .instructions {
+    min-height: 0;
+    margin: 0;
+    padding: clamp(8px, 1.35vh, 15px)
+        clamp(20px, 3.5vw, 50px);
+    font-size: clamp(10px, 1.35vh, 13px);
+    line-height: 1.35;
+}
+
+body > main > section > footer {
+    min-height: 0;
+    margin: 0;
+    padding: clamp(8px, 1.35vh, 15px)
+        clamp(20px, 3.5vw, 50px);
+    font-size: clamp(10px, 1.35vh, 13px);
+    line-height: 1.3;
+}
+
+body > main > .transparency-section {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+}
+
+.transparency-section > .main-canvas-section {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+.transparency-section > .main-canvas-section > .canvas-wrapper {
+    width: 100%;
+    height: clamp(420px, 58svh, 690px);
+    min-height: 0;
+    margin: 0;
+    position: relative;
+}
+
+.transparency-section #colorCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.transparency-section > .color-archive {
+    min-height: 0;
+    margin: 0;
+    padding: clamp(20px, 3vh, 34px) clamp(20px, 3.5vw, 50px) clamp(34px, 5vh, 64px);
+    overflow: visible;
+    border-top: 1px solid var(--border);
+}
+
+.transparency-section > .color-archive h2 {
+    margin: 0 0 7px;
+    font-size: clamp(10px, 1.2vh, 13px);
+}
+
+.transparency-section .color-swatch {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 110px;
+    padding: 12px;
+    font-size: 12px;
+}
+
+.transparency-section .color-swatch strong {
+    font-size: 10px;
+}
+
+body > main > .deception-section {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+}
+
+.deception-section > .exercise-navigation {
+    min-height: 0;
+    margin: 0;
+    padding: clamp(16px, 2.5vh, 30px) clamp(20px, 3.5vw, 50px);
+    display: grid;
+    grid-template-rows: auto auto;
+    overflow: visible;
+}
+
+.deception-section .exercise-panels {
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+}
+
+.deception-section .exercise-panel.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deception-section .exercise-panel > div {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body > main > .pigment-map-section {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+}
+
+.pigment-map-section > .pigment-map-wrapper {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: clamp(12px, 2vh, 24px) clamp(20px, 3.5vw, 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.pigment-map-section #pigment-map {
+    position: relative;
+    width: min(62svh, 680px, 100%);
+    height: min(62svh, 680px);
+    min-height: 360px;
+    max-height: none;
+    aspect-ratio: 1 / 1;
+}
+
+body > main > .color-timeline-section {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
+    overflow: visible;
+}
+
+.color-timeline-section > .color-comparison-panel {
+    width: 100%;
+    height: auto;
+    min-height: clamp(290px, 35svh, 390px);
+    margin: 0;
+    overflow: hidden;
+    grid-template-columns: clamp(150px, 16vw, 220px) minmax(0, 1fr);
+    display: grid;
+    background: var(--black);
+    color: var(--white);
+    border: 0;
+}
+
+.color-timeline-section .comparison-year-column {
+    min-width: 0;
+    padding: clamp(12px, 2.2vh, 26px);
+}
+
+.color-timeline-section .comparison-year {
+    font-size: clamp(36px, 6vh, 68px);
+}
+
+.color-timeline-section .comparison-colors {
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 18px;
+    scrollbar-gutter: stable;
+    align-items: flex-start;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.55) rgba(255, 255, 255, 0.12);
+    gap: clamp(26px, 3vw, 48px);
+    display: flex;
+    padding: clamp(28px, 4vh, 46px) clamp(24px, 3vw, 44px) 34px;
+}
+
+.color-timeline-section .comparison-color-card {
+    min-width: 280px;
+    height: auto;
+    padding: 0;
+    align-self: flex-start;
+    padding-bottom: 10px;
+    gap: clamp(16px, 1.5vw, 24px);
+    display: flex;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    border-right: 0;
+    color: var(--white);
+}
+
+.color-timeline-section .comparison-color-card-primary {
+    min-width: 440px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: 0;
+    opacity: 1;
+}
+
+.color-timeline-section .comparison-swatch-primary {
+    width: clamp(126px, 17svh, 160px);
+    height: clamp(126px, 17svh, 160px);
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    flex: 0 0 auto;
+}
+
+.color-timeline-section .comparison-swatch-secondary {
+    width: clamp(64px, 9svh, 84px);
+    height: clamp(64px, 9svh, 84px);
+}
+
+.color-timeline-section > #color-timeline svg {
+    display: block;
+    max-height: 100%;
+}
+
+body > main > .mixing-section {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    overflow: visible;
+}
+
+.mixing-section > .mixing-layout {
+    min-height: 710px;
+    height: auto;
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(210px, 0.85fr) minmax(500px, 2.35fr) minmax(225px, 0.95fr);
+    overflow: visible;
+}
+
+.mixing-section .mixing-introduction , .mixing-section .mixing-information-panel {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.mixing-section .mixing-introduction {
+    padding: clamp(12px, 2.1vh, 26px);
+}
+
+.mixing-section .mixing-lead {
+    font-size: clamp(11px, 1.45vh, 14px);
+    line-height: 1.4;
+}
+
+.mixing-section .mixing-steps {
+    margin-top: clamp(12px, 1.8vh, 24px);
+}
+
+.mixing-section .mixing-step {
+    padding: clamp(6px, 0.9vh, 10px) 0;
+}
+
+.mixing-section .mixing-reset-button {
+    margin-top: clamp(10px, 1.6vh, 20px);
+    padding: 9px 13px;
+}
+
+.mixing-section .mixing-canvas-column {
+    min-height: 0;
+    display: grid;
+    grid-template-rows: minmax(620px, 1fr) auto;
+    overflow: visible;
+}
+
+.mixing-section .cmyk-genealogy {
+    width: 100%;
+    height: clamp(620px, 68svh, 760px);
+    min-height: 620px;
+    overflow: visible;
+}
+
+.mixing-section .cmyk-genealogy svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.mixing-section .mixing-information-panel {
+    padding: clamp(10px, 1.8vh, 22px);
+}
+
+.mixing-section .mixing-selection-section , .mixing-section .mixing-result-section , .mixing-section .mixing-recipe-section {
+    padding: clamp(8px, 1.4vh, 16px) 0;
+}
+
+.mixing-section .mixing-selected-swatch {
+    width: clamp(36px, 5.5vh, 54px);
+    height: clamp(36px, 5.5vh, 54px);
+}
+
+.mixing-section .mixing-result-swatch {
+    width: clamp(52px, 8.5vh, 82px);
+    height: clamp(52px, 8.5vh, 82px);
+}
+
+body > main > .color-poll-section {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto auto;
+    overflow: visible;
+}
+
+.color-poll-section > .color-poll-form {
+    margin: clamp(28px, 4vh, 56px) 0 0;
+    padding: clamp(12px, 2vh, 22px) clamp(20px, 3.5vw, 50px);
+    margin-top: clamp(24px, 5vh, 70px);
+}
+
+.color-poll-section > .color-poll-status {
+    min-height: 0;
+    margin: 0;
+    padding: 0 clamp(20px, 3.5vw, 50px);
+}
+
+.color-poll-section > .color-poll-bubbles {
+    width: 100%;
+    height: auto;
+    min-height: clamp(360px, 54svh, 660px);
+    margin: 0;
+    overflow: visible;
+}
+
+body > main > .pigment-map-section > .pigment-map-header {
+    display: block;
+    grid-template-columns: none;
+    gap: 0;
+    margin: 0;
+    padding: clamp(26px, 4.2vh, 50px) clamp(20px, 3.5vw, 50px) clamp(14px, 2vh, 24px);
+}
+
+body > main > .pigment-map-section > .pigment-map-header h1 {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+body > main > .pigment-map-section > .pigment-map-header .subtitle {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin-top: clamp(
+            10px,
+            1.6vh,
+            20px
+        );
+}
+
+
+
+.color-poll-section .color-poll-input , .color-poll-section .color-poll-submit {
+    min-height: 48px;
+}
+
+.color-timeline-section #color-timeline .color-timeline-svg {
+    display: block;
+    width: auto;
+    max-width: none;
+    height: auto;
+    max-height: none;
+}
+
+.color-timeline-section > #color-timeline::-webkit-scrollbar {
+    height: 8px;
+}
+
+.color-timeline-section > #color-timeline::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.color-timeline-section > #color-timeline::-webkit-scrollbar-thumb {
+    background: #999999;
+}
+
+.color-timeline-section > #color-timeline::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+.genealogy-node .genealogy-primary-hex {
+    font-size: 7px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    stroke-width: 0;
+    opacity: 0.88;
+    fill: #ffffff;
+    stroke: none;
+    paint-order: normal;
+    transform: translateY(5px);
+}
+
+.genealogy-node .genealogy-child-name {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+}
+
+.genealogy-node .genealogy-child-hex {
+    font-size: 7.5px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    fill: #777777;
+}
+
+.color-timeline-section .comparison-colors::-webkit-scrollbar {
+    height: 7px;
+}
+
+.color-timeline-section .comparison-colors::-webkit-scrollbar-track {
+    background: rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+}
+
+.color-timeline-section .comparison-colors::-webkit-scrollbar-thumb {
+    background: rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-information {
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    padding: clamp(16px, 2vh, 22px);
+    min-width: 210px;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-source {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    opacity: 1;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-name {
+    margin-top: 8px;
+    font-size: clamp(24px, 2.4vw, 36px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-details {
+    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-details dt {
+    font-weight: 800;
+    opacity: 0.7;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-details dd {
+    font-weight: 700;
+    opacity: 1;
+}
+
+.color-timeline-section .comparison-color-card-secondary {
+    opacity: 0.58;
+    transition: opacity 180ms ease;
+    min-width: 270px;
+}
+
+.color-timeline-section .comparison-color-card-secondary:hover {
+    opacity: 0.88;
+}
+
+.color-timeline-section .comparison-color-card-secondary .comparison-color-information {
+    border: 0;
+    padding: 0;
+}
+
+.color-timeline-section .comparison-color-card-secondary .comparison-color-name {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.color-timeline-section .comparison-color-card-secondary .comparison-source {
+    font-weight: 500;
+    opacity: 0.68;
+}
+
+.color-timeline-section .comparison-color-card-secondary .comparison-color-details {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+body > main > .transparency-section, body > main > .deception-section, body > main > .pigment-map-section, body > main > .color-timeline-section, body > main > .mixing-section, body > main > .color-poll-section {
+    width: 100%;
+    height: auto;
+    min-height: 100svh;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+}
+
+.deception-section .exercise-panel canvas, .deception-section .exerciseCanvas {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: min(58svh, 600px);
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+
+@media (max-width: 800px) {
+
+    .pigment-map-section {
+        padding: 55px 20px 40px;
+        display: block;
+        padding-top: 52px;
+    }
+
+    .pigment-map-header {
+        display: block;
+    }
+
+    .pigment-map-number {
+        margin-bottom: 20px;
+    }
+
+    .pigment-map-header h2 {
+        margin-bottom: 24px;
+    }
+
+    .pigment-map-description {
+        max-width: 100%;
+    }
+
+    .pigment-map-wrapper {
+        width: 100%;
+        height: min(62svh, 600px);
+        min-height: 440px;
+        margin-top: 28px;
+        margin-bottom: 24px;
+    }
+
+    #pigment-map {
+        width: 100%;
+        height: min(68svh, 580px);
+        min-height: 420px;
+    }
+
+    header , .exercise-navigation , .pigment-map-section , .color-timeline-section , .mixing-section {
+        min-height: 100svh;
+        height: auto;
+    }
+
+    header {
+        display: block;
+        padding: 36px 20px 24px;
+    }
+
+    h1 , .pigment-map-header h2 {
+        font-size: clamp(58px, 19vw, 100px);
+    }
+
+    .subtitle {
+        margin-top: 22px;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    .main-canvas-section {
+        margin-top: 34px;
+    }
+
+    .canvas-wrapper {
+        height: 56svh;
+        min-height: 380px;
+        max-height: none;
+    }
+
+    .exercise-navigation {
+        justify-content: flex-start;
+        padding: 50px 20px;
+    }
+
+    .exercise-buttons {
+        gap: 10px;
+    }
+
+    .exercise-button {
+        flex: 1 1 140px;
+        padding: 12px 18px;
+    }
+
+    .exerciseCanvas , #canvas-container-1 canvas , #canvas-container-2 canvas , #canvas-container-3 canvas , #canvas-container-4 canvas {
+        width: 100%;
+        max-height: none;
+    }
+
+    .color-timeline-section {
+        display: block;
+        padding-top: 55px;
+    }
+
+    .color-comparison-panel {
+        min-height: 0;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    #colorTimeline , #color-timeline , .color-timeline-container , .timeline-container {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .mixing-section {
+        display: block;
+    }
+
+    .mixing-header {
+        padding: 55px 20px 35px;
+    }
+
+    .mixing-layout {
+        display: block;
+        min-height: 0;
+    }
+
+    .mixing-introduction {
+        padding: 36px 20px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    footer , .mixing-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    :root {
+        --page-gutter: 20px;
+    }
+
+    .transparency-section , .deception-section , .pigment-map-section , .color-timeline-section , .mixing-section , .color-poll-section {
+        min-height: 100svh;
+        height: auto;
+        display: block;
+        overflow: visible;
+    }
+
+    .transparency-section h1 , .deception-section h1 , .pigment-map-section > h1 , .color-timeline-section h1 , .mixing-section h1 , .color-poll-section h1 {
+        font-size: clamp(48px, 17vw, 86px);
+        letter-spacing: -0.075em;
+        overflow-wrap: anywhere;
+    }
+
+    .transparency-section .canvas-wrapper {
+        height: 58svh;
+        min-height: 390px;
+    }
+
+    .transparency-section .color-archive {
+        padding-top: 12px;
+    }
+
+    .color-swatch {
+        width: calc(50% - 8px);
+        min-width: 135px;
+    }
+
+    .deception-section .exercise-navigation {
+        padding-top: 18px;
+        padding-bottom: 22px;
+    }
+
+    .deception-section .exercise-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+        padding: 5px 0;
+    }
+
+    .deception-section .exercise-button {
+        width: 100%;
+        padding: 7px 4px;
+    }
+
+    .deception-section .exercise-panel canvas , .deception-section .exerciseCanvas {
+        width: 100%;
+        height: auto;
+        max-height: none;
+    }
+
+    .comparison-year-column {
+        padding: 24px 20px;
+    }
+
+    .comparison-colors {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .comparison-color-card , .comparison-color-card-primary , .comparison-color-card-secondary {
+        min-width: min(86vw, 340px);
+        padding: 24px 20px;
+    }
+
+    .comparison-swatch-primary {
+        width: 104px;
+        height: 104px;
+    }
+
+    .comparison-swatch-secondary {
+        width: 72px;
+        height: 72px;
+    }
+
+    .color-timeline-section > #color-timeline {
+        min-height: 420px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .mixing-introduction , .mixing-information-panel {
+        padding: 32px 20px;
+        border-right: 0;
+        border-left: 0;
+    }
+
+    .mixing-lead {
+        max-width: none;
+    }
+
+    .mixing-steps {
+        margin-top: 30px;
+    }
+
+    .cmyk-genealogy {
+        height: 68svh;
+        min-height: 500px;
+    }
+
+    .mixing-information-panel {
+        display: block;
+    }
+
+    .mixing-information-panel > section {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mixing-information-panel > section:last-child {
+        border-bottom: 0;
+    }
+
+    .color-poll-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .color-poll-input , .color-poll-submit {
+        width: 100%;
+    }
+
+    .color-poll-bubbles {
+        min-height: 58svh;
+    }
+
+    body > main > .transparency-section , body > main > .deception-section , body > main > .pigment-map-section , body > main > .color-timeline-section , body > main > .mixing-section , body > main > .color-poll-section {
+        height: 100dvh;
+        min-height: 520px;
+    }
+
+    body > main > section > header {
+        padding: 24px 20px 14px;
+    }
+
+    body > main > section > header h1 {
+        font-size: clamp(48px, 16.5vw, 92px);
+        line-height: 0.78;
+        letter-spacing: -0.08em;
+    }
+
+    body > main > section > header .subtitle {
+        margin-top: 9px;
+        font-size: clamp(
+                11px,
+                3.3vw,
+                14px
+            );
+        max-width: 92%;
+        line-height: 1.35;
+    }
+
+    body > main > section > .instructions , body > main > section .mixing-canvas-column > .instructions , body > main > section > footer {
+        padding: 7px 20px;
+        font-size: 10px;
+    }
+
+    body > main > .transparency-section {
+        grid-template-rows: auto
+            minmax(0, 1fr)
+            auto
+            88px;
+    }
+
+    .transparency-section > .color-archive {
+        padding: 7px 20px;
+    }
+
+    .deception-section > .exercise-navigation {
+        padding: 5px 20px;
+    }
+
+    .pigment-map-section #pigment-map {
+        width: 100%;
+        height: min(68svh, 590px);
+        aspect-ratio: auto;
+        min-height: 400px;
+    }
+
+    body > main > .color-timeline-section {
+        grid-template-rows: auto
+            minmax(94px, 21vh)
+            minmax(0, 1fr)
+            auto
+            auto;
+    }
+
+    .color-timeline-section > .color-comparison-panel {
+        grid-template-columns: 88px minmax(0, 1fr);
+        display: block;
+        min-height: 0;
+    }
+
+    .color-timeline-section .comparison-year-column {
+        padding: 10px;
+    }
+
+    .color-timeline-section .comparison-year {
+        font-size: 32px;
+    }
+
+    .color-timeline-section .comparison-color-card {
+        min-width: 180px;
+        padding: 9px;
+    }
+
+    .color-timeline-section .comparison-color-card-primary {
+        min-width: min(88vw, 390px);
+    }
+
+    .color-timeline-section .comparison-swatch-primary {
+        width: 88px;
+        height: 88px;
+    }
+
+    .color-timeline-section .comparison-swatch-secondary {
+        width: 44px;
+        height: 44px;
+    }
+
+    .mixing-section > .mixing-layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(82px, 16vh)
+            minmax(0, 1fr)
+            minmax(105px, 22vh);
+        display: block;
+        min-height: 0;
+    }
+
+    .mixing-section .mixing-introduction {
+        padding: 9px 20px;
+        overflow: hidden;
+    }
+
+    .mixing-section .mixing-rule , .mixing-section .mixing-steps {
+        display: none;
+    }
+
+    .mixing-section .mixing-reset-button {
+        margin-top: 7px;
+    }
+
+    .mixing-section .mixing-information-panel {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(135px, 1fr));
+        gap: 10px;
+        padding: 8px 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-top: 1px solid var(--border);
+        border-left: none;
+    }
+
+    .mixing-section .mixing-selection-section , .mixing-section .mixing-result-section , .mixing-section .mixing-recipe-section {
+        min-width: 135px;
+        padding: 0;
+        border: 0;
+    }
+
+    .mixing-section .mixing-recipe-list > div {
+        padding: 3px 0;
+    }
+
+    .color-poll-section > .color-poll-form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 6px;
+        padding: 7px 20px;
+        margin-top: 24px;
+    }
+
+    .color-poll-section .color-poll-label {
+        grid-column: 1 / -1;
+    }
+
+    body > main > .pigment-map-section > .pigment-map-header {
+        display: block;
+        padding: 18px
+            20px
+            9px;
+    }
+
+    .color-timeline-section .comparison-colors {
+        padding-bottom: 16px;
+        padding: 24px 20px 30px;
+    }
+
+    .color-timeline-section .comparison-color-card-primary .comparison-color-information {
+        min-width: 170px;
+        padding: 13px;
+    }
+
+    .color-timeline-section .comparison-color-card-primary .comparison-color-name {
+        font-size: 23px;
+    }
+
+    .color-timeline-section .comparison-color-card-secondary {
+        opacity: 0.7;
+    }
+
+    body > main > .transparency-section, body > main > .deception-section, body > main > .pigment-map-section, body > main > .color-timeline-section, body > main > .mixing-section, body > main > .color-poll-section {
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
+    }
+
+    .transparency-section > .main-canvas-section > .canvas-wrapper {
+        height: clamp(390px, 58svh, 620px);
+    }
+
+    .deception-section .exercise-panel canvas, .deception-section .exerciseCanvas {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        max-height: none;
+    }
+
+    .mixing-section .mixing-canvas-column {
+        display: grid;
+        grid-template-rows: minmax(520px, 68svh) auto;
+    }
+
+    .mixing-section .cmyk-genealogy {
+        height: 68svh;
+        min-height: 520px;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .color-comparison-panel {
+        display: block;
+    }
+
+    .comparison-year-column {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .comparison-color-card-primary {
+        min-width: 340px;
+    }
+
+    .comparison-color-card-secondary {
+        min-width: 270px;
+    }
+
+    .comparison-swatch-primary {
+        width: 112px;
+        height: 112px;
+    }
+
+    .comparison-swatch-secondary {
+        width: 70px;
+        height: 70px;
+    }
+
+    .mixing-section {
+        margin-top: 100px;
+    }
+
+    .mixing-header {
+        padding: 70px 20px 35px;
+    }
+
+    .mixing-layout {
+        display: block;
+        min-height: 0;
+    }
+
+    .mixing-introduction {
+        padding: 36px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mixing-lead {
+        max-width: 100%;
+    }
+
+    .mixing-steps {
+        margin-top: 35px;
+    }
+
+    .cmyk-genealogy {
+        height: 620px;
+    }
+
+    .mixing-information-panel {
+        display: block;
+        padding: 38px 20px;
+    }
+
+    .mixing-selection-section , .mixing-result-section {
+        padding-bottom: 34px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mixing-result-section , .mixing-recipe-section {
+        padding-top: 34px;
+    }
+
+    .mixing-footer {
+        display: block;
+        padding: 32px 20px;
+    }
+
+    .mixing-footer p + p {
+        margin-top: 12px;
+    }
+
+}
+
+
+@media (max-width: 1050px) {
+
+    .mixing-layout {
+        grid-template-columns: 220px minmax(0, 1fr);
+        min-height: auto;
+    }
+
+    .mixing-information-panel {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 38px;
+        padding: 40px 50px;
+        border-top: 1px solid var(--border);
+        border-left: 0;
+    }
+
+    .mixing-selection-section , .mixing-result-section {
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .mixing-result-section , .mixing-recipe-section {
+        padding-top: 0;
+    }
+
+    header , .exercise-navigation , .pigment-map-section , .color-timeline-section , .mixing-section {
+        min-height: auto;
+    }
+
+    .mixing-information-panel > section {
+        min-width: 0;
+        border-right: 1px solid var(--border);
+    }
+
+    .mixing-information-panel > section:last-child {
+        border-right: 0;
+    }
+
+    .mixing-section > .mixing-layout {
+        grid-template-columns: minmax(155px, 22vw)
+            minmax(0, 1fr)
+            minmax(185px, 27vw);
+    }
+
+}
+
+
+@media (max-height: 820px) and (min-width: 801px) {
+
+    header {
+        padding-top: 24px;
+        padding-bottom: 18px;
+    }
+
+    h1 , .pigment-map-header h2 {
+        font-size: clamp(58px, 9vw, 118px);
+    }
+
+    .subtitle {
+        margin-top: 16px;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .main-canvas-section {
+        margin-top: 22px;
+    }
+
+    .canvas-wrapper {
+        height: 51svh;
+        max-height: 51svh;
+    }
+
+    .exercise-navigation {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+    .exercise-panel {
+        margin-top: 22px;
+    }
+
+    .exerciseCanvas , #canvas-container-1 canvas , #canvas-container-2 canvas , #canvas-container-3 canvas , #canvas-container-4 canvas {
+        max-height: 50svh;
+    }
+
+    .pigment-map-section {
+        padding-top: 28px;
+        padding-bottom: 26px;
+    }
+
+    #pigment-map {
+        width: min(52svh, 580px, 100%);
+        height: min(52svh, 580px);
+    }
+
+    .color-timeline-section {
+        padding-top: 28px;
+    }
+
+    .color-comparison-panel {
+        min-height: 210px;
+    }
+
+    .comparison-year-column , .comparison-color-card {
+        padding: 26px;
+    }
+
+    .mixing-header {
+        padding-top: 28px;
+        padding-bottom: 24px;
+    }
+
+    .mixing-layout {
+        min-height: 0;
+    }
+
+    .mixing-introduction {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+}
+
+
+@media (min-width: 801px) and (max-height: 820px) {
+
+    .transparency-section h1 , .deception-section h1 , .pigment-map-section > h1 , .color-timeline-section h1 , .mixing-section h1 , .color-poll-section h1 {
+        font-size: clamp(54px, 9.5vw, 118px);
+    }
+
+    .transparency-section .canvas-wrapper {
+        height: clamp(330px, 50svh, 520px);
+    }
+
+    .deception-section .exercise-panel canvas , .deception-section .exerciseCanvas {
+        max-height: 46svh;
+    }
+
+    #pigment-map {
+        width: min(54svh, 580px, 100%);
+        height: min(54svh, 580px);
+    }
+
+    .color-comparison-panel {
+        min-height: 220px;
+    }
+
+    .comparison-year-column , .comparison-color-card {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .cmyk-genealogy {
+        height: clamp(440px, 58svh, 600px);
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .deception-section .exercise-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .color-swatch {
+        width: 100%;
+    }
+
+    #pigment-map {
+        min-height: 380px;
+    }
+
+    .comparison-color-card {
+        flex-direction: column;
+    }
+
+    body > main > section > header h1 {
+        font-size: clamp(
+                42px,
+                15.5vw,
+                70px
+            );
+    }
+
+    .color-timeline-section > .color-comparison-panel {
+        grid-template-columns: 76px minmax(0, 1fr);
+    }
+
+    .deception-section .exercise-button {
+        font-size: 9px;
+    }
+
+    .transparency-section > header h1 {
+        font-size: clamp(
+                38px,
+                13.5vw,
+                62px
+            );
+    }
+
+}
+
+
+@media (min-width: 801px) and (max-height: 760px) {
+
+    body > main > section > header {
+        padding: 14px
+            38px
+            7px;
+    }
+
+    body > main > section > header h1 {
+        font-size: clamp(
+                66px,
+                min(13vw, 17vh),
+                128px
+            );
+        line-height: 0.76;
+    }
+
+    body > main > section > header .subtitle {
+        margin-top: 7px;
+        font-size: clamp(
+                11px,
+                1.6vh,
+                15px
+            );
+    }
+
+    body > main > .color-timeline-section {
+        grid-template-rows: auto
+            minmax(100px, 24vh)
+            minmax(0, 1fr)
+            auto
+            auto;
+    }
+
+    .mixing-section .mixing-steps {
+        margin-top: 8px;
+    }
+
+    body > main > .pigment-map-section > .pigment-map-header {
+        padding: 14px
+            38px
+            7px;
+    }
+
+}
+
+
+@media (min-width: 601px) and (max-width: 1000px) {
+
+    body > main > section > header h1 {
+        font-size: clamp(
+                68px,
+                min(15vw, 17vh),
+                145px
+            );
+    }
+
+}
+
+
+ ==========================================
+   TRANSPARENCY — SHORTER DISCOVERED COLORS AREA
+   ========================================== */
+
+.transparency-section > .color-archive {
+    padding-top: 10px;
+    padding-bottom: 16px;
+}
+
+.transparency-section > .color-archive h2 {
+    margin-bottom: 8px;
+}
+
+.transparency-section #colorArchiveContainer {
+    gap: 8px;
+}
+
+.transparency-section .color-swatch {
+    height: 58px;
+    padding: 7px 9px;
+    justify-content: flex-end;
+}
+
+.transparency-section .color-swatch strong {
+    margin-bottom: 2px;
+    font-size: 10px;
+}
+
+.transparency-section .color-swatch span {
+    font-size: 9px;
+}
+
+
+/* ==========================================
+   MIXING — GREY TEXT INSIDE PRIMARY BUBBLES
+   ========================================== */
+
+.genealogy-node .genealogy-primary-letter,
+.genealogy-node .genealogy-primary-name,
+.genealogy-node .genealogy-primary-hex {
+    fill: #6f6f6f;
+    stroke: none;
+    paint-order: normal;
+}
+
+.genealogy-node .genealogy-primary-name {
+    font-weight: 700;
+}
+
+.genealogy-node .genealogy-primary-hex {
+    opacity: 1;
+}
+
+
+/* ==========================================
+   TRENDS — KEEP TIMELINE BELOW BLACK PANEL
+   ========================================== */
+
+.color-timeline-section > .color-comparison-panel {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 28px;
+}
+
+.color-timeline-section > #color-timeline {
+    position: relative;
+    z-index: 1;
+    clear: both;
+    margin-top: 0;
+    padding-top: 12px;
+    background: var(--white);
+}
+
+.color-timeline-section > #color-timeline .color-timeline-svg {
+    display: block;
+}
+
+
+/* Prevent the first timeline row from visually
+   sliding underneath the black comparison band. */
+
+.color-timeline-section > #color-timeline {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* ==========================================================
+   VERTICAL SECTION NAVIGATION
+   ========================================================== */
+
+html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 0;
+}
+
+
+/*
+Each project becomes a scroll destination.
+
+Use scroll-snap-align without forcing every
+section to be exactly one viewport tall.
+*/
+
+.transparency-section,
+.deception-section,
+.pigment-map-section,
+.color-timeline-section,
+.mixing-section,
+.color-poll-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+
+/* ==========================================
+   NAVIGATION CONTAINER
+   ========================================== */
+
+.section-navigation {
+    position: fixed;
+
+    top: 50%;
+    right: clamp(14px, 1.8vw, 28px);
+
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 18px;
+
+    transform: translateY(-50%);
+}
+
+
+/* ==========================================
+   VERTICAL GRAY LINE
+   ========================================== */
+
+.section-navigation-line {
+    position: absolute;
+
+    top: 7px;
+    bottom: 7px;
+    left: 50%;
+
+    width: 1px;
+
+    background: rgba(17, 17, 17, 0.25);
+
+    transform: translateX(-50%);
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   SECTION DOTS
+   ========================================== */
+
+.section-navigation-dot {
+    position: relative;
+    z-index: 1;
+
+    width: 10px;
+    height: 10px;
+
+    padding: 0;
+
+    border: 1px solid #777777;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transition:
+        width 180ms ease,
+        height 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+}
+
+
+.section-navigation-dot:hover {
+    border-color: #111111;
+
+    transform: scale(1.25);
+}
+
+
+.section-navigation-dot.active {
+    width: 15px;
+    height: 15px;
+
+    border-color: #111111;
+
+    background: #111111;
+}
+
+
+/* Visible keyboard navigation */
+
+.section-navigation-dot:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 4px;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 800px) {
+
+    /*
+    Keep the navigation available, but move it
+    closer to the edge and reduce its size.
+    */
+
+    .section-navigation {
+        right: 8px;
+        gap: 15px;
+    }
+
+
+    .section-navigation-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+
+    .section-navigation-dot.active {
+        width: 12px;
+        height: 12px;
+    }
+
+}
+
+
+/* Very narrow phones */
+
+@media (max-width: 480px) {
+
+    /*
+    Hiding it is safer when the rail would
+    overlap interactive content.
+    */
+
+    .section-navigation {
+        display: none;
+    }
+
+}
+
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+
+    .section-navigation-dot {
+        transition: none;
+    }
+
+}
+
+
+
+/* ==========================================================
+   PLAYGROUND, PALETTE, DECEPTION, TRENDS, MIXING
+   ========================================================== */
+
+:root {
+    --navigation-safe-area: clamp(52px, 5vw, 82px);
+}
+
+
+/* ==========================================
+   COLOR PLAYGROUND TITLE
+   ========================================== */
+
+.playground-title {
+    display: inline-grid;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+
+    font-weight: 900;
+    line-height: 0.72;
+    letter-spacing: -0.09em;
+}
+
+
+.playground-title-color {
+    display: block;
+
+    color: var(--black);
+
+    font-size:
+        clamp(
+            120px,
+            min(27vw, 38vh),
+            410px
+        );
+
+    white-space: nowrap;
+}
+
+
+/*
+"playground" starts under the left edge
+of the L in COLOR.
+
+COLOR has five letters, so placing the
+word at approximately 40% of COLOR's
+rendered width aligns it with the L.
+*/
+
+.playground-title-word {
+    display: block;
+
+    width: max-content;
+
+    margin-top:
+        clamp(
+            24px,
+            5vh,
+            70px
+        );
+
+    margin-left:
+        40%;
+
+    font-size:
+        clamp(
+            78px,
+            min(17vw, 25vh),
+            265px
+        );
+
+    font-weight: 500;
+    letter-spacing: -0.075em;
+
+    animation:
+        playground-color-cycle
+        12s
+        linear
+        infinite;
+}
+
+/* ==========================================
+   PALETTE PLACEHOLDER
+   ========================================== */
+
+.palette-section {
+    width: 100%;
+    min-height: 100svh;
+
+    padding-right: var(--navigation-safe-area);
+
+    background: var(--white);
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+
+.palette-section > header {
+    min-height: 0;
+}
+
+
+/* ==========================================
+   DECEPTION — SAME CANVAS SIZE FOR ALL FOUR
+   ========================================== */
+
+.deception-section .exercise-panels {
+    width: 100%;
+}
+
+
+.deception-section .exercise-panel.active {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.deception-section .exercise-panel > div {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width:
+        min(
+            calc(100vw - 2 * var(--page-gutter) - var(--navigation-safe-area)),
+            760px
+        );
+
+    max-width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+.deception-section .exercise-panel canvas,
+.deception-section .exerciseCanvas,
+#canvas-container-1 canvas,
+#canvas-container-2 canvas,
+#canvas-container-3 canvas,
+#canvas-container-4 canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   TRENDS — RESERVE NAVIGATION SPACE
+   ========================================== */
+
+.color-timeline-section {
+    padding-right: var(--navigation-safe-area);
+}
+
+
+/* Center the year in its black column */
+
+.color-timeline-section .comparison-year-column {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.color-timeline-section .comparison-year,
+.color-timeline-section .comparison-year-label {
+    width: 100%;
+
+    text-align: center;
+}
+
+
+/*
+The timeline should fit the available screen.
+JavaScript will assign an SVG width equal to
+the visible container width.
+*/
+
+.color-timeline-section > #color-timeline {
+    width: 100%;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    padding-right: 0;
+    padding-bottom: 14px;
+}
+
+
+.color-timeline-section
+#color-timeline
+.color-timeline-svg {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+}
+
+
+/* ==========================================
+   MIXING — RESERVE NAVIGATION SPACE
+   ========================================== */
+
+.mixing-section {
+    padding-right: var(--navigation-safe-area);
+}
+
+
+.mixing-section > header,
+.mixing-section > footer {
+    padding-right:
+        calc(
+            var(--page-gutter) +
+            var(--navigation-safe-area)
+        );
+}
+
+
+.mixing-section > .mixing-layout {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 800px) {
+
+    :root {
+        --navigation-safe-area: 34px;
+    }
+
+
+    .playground-title-color {
+        font-size:
+            clamp(
+                72px,
+                25vw,
+                155px
+            );
+    }
+
+
+    .playground-title-word {
+        margin-top: 34px;
+        margin-left: 16%;
+
+        font-size:
+            clamp(
+                52px,
+                17vw,
+                110px
+            );
+    }
+
+
+    .deception-section .exercise-panel > div {
+        width:
+            calc(
+                100vw -
+                40px -
+                var(--navigation-safe-area)
+            );
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    :root {
+        --navigation-safe-area: 0px;
+    }
+
+
+    .playground-intro-section,
+    .palette-section,
+    .color-timeline-section,
+    .mixing-section {
+        padding-right: 0;
+    }
+
+
+    .playground-title-word {
+        margin-left: 10%;
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .playground-title-word {
+        animation: none;
+
+        color: #9b78e8;
+    }
+
+}
+
+/* ==========================================================
    FINAL STABILIZATION — JULY 2026
    Keep this section last. It replaces earlier conflicting
    layout decisions without using !important.
@@ -344,6 +3545,1036 @@ body > main > section > header .subtitle,
         color: #9b78e8;
     }
 }
+
+
+/* ==========================================================
+   FINAL STABILIZATION — JULY 2026
+   Keep this section last. It replaces earlier conflicting
+   layout decisions without using !important.
+   ========================================================== */
+
+:root {
+    --navigation-safe-area: clamp(44px, 4.5vw, 72px);
+    --subtitle-offset: clamp(14px, 2vw, 30px);
+}
+
+/* ---------- Shared section headers ---------- */
+
+body > main > section > header,
+.pigment-map-section > .pigment-map-header {
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding:
+        clamp(24px, 4vh, 46px)
+        calc(var(--page-gutter) + var(--navigation-safe-area))
+        clamp(12px, 1.8vh, 22px)
+        var(--page-gutter);
+}
+
+body > main > section > header h1,
+.pigment-map-section > .pigment-map-header h1 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+body > main > section > header .subtitle,
+.pigment-map-section > .pigment-map-header .subtitle {
+    width: auto;
+    max-width: min(820px, calc(100% - var(--subtitle-offset)));
+    margin:
+        clamp(10px, 1.5vh, 18px)
+        0
+        0
+        var(--subtitle-offset);
+    padding: 0;
+    text-align: left;
+    transform: none;
+}
+
+/* ---------- Playground ---------- */
+
+.playground-intro-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 100svh;
+    padding:
+        clamp(30px, 5vh, 60px)
+        calc(var(--page-gutter) + var(--navigation-safe-area))
+        clamp(30px, 5vh, 60px)
+        var(--page-gutter);
+    overflow: hidden;
+    background: var(--white);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.playground-title {
+    display: inline-grid;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    font-weight: 900;
+    line-height: 0.72;
+}
+
+.playground-title-color {
+    display: block;
+    color: var(--black);
+    font-size: clamp(120px, min(27vw, 38vh), 410px);
+    font-weight: 900;
+    line-height: 0.72;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+}
+
+.playground-title-word {
+    display: block;
+    width: max-content;
+    margin-top: clamp(24px, 5vh, 70px);
+    margin-left: 40%;
+    font-size: clamp(78px, min(17vw, 25vh), 265px);
+    font-weight: 500;
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    animation: playground-color-cycle 12s linear infinite;
+}
+
+/* ---------- Deception: whole section fits on desktop ---------- */
+
+.deception-section {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    width: 100%;
+    height: 100svh;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+.deception-section > header {
+    padding-top: clamp(14px, 2.4vh, 28px);
+    padding-bottom: clamp(6px, 1vh, 12px);
+}
+
+.deception-section > header h1 {
+    font-size: clamp(62px, min(12vw, 15vh), 145px);
+}
+
+.deception-section .exercise-navigation {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+    padding:
+        clamp(5px, 0.9vh, 10px)
+        calc(var(--page-gutter) + var(--navigation-safe-area))
+        clamp(6px, 1vh, 12px)
+        var(--page-gutter);
+    overflow: hidden;
+}
+
+.deception-section .exercise-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: clamp(6px, 1vw, 14px);
+    padding: clamp(6px, 1vh, 10px) 0;
+}
+
+.deception-section .exercise-panels,
+.deception-section .exercise-panel {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.deception-section .exercise-panel {
+    display: none;
+}
+
+.deception-section .exercise-panel.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deception-section .exercise-panel > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 640px);
+    height: auto;
+    max-height: 100%;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.deception-section .exercise-panel canvas,
+.deception-section .exerciseCanvas,
+#canvas-container-1 canvas,
+#canvas-container-2 canvas,
+#canvas-container-3 canvas,
+#canvas-container-4 canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    object-fit: contain;
+}
+
+.deception-section > .instructions,
+.deception-section > footer {
+    margin: 0;
+    padding:
+        clamp(7px, 1.1vh, 12px)
+        calc(var(--page-gutter) + var(--navigation-safe-area))
+        clamp(7px, 1.1vh, 12px)
+        var(--page-gutter);
+    font-size: clamp(10px, 1.25vh, 13px);
+    line-height: 1.35;
+}
+
+/* ---------- Trends ---------- */
+
+.color-timeline-section {
+    padding-right: var(--navigation-safe-area);
+}
+
+.color-timeline-section > .color-comparison-panel {
+    width: 100%;
+}
+
+.color-timeline-section .comparison-year-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.color-timeline-section .comparison-year,
+.color-timeline-section .comparison-year-label {
+    width: 100%;
+    text-align: center;
+}
+
+.color-timeline-section > #color-timeline {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-right: 0;
+    padding-bottom: 14px;
+}
+
+.color-timeline-section #color-timeline .color-timeline-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+/* ---------- Mixing ---------- */
+
+.mixing-section {
+    padding-right: var(--navigation-safe-area);
+}
+
+.mixing-section > header,
+.mixing-section > footer {
+    padding-right: calc(var(--page-gutter) + var(--navigation-safe-area));
+}
+
+.mixing-section > .mixing-layout {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ---------- Pigment footer ---------- */
+
+.pigment-map-section > footer {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: calc(var(--page-gutter) + var(--navigation-safe-area));
+    padding-left: var(--page-gutter);
+    text-align: left;
+}
+
+/* ---------- Tablet and mobile ---------- */
+
+@media (max-width: 800px) {
+    :root {
+        --navigation-safe-area: 32px;
+        --subtitle-offset: clamp(10px, 4vw, 22px);
+    }
+
+    body > main > section > header,
+    .pigment-map-section > .pigment-map-header {
+        padding-right: calc(20px + var(--navigation-safe-area));
+        padding-left: 20px;
+    }
+
+ 
+
+    .playground-title-word {
+    display: block;
+    width: max-content;
+
+    margin-top: clamp(24px, 5vh, 70px);
+    margin-left: 40%;
+
+    font-size: clamp(78px, min(17vw, 25vh), 265px);
+    font-weight: 500;
+    letter-spacing: -0.075em;
+
+    animation: playground-color-cycle 12s linear infinite;
+}
+
+@keyframes playground-color-cycle {
+    0% {
+        color: #ff7a8a;
+    }
+
+    16% {
+        color: #ffb347;
+    }
+
+    32% {
+        color: #d3c94e;
+    }
+
+    48% {
+        color: #61c99a;
+    }
+
+    64% {
+        color: #5b9df9;
+    }
+
+    80% {
+        color: #9b78e8;
+    }
+
+    100% {
+        color: #ff7a8a;
+    }
+}
+
+
+
+    .deception-section {
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
+    }
+
+    .deception-section .exercise-navigation {
+        display: block;
+        padding: 12px calc(20px + var(--navigation-safe-area)) 18px 20px;
+        overflow: visible;
+    }
+
+    .deception-section .exercise-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .deception-section .exercise-panel {
+        height: auto;
+        margin-top: 16px;
+        overflow: visible;
+    }
+
+    .deception-section .exercise-panel > div {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .deception-section .exercise-panel canvas,
+    .deception-section .exerciseCanvas,
+    #canvas-container-1 canvas,
+    #canvas-container-2 canvas,
+    #canvas-container-3 canvas,
+    #canvas-container-4 canvas {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --navigation-safe-area: 0px;
+    }
+
+    .playground-intro-section,
+    .color-timeline-section,
+    .mixing-section {
+        padding-right: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .playground-title-word {
+        animation: none;
+        color: #9b78e8;
+    }
+}
+
+
+/* ==========================================
+   PLAYGROUND COLOR ANIMATION
+   ========================================== */
+
+@keyframes playground-color-cycle {
+    0% {
+        color: #ff7a8a;
+    }
+
+    16% {
+        color: #ffb347;
+    }
+
+    32% {
+        color: #d3c94e;
+    }
+
+    48% {
+        color: #61c99a;
+    }
+
+    64% {
+        color: #5b9df9;
+    }
+
+    80% {
+        color: #9b78e8;
+    }
+
+    100% {
+        color: #ff7a8a;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .playground-title-word {
+        animation: none;
+        color: #9b78e8;
+    }
+}
+
+.color-poll-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.color-poll-label {
+    display: flex;
+    align-items: center;
+
+    height: 48px;
+    margin: 0;
+
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.color-poll-input,
+.color-poll-submit {
+    height: 48px;
+    margin: 0;
+}
+
+
+
+/* ==========================================================
+   TRENDS + MIXING — NAVIGATION-SAFE LAYOUT
+   ========================================================== */
+
+:root {
+    --navigation-rail-space:
+        clamp(
+            56px,
+            5vw,
+            82px
+        );
+}
+
+
+/* Reserve space without moving the fixed navigation itself */
+
+.color-timeline-section,
+.mixing-section {
+    width:
+        calc(
+            100% -
+            var(--navigation-rail-space)
+        );
+
+    max-width:
+        calc(
+            100% -
+            var(--navigation-rail-space)
+        );
+
+    margin-right:
+        var(--navigation-rail-space);
+
+    overflow-x:
+        hidden;
+}
+
+
+/* ==========================================================
+   TRENDS — FIT ALL CONTENT
+   ========================================================== */
+
+.color-timeline-section {
+    display: grid;
+
+    grid-template-rows:
+        auto
+        auto
+        auto
+        auto
+        auto;
+
+    min-height: 100svh;
+    height: auto;
+
+    margin-top: 0;
+    padding: 0;
+
+    overflow: visible;
+}
+
+
+/* Compact header without losing the large title */
+
+.color-timeline-section > .color-timeline-header {
+    min-height: 0;
+
+    margin: 0;
+
+    padding:
+        clamp(22px, 3.5vh, 42px)
+        var(--page-gutter)
+        clamp(12px, 1.8vh, 22px);
+}
+
+
+/* ==========================================
+   BLACK COMPARISON BAND
+   ========================================== */
+
+.color-timeline-section
+> .color-comparison-panel {
+    display: grid;
+
+    grid-template-columns:
+        clamp(135px, 15vw, 205px)
+        minmax(0, 1fr);
+
+    width: 100%;
+    min-width: 0;
+
+    min-height:
+        clamp(
+            230px,
+            30svh,
+            320px
+        );
+
+    margin: 0;
+
+    overflow: hidden;
+
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* Center selected year */
+
+.color-timeline-section
+.comparison-year-column {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+
+    padding:
+        clamp(
+            18px,
+            2.5vw,
+            34px
+        );
+
+    text-align: center;
+
+    border-right:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+}
+
+
+.color-timeline-section
+.comparison-year,
+.color-timeline-section
+.comparison-year-label {
+    width: 100%;
+    text-align: center;
+}
+
+
+/* Comparison cards may scroll only inside black band */
+
+.color-timeline-section
+.comparison-colors {
+    display: flex;
+    align-items: flex-start;
+
+    min-width: 0;
+
+    gap:
+        clamp(
+            20px,
+            2.5vw,
+            38px
+        );
+
+    padding:
+        clamp(22px, 3vh, 34px)
+        clamp(20px, 2.5vw, 34px)
+        28px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-gutter: stable;
+}
+
+
+/* Prevent cards from becoming unnecessarily wide */
+
+.color-timeline-section
+.comparison-color-card {
+    min-width:
+        clamp(
+            220px,
+            24vw,
+            300px
+        );
+
+    gap: 16px;
+
+    padding: 0;
+}
+
+
+.color-timeline-section
+.comparison-color-card-primary {
+    min-width:
+        clamp(
+            350px,
+            38vw,
+            445px
+        );
+}
+
+
+.color-timeline-section
+.comparison-color-card-secondary {
+    min-width:
+        clamp(
+            215px,
+            23vw,
+            280px
+        );
+}
+
+
+/* ==========================================
+   TIMELINE
+   ========================================== */
+
+.color-timeline-section
+> #color-timeline {
+    width: 100%;
+    min-width: 0;
+
+    min-height: 330px;
+    height: auto;
+
+    margin: 0;
+
+    padding:
+        14px
+        0
+        10px;
+
+    overflow-x: hidden;
+    overflow-y: visible;
+
+    background: var(--white);
+}
+
+
+.color-timeline-section
+#color-timeline
+.color-timeline-svg {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+    max-height: none;
+}
+
+
+/* Instructions and footer remain visible */
+
+.color-timeline-section
+> .instructions,
+.color-timeline-section
+> .color-timeline-footer {
+    width: 100%;
+    margin: 0;
+}
+
+
+/* ==========================================================
+   MIXING — FIT CONTENT + NAVIGATION CLEARANCE
+   ========================================================== */
+
+.mixing-section {
+    display: grid;
+
+    grid-template-rows:
+        auto
+        auto
+        auto;
+
+    min-height: 100svh;
+    height: auto;
+
+    margin-top: 0;
+    padding: 0;
+
+    overflow: visible;
+}
+
+
+.mixing-section
+> .mixing-header {
+    min-height: 0;
+
+    margin: 0;
+
+    padding:
+        clamp(22px, 3.5vh, 42px)
+        var(--page-gutter)
+        clamp(12px, 1.8vh, 22px);
+}
+
+
+/* Three-column desktop layout */
+
+.mixing-section
+> .mixing-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(170px, 0.8fr)
+        minmax(380px, 2.2fr)
+        minmax(205px, 0.95fr);
+
+    width: 100%;
+    min-width: 0;
+
+    min-height:
+        clamp(
+            560px,
+            66svh,
+            720px
+        );
+
+    margin: 0;
+
+    overflow: hidden;
+
+    border-top:
+        1px solid
+        var(--border);
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+
+/* Left panel */
+
+.mixing-section
+.mixing-introduction {
+    min-width: 0;
+
+    padding:
+        clamp(22px, 3vh, 38px)
+        clamp(18px, 2vw, 30px);
+
+    overflow-y: auto;
+
+    border-right:
+        1px solid
+        var(--border);
+}
+
+
+/* Center visualization */
+
+.mixing-section
+.mixing-canvas-column {
+    display: grid;
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        auto;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+
+.mixing-section
+.cmyk-genealogy {
+    width: 100%;
+    height: 100%;
+
+    min-height:
+        clamp(
+            500px,
+            60svh,
+            660px
+        );
+
+    overflow: hidden;
+}
+
+
+.mixing-section
+.cmyk-genealogy svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+
+    overflow: visible;
+}
+
+
+/* Right information panel */
+
+.mixing-section
+.mixing-information-panel {
+    min-width: 0;
+
+    padding:
+        clamp(22px, 3vh, 38px)
+        clamp(18px, 2vw, 30px);
+
+    overflow-y: auto;
+
+    border-left:
+        1px solid
+        var(--border);
+}
+
+
+/* Keep recipe values inside panel */
+
+.mixing-section
+.mixing-recipe-list > div {
+    grid-template-columns:
+        minmax(60px, 1fr)
+        minmax(50px, auto);
+
+    gap: 14px;
+}
+
+
+/* Footer */
+
+.mixing-section
+> .mixing-footer {
+    width: 100%;
+    margin: 0;
+}
+
+
+@media
+    (max-width: 1050px)
+    and
+    (min-width: 801px) {
+
+    .mixing-section
+    > .mixing-layout {
+        grid-template-columns:
+            minmax(175px, 0.75fr)
+            minmax(360px, 1.8fr);
+
+        overflow: visible;
+    }
+
+
+    .mixing-section
+    .mixing-information-panel {
+        grid-column:
+            1 / -1;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+
+        gap: 28px;
+
+        overflow: visible;
+
+        border-top:
+            1px solid
+            var(--border);
+
+        border-left: 0;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    :root {
+        --navigation-rail-space:
+            28px;
+    }
+
+
+    .color-timeline-section,
+    .mixing-section {
+        width:
+            calc(
+                100% -
+                var(--navigation-rail-space)
+            );
+
+        max-width:
+            calc(
+                100% -
+                var(--navigation-rail-space)
+            );
+
+        margin-right:
+            var(--navigation-rail-space);
+    }
+
+
+    .color-timeline-section
+    > .color-comparison-panel {
+        display: block;
+    }
+
+
+    .color-timeline-section
+    .comparison-year-column {
+        min-height: 110px;
+
+        border-right: 0;
+
+        border-bottom:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.25
+            );
+    }
+
+
+    .color-timeline-section
+    > #color-timeline {
+        min-height: 380px;
+    }
+
+
+    .mixing-section
+    > .mixing-layout {
+        display: block;
+
+        min-height: 0;
+
+        overflow: visible;
+    }
+
+
+    .mixing-section
+    .mixing-introduction,
+    .mixing-section
+    .mixing-information-panel {
+        overflow: visible;
+
+        border-right: 0;
+        border-left: 0;
+    }
+
+
+    .mixing-section
+    .mixing-information-panel {
+        display: block;
+
+        border-top:
+            1px solid
+            var(--border);
+    }
+
+
+    .mixing-section
+    .cmyk-genealogy {
+        height: 66svh;
+        min-height: 500px;
+    }
+
+}
+
 
 
 

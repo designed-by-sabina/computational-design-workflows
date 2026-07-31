@@ -110,6 +110,7 @@
             playground
         </span>
 
+    
     </h1>
 
 </section>
@@ -321,73 +322,87 @@
 
 
         <!-- ==========================================
-             SECTION 04 — TRENDS
-        =========================================== -->
+     COLOR FORECAST TIMELINE
+=========================================== -->
 
-        <section
+<section
     class="color-timeline-section"
     id="trends"
 >
 
-            <header class="color-timeline-header">
+    <header class="color-timeline-header">
 
-                <h1>
-                    TRENDS
-                </h1>
+        <h1>
+            TRENDS
+        </h1>
 
-                <p class="subtitle">
-                    Annual color selections and forecasts across cultural,
-                    architectural, and fashion sources
-                </p>
+        <p class="subtitle">
+            Annual color selections and forecasts across cultural,
+            architectural, and fashion sources
+        </p>
 
-            </header>
-
-
-            <div id="color-comparison-panel" class="color-comparison-panel" aria-live="polite">
-
-                <div class="comparison-year-column">
-
-                    <p id="comparison-year" class="comparison-year">
-                        2026
-                    </p>
-
-                    <p class="comparison-year-label">
-                        YEAR SELECTED
-                    </p>
-
-                </div>
+    </header>
 
 
-                <div id="comparison-colors" class="comparison-colors"></div>
+    <!-- ======================================
+         SELECTED COLOR COMPARISON
+    ======================================= -->
 
-            </div>
+    <div
+        id="color-comparison-panel"
+        class="color-comparison-panel"
+        aria-live="polite"
+    >
+
+        <div class="comparison-year-column">
+
+            <p
+                id="comparison-year"
+                class="comparison-year"
+            >
+                2026
+            </p>
+
+            <p class="comparison-year-label">
+                YEAR SELECTED
+            </p>
+
+        </div>
 
 
-            <!-- D3 timeline is generated here -->
-            <div id="color-timeline"></div>
+        <div
+            id="comparison-colors"
+            class="comparison-colors"
+        ></div>
+
+    </div>
 
 
-            <section class="instructions">
+    <!-- Only one timeline container -->
 
-                <p>
-                    Click a <strong>COLOR SWATCH</strong> to learn more and compare
-                    color selections from the same year.
-                </p>
-
-            </section>
+    <div id="color-timeline"></div>
 
 
-            <footer class="color-timeline-footer">
+    <section class="instructions">
 
-                <p>
-                    Digital colors are visual approximations.
-                    Manufacturer and color-system codes are provided as references.
-                </p>
+        <p>
+            Click a <strong>COLOR SWATCH</strong> to learn more
+            and compare color selections from the same year.
+        </p>
 
-            </footer>
+    </section>
 
-        </section>
 
+    <footer class="color-timeline-footer">
+
+        <p>
+            Digital colors are visual approximations.
+            Manufacturer and color-system codes are provided as references.
+        </p>
+
+    </footer>
+
+</section>
 
         <!-- ==========================================
              SECTION 05 — MIXING
