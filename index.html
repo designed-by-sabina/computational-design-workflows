@@ -16,18 +16,29 @@
 
 <body>
 
-    <nav
+<nav
     class="section-navigation"
     aria-label="Project section navigation"
 >
+
     <div class="section-navigation-line"></div>
+
 
     <button
         class="section-navigation-dot active"
         type="button"
+        data-section="playground"
+        aria-label="Go to Color Playground"
+    ></button>
+
+
+    <button
+        class="section-navigation-dot"
+        type="button"
         data-section="transparency"
         aria-label="Go to Transparency"
     ></button>
+
 
     <button
         class="section-navigation-dot"
@@ -36,12 +47,14 @@
         aria-label="Go to Deception"
     ></button>
 
+
     <button
         class="section-navigation-dot"
         type="button"
         data-section="pigment"
         aria-label="Go to Pigment"
     ></button>
+
 
     <button
         class="section-navigation-dot"
@@ -50,6 +63,7 @@
         aria-label="Go to Trends"
     ></button>
 
+
     <button
         class="section-navigation-dot"
         type="button"
@@ -57,15 +71,48 @@
         aria-label="Go to Mixing"
     ></button>
 
+
     <button
         class="section-navigation-dot"
         type="button"
-        data-section="favorite"
+        data-section="colorPoll"
         aria-label="Go to Favorite"
     ></button>
+
+
+    <button
+        class="section-navigation-dot"
+        type="button"
+        data-section="palette"
+        aria-label="Go to Palette"
+    ></button>
+
 </nav>
 
     <main>
+
+        <!-- ==========================================
+     SECTION 00 — COLOR PLAYGROUND
+=========================================== -->
+
+<section
+    class="playground-intro-section"
+    id="playground"
+>
+
+    <h1 class="playground-title">
+
+        <span class="playground-title-color">
+            COLOR
+        </span>
+
+        <span class="playground-title-word">
+            playground
+        </span>
+
+    </h1>
+
+</section>
 
         <!-- ==========================================
              SECTION 01 — TRANSPARENCY
@@ -547,10 +594,9 @@
              SECTION 06 — FAVORITE
         =========================================== -->
 
-        <section
+ <section
     class="color-poll-section"
     id="colorPoll"
-    data-navigation-id="favorite"
 >
 
             <header class="color-poll-header">
@@ -608,6 +654,29 @@
             </footer>
 
         </section>
+
+        <!-- ==========================================
+     SECTION 07 — PALETTE
+=========================================== -->
+
+<section
+    class="palette-section"
+    id="palette"
+>
+
+    <header class="palette-header">
+
+        <h1>
+            PALETTE
+        </h1>
+
+        <p class="subtitle">
+            Future color study
+        </p>
+
+    </header>
+
+</section>
 
     </main>
 

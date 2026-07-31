@@ -1,6 +1,6 @@
 // ==========================================
 // SECTION NAVIGATION
-// Scroll-to-section dots + active state
+// Reliable click navigation + active states
 // ==========================================
 
 document.addEventListener(
@@ -12,161 +12,305 @@ document.addEventListener(
 function initializeSectionNavigation() {
 
     const navigationDots =
-        document.querySelectorAll(
-            ".section-navigation-dot"
+        Array.from(
+            document.querySelectorAll(
+                ".section-navigation-dot"
+            )
         );
 
 
     if (navigationDots.length === 0) {
+
+        console.warn(
+            "No section navigation dots were found."
+        );
+
         return;
+
     }
 
 
-    const sectionEntries = [];
+    const sectionEntries =
+        navigationDots
+            .map(function (dot) {
+
+                const sectionId =
+                    dot.dataset.section;
 
 
-    navigationDots.forEach(function (dot) {
+                const section =
+                    document.getElementById(
+                        sectionId
+                    );
 
-        const sectionId =
-            dot.dataset.section;
+
+                if (!section) {
+
+                    console.warn(
+                        `Navigation target not found: #${sectionId}`
+                    );
+
+                    /*
+                    Hide unmatched dots instead of
+                    leaving a broken button visible.
+                    */
+
+                    dot.hidden = true;
+
+                    return null;
+
+                }
 
 
-        const section =
-            document.getElementById(
-                sectionId
+                return {
+                    dot: dot,
+                    section: section,
+                    id: sectionId
+                };
+
+            })
+            .filter(function (entry) {
+
+                return entry !== null;
+
+            });
+
+
+    if (sectionEntries.length === 0) {
+
+        console.warn(
+            "No valid navigation sections were found."
+        );
+
+        return;
+
+    }
+
+
+    // ======================================
+    // SET ACTIVE DOT
+    // ======================================
+
+    function setActiveEntry(activeEntry) {
+
+        sectionEntries.forEach(
+            function (entry) {
+
+                const isActive =
+                    entry === activeEntry;
+
+
+                entry.dot.classList.toggle(
+                    "active",
+                    isActive
+                );
+
+
+                if (isActive) {
+
+                    entry.dot.setAttribute(
+                        "aria-current",
+                        "true"
+                    );
+
+                } else {
+
+                    entry.dot.removeAttribute(
+                        "aria-current"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // ======================================
+    // CLICK NAVIGATION
+    // ======================================
+
+    sectionEntries.forEach(
+        function (entry) {
+
+            entry.dot.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+
+                    /*
+                    Set the active state immediately,
+                    rather than waiting for scrolling
+                    and observer calculations.
+                    */
+
+                    setActiveEntry(
+                        entry
+                    );
+
+
+                    const sectionTop =
+
+                        entry.section
+                            .getBoundingClientRect()
+                            .top
+
+                        +
+
+                        window.scrollY;
+
+
+                    window.scrollTo({
+                        top: sectionTop,
+                        behavior: "smooth"
+                    });
+
+                }
             );
 
+        }
+    );
 
-        if (!section) {
 
-            console.warn(
-                `Navigation section not found: #${sectionId}`
-            );
+    // ======================================
+    // ACTIVE SECTION FROM VIEWPORT CENTER
+    // ======================================
+
+    let scrollFrame = null;
+
+
+    function updateActiveSection() {
+
+        scrollFrame = null;
+
+
+        const viewportCenter =
+            window.innerHeight / 2;
+
+
+        let closestEntry =
+            sectionEntries[0];
+
+
+        let closestDistance =
+            Infinity;
+
+
+        sectionEntries.forEach(
+            function (entry) {
+
+                const rectangle =
+                    entry.section
+                        .getBoundingClientRect();
+
+
+                /*
+                Prefer a section that actually
+                crosses the viewport center.
+                */
+
+                if (
+                    rectangle.top <= viewportCenter &&
+                    rectangle.bottom >= viewportCenter
+                ) {
+
+                    closestEntry =
+                        entry;
+
+
+                    closestDistance =
+                        0;
+
+                    return;
+
+                }
+
+
+                /*
+                Otherwise choose the section whose
+                center is nearest the viewport center.
+                */
+
+                const sectionCenter =
+
+                    rectangle.top +
+
+                    rectangle.height / 2;
+
+
+                const distance =
+
+                    Math.abs(
+                        sectionCenter -
+                        viewportCenter
+                    );
+
+
+                if (
+                    distance <
+                    closestDistance
+                ) {
+
+                    closestDistance =
+                        distance;
+
+
+                    closestEntry =
+                        entry;
+
+                }
+
+            }
+        );
+
+
+        setActiveEntry(
+            closestEntry
+        );
+
+    }
+
+
+    function requestActiveSectionUpdate() {
+
+        if (scrollFrame !== null) {
 
             return;
 
         }
 
 
-        sectionEntries.push({
-            dot: dot,
-            section: section
-        });
+        scrollFrame =
+            requestAnimationFrame(
+                updateActiveSection
+            );
 
-
-        dot.addEventListener(
-            "click",
-            function () {
-
-                section.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-        );
-
-    });
-
-
-    if (sectionEntries.length === 0) {
-        return;
     }
 
 
-    // ======================================
-    // ACTIVE SECTION OBSERVER
-    // ======================================
-
-    const observer =
-        new IntersectionObserver(
-            function (entries) {
-
-                const visibleEntries =
-                    entries
-                        .filter(function (entry) {
-                            return entry.isIntersecting;
-                        })
-                        .sort(function (a, b) {
-                            return (
-                                b.intersectionRatio -
-                                a.intersectionRatio
-                            );
-                        });
-
-
-                if (visibleEntries.length === 0) {
-                    return;
-                }
-
-
-                const activeSection =
-                    visibleEntries[0].target;
-
-
-                sectionEntries.forEach(
-                    function (entry) {
-
-                        const isActive =
-                            entry.section ===
-                            activeSection;
-
-
-                        entry.dot.classList.toggle(
-                            "active",
-                            isActive
-                        );
-
-
-                        if (isActive) {
-
-                            entry.dot.setAttribute(
-                                "aria-current",
-                                "true"
-                            );
-
-                        } else {
-
-                            entry.dot.removeAttribute(
-                                "aria-current"
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                /*
-                The center portion of the viewport
-                determines the active section.
-                */
-
-                root: null,
-
-                rootMargin:
-                    "-35% 0px -35% 0px",
-
-                threshold: [
-                    0,
-                    0.1,
-                    0.25,
-                    0.5,
-                    0.75
-                ]
-            }
-        );
-
-
-    sectionEntries.forEach(
-        function (entry) {
-
-            observer.observe(
-                entry.section
-            );
-
+    window.addEventListener(
+        "scroll",
+        requestActiveSectionUpdate,
+        {
+            passive: true
         }
     );
+
+
+    window.addEventListener(
+        "resize",
+        requestActiveSectionUpdate
+    );
+
+
+    /*
+    Set the correct initial active dot.
+    */
+
+    updateActiveSection();
 
 }
