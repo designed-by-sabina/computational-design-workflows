@@ -835,20 +835,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const response =
             await fetch(
-                "https://api.openai.com/v1/chat/completions",
+                "https://us-central1-favorite-color-4f696.cloudfunctions.net/callOpenAI",
                 {
                     method: "POST",
                     headers: {
                         "Content-Type":
-                            "application/json",
-                        "Authorization":
-                            `Bearer ${OPENAI_API_KEY}`
+                            "application/json"
                     },
                     body: JSON.stringify({
-                        model: "gpt-4o-mini",
-                        response_format: {
-                            type: "json_object"
-                        },
                         messages
                     })
                 }
