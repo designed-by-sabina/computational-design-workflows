@@ -8086,7 +8086,7 @@ body > main > .palette-section >
 
 .playground-intro-section {
     animation: playground-bg-color-cycle 12s linear infinite;
-}
+    animation-delay: -4s;
 
 @media (prefers-reduced-motion: reduce) {
     .playground-intro-section {
