@@ -8046,3 +8046,48 @@ body > main > .palette-section >
     padding-top: 0;
 }
 
+/* ==========================================
+   PLAYGROUND SECTION — ANIMATED BACKGROUND
+   Mirrors the playground-title-word color cycle
+   ========================================== */
+
+@keyframes playground-bg-color-cycle {
+    0% {
+        background-color: #ff7a8a;
+    }
+
+    16% {
+        background-color: #ffb347;
+    }
+
+    32% {
+        background-color: #d3c94e;
+    }
+
+    48% {
+        background-color: #61c99a;
+    }
+
+    64% {
+        background-color: #5b9df9;
+    }
+
+    80% {
+        background-color: #9b78e8;
+    }
+
+    100% {
+        background-color: #ff7a8a;
+    }
+}
+
+.playground-intro-section {
+    animation: playground-bg-color-cycle 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .playground-intro-section {
+        animation: none;
+        background-color: #9b78e8;
+    }
+}
