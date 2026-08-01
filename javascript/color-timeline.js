@@ -677,26 +677,11 @@ function drawTimelineYearLabels(
         )
         .attr(
             "y",
-            -24
+            -6
         )
         .attr(
             "text-anchor",
-            "end"
-        )
-        .attr(
-            "transform",
-            year => {
-
-                const x =
-                    xScale(year) +
-                    xScale.bandwidth() / 2;
-
-
-                return (
-                    `rotate(-90, ${x}, -24)`
-                );
-
-            }
+            "middle"
         )
         .text(
             year => year
