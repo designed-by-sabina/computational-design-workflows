@@ -426,8 +426,8 @@ function createFrameBox04(
     createBox04(
         x,
         y +
-            slotHeight / 2 +
-            topBottomHeight / 2,
+        slotHeight / 2 +
+        topBottomHeight / 2,
         z,
         width,
         topBottomHeight,
@@ -441,8 +441,8 @@ function createFrameBox04(
     createBox04(
         x,
         y -
-            slotHeight / 2 -
-            topBottomHeight / 2,
+        slotHeight / 2 -
+        topBottomHeight / 2,
         z,
         width,
         topBottomHeight,
@@ -455,8 +455,8 @@ function createFrameBox04(
 
     createBox04(
         x -
-            slotWidth / 2 -
-            sideWidth / 2,
+        slotWidth / 2 -
+        sideWidth / 2,
         y,
         z,
         sideWidth,
@@ -470,8 +470,8 @@ function createFrameBox04(
 
     createBox04(
         x +
-            slotWidth / 2 +
-            sideWidth / 2,
+        slotWidth / 2 +
+        sideWidth / 2,
         y,
         z,
         sideWidth,

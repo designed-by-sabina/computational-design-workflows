@@ -598,85 +598,85 @@
                 return node.name.toUpperCase();
             });
 
-            nodeEnter
-    .filter(function (node) {
-        return node.generation === 0;
-    })
-    .append("text")
-    .attr(
-        "class",
-        "genealogy-primary-hex"
-    )
-    .attr(
-        "dy",
-        "2.85em"
-    )
-    .attr(
-        "fill",
-        function (node) {
-            return getReadableTextColor(
-                node.color
-            );
-        }
-    )
-    .text(function (node) {
-        return formatNodeHex(
-            node.color
-        );
-    });
+        nodeEnter
+            .filter(function (node) {
+                return node.generation === 0;
+            })
+            .append("text")
+            .attr(
+                "class",
+                "genealogy-primary-hex"
+            )
+            .attr(
+                "dy",
+                "2.85em"
+            )
+            .attr(
+                "fill",
+                function (node) {
+                    return getReadableTextColor(
+                        node.color
+                    );
+                }
+            )
+            .text(function (node) {
+                return formatNodeHex(
+                    node.color
+                );
+            });
 
 
         nodeEnter
-    .filter(function (node) {
-        return node.generation > 0;
-    })
-    .append("text")
-    .attr(
-        "class",
-        "genealogy-child-label"
-    )
-    .attr(
-        "dy",
-        function (node) {
-            return (
-                getNodeRadius(node) +
-                16
-            );
-        }
-    )
-    .each(function (node) {
-
-        const label =
-            d3.select(this);
-
-
-        label
-            .append("tspan")
-            .attr("x", 0)
+            .filter(function (node) {
+                return node.generation > 0;
+            })
+            .append("text")
             .attr(
                 "class",
-                "genealogy-child-name"
+                "genealogy-child-label"
             )
-            .text(
-                node.name.toUpperCase()
-            );
-
-
-        label
-            .append("tspan")
-            .attr("x", 0)
-            .attr("dy", "1.35em")
             .attr(
-                "class",
-                "genealogy-child-hex"
+                "dy",
+                function (node) {
+                    return (
+                        getNodeRadius(node) +
+                        16
+                    );
+                }
             )
-            .text(
-                formatNodeHex(
-                    node.color
-                )
-            );
+            .each(function (node) {
 
-    });
+                const label =
+                    d3.select(this);
+
+
+                label
+                    .append("tspan")
+                    .attr("x", 0)
+                    .attr(
+                        "class",
+                        "genealogy-child-name"
+                    )
+                    .text(
+                        node.name.toUpperCase()
+                    );
+
+
+                label
+                    .append("tspan")
+                    .attr("x", 0)
+                    .attr("dy", "1.35em")
+                    .attr(
+                        "class",
+                        "genealogy-child-hex"
+                    )
+                    .text(
+                        formatNodeHex(
+                            node.color
+                        )
+                    );
+
+            });
 
 
 
@@ -1014,7 +1014,7 @@
 
     }
 
-function hexToRgbArray(hex) {
+    function hexToRgbArray(hex) {
         const value = hex.replace("#", "");
         return {
             r: parseInt(value.substring(0, 2), 16),
@@ -1026,64 +1026,64 @@ function hexToRgbArray(hex) {
 
 
     // ==========================================
-// COLOR NAME
-// ==========================================
+    // COLOR NAME
+    // ==========================================
 
-function createColorName(recipe) {
+    function createColorName(recipe) {
 
-    const rgb = hexToRgbArray(
-        cmykToHex(
-            recipe.c,
-            recipe.m,
-            recipe.yellow,
-            recipe.k
-        )
-    );
+        const rgb = hexToRgbArray(
+            cmykToHex(
+                recipe.c,
+                recipe.m,
+                recipe.yellow,
+                recipe.k
+            )
+        );
 
-    // getColorName() comes from color-naming.js — same
-    // OKLab / CSS147 nearest-match logic used for the
-    // TRANSPARENCY bubbles, so naming is consistent
-    // across the whole site.
-    return getColorName([rgb.r, rgb.g, rgb.b]);
-
-}
-
-// ==========================================
-// FORMAT NODE HEX
-// ==========================================
-
-function formatNodeHex(color) {
-
-    if (!color) {
-        return "#CCCCCC";
-    }
-
-
-    const normalizedColor =
-        color.startsWith("#")
-            ? color
-            : `#${color}`;
-
-
-    return normalizedColor.toUpperCase();
-
-}
-
-// ==========================================
-// NODE SIZE
-// ==========================================
-
-function getNodeRadius(node) {
-
-    if (GENERATION_RADIUS[node.generation]) {
-
-        return GENERATION_RADIUS[node.generation];
+        // getColorName() comes from color-naming.js — same
+        // OKLab / CSS147 nearest-match logic used for the
+        // TRANSPARENCY bubbles, so naming is consistent
+        // across the whole site.
+        return getColorName([rgb.r, rgb.g, rgb.b]);
 
     }
 
-    return 11;
+    // ==========================================
+    // FORMAT NODE HEX
+    // ==========================================
 
-}
+    function formatNodeHex(color) {
+
+        if (!color) {
+            return "#CCCCCC";
+        }
+
+
+        const normalizedColor =
+            color.startsWith("#")
+                ? color
+                : `#${color}`;
+
+
+        return normalizedColor.toUpperCase();
+
+    }
+
+    // ==========================================
+    // NODE SIZE
+    // ==========================================
+
+    function getNodeRadius(node) {
+
+        if (GENERATION_RADIUS[node.generation]) {
+
+            return GENERATION_RADIUS[node.generation];
+
+        }
+
+        return 11;
+
+    }
 
 
 

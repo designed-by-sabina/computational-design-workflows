@@ -13,19 +13,19 @@
 // ==========================================
 
 const canvas =
-document.getElementById("colorCanvas");
+    document.getElementById("colorCanvas");
 
 const ctx =
-canvas.getContext("2d");
+    canvas.getContext("2d");
 
 const sourceLabelContainer =
-document.getElementById("sourceLabelContainer");
+    document.getElementById("sourceLabelContainer");
 
 const discoveredLabelContainer =
-document.getElementById("discoveredLabelContainer");
+    document.getElementById("discoveredLabelContainer");
 
 const archiveContainer =
-document.getElementById("colorArchiveContainer");
+    document.getElementById("colorArchiveContainer");
 
 
 
@@ -65,7 +65,7 @@ const DISCOVERY_COOLDOWN = 2500;
 // CANVAS SIZE
 // ==========================================
 
-function resizeCanvas(){
+function resizeCanvas() {
 
     canvas.width =
         canvas.clientWidth;
@@ -91,38 +91,38 @@ resizeCanvas();
 const palette = [
 
     {
-        rgb:[255,188,196],
-        name:"Soft Pink"
+        rgb: [255, 188, 196],
+        name: "Soft Pink"
     },
 
     {
-        rgb:[255,222,170],
-        name:"Peach"
+        rgb: [255, 222, 170],
+        name: "Peach"
     },
 
     {
-        rgb:[191,224,255],
-        name:"Sky Blue"
+        rgb: [191, 224, 255],
+        name: "Sky Blue"
     },
 
     {
-        rgb:[219,198,255],
-        name:"Lavender"
+        rgb: [219, 198, 255],
+        name: "Lavender"
     },
 
     {
-        rgb:[185,255,215],
-        name:"Mint"
+        rgb: [185, 255, 215],
+        name: "Mint"
     },
 
     {
-        rgb:[255,205,225],
-        name:"Rose"
+        rgb: [255, 205, 225],
+        name: "Rose"
     },
 
     {
-        rgb:[244,239,180],
-        name:"Cream"
+        rgb: [244, 239, 180],
+        name: "Cream"
     }
 
 ];
@@ -133,38 +133,38 @@ const palette = [
 // CIRCLE CLASS
 // ==========================================
 
-class Circle{
+class Circle {
 
-    constructor(){
+    constructor() {
 
 
         this.radius =
-            random(70,135);
+            random(70, 135);
 
 
 
         this.x =
             random(
-    150,
-    canvas.width-150
-);
+                150,
+                canvas.width - 150
+            );
 
 
         this.y =
-                random(
-    150,
-    canvas.height-150
-);
+            random(
+                150,
+                canvas.height - 150
+            );
 
 
 
         let color =
             palette[
-                Math.floor(
-                    Math.random()
-                    *
-                    palette.length
-                )
+            Math.floor(
+                Math.random()
+                *
+                palette.length
+            )
             ];
 
 
@@ -187,16 +187,16 @@ class Circle{
         // each circle gets its own movement personality
 
         this.offsetX =
-            random(0,5000);
+            random(0, 5000);
 
         this.offsetY =
-            random(0,5000);
+            random(0, 5000);
 
         this.speed =
-            random(0.25,0.45);
+            random(0.25, 0.45);
 
         this.phase =
-            random(0,1000);
+            random(0, 1000);
 
         this.homeX = this.x;
 
@@ -210,196 +210,196 @@ class Circle{
 
 
 
-  update(){
+    update() {
 
 
-    // continuously changing direction
+        // continuously changing direction
 
-    let angle =
+        let angle =
 
-    noise(
-        animationTime * 0.35 +
-        this.offsetX
-    )
-    *
-    Math.PI
-    *
-    2;
-
-
-
-// floating movement
-
-this.x +=
-
-Math.cos(angle)
-*
-this.speed;
-
-
-this.y +=
-
-Math.sin(angle)
-*
-this.speed;
-
-// =================================
-// SOFT PERSONAL SPACE
-// =================================
-
-
-circles.forEach(other=>{
-
-
-    if(other === this){
-
-        return;
-
-    }
-
-
-    let dx =
-        this.x - other.x;
-
-
-    let dy =
-        this.y - other.y;
-
-
-    let distance =
-        Math.sqrt(
-            dx*dx +
-            dy*dy
-        );
-
-
-
-    let minimumDistance =
-
-    (this.radius +
-    other.radius)
-    *
-    0.85;
-
-
-
-    if(
-        distance < minimumDistance
-        &&
-        distance > 0
-    ){
-
-
-        let push =
-
-            (
-                minimumDistance -
-                distance
+            noise(
+                animationTime * 0.35 +
+                this.offsetX
             )
             *
-            0.008;
+            Math.PI
+            *
+            2;
 
 
+
+        // floating movement
 
         this.x +=
-            (dx/distance)
-            *
-            push;
 
+            Math.cos(angle)
+            *
+            this.speed;
 
 
         this.y +=
-            (dy/distance)
+
+            Math.sin(angle)
             *
-            push;
+            this.speed;
+
+        // =================================
+        // SOFT PERSONAL SPACE
+        // =================================
+
+
+        circles.forEach(other => {
+
+
+            if (other === this) {
+
+                return;
+
+            }
+
+
+            let dx =
+                this.x - other.x;
+
+
+            let dy =
+                this.y - other.y;
+
+
+            let distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+
+            let minimumDistance =
+
+                (this.radius +
+                    other.radius)
+                *
+                0.85;
+
+
+
+            if (
+                distance < minimumDistance
+                &&
+                distance > 0
+            ) {
+
+
+                let push =
+
+                    (
+                        minimumDistance -
+                        distance
+                    )
+                    *
+                    0.008;
+
+
+
+                this.x +=
+                    (dx / distance)
+                    *
+                    push;
+
+
+
+                this.y +=
+                    (dy / distance)
+                    *
+                    push;
+
+
+            }
+
+
+        });
+
+
+
+        // subtle transparency breathing
+
+        this.alpha =
+
+            0.32 +
+
+            Math.sin(
+                animationTime * 0.8 +
+                this.phase
+            )
+            *
+            0.04;
+
+
+
+        // stronger soft boundary steering
+
+        let margin =
+            this.radius;
+
+
+
+        if (this.x < margin) {
+
+            this.x += 1.5;
+
+            this.offsetX += 0.5;
+
+        }
+
+
+
+        if (
+            this.x >
+            canvas.width - margin
+        ) {
+
+            this.x -= 1.5;
+
+            this.offsetX += 0.5;
+
+        }
+
+
+
+        if (this.y < margin) {
+
+            this.y += 1.5;
+
+            this.offsetY += 0.5;
+
+        }
+
+
+
+        if (
+            this.y >
+            canvas.height - margin
+        ) {
+
+            this.y -= 1.5;
+
+            this.offsetY += 0.5;
+
+        }
+
 
 
     }
 
 
-});
 
-
-
-    // subtle transparency breathing
-
-    this.alpha =
-
-        0.32 +
-
-        Math.sin(
-            animationTime * 0.8 +
-            this.phase
-        )
-        *
-        0.04;
-
-
-
-    // stronger soft boundary steering
-
-    let margin =
-        this.radius;
-
-
-
-    if(this.x < margin){
-
-        this.x += 1.5;
-
-        this.offsetX += 0.5;
-
-    }
-
-
-
-    if(
-        this.x >
-        canvas.width-margin
-    ){
-
-        this.x -= 1.5;
-
-        this.offsetX += 0.5;
-
-    }
-
-
-
-    if(this.y < margin){
-
-        this.y += 1.5;
-
-        this.offsetY += 0.5;
-
-    }
-
-
-
-    if(
-        this.y >
-        canvas.height-margin
-    ){
-
-        this.y -= 1.5;
-
-        this.offsetY += 0.5;
-
-    }
-
-
-
-}
-
-
-
-    draw(){
+    draw() {
 
         ctx.beginPath();
 
         ctx.fillStyle =
 
-        `rgba(
+            `rgba(
             ${this.rgb[0]},
             ${this.rgb[1]},
             ${this.rgb[2]},
@@ -418,7 +418,7 @@ circles.forEach(other=>{
 
             0,
 
-            Math.PI*2
+            Math.PI * 2
 
         );
 
@@ -436,7 +436,7 @@ circles.forEach(other=>{
 // CREATE CIRCLES
 // ==========================================
 
-for(let i=0;i<9;i++){
+for (let i = 0; i < 9; i++) {
 
     circles.push(
         new Circle()
@@ -450,7 +450,7 @@ for(let i=0;i<9;i++){
 // ANIMATION
 // ==========================================
 
-function animate(){
+function animate() {
 
     ctx.clearRect(
         0,
@@ -461,7 +461,7 @@ function animate(){
 
 
 
-    if(!paused){
+    if (!paused) {
 
         animationTime += 0.008;
 
@@ -473,9 +473,9 @@ function animate(){
 
 
 
-    circles.forEach(circle=>{
+    circles.forEach(circle => {
 
-        if(!paused){
+        if (!paused) {
 
             circle.update();
 
@@ -508,15 +508,15 @@ animate();
 // LIVE OVERLAP DETECTION
 // ==========================================
 
-function detectOverlaps(){
+function detectOverlaps() {
 
     overlapRegions = [];
 
     const now = Date.now();
 
-    for(let i=0;i<circles.length;i++){
+    for (let i = 0; i < circles.length; i++) {
 
-        for(let j=i+1;j<circles.length;j++){
+        for (let j = i + 1; j < circles.length; j++) {
 
             let a = circles[i];
             let b = circles[j];
@@ -536,72 +536,72 @@ function detectOverlaps(){
             // only significant overlaps
 
             let threshold =
-                (a.radius+b.radius)
-                *0.30;
+                (a.radius + b.radius)
+                * 0.30;
 
-            if(overlap < threshold){
+            if (overlap < threshold) {
 
                 continue;
 
             }
 
             let x =
-                (a.x+b.x)/2;
+                (a.x + b.x) / 2;
 
             let y =
-                (a.y+b.y)/2;
+                (a.y + b.y) / 2;
 
             // sample actual color on canvas
 
             let rgb = [
 
-Math.round(
-    (a.rgb[0]+b.rgb[0])/2
-),
+                Math.round(
+                    (a.rgb[0] + b.rgb[0]) / 2
+                ),
 
-Math.round(
-    (a.rgb[1]+b.rgb[1])/2
-),
+                Math.round(
+                    (a.rgb[1] + b.rgb[1]) / 2
+                ),
 
-Math.round(
-    (a.rgb[2]+b.rgb[2])/2
-)
+                Math.round(
+                    (a.rgb[2] + b.rgb[2]) / 2
+                )
 
-];
+            ];
 
-           let region = {
-
-
-    x,
-
-    y,
+            let region = {
 
 
-    rgb,
+                x,
+
+                y,
 
 
-    name:getColorName(rgb),
+                rgb,
 
 
-    circleA:a,
+                name: getColorName(rgb),
 
 
-    circleB:b
+                circleA: a,
 
 
-};
+                circleB: b
+
+
+            };
 
             overlapRegions.push(
                 region
             );
 
-            if(
+            if (
 
-                now-lastDiscovery >
+                now - lastDiscovery >
 
                 DISCOVERY_COOLDOWN
 
-            ){
+            ) {
 
                 registerDiscovery(
                     region
@@ -620,18 +620,18 @@ Math.round(
 // DISCOVERIES
 // ==========================================
 
-function registerDiscovery(region){
+function registerDiscovery(region) {
 
     let key =
         normalizeColor(
             region.rgb
         );
 
-    if(
+    if (
         discoveredColors.includes(
             key
         )
-    ){
+    ) {
 
         return;
 
@@ -648,7 +648,7 @@ function registerDiscovery(region){
 
         ...region,
 
-        created:lastDiscovery
+        created: lastDiscovery
 
     };
 
@@ -693,9 +693,9 @@ function rgbToHex(rgb) {
 // DISCOVERY LABEL
 // ==========================================
 
-function renderDiscoveryLabel(){
+function renderDiscoveryLabel() {
 
-    if(!discoveryLabel){
+    if (!discoveryLabel) {
 
         return;
 
@@ -714,7 +714,7 @@ function renderDiscoveryLabel(){
         discoveryLabel.created;
 
 
-    if(age > 8000){
+    if (age > 8000) {
 
         discoveryLabel = null;
 
@@ -726,7 +726,7 @@ function renderDiscoveryLabel(){
     let opacity = 1;
 
 
-    if(age > 7000){
+    if (age > 7000) {
 
         opacity =
 
@@ -781,7 +781,7 @@ function renderDiscoveryLabel(){
 
     label.innerHTML =
 
-    `
+        `
         <strong>
             ${discoveryLabel.name}
         </strong>
@@ -803,7 +803,7 @@ function renderDiscoveryLabel(){
 // ARCHIVE
 // ==========================================
 
-function addArchiveSwatch(region){
+function addArchiveSwatch(region) {
 
     let swatch =
 
@@ -831,7 +831,7 @@ function addArchiveSwatch(region){
 
     swatch.innerHTML =
 
-    `
+        `
         <strong>
             ${region.name}
         </strong>
@@ -855,24 +855,24 @@ function addArchiveSwatch(region){
 // COLOR GROUPING
 // ==========================================
 
-function normalizeColor(rgb){
+function normalizeColor(rgb) {
 
     // finer grouping than before
 
     let r =
         Math.round(
-            rgb[0]/10
-        )*10;
+            rgb[0] / 10
+        ) * 10;
 
     let g =
         Math.round(
-            rgb[1]/10
-        )*10;
+            rgb[1] / 10
+        ) * 10;
 
     let b =
         Math.round(
-            rgb[2]/10
-        )*10;
+            rgb[2] / 10
+        ) * 10;
 
     return `${r},${g},${b}`;
 
@@ -889,7 +889,7 @@ function normalizeColor(rgb){
 
 canvas.addEventListener(
     "mousemove",
-    function(event){
+    function (event) {
 
 
         let rect =
@@ -923,70 +923,70 @@ canvas.addEventListener(
         // Albers color interactions
 
 
-        overlapRegions.forEach(region=>{
+        overlapRegions.forEach(region => {
 
 
-    let insideOverlap = false;
-
-
-
-    // check distance to both original circles
-
-    let d1 =
-        distance(
-
-            mouseX,
-
-            mouseY,
-
-            region.circleA.x,
-
-            region.circleA.y
-
-        );
+            let insideOverlap = false;
 
 
 
-    let d2 =
-        distance(
+            // check distance to both original circles
 
-            mouseX,
+            let d1 =
+                distance(
 
-            mouseY,
+                    mouseX,
 
-            region.circleB.x,
+                    mouseY,
 
-            region.circleB.y
+                    region.circleA.x,
 
-        );
+                    region.circleA.y
 
-
-
-    if(
-
-        d1 < region.circleA.radius + 5
-
-        &&
-
-        d2 < region.circleB.radius + 5
-
-    ){
-
-        insideOverlap = true;
-
-    }
+                );
 
 
 
-    if(insideOverlap){
+            let d2 =
+                distance(
 
-        foundOverlap =
-            region;
+                    mouseX,
 
-    }
+                    mouseY,
+
+                    region.circleB.x,
+
+                    region.circleB.y
+
+                );
 
 
-});
+
+            if (
+
+                d1 < region.circleA.radius + 5
+
+                &&
+
+                d2 < region.circleB.radius + 5
+
+            ) {
+
+                insideOverlap = true;
+
+            }
+
+
+
+            if (insideOverlap) {
+
+                foundOverlap =
+                    region;
+
+            }
+
+
+        });
 
 
 
@@ -995,7 +995,7 @@ canvas.addEventListener(
         // Check original circles
 
 
-        circles.forEach(circle=>{
+        circles.forEach(circle => {
 
 
             let d =
@@ -1013,10 +1013,10 @@ canvas.addEventListener(
 
 
 
-            if(
+            if (
                 d <
                 circle.radius
-            ){
+            ) {
 
                 foundCircle =
                     circle;
@@ -1032,7 +1032,7 @@ canvas.addEventListener(
 
 
 
-        if(foundOverlap){
+        if (foundOverlap) {
 
 
             showHoverLabel(
@@ -1042,26 +1042,26 @@ canvas.addEventListener(
 
         }
 
-        else if(foundCircle){
+        else if (foundCircle) {
 
 
             showHoverLabel(
                 {
 
                     x:
-                    foundCircle.x,
+                        foundCircle.x,
 
 
                     y:
-                    foundCircle.y,
+                        foundCircle.y,
 
 
                     rgb:
-                    foundCircle.rgb,
+                        foundCircle.rgb,
 
 
                     name:
-                    foundCircle.name
+                        foundCircle.name
 
                 }
             );
@@ -1069,7 +1069,7 @@ canvas.addEventListener(
 
         }
 
-        else{
+        else {
 
 
             removeHoverLabel();
@@ -1093,7 +1093,7 @@ canvas.addEventListener(
 
     "mouseleave",
 
-    function(){
+    function () {
 
         removeHoverLabel();
 
@@ -1114,7 +1114,7 @@ canvas.addEventListener(
 // ==========================================
 
 
-function showHoverLabel(item){
+function showHoverLabel(item) {
 
     removeHoverLabel();
 
@@ -1140,7 +1140,7 @@ function showHoverLabel(item){
 
     label.innerHTML =
 
-    `
+        `
         <strong>
             ${item.name}
         </strong>
@@ -1187,10 +1187,10 @@ function showHoverLabel(item){
 // ==========================================
 
 
-function removeHoverLabel(){
+function removeHoverLabel() {
 
 
-    if(hoverLabel){
+    if (hoverLabel) {
 
 
         hoverLabel.remove();
@@ -1218,11 +1218,11 @@ document.addEventListener(
 
     "keydown",
 
-    function(event){
+    function (event) {
 
 
 
-        if(event.code === "Space"){
+        if (event.code === "Space") {
 
 
             event.preventDefault();
@@ -1254,30 +1254,30 @@ document.addEventListener(
 
 
 const buttons =
-document.querySelectorAll(".exercise-button");
+    document.querySelectorAll(".exercise-button");
 
 
 const panels =
-document.querySelectorAll(".exercise-panel");
+    document.querySelectorAll(".exercise-panel");
 
 
 
-buttons.forEach(button=>{
+buttons.forEach(button => {
 
 
     button.addEventListener(
         "click",
-        ()=>{
+        () => {
 
 
-            buttons.forEach(b=>{
+            buttons.forEach(b => {
 
                 b.classList.remove("active");
 
             });
 
 
-            panels.forEach(panel=>{
+            panels.forEach(panel => {
 
                 panel.classList.remove("active");
 
@@ -1297,7 +1297,7 @@ buttons.forEach(button=>{
 
 
 
-            if(target){
+            if (target) {
 
                 target.classList.add("active");
 
@@ -1323,16 +1323,16 @@ function distance(
     y1,
     x2,
     y2
-){
+) {
 
 
     return Math.sqrt(
 
-        (x2-x1)**2
+        (x2 - x1) ** 2
 
         +
 
-        (y2-y1)**2
+        (y2 - y1) ** 2
 
     );
 
@@ -1347,7 +1347,7 @@ function distance(
 
 
 
-function noise(value){
+function noise(value) {
 
 
     return (
@@ -1356,26 +1356,26 @@ function noise(value){
 
         +
 
-        Math.sin(value*0.37)
+        Math.sin(value * 0.37)
 
         +
 
-        Math.sin(value*0.11)
+        Math.sin(value * 0.11)
 
 
     )
 
-    /
+        /
 
-    3
+        3
 
-    *
+        *
 
-    0.5
+        0.5
 
-    +
+        +
 
-    0.5;
+        0.5;
 
 
 
@@ -1389,18 +1389,18 @@ function noise(value){
 
 
 
-function random(min,max){
+function random(min, max) {
 
 
     return Math.random()
 
-    *
+        *
 
-    (max-min)
+        (max - min)
 
-    +
+        +
 
-    min;
+        min;
 
 
 

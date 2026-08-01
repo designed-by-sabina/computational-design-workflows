@@ -1,13 +1,13 @@
-const exercise02 = function(p) {
+const exercise02 = function (p) {
 
     let paperOffset = 0;
 
-    p.setup = function() {
+    p.setup = function () {
         let canvas = p.createCanvas(800, 600);
         canvas.parent("canvas-container-2");
     };
 
-    p.draw = function() {
+    p.draw = function () {
 
         p.background(193, 170, 162);
         p.noStroke();

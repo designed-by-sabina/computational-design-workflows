@@ -3,13 +3,13 @@
 // Josef Albers Inspired Composition
 // ==========================================
 
-const exercise01 = function(p) {
+const exercise01 = function (p) {
 
     // ======================================
     // SETUP
     // ======================================
 
-    p.setup = function() {
+    p.setup = function () {
 
         let canvas = p.createCanvas(800, 600);
 
@@ -24,7 +24,7 @@ const exercise01 = function(p) {
     // DRAW
     // ======================================
 
-    p.draw = function() {
+    p.draw = function () {
 
         // Background
         p.background(193, 170, 162);
@@ -49,10 +49,10 @@ const exercise01 = function(p) {
         p.fill(193, 170, 162);
 
         p.rect(
-          220,   // x
-    178,   // y
-    360,   // width
-    12     // height
+            220,   // x
+            178,   // y
+            360,   // width
+            12     // height
         );
 
 
@@ -73,10 +73,10 @@ const exercise01 = function(p) {
 
         p.fill(193, 170, 162);
         p.rect(
-               220,   // x
-    408,   // y
-    360,   // width
-    12     // height
+            220,   // x
+            408,   // y
+            360,   // width
+            12     // height
         );
 
     };

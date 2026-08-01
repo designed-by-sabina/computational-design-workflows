@@ -5,8 +5,15 @@
 
 
 @keyframes color-poll-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 
@@ -80,7 +87,8 @@ h1 {
     background: white;
 }
 
-#sourceLabelContainer , #discoveredLabelContainer {
+#sourceLabelContainer,
+#discoveredLabelContainer {
     position: absolute;
     top: 0;
     left: 0;
@@ -96,13 +104,13 @@ h1 {
     pointer-events: none;
     transition: opacity 0.2s ease;
     z-index: 30;
-    color: rgba(0,0,0,0.65);
+    color: rgba(0, 0, 0, 0.65);
     font-size: 12px;
     letter-spacing: 0.04em;
     line-height: 1.5;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
     padding: 6px 10px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     white-space: nowrap;
 }
 
@@ -116,11 +124,11 @@ h1 {
     transform: translate(-50%, -120%);
     min-width: 150px;
     padding: 16px 20px;
-    background: rgba(255,255,255,0.94);
+    background: rgba(255, 255, 255, 0.94);
     border: 1px solid var(--border);
     font-size: 13px;
     line-height: 1.5;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     transition: opacity 1s ease,
         transform .3s ease;
 }
@@ -206,7 +214,8 @@ h1 {
     cursor: pointer;
 }
 
-.exercise-button:hover , .exercise-button.active {
+.exercise-button:hover,
+.exercise-button.active {
     background: var(--black);
     color: white;
 }
@@ -395,170 +404,6 @@ footer {
     font-size: 9px;
 }
 
-.color-timeline-section {
-    width: 100%;
-    margin-top: 0;
-    padding-bottom: 80px;
-    display: grid;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0;
-    grid-template-rows: auto auto minmax(280px, 1fr) auto auto;
-    overflow: hidden;
-}
-
-.color-timeline-header {
-    margin-bottom: clamp(18px, 3vh, 34px);
-    flex: 0 0 auto;
-    margin: 0;
-}
-
-.color-comparison-panel {
-    display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
-    width: 100%;
-    min-height: clamp(210px, 27svh, 270px);
-    margin: 0 0 clamp(18px, 2.5vh, 32px);
-    color: #ffffff;
-    background-color: #111111;
-    border: 1px solid #111111;
-    flex: 0 0 auto;
-    margin-bottom: clamp(18px, 3vh, 34px);
-}
-
-.comparison-year-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    padding: 36px;
-    border-right: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.comparison-year {
-    margin: 0;
-    color: #ffffff;
-    font-size: clamp(54px, 5vw, 82px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-}
-
-.comparison-year-label {
-    margin: 20px 0 0;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.12em;
-}
-
-.comparison-colors {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    min-width: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.comparison-color-card {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    flex: 0 0 auto;
-    gap: 18px;
-    min-width: 290px;
-    padding: 34px;
-    color: #ffffff;
-    border-right: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.comparison-color-card:last-child {
-    border-right: none;
-}
-
-.comparison-color-card-primary {
-    min-width: 420px;
-    outline: 1px solid rgba(255, 255, 255, 0.8);
-    outline-offset: -14px;
-}
-
-.comparison-color-card-secondary {
-    min-width: 300px;
-}
-
-.comparison-swatch {
-    display: block;
-    flex: 0 0 auto;
-    aspect-ratio: 1 / 1;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-}
-
-.comparison-swatch-primary {
-    width: 148px;
-    height: 148px;
-}
-
-.comparison-swatch-secondary {
-    width: 82px;
-    height: 82px;
-}
-
-.comparison-color-information {
-    min-width: 0;
-}
-
-.comparison-source {
-    margin: 2px 0 10px;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.comparison-color-name {
-    margin: 0 0 14px;
-    color: #ffffff;
-    font-size: 19px;
-    font-weight: 500;
-    line-height: 1.1;
-}
-
-.comparison-color-card-primary .comparison-color-name {
-    font-size: 26px;
-}
-
-.comparison-color-details {
-    margin: 0;
-    padding-top: 11px;
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.comparison-color-details div {
-    display: grid;
-    grid-template-columns: 48px minmax(0, 1fr);
-    gap: 8px;
-    margin-top: 7px;
-}
-
-.comparison-color-details dt , .comparison-color-details dd {
-    margin: 0;
-    color: #ffffff;
-    font-size: 10px;
-    line-height: 1.35;
-}
-
-.comparison-color-details dt {
-    color: rgba(255, 255, 255, 0.55);
-}
-
-.comparison-color-details dd {
-    overflow-wrap: anywhere;
-}
-
 .mixing-section {
     width: 100%;
     margin-top: 0;
@@ -716,7 +561,8 @@ footer {
         opacity 160ms ease;
 }
 
-.genealogy-node:hover circle , .genealogy-node.is-selected circle {
+.genealogy-node:hover circle,
+.genealogy-node.is-selected circle {
     stroke-width: 3;
 }
 
@@ -777,12 +623,14 @@ footer {
     letter-spacing: 0.1em;
 }
 
-.mixing-selection-section , .mixing-result-section {
+.mixing-selection-section,
+.mixing-result-section {
     padding-bottom: 38px;
     border-bottom: 1px solid var(--border);
 }
 
-.mixing-result-section , .mixing-recipe-section {
+.mixing-result-section,
+.mixing-recipe-section {
     padding-top: 38px;
 }
 
@@ -863,7 +711,7 @@ footer {
     letter-spacing: 0.08em;
 }
 
-.mixing-recipe-list > div {
+.mixing-recipe-list>div {
     display: grid;
     grid-template-columns: 82px minmax(0, 1fr);
     gap: 12px;
@@ -871,7 +719,8 @@ footer {
     border-bottom: 1px solid var(--border);
 }
 
-.mixing-recipe-list dt , .mixing-recipe-list dd {
+.mixing-recipe-list dt,
+.mixing-recipe-list dd {
     margin: 0;
     font-size: 10px;
     line-height: 1.35;
@@ -933,7 +782,9 @@ footer {
     margin: 2rem 0 1rem;
 }
 
-.color-poll-label , .color-poll-input , .color-poll-submit {
+.color-poll-label,
+.color-poll-input,
+.color-poll-submit {
     box-sizing: border-box;
     height: 48px;
     font-size: .85rem;
@@ -1030,16 +881,25 @@ html {
     min-width: 320px;
 }
 
-header , .exercise-navigation , .pigment-map-section , .color-timeline-section , .mixing-section {
+header,
+.exercise-navigation,
+.pigment-map-section,
+.color-timeline-section,
+.mixing-section {
     min-height: 100svh;
 }
 
-header .main-canvas-section , .main-canvas-section {
+header .main-canvas-section,
+.main-canvas-section {
     min-height: 0;
     margin-top: clamp(24px, 5vh, 60px);
 }
 
-.exerciseCanvas , #canvas-container-1 canvas , #canvas-container-2 canvas , #canvas-container-3 canvas , #canvas-container-4 canvas {
+.exerciseCanvas,
+#canvas-container-1 canvas,
+#canvas-container-2 canvas,
+#canvas-container-3 canvas,
+#canvas-container-4 canvas {
     width: auto;
     max-width: 100%;
     height: auto;
@@ -1047,22 +907,23 @@ header .main-canvas-section , .main-canvas-section {
     object-fit: contain;
 }
 
-#colorTimeline , #color-timeline , .color-timeline-container , .timeline-container {
-    flex: 1 1 auto;
-    min-height: 0;
-    max-height: 48svh;
-    overflow: auto;
-}
-
-.mixing-canvas-column , .mixing-information-panel {
+.mixing-canvas-column,
+.mixing-information-panel {
     min-height: 0;
 }
 
-img , svg , canvas {
+img,
+svg,
+canvas {
     max-width: 100%;
 }
 
-.transparency-section , .deception-section , .pigment-map-section , .color-timeline-section , .mixing-section , .color-poll-section {
+.transparency-section,
+.deception-section,
+.pigment-map-section,
+.color-timeline-section,
+.mixing-section,
+.color-poll-section {
     width: 100%;
     min-height: 100svh;
     margin: 0;
@@ -1076,21 +937,34 @@ img , svg , canvas {
     grid-template-rows: auto minmax(320px, 1fr) auto auto;
 }
 
-.transparency-section > header , .deception-section > header , .color-timeline-header , .mixing-header , .color-poll-header {
+.transparency-section>header,
+.deception-section>header,
+.color-timeline-header,
+.mixing-header,
+.color-poll-header {
     padding: clamp(28px, 5vh, 58px) var(--page-gutter) clamp(14px, 2.5vh, 28px);
 }
 
-.transparency-section h1 , .deception-section h1 , .pigment-map-section > h1 , .color-timeline-section h1 , .mixing-section h1 , .color-poll-section h1 , .palette-section h1 {
+.transparency-section h1,
+.deception-section h1,
+.pigment-map-section>h1,
+.color-timeline-section h1,
+.mixing-section h1,
+.color-poll-section h1,
+.palette-section h1 {
     font-size: clamp(58px, 11vw, 150px);
     line-height: 0.82;
     letter-spacing: -0.02em;
 }
 
-footer , .color-timeline-footer , .mixing-footer , .color-poll-footer {
+footer,
+.color-timeline-footer,
+.mixing-footer,
+.color-poll-footer {
     padding: clamp(20px, 3vh, 38px) var(--page-gutter);
 }
 
-.transparency-section > main {
+.transparency-section>main {
     display: contents;
 }
 
@@ -1142,8 +1016,7 @@ footer , .color-timeline-footer , .mixing-footer , .color-poll-footer {
 }
 
 .deception-section .exercise-button {
-    padding: clamp(7px, 1.1vh, 11px)
-        clamp(9px, 1.8vw, 28px);
+    padding: clamp(7px, 1.1vh, 11px) clamp(9px, 1.8vw, 28px);
     font-size: clamp(10px, 1.3vh, 13px);
 }
 
@@ -1155,7 +1028,8 @@ footer , .color-timeline-footer , .mixing-footer , .color-poll-footer {
     overflow: visible;
 }
 
-.deception-section .exercise-panel canvas , .deception-section .exerciseCanvas {
+.deception-section .exercise-panel canvas,
+.deception-section .exerciseCanvas {
     display: block;
     width: auto;
     height: auto;
@@ -1165,43 +1039,18 @@ footer , .color-timeline-footer , .mixing-footer , .color-poll-footer {
 }
 
 
-
-.pigment-map-section > .subtitle {
+.pigment-map-section>.subtitle {
     margin-bottom: clamp(8px, 1.5vh, 18px);
 }
 
-.pigment-map-section > .instructions , .pigment-map-section > footer {
+.pigment-map-section>.instructions,
+.pigment-map-section>footer {
     margin-right: calc(-1 * var(--page-gutter));
     margin-left: calc(-1 * var(--page-gutter));
 }
 
-.color-timeline-section > #color-timeline {
-    width: 100%;
-    min-height: 380px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: auto;
-    margin: 0;
-    overflow: auto hidden;
-    min-width: 0;
-    scrollbar-gutter: stable;
-    padding-bottom: 18px;
-    margin-bottom: clamp(
-            16px,
-            2.5vh,
-            30px
-        );
-}
-
-.color-timeline-section > .instructions {
-    margin: 0;
-}
-
-.color-timeline-section > .color-timeline-footer {
-    margin: 0;
-}
-
-.mixing-introduction , .mixing-information-panel {
+.mixing-introduction,
+.mixing-information-panel {
     padding-top: clamp(28px, 4vh, 50px);
     padding-bottom: clamp(28px, 4vh, 46px);
 }
@@ -1217,16 +1066,22 @@ footer , .color-timeline-footer , .mixing-footer , .color-poll-footer {
     padding: 0;
 }
 
-.color-poll-form , .color-poll-status {
+.color-poll-form,
+.color-poll-status {
     margin-right: var(--page-gutter);
     margin-left: var(--page-gutter);
 }
 
-body > main {
+body>main {
     width: 100%;
 }
 
-body > main > .transparency-section , body > main > .deception-section , body > main > .pigment-map-section , body > main > .color-timeline-section , body > main > .mixing-section , body > main > .color-poll-section {
+body>main>.transparency-section,
+body>main>.deception-section,
+body>main>.pigment-map-section,
+body>main>.color-timeline-section,
+body>main>.mixing-section,
+body>main>.color-poll-section {
     width: 100%;
     height: 100dvh;
     min-height: 560px;
@@ -1236,14 +1091,14 @@ body > main > .transparency-section , body > main > .deception-section , body > 
     border-top: 1px solid var(--border);
 }
 
-body > main > section > header {
+body>main>section>header {
     min-width: 0;
     min-height: 0;
     margin: 0;
     padding: clamp(26px, 4.2vh, 50px) clamp(20px, 3.5vw, 50px) clamp(14px, 2vh, 24px);
 }
 
-body > main > section > header h1 {
+body>main>section>header h1 {
     margin: 0;
     font-size: clamp(72px, min(14vw, 19vh), 188px);
     line-height: 0.76;
@@ -1252,31 +1107,29 @@ body > main > section > header h1 {
 }
 
 
-
-body > main > section > .instructions , body > main > section .mixing-canvas-column > .instructions {
+body>main>section>.instructions,
+body>main>section .mixing-canvas-column>.instructions {
     min-height: 0;
     margin: 0;
-    padding: clamp(8px, 1.35vh, 15px)
-        clamp(20px, 3.5vw, 50px);
+    padding: clamp(8px, 1.35vh, 15px) clamp(20px, 3.5vw, 50px);
     font-size: clamp(10px, 1.35vh, 13px);
     line-height: 1.35;
 }
 
-body > main > section > footer {
+body>main>section>footer {
     min-height: 0;
     margin: 0;
-    padding: clamp(8px, 1.35vh, 15px)
-        clamp(20px, 3.5vw, 50px);
+    padding: clamp(8px, 1.35vh, 15px) clamp(20px, 3.5vw, 50px);
     font-size: clamp(10px, 1.35vh, 13px);
     line-height: 1.3;
 }
 
-body > main > .transparency-section {
+body>main>.transparency-section {
     display: grid;
     grid-template-rows: auto auto auto auto;
 }
 
-.transparency-section > .main-canvas-section {
+.transparency-section>.main-canvas-section {
     width: 100%;
     min-height: 0;
     margin: 0;
@@ -1284,7 +1137,7 @@ body > main > .transparency-section {
     overflow: visible;
 }
 
-.transparency-section > .main-canvas-section > .canvas-wrapper {
+.transparency-section>.main-canvas-section>.canvas-wrapper {
     width: 100%;
     height: clamp(420px, 58svh, 690px);
     min-height: 0;
@@ -1298,7 +1151,7 @@ body > main > .transparency-section {
     height: 100%;
 }
 
-.transparency-section > .color-archive {
+.transparency-section>.color-archive {
     min-height: 0;
     margin: 0;
     padding: clamp(20px, 3vh, 34px) clamp(20px, 3.5vw, 50px) clamp(34px, 5vh, 64px);
@@ -1306,7 +1159,7 @@ body > main > .transparency-section {
     border-top: 1px solid var(--border);
 }
 
-.transparency-section > .color-archive h2 {
+.transparency-section>.color-archive h2 {
     margin: 0 0 7px;
     font-size: clamp(10px, 1.2vh, 13px);
 }
@@ -1323,12 +1176,12 @@ body > main > .transparency-section {
     font-size: 10px;
 }
 
-body > main > .deception-section {
+body>main>.deception-section {
     display: grid;
     grid-template-rows: auto auto auto auto;
 }
 
-.deception-section > .exercise-navigation {
+.deception-section>.exercise-navigation {
     min-height: 0;
     margin: 0;
     padding: clamp(16px, 2.5vh, 30px) clamp(20px, 3.5vw, 50px);
@@ -1349,7 +1202,7 @@ body > main > .deception-section {
     justify-content: center;
 }
 
-.deception-section .exercise-panel > div {
+.deception-section .exercise-panel>div {
     width: 100%;
     height: 100%;
     min-height: 0;
@@ -1358,12 +1211,12 @@ body > main > .deception-section {
     justify-content: center;
 }
 
-body > main > .pigment-map-section {
+body>main>.pigment-map-section {
     display: grid;
     grid-template-rows: auto auto auto auto;
 }
 
-.pigment-map-section > .pigment-map-wrapper {
+.pigment-map-section>.pigment-map-wrapper {
     width: 100%;
     height: auto;
     min-height: 0;
@@ -1384,103 +1237,13 @@ body > main > .pigment-map-section {
     aspect-ratio: 1 / 1;
 }
 
-body > main > .color-timeline-section {
-    display: grid;
-    grid-template-rows: auto auto auto auto auto;
-    overflow: visible;
-}
-
-.color-timeline-section > .color-comparison-panel {
-    width: 100%;
-    height: auto;
-    min-height: clamp(290px, 35svh, 390px);
-    margin: 0;
-    overflow: hidden;
-    grid-template-columns: clamp(150px, 16vw, 220px) minmax(0, 1fr);
-    display: grid;
-    background: var(--black);
-    color: var(--white);
-    border: 0;
-}
-
-.color-timeline-section .comparison-year-column {
-    min-width: 0;
-    padding: clamp(12px, 2.2vh, 26px);
-}
-
-.color-timeline-section .comparison-year {
-    font-size: clamp(36px, 6vh, 68px);
-}
-
-
-
-.color-timeline-section .comparison-colors {
-    min-width: 0;
-    min-height: 0;
-    height: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 18px;
-    scrollbar-gutter: stable;
-    align-items: flex-start;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.55) rgba(255, 255, 255, 0.12);
-    gap: 14px;
-    display: flex;
-    padding: 18px
-        20px
-        20px;
-}
-
-.color-timeline-section .comparison-color-card {
-    min-width: 280px;
-    height: auto;
-    padding: 0;
-    align-self: flex-start;
-    padding-bottom: 10px;
-    gap: clamp(16px, 1.5vw, 24px);
-    display: flex;
-    align-items: flex-start;
-    flex: 0 0 auto;
-    border-right: 0;
-    color: var(--white);
-}
-
-.color-timeline-section .comparison-color-card-primary {
-    min-width: 360px;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    outline: 0;
-    opacity: 1;
-}
-
-.color-timeline-section .comparison-swatch-primary {
-    width: clamp(126px, 17svh, 160px);
-    height: clamp(126px, 17svh, 160px);
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-    flex: 0 0 auto;
-}
-
-.color-timeline-section .comparison-swatch-secondary {
-    width: clamp(64px, 9svh, 84px);
-    height: clamp(64px, 9svh, 84px);
-}
-
-.color-timeline-section > #color-timeline svg {
-    display: block;
-    max-height: 100%;
-}
-
-body > main > .mixing-section {
+body>main>.mixing-section {
     display: grid;
     grid-template-rows: auto auto auto;
     overflow: visible;
 }
 
-.mixing-section > .mixing-layout {
+.mixing-section>.mixing-layout {
     min-height: 710px;
     height: auto;
     margin: 0;
@@ -1489,7 +1252,8 @@ body > main > .mixing-section {
     overflow: visible;
 }
 
-.mixing-section .mixing-introduction , .mixing-section .mixing-information-panel {
+.mixing-section .mixing-introduction,
+.mixing-section .mixing-information-panel {
     min-height: 0;
     overflow-y: auto;
 }
@@ -1541,7 +1305,9 @@ body > main > .mixing-section {
     padding: clamp(10px, 1.8vh, 22px);
 }
 
-.mixing-section .mixing-selection-section , .mixing-section .mixing-result-section , .mixing-section .mixing-recipe-section {
+.mixing-section .mixing-selection-section,
+.mixing-section .mixing-result-section,
+.mixing-section .mixing-recipe-section {
     padding: clamp(8px, 1.4vh, 16px) 0;
 }
 
@@ -1555,25 +1321,25 @@ body > main > .mixing-section {
     height: clamp(52px, 8.5vh, 82px);
 }
 
-body > main > .color-poll-section {
+body>main>.color-poll-section {
     display: grid;
     grid-template-rows: auto auto auto auto auto auto;
     overflow: visible;
 }
 
-.color-poll-section > .color-poll-form {
+.color-poll-section>.color-poll-form {
     margin: clamp(28px, 4vh, 56px) 0 0;
     padding: clamp(12px, 2vh, 22px) clamp(20px, 3.5vw, 50px);
     margin-top: clamp(24px, 5vh, 70px);
 }
 
-.color-poll-section > .color-poll-status {
+.color-poll-section>.color-poll-status {
     min-height: 0;
     margin: 0;
     padding: 0 clamp(20px, 3.5vw, 50px);
 }
 
-.color-poll-section > .color-poll-bubbles {
+.color-poll-section>.color-poll-bubbles {
     width: 100%;
     height: auto;
     min-height: clamp(360px, 54svh, 660px);
@@ -1581,7 +1347,7 @@ body > main > .color-poll-section {
     overflow: visible;
 }
 
-body > main > .pigment-map-section > .pigment-map-header {
+body>main>.pigment-map-section>.pigment-map-header {
     display: block;
     grid-template-columns: none;
     gap: 0;
@@ -1589,42 +1355,16 @@ body > main > .pigment-map-section > .pigment-map-header {
     padding: clamp(26px, 4.2vh, 50px) clamp(20px, 3.5vw, 50px) clamp(14px, 2vh, 24px);
 }
 
-body > main > .pigment-map-section > .pigment-map-header h1 {
+body>main>.pigment-map-section>.pigment-map-header h1 {
     display: block;
     width: 100%;
     margin: 0;
 }
 
 
-
-
-
-.color-poll-section .color-poll-input , .color-poll-section .color-poll-submit {
+.color-poll-section .color-poll-input,
+.color-poll-section .color-poll-submit {
     min-height: 48px;
-}
-
-.color-timeline-section #color-timeline .color-timeline-svg {
-    display: block;
-    width: auto;
-    max-width: none;
-    height: auto;
-    max-height: none;
-}
-
-.color-timeline-section > #color-timeline::-webkit-scrollbar {
-    height: 8px;
-}
-
-.color-timeline-section > #color-timeline::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.color-timeline-section > #color-timeline::-webkit-scrollbar-thumb {
-    background: #999999;
-}
-
-.color-timeline-section > #color-timeline::-webkit-scrollbar-thumb:hover {
-    background: #555555;
 }
 
 .genealogy-node .genealogy-primary-hex {
@@ -1652,99 +1392,12 @@ body > main > .pigment-map-section > .pigment-map-header h1 {
     fill: #777777;
 }
 
-.color-timeline-section .comparison-colors::-webkit-scrollbar {
-    height: 7px;
-}
-
-.color-timeline-section .comparison-colors::-webkit-scrollbar-track {
-    background: rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-}
-
-.color-timeline-section .comparison-colors::-webkit-scrollbar-thumb {
-    background: rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-information {
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    padding: clamp(16px, 2vh, 22px);
-    min-width: 210px;
-    background: transparent;
-    box-sizing: border-box;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-source {
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    opacity: 1;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-name {
-    margin-top: 8px;
-    font-size: clamp(24px, 2.4vw, 36px);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.035em;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-details {
-    margin-top: 16px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-details dt {
-    font-weight: 800;
-    opacity: 0.7;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-details dd {
-    font-weight: 700;
-    opacity: 1;
-}
-
-.color-timeline-section .comparison-color-card-secondary {
-    opacity: 0.58;
-    transition: opacity 180ms ease;
-    min-width: 210px;
-}
-
-.color-timeline-section .comparison-color-card-secondary:hover {
-    opacity: 0.88;
-}
-
-.color-timeline-section .comparison-color-card-secondary .comparison-color-information {
-    border: 0;
-    padding: 0;
-}
-
-.color-timeline-section .comparison-color-card-secondary .comparison-color-name {
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.1;
-}
-
-.color-timeline-section .comparison-color-card-secondary .comparison-source {
-    font-weight: 500;
-    opacity: 0.68;
-}
-
-.color-timeline-section .comparison-color-card-secondary .comparison-color-details {
-    font-size: 10px;
-    opacity: 0.7;
-}
-
-body > main > .transparency-section, body > main > .deception-section, body > main > .pigment-map-section, body > main > .color-timeline-section, body > main > .mixing-section, body > main > .color-poll-section {
+body>main>.transparency-section,
+body>main>.deception-section,
+body>main>.pigment-map-section,
+body>main>.color-timeline-section,
+body>main>.mixing-section,
+body>main>.color-poll-section {
     width: 100%;
     height: auto;
     min-height: 100svh;
@@ -1755,7 +1408,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
     background: var(--white);
 }
 
-.deception-section .exercise-panel canvas, .deception-section .exerciseCanvas {
+.deception-section .exercise-panel canvas,
+.deception-section .exerciseCanvas {
     display: block;
     width: auto;
     height: auto;
@@ -1804,7 +1458,11 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         min-height: 420px;
     }
 
-    header , .exercise-navigation , .pigment-map-section , .color-timeline-section , .mixing-section {
+    header,
+    .exercise-navigation,
+    .pigment-map-section,
+    .color-timeline-section,
+    .mixing-section {
         min-height: 100svh;
         height: auto;
     }
@@ -1814,7 +1472,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         padding: 36px 20px 24px;
     }
 
-    h1 , .pigment-map-header h2 {
+    h1,
+    .pigment-map-header h2 {
         font-size: clamp(58px, 19vw, 100px);
     }
 
@@ -1848,7 +1507,11 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         padding: 12px 18px;
     }
 
-    .exerciseCanvas , #canvas-container-1 canvas , #canvas-container-2 canvas , #canvas-container-3 canvas , #canvas-container-4 canvas {
+    .exerciseCanvas,
+    #canvas-container-1 canvas,
+    #canvas-container-2 canvas,
+    #canvas-container-3 canvas,
+    #canvas-container-4 canvas {
         width: 100%;
         max-height: none;
     }
@@ -1864,7 +1527,10 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         margin-bottom: 20px;
     }
 
-    #colorTimeline , #color-timeline , .color-timeline-container , .timeline-container {
+    #colorTimeline,
+    #color-timeline,
+    .color-timeline-container,
+    .timeline-container {
         max-height: none;
         overflow: visible;
     }
@@ -1887,7 +1553,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         border-bottom: 1px solid var(--border);
     }
 
-    footer , .mixing-footer {
+    footer,
+    .mixing-footer {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -1896,14 +1563,24 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         --page-gutter: 20px;
     }
 
-    .transparency-section , .deception-section , .pigment-map-section , .color-timeline-section , .mixing-section , .color-poll-section {
+    .transparency-section,
+    .deception-section,
+    .pigment-map-section,
+    .color-timeline-section,
+    .mixing-section,
+    .color-poll-section {
         min-height: 100svh;
         height: auto;
         display: block;
         overflow: visible;
     }
 
-    .transparency-section h1 , .deception-section h1 , .pigment-map-section > h1 , .color-timeline-section h1 , .mixing-section h1 , .color-poll-section h1 {
+    .transparency-section h1,
+    .deception-section h1,
+    .pigment-map-section>h1,
+    .color-timeline-section h1,
+    .mixing-section h1,
+    .color-poll-section h1 {
         font-size: clamp(48px, 17vw, 86px);
         letter-spacing: -0.075em;
         overflow-wrap: anywhere;
@@ -1940,7 +1617,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         padding: 7px 4px;
     }
 
-    .deception-section .exercise-panel canvas , .deception-section .exerciseCanvas {
+    .deception-section .exercise-panel canvas,
+    .deception-section .exerciseCanvas {
         width: 100%;
         height: auto;
         max-height: none;
@@ -1955,7 +1633,9 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         -webkit-overflow-scrolling: touch;
     }
 
-    .comparison-color-card , .comparison-color-card-primary , .comparison-color-card-secondary {
+    .comparison-color-card,
+    .comparison-color-card-primary,
+    .comparison-color-card-secondary {
         min-width: min(86vw, 340px);
         padding: 24px 20px;
     }
@@ -1970,13 +1650,14 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         height: 72px;
     }
 
-    .color-timeline-section > #color-timeline {
+    .color-timeline-section>#color-timeline {
         min-height: 420px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
 
-    .mixing-introduction , .mixing-information-panel {
+    .mixing-introduction,
+    .mixing-information-panel {
         padding: 32px 20px;
         border-right: 0;
         border-left: 0;
@@ -1999,12 +1680,12 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         display: block;
     }
 
-    .mixing-information-panel > section {
+    .mixing-information-panel>section {
         border-right: 0;
         border-bottom: 1px solid var(--border);
     }
 
-    .mixing-information-panel > section:last-child {
+    .mixing-information-panel>section:last-child {
         border-bottom: 0;
     }
 
@@ -2014,7 +1695,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         gap: 12px;
     }
 
-    .color-poll-input , .color-poll-submit {
+    .color-poll-input,
+    .color-poll-submit {
         width: 100%;
     }
 
@@ -2022,40 +1704,43 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         min-height: 58svh;
     }
 
-    body > main > .transparency-section , body > main > .deception-section , body > main > .pigment-map-section , body > main > .color-timeline-section , body > main > .mixing-section , body > main > .color-poll-section {
+    body>main>.transparency-section,
+    body>main>.deception-section,
+    body>main>.pigment-map-section,
+    body>main>.color-timeline-section,
+    body>main>.mixing-section,
+    body>main>.color-poll-section {
         height: 100dvh;
         min-height: 520px;
     }
 
-    body > main > section > header {
+    body>main>section>header {
         padding: 24px 20px 14px;
     }
 
-    body > main > section > header h1 {
+    body>main>section>header h1 {
         font-size: clamp(48px, 16.5vw, 92px);
         line-height: 0.78;
         letter-spacing: -0.08em;
     }
 
 
-
-    body > main > section > .instructions , body > main > section .mixing-canvas-column > .instructions , body > main > section > footer {
+    body>main>section>.instructions,
+    body>main>section .mixing-canvas-column>.instructions,
+    body>main>section>footer {
         padding: 7px 20px;
         font-size: 10px;
     }
 
-    body > main > .transparency-section {
-        grid-template-rows: auto
-            minmax(0, 1fr)
-            auto
-            88px;
+    body>main>.transparency-section {
+        grid-template-rows: auto minmax(0, 1fr) auto 88px;
     }
 
-    .transparency-section > .color-archive {
+    .transparency-section>.color-archive {
         padding: 7px 20px;
     }
 
-    .deception-section > .exercise-navigation {
+    .deception-section>.exercise-navigation {
         padding: 5px 20px;
     }
 
@@ -2066,15 +1751,11 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         min-height: 400px;
     }
 
-    body > main > .color-timeline-section {
-        grid-template-rows: auto
-            minmax(94px, 21vh)
-            minmax(0, 1fr)
-            auto
-            auto;
+    body>main>.color-timeline-section {
+        grid-template-rows: auto minmax(94px, 21vh) minmax(0, 1fr) auto auto;
     }
 
-    .color-timeline-section > .color-comparison-panel {
+    .color-timeline-section>.color-comparison-panel {
         grid-template-columns: 88px minmax(0, 1fr);
         display: block;
         min-height: 0;
@@ -2107,11 +1788,9 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         height: 44px;
     }
 
-    .mixing-section > .mixing-layout {
+    .mixing-section>.mixing-layout {
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: minmax(82px, 16vh)
-            minmax(0, 1fr)
-            minmax(105px, 22vh);
+        grid-template-rows: minmax(82px, 16vh) minmax(0, 1fr) minmax(105px, 22vh);
         display: block;
         min-height: 0;
     }
@@ -2121,7 +1800,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         overflow: hidden;
     }
 
-    .mixing-section .mixing-rule , .mixing-section .mixing-steps {
+    .mixing-section .mixing-rule,
+    .mixing-section .mixing-steps {
         display: none;
     }
 
@@ -2140,17 +1820,19 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         border-left: none;
     }
 
-    .mixing-section .mixing-selection-section , .mixing-section .mixing-result-section , .mixing-section .mixing-recipe-section {
+    .mixing-section .mixing-selection-section,
+    .mixing-section .mixing-result-section,
+    .mixing-section .mixing-recipe-section {
         min-width: 135px;
         padding: 0;
         border: 0;
     }
 
-    .mixing-section .mixing-recipe-list > div {
+    .mixing-section .mixing-recipe-list>div {
         padding: 3px 0;
     }
 
-    .color-poll-section > .color-poll-form {
+    .color-poll-section>.color-poll-form {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
         gap: 6px;
@@ -2162,11 +1844,9 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         grid-column: 1 / -1;
     }
 
-    body > main > .pigment-map-section > .pigment-map-header {
+    body>main>.pigment-map-section>.pigment-map-header {
         display: block;
-        padding: 18px
-            20px
-            9px;
+        padding: 18px 20px 9px;
     }
 
     .color-timeline-section .comparison-colors {
@@ -2183,21 +1863,23 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         font-size: 23px;
     }
 
-    .color-timeline-section .comparison-color-card-secondary {
-        opacity: 0.7;
-    }
-
-    body > main > .transparency-section, body > main > .deception-section, body > main > .pigment-map-section, body > main > .color-timeline-section, body > main > .mixing-section, body > main > .color-poll-section {
+    body>main>.transparency-section,
+    body>main>.deception-section,
+    body>main>.pigment-map-section,
+    body>main>.color-timeline-section,
+    body>main>.mixing-section,
+    body>main>.color-poll-section {
         height: auto;
         min-height: 100svh;
         overflow: visible;
     }
 
-    .transparency-section > .main-canvas-section > .canvas-wrapper {
+    .transparency-section>.main-canvas-section>.canvas-wrapper {
         height: clamp(390px, 58svh, 620px);
     }
 
-    .deception-section .exercise-panel canvas, .deception-section .exerciseCanvas {
+    .deception-section .exercise-panel canvas,
+    .deception-section .exerciseCanvas {
         width: 100%;
         height: auto;
         max-width: 100%;
@@ -2282,12 +1964,14 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         padding: 38px 20px;
     }
 
-    .mixing-selection-section , .mixing-result-section {
+    .mixing-selection-section,
+    .mixing-result-section {
         padding-bottom: 34px;
         border-bottom: 1px solid var(--border);
     }
 
-    .mixing-result-section , .mixing-recipe-section {
+    .mixing-result-section,
+    .mixing-recipe-section {
         padding-top: 34px;
     }
 
@@ -2296,7 +1980,7 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         padding: 32px 20px;
     }
 
-    .mixing-footer p + p {
+    .mixing-footer p+p {
         margin-top: 12px;
     }
 
@@ -2320,32 +2004,36 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         border-left: 0;
     }
 
-    .mixing-selection-section , .mixing-result-section {
+    .mixing-selection-section,
+    .mixing-result-section {
         padding: 0;
         border-bottom: none;
     }
 
-    .mixing-result-section , .mixing-recipe-section {
+    .mixing-result-section,
+    .mixing-recipe-section {
         padding-top: 0;
     }
 
-    header , .exercise-navigation , .pigment-map-section , .color-timeline-section , .mixing-section {
+    header,
+    .exercise-navigation,
+    .pigment-map-section,
+    .color-timeline-section,
+    .mixing-section {
         min-height: auto;
     }
 
-    .mixing-information-panel > section {
+    .mixing-information-panel>section {
         min-width: 0;
         border-right: 1px solid var(--border);
     }
 
-    .mixing-information-panel > section:last-child {
+    .mixing-information-panel>section:last-child {
         border-right: 0;
     }
 
-    .mixing-section > .mixing-layout {
-        grid-template-columns: minmax(155px, 22vw)
-            minmax(0, 1fr)
-            minmax(185px, 27vw);
+    .mixing-section>.mixing-layout {
+        grid-template-columns: minmax(155px, 22vw) minmax(0, 1fr) minmax(185px, 27vw);
     }
 
 }
@@ -2358,7 +2046,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         padding-bottom: 18px;
     }
 
-    h1 , .pigment-map-header h2 {
+    h1,
+    .pigment-map-header h2 {
         font-size: clamp(58px, 9vw, 118px);
     }
 
@@ -2386,7 +2075,11 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         margin-top: 22px;
     }
 
-    .exerciseCanvas , #canvas-container-1 canvas , #canvas-container-2 canvas , #canvas-container-3 canvas , #canvas-container-4 canvas {
+    .exerciseCanvas,
+    #canvas-container-1 canvas,
+    #canvas-container-2 canvas,
+    #canvas-container-3 canvas,
+    #canvas-container-4 canvas {
         max-height: 50svh;
     }
 
@@ -2408,7 +2101,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         min-height: 210px;
     }
 
-    .comparison-year-column , .comparison-color-card {
+    .comparison-year-column,
+    .comparison-color-card {
         padding: 26px;
     }
 
@@ -2431,7 +2125,12 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
 
 @media (min-width: 801px) and (max-height: 820px) {
 
-    .transparency-section h1 , .deception-section h1 , .pigment-map-section > h1 , .color-timeline-section h1 , .mixing-section h1 , .color-poll-section h1 {
+    .transparency-section h1,
+    .deception-section h1,
+    .pigment-map-section>h1,
+    .color-timeline-section h1,
+    .mixing-section h1,
+    .color-poll-section h1 {
         font-size: clamp(54px, 9.5vw, 118px);
     }
 
@@ -2439,7 +2138,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         height: clamp(330px, 50svh, 520px);
     }
 
-    .deception-section .exercise-panel canvas , .deception-section .exerciseCanvas {
+    .deception-section .exercise-panel canvas,
+    .deception-section .exerciseCanvas {
         max-height: 46svh;
     }
 
@@ -2452,7 +2152,8 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         min-height: 220px;
     }
 
-    .comparison-year-column , .comparison-color-card {
+    .comparison-year-column,
+    .comparison-color-card {
         padding-top: 24px;
         padding-bottom: 24px;
     }
@@ -2482,15 +2183,13 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         flex-direction: column;
     }
 
-    body > main > section > header h1 {
-        font-size: clamp(
-                42px,
+    body>main>section>header h1 {
+        font-size: clamp(42px,
                 15.5vw,
-                70px
-            );
+                70px);
     }
 
-    .color-timeline-section > .color-comparison-panel {
+    .color-timeline-section>.color-comparison-panel {
         grid-template-columns: 76px minmax(0, 1fr);
     }
 
@@ -2498,12 +2197,10 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
         font-size: 9px;
     }
 
-    .transparency-section > header h1 {
-        font-size: clamp(
-                38px,
+    .transparency-section>header h1 {
+        font-size: clamp(38px,
                 13.5vw,
-                62px
-            );
+                62px);
     }
 
 }
@@ -2511,39 +2208,28 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
 
 @media (min-width: 801px) and (max-height: 760px) {
 
-    body > main > section > header {
-        padding: 14px
-            38px
-            7px;
+    body>main>section>header {
+        padding: 14px 38px 7px;
     }
 
-    body > main > section > header h1 {
-        font-size: clamp(
-                66px,
+    body>main>section>header h1 {
+        font-size: clamp(66px,
                 min(13vw, 17vh),
-                128px
-            );
+                128px);
         line-height: 0.76;
     }
 
 
-
-    body > main > .color-timeline-section {
-        grid-template-rows: auto
-            minmax(100px, 24vh)
-            minmax(0, 1fr)
-            auto
-            auto;
+    body>main>.color-timeline-section {
+        grid-template-rows: auto minmax(100px, 24vh) minmax(0, 1fr) auto auto;
     }
 
     .mixing-section .mixing-steps {
         margin-top: 8px;
     }
 
-    body > main > .pigment-map-section > .pigment-map-header {
-        padding: 14px
-            38px
-            7px;
+    body>main>.pigment-map-section>.pigment-map-header {
+        padding: 14px 38px 7px;
     }
 
 }
@@ -2551,12 +2237,10 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
 
 @media (min-width: 601px) and (max-width: 1000px) {
 
-    body > main > section > header h1 {
-        font-size: clamp(
-                68px,
+    body>main>section>header h1 {
+        font-size: clamp(68px,
                 min(15vw, 17vh),
-                145px
-            );
+                145px);
     }
 
 }
@@ -2566,12 +2250,12 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
    TRANSPARENCY — SHORTER DISCOVERED COLORS AREA
    ========================================== */
 
-.transparency-section > .color-archive {
+.transparency-section>.color-archive {
     padding-top: 10px;
     padding-bottom: 16px;
 }
 
-.transparency-section > .color-archive h2 {
+.transparency-section>.color-archive h2 {
     margin-bottom: 8px;
 }
 
@@ -2613,39 +2297,6 @@ body > main > .transparency-section, body > main > .deception-section, body > ma
 
 .genealogy-node .genealogy-primary-hex {
     opacity: 1;
-}
-
-
-/* ==========================================
-   TRENDS — KEEP TIMELINE BELOW BLACK PANEL
-   ========================================== */
-
-.color-timeline-section > .color-comparison-panel {
-    position: relative;
-    z-index: 2;
-    margin-bottom: 28px;
-}
-
-.color-timeline-section > #color-timeline {
-    position: relative;
-    z-index: 1;
-    clear: both;
-    margin-top: 0;
-    padding-top: 12px;
-    background: var(--white);
-}
-
-.color-timeline-section > #color-timeline .color-timeline-svg {
-    display: block;
-}
-
-
-/* Prevent the first timeline row from visually
-   sliding underneath the black comparison band. */
-
-.color-timeline-section > #color-timeline {
-    overflow-x: auto;
-    overflow-y: hidden;
 }
 
 
@@ -2837,7 +2488,6 @@ section to be exactly one viewport tall.
 }
 
 
-
 /* ==========================================================
    PLAYGROUND, PALETTE, DECEPTION, TRENDS, MIXING
    ========================================================== */
@@ -2869,11 +2519,9 @@ section to be exactly one viewport tall.
     color: var(--black);
 
     font-size:
-        clamp(
-            120px,
+        clamp(120px,
             min(27vw, 38vh),
-            410px
-        );
+            410px);
 
     white-space: nowrap;
 }
@@ -2894,30 +2542,23 @@ rendered width aligns it with the L.
     width: max-content;
 
     margin-top:
-        clamp(
-            24px,
+        clamp(24px,
             5vh,
-            70px
-        );
+            70px);
 
     margin-left:
         40%;
 
     font-size:
-        clamp(
-            78px,
+        clamp(78px,
             min(17vw, 25vh),
-            265px
-        );
+            265px);
 
     font-weight: 500;
     letter-spacing: -0.075em;
 
     animation:
-        playground-color-cycle
-        12s
-        linear
-        infinite;
+        playground-color-cycle 12s linear infinite;
 }
 
 
@@ -2938,17 +2579,15 @@ rendered width aligns it with the L.
 }
 
 
-.deception-section .exercise-panel > div {
+.deception-section .exercise-panel>div {
     display: flex;
 
     align-items: center;
     justify-content: center;
 
     width:
-        min(
-            calc(100vw - 2 * var(--page-gutter) - var(--navigation-safe-area)),
-            760px
-        );
+        min(calc(100vw - 2 * var(--page-gutter) - var(--navigation-safe-area)),
+            760px);
 
     max-width: 100%;
 
@@ -2981,65 +2620,6 @@ rendered width aligns it with the L.
 
 
 /* ==========================================
-   TRENDS — RESERVE NAVIGATION SPACE
-   ========================================== */
-
-.color-timeline-section {
-    padding-right: var(--navigation-safe-area);
-}
-
-
-/* Center the year in its black column */
-
-.color-timeline-section .comparison-year-column {
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-
-.color-timeline-section .comparison-year,
-.color-timeline-section .comparison-year-label {
-    width: 100%;
-
-    text-align: center;
-}
-
-
-/*
-The timeline should fit the available screen.
-JavaScript will assign an SVG width equal to
-the visible container width.
-*/
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-
-    overflow-x: hidden;
-    overflow-y: hidden;
-
-    padding-right: 0;
-    padding-bottom: 14px;
-}
-
-
-.color-timeline-section
-#color-timeline
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-}
-
-
-/* ==========================================
    MIXING — RESERVE NAVIGATION SPACE
    ========================================== */
 
@@ -3048,17 +2628,14 @@ the visible container width.
 }
 
 
-.mixing-section > header,
-.mixing-section > footer {
+.mixing-section>header,
+.mixing-section>footer {
     padding-right:
-        calc(
-            var(--page-gutter) +
-            var(--navigation-safe-area)
-        );
+        calc(var(--page-gutter) + var(--navigation-safe-area));
 }
 
 
-.mixing-section > .mixing-layout {
+.mixing-section>.mixing-layout {
     width: 100%;
     max-width: 100%;
 }
@@ -3077,11 +2654,9 @@ the visible container width.
 
     .playground-title-color {
         font-size:
-            clamp(
-                72px,
+            clamp(72px,
                 25vw,
-                155px
-            );
+                155px);
     }
 
 
@@ -3090,21 +2665,15 @@ the visible container width.
         margin-left: 16%;
 
         font-size:
-            clamp(
-                52px,
+            clamp(52px,
                 17vw,
-                110px
-            );
+                110px);
     }
 
 
-    .deception-section .exercise-panel > div {
+    .deception-section .exercise-panel>div {
         width:
-            calc(
-                100vw -
-                40px -
-                var(--navigation-safe-area)
-            );
+            calc(100vw - 40px - var(--navigation-safe-area));
     }
 
 }
@@ -3155,21 +2724,18 @@ the visible container width.
 
 /* ---------- Shared section headers ---------- */
 
-body > main > section > header,
-.pigment-map-section > .pigment-map-header {
+body>main>section>header,
+.pigment-map-section>.pigment-map-header {
     display: block;
     min-width: 0;
     min-height: 0;
     margin: 0;
     padding:
-        clamp(24px, 4vh, 46px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(12px, 1.8vh, 22px)
-        var(--page-gutter);
+        clamp(24px, 4vh, 46px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(12px, 1.8vh, 22px) var(--page-gutter);
 }
 
-body > main > section > header h1,
-.pigment-map-section > .pigment-map-header h1 {
+body>main>section>header h1,
+.pigment-map-section>.pigment-map-header h1 {
     margin: 0;
     padding: 0;
     text-align: left;
@@ -3185,10 +2751,7 @@ body > main > section > header h1,
     width: 100%;
     min-height: 100svh;
     padding:
-        clamp(30px, 5vh, 60px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(30px, 5vh, 60px)
-        var(--page-gutter);
+        clamp(30px, 5vh, 60px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(30px, 5vh, 60px) var(--page-gutter);
     overflow: hidden;
     background: var(--white);
     scroll-snap-align: start;
@@ -3237,12 +2800,12 @@ body > main > section > header h1,
     overflow: hidden;
 }
 
-.deception-section > header {
+.deception-section>header {
     padding-top: clamp(14px, 2.4vh, 28px);
     padding-bottom: clamp(6px, 1vh, 12px);
 }
 
-.deception-section > header h1 {
+.deception-section>header h1 {
     font-size: clamp(62px, min(12vw, 15vh), 145px);
 }
 
@@ -3251,10 +2814,7 @@ body > main > section > header h1,
     grid-template-rows: auto minmax(0, 1fr);
     min-height: 0;
     padding:
-        clamp(5px, 0.9vh, 10px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(6px, 1vh, 12px)
-        var(--page-gutter);
+        clamp(5px, 0.9vh, 10px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(6px, 1vh, 12px) var(--page-gutter);
     overflow: hidden;
 }
 
@@ -3285,7 +2845,7 @@ body > main > section > header h1,
     justify-content: center;
 }
 
-.deception-section .exercise-panel > div {
+.deception-section .exercise-panel>div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3312,57 +2872,15 @@ body > main > section > header h1,
     object-fit: contain;
 }
 
-.deception-section > .instructions,
-.deception-section > footer {
+.deception-section>.instructions,
+.deception-section>footer {
     margin: 0;
     padding:
-        clamp(7px, 1.1vh, 12px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(7px, 1.1vh, 12px)
-        var(--page-gutter);
+        clamp(7px, 1.1vh, 12px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(7px, 1.1vh, 12px) var(--page-gutter);
     font-size: clamp(10px, 1.25vh, 13px);
     line-height: 1.35;
 }
 
-/* ---------- Trends ---------- */
-
-.color-timeline-section {
-    padding-right: var(--navigation-safe-area);
-}
-
-.color-timeline-section > .color-comparison-panel {
-    width: 100%;
-}
-
-.color-timeline-section .comparison-year-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.color-timeline-section .comparison-year,
-.color-timeline-section .comparison-year-label {
-    width: 100%;
-    text-align: center;
-}
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-right: 0;
-    padding-bottom: 14px;
-}
-
-.color-timeline-section #color-timeline .color-timeline-svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-}
 
 /* ---------- Mixing ---------- */
 
@@ -3370,19 +2888,19 @@ body > main > section > header h1,
     padding-right: var(--navigation-safe-area);
 }
 
-.mixing-section > header,
-.mixing-section > footer {
+.mixing-section>header,
+.mixing-section>footer {
     padding-right: calc(var(--page-gutter) + var(--navigation-safe-area));
 }
 
-.mixing-section > .mixing-layout {
+.mixing-section>.mixing-layout {
     width: 100%;
     max-width: 100%;
 }
 
 /* ---------- Pigment footer ---------- */
 
-.pigment-map-section > footer {
+.pigment-map-section>footer {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -3394,63 +2912,62 @@ body > main > section > header h1,
 /* ---------- Tablet and mobile ---------- */
 
 
+body>main>section>header,
+.pigment-map-section>.pigment-map-header {
+    padding-right: calc(20px + var(--navigation-safe-area));
+    padding-left: 20px;
+}
 
-    body > main > section > header,
-    .pigment-map-section > .pigment-map-header {
-        padding-right: calc(20px + var(--navigation-safe-area));
-        padding-left: 20px;
-    }
+.playground-title-color {
+    font-size: clamp(72px, 25vw, 155px);
+}
 
-    .playground-title-color {
-        font-size: clamp(72px, 25vw, 155px);
-    }
+.playground-title-word {
+    margin-top: 34px;
+    margin-left: 40%;
+    font-size: clamp(52px, 17vw, 110px);
+}
 
-    .playground-title-word {
-        margin-top: 34px;
-        margin-left: 40%;
-        font-size: clamp(52px, 17vw, 110px);
-    }
+.deception-section {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+}
 
-    .deception-section {
-        height: auto;
-        min-height: 100svh;
-        overflow: visible;
-    }
+.deception-section .exercise-navigation {
+    display: block;
+    padding: 12px calc(20px + var(--navigation-safe-area)) 18px 20px;
+    overflow: visible;
+}
 
-    .deception-section .exercise-navigation {
-        display: block;
-        padding: 12px calc(20px + var(--navigation-safe-area)) 18px 20px;
-        overflow: visible;
-    }
+.deception-section .exercise-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+}
 
-    .deception-section .exercise-buttons {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 6px;
-    }
+.deception-section .exercise-panel {
+    height: auto;
+    margin-top: 16px;
+    overflow: visible;
+}
 
-    .deception-section .exercise-panel {
-        height: auto;
-        margin-top: 16px;
-        overflow: visible;
-    }
+.deception-section .exercise-panel>div {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
 
-    .deception-section .exercise-panel > div {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 4 / 3;
-    }
-
-    .deception-section .exercise-panel canvas,
-    .deception-section .exerciseCanvas,
-    #canvas-container-1 canvas,
-    #canvas-container-2 canvas,
-    #canvas-container-3 canvas,
-    #canvas-container-4 canvas {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 4 / 3;
-    }
+.deception-section .exercise-panel canvas,
+.deception-section .exerciseCanvas,
+#canvas-container-1 canvas,
+#canvas-container-2 canvas,
+#canvas-container-3 canvas,
+#canvas-container-4 canvas {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
 }
 
 @media (max-width: 480px) {
@@ -3486,35 +3003,29 @@ body > main > section > header h1,
 
 /* ---------- Shared section headers ---------- */
 
-body > main > section > header,
-.pigment-map-section > .pigment-map-header {
+body>main>section>header,
+.pigment-map-section>.pigment-map-header {
     display: block;
     min-width: 0;
     min-height: 0;
     margin: 0;
     padding:
-        clamp(24px, 4vh, 46px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(12px, 1.8vh, 22px)
-        var(--page-gutter);
+        clamp(24px, 4vh, 46px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(12px, 1.8vh, 22px) var(--page-gutter);
 }
 
-body > main > section > header h1,
-.pigment-map-section > .pigment-map-header h1 {
+body>main>section>header h1,
+.pigment-map-section>.pigment-map-header h1 {
     margin: 0;
     padding: 0;
     text-align: left;
 }
 
-body > main > section > header .subtitle,
-.pigment-map-section > .pigment-map-header .subtitle {
+body>main>section>header .subtitle,
+.pigment-map-section>.pigment-map-header .subtitle {
     width: auto;
     max-width: min(820px, calc(100% - var(--subtitle-offset)));
     margin:
-        clamp(10px, 1.5vh, 18px)
-        0
-        0
-        var(--subtitle-offset);
+        clamp(10px, 1.5vh, 18px) 0 0 var(--subtitle-offset);
     padding: 0;
     text-align: left;
     transform: none;
@@ -3529,10 +3040,7 @@ body > main > section > header .subtitle,
     width: 100%;
     min-height: 100svh;
     padding:
-        clamp(30px, 5vh, 60px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(30px, 5vh, 60px)
-        var(--page-gutter);
+        clamp(30px, 5vh, 60px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(30px, 5vh, 60px) var(--page-gutter);
     overflow: hidden;
     background: var(--white);
     scroll-snap-align: start;
@@ -3581,12 +3089,12 @@ body > main > section > header .subtitle,
     overflow: hidden;
 }
 
-.deception-section > header {
+.deception-section>header {
     padding-top: clamp(14px, 2.4vh, 28px);
     padding-bottom: clamp(6px, 1vh, 12px);
 }
 
-.deception-section > header h1 {
+.deception-section>header h1 {
     font-size: clamp(62px, min(12vw, 15vh), 145px);
 }
 
@@ -3595,10 +3103,7 @@ body > main > section > header .subtitle,
     grid-template-rows: auto minmax(0, 1fr);
     min-height: 0;
     padding:
-        clamp(5px, 0.9vh, 10px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(6px, 1vh, 12px)
-        var(--page-gutter);
+        clamp(5px, 0.9vh, 10px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(6px, 1vh, 12px) var(--page-gutter);
     overflow: hidden;
 }
 
@@ -3629,7 +3134,7 @@ body > main > section > header .subtitle,
     justify-content: center;
 }
 
-.deception-section .exercise-panel > div {
+.deception-section .exercise-panel>div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3656,57 +3161,15 @@ body > main > section > header .subtitle,
     object-fit: contain;
 }
 
-.deception-section > .instructions,
-.deception-section > footer {
+.deception-section>.instructions,
+.deception-section>footer {
     margin: 0;
     padding:
-        clamp(7px, 1.1vh, 12px)
-        calc(var(--page-gutter) + var(--navigation-safe-area))
-        clamp(7px, 1.1vh, 12px)
-        var(--page-gutter);
+        clamp(7px, 1.1vh, 12px) calc(var(--page-gutter) + var(--navigation-safe-area)) clamp(7px, 1.1vh, 12px) var(--page-gutter);
     font-size: clamp(10px, 1.25vh, 13px);
     line-height: 1.35;
 }
 
-/* ---------- Trends ---------- */
-
-.color-timeline-section {
-    padding-right: var(--navigation-safe-area);
-}
-
-.color-timeline-section > .color-comparison-panel {
-    width: 100%;
-}
-
-.color-timeline-section .comparison-year-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.color-timeline-section .comparison-year,
-.color-timeline-section .comparison-year-label {
-    width: 100%;
-    text-align: center;
-}
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-right: 0;
-    padding-bottom: 14px;
-}
-
-.color-timeline-section #color-timeline .color-timeline-svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-}
 
 /* ---------- Mixing ---------- */
 
@@ -3714,19 +3177,19 @@ body > main > section > header .subtitle,
     padding-right: var(--navigation-safe-area);
 }
 
-.mixing-section > header,
-.mixing-section > footer {
+.mixing-section>header,
+.mixing-section>footer {
     padding-right: calc(var(--page-gutter) + var(--navigation-safe-area));
 }
 
-.mixing-section > .mixing-layout {
+.mixing-section>.mixing-layout {
     width: 100%;
     max-width: 100%;
 }
 
 /* ---------- Pigment footer ---------- */
 
-.pigment-map-section > footer {
+.pigment-map-section>footer {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -3743,58 +3206,57 @@ body > main > section > header .subtitle,
         --subtitle-offset: clamp(10px, 4vw, 22px);
     }
 
-    body > main > section > header,
-    .pigment-map-section > .pigment-map-header {
+    body>main>section>header,
+    .pigment-map-section>.pigment-map-header {
         padding-right: calc(20px + var(--navigation-safe-area));
         padding-left: 20px;
     }
 
- 
+
 
     .playground-title-word {
-    display: block;
-    width: max-content;
+        display: block;
+        width: max-content;
 
-    margin-top: clamp(24px, 5vh, 70px);
-    margin-left: 40%;
+        margin-top: clamp(24px, 5vh, 70px);
+        margin-left: 40%;
 
-    font-size: clamp(78px, min(17vw, 25vh), 265px);
-    font-weight: 500;
-    letter-spacing: -0.075em;
+        font-size: clamp(78px, min(17vw, 25vh), 265px);
+        font-weight: 500;
+        letter-spacing: -0.075em;
 
-    animation: playground-color-cycle 12s linear infinite;
-}
-
-@keyframes playground-color-cycle {
-    0% {
-        color: #ff7a8a;
+        animation: playground-color-cycle 12s linear infinite;
     }
 
-    16% {
-        color: #ffb347;
-    }
+    @keyframes playground-color-cycle {
+        0% {
+            color: #ff7a8a;
+        }
 
-    32% {
-        color: #d3c94e;
-    }
+        16% {
+            color: #ffb347;
+        }
 
-    48% {
-        color: #61c99a;
-    }
+        32% {
+            color: #d3c94e;
+        }
 
-    64% {
-        color: #5b9df9;
-    }
+        48% {
+            color: #61c99a;
+        }
 
-    80% {
-        color: #9b78e8;
-    }
+        64% {
+            color: #5b9df9;
+        }
 
-    100% {
-        color: #ff7a8a;
-    }
-}
+        80% {
+            color: #9b78e8;
+        }
 
+        100% {
+            color: #ff7a8a;
+        }
+    }
 
 
     .deception-section {
@@ -3821,7 +3283,7 @@ body > main > section > header .subtitle,
         overflow: visible;
     }
 
-    .deception-section .exercise-panel > div {
+    .deception-section .exercise-panel>div {
         width: 100%;
         height: auto;
         aspect-ratio: 4 / 3;
@@ -3926,18 +3388,15 @@ body > main > section > header .subtitle,
 }
 
 
-
 /* ==========================================================
    TRENDS + MIXING — NAVIGATION-SAFE LAYOUT
    ========================================================== */
 
 :root {
     --navigation-rail-space:
-        clamp(
-            56px,
+        clamp(56px,
             5vw,
-            82px
-        );
+            82px);
 }
 
 
@@ -3946,249 +3405,16 @@ body > main > section > header .subtitle,
 .color-timeline-section,
 .mixing-section {
     width:
-        calc(
-            100% -
-            var(--navigation-rail-space)
-        );
+        calc(100% - var(--navigation-rail-space));
 
     max-width:
-        calc(
-            100% -
-            var(--navigation-rail-space)
-        );
+        calc(100% - var(--navigation-rail-space));
 
     margin-right:
         var(--navigation-rail-space);
 
     overflow-x:
         hidden;
-}
-
-
-/* ==========================================================
-   TRENDS — FIT ALL CONTENT
-   ========================================================== */
-
-.color-timeline-section {
-    display: grid;
-
-    grid-template-rows:
-        auto
-        auto
-        auto
-        auto
-        auto;
-
-    min-height: 100svh;
-    height: auto;
-
-    margin-top: 0;
-    padding: 0;
-
-    overflow: visible;
-}
-
-
-/* Compact header without losing the large title */
-
-.color-timeline-section > .color-timeline-header {
-    min-height: 0;
-
-    margin: 0;
-
-    padding:
-        clamp(22px, 3.5vh, 42px)
-        var(--page-gutter)
-        clamp(12px, 1.8vh, 22px);
-}
-
-
-/* ==========================================
-   BLACK COMPARISON BAND
-   ========================================== */
-
-.color-timeline-section
-> .color-comparison-panel {
-    display: grid;
-
-    grid-template-columns:
-        clamp(135px, 15vw, 205px)
-        minmax(0, 1fr);
-
-    width: 100%;
-    min-width: 0;
-
-    min-height:
-        clamp(
-            230px,
-            30svh,
-            320px
-        );
-
-    margin: 0;
-
-    overflow: hidden;
-
-    background: var(--black);
-    color: var(--white);
-}
-
-
-/* Center selected year */
-
-.color-timeline-section
-.comparison-year-column {
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 0;
-
-    padding:
-        clamp(
-            18px,
-            2.5vw,
-            34px
-        );
-
-    text-align: center;
-
-    border-right:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.25
-        );
-}
-
-
-.color-timeline-section
-.comparison-year,
-.color-timeline-section
-.comparison-year-label {
-    width: 100%;
-    text-align: center;
-}
-
-
-/* Comparison cards may scroll only inside black band */
-
-.color-timeline-section
-.comparison-colors {
-    display: flex;
-    align-items: flex-start;
-
-    min-width: 0;
-
-    gap:
-        clamp(
-            20px,
-            2.5vw,
-            38px
-        );
-
-    padding:
-        clamp(22px, 3vh, 34px)
-        clamp(20px, 2.5vw, 34px)
-        28px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scrollbar-gutter: stable;
-}
-
-
-/* Prevent cards from becoming unnecessarily wide */
-
-.color-timeline-section
-.comparison-color-card {
-    min-width:
-        clamp(
-            220px,
-            24vw,
-            300px
-        );
-
-    gap: 16px;
-
-    padding: 0;
-}
-
-
-.color-timeline-section
-.comparison-color-card-primary {
-    min-width:
-        clamp(
-            350px,
-            38vw,
-            445px
-        );
-}
-
-
-.color-timeline-section
-.comparison-color-card-secondary {
-    min-width:
-        clamp(
-            215px,
-            23vw,
-            280px
-        );
-}
-
-
-/* ==========================================
-   TIMELINE
-   ========================================== */
-
-.color-timeline-section
-> #color-timeline {
-    width: 100%;
-    min-width: 0;
-
-    min-height: 330px;
-    height: auto;
-
-    margin: 0;
-
-    padding:
-        14px
-        0
-        10px;
-
-    overflow-x: hidden;
-    overflow-y: visible;
-
-    background: var(--white);
-}
-
-
-.color-timeline-section
-#color-timeline
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-    max-height: none;
-}
-
-
-/* Instructions and footer remain visible */
-
-.color-timeline-section
-> .instructions,
-.color-timeline-section
-> .color-timeline-footer {
-    width: 100%;
-    margin: 0;
 }
 
 
@@ -4200,9 +3426,7 @@ body > main > section > header .subtitle,
     display: grid;
 
     grid-template-rows:
-        auto
-        auto
-        auto;
+        auto auto auto;
 
     min-height: 100svh;
     height: auto;
@@ -4214,70 +3438,56 @@ body > main > section > header .subtitle,
 }
 
 
-
-
 /* Three-column desktop layout */
 
-.mixing-section
-> .mixing-layout {
+.mixing-section>.mixing-layout {
     display: grid;
 
     grid-template-columns:
-        minmax(170px, 0.8fr)
-        minmax(380px, 2.2fr)
-        minmax(205px, 0.95fr);
+        minmax(170px, 0.8fr) minmax(380px, 2.2fr) minmax(205px, 0.95fr);
 
     width: 100%;
     min-width: 0;
 
     min-height:
-        clamp(
-            560px,
+        clamp(560px,
             66svh,
-            720px
-        );
+            720px);
 
     margin: 0;
 
     overflow: hidden;
 
     border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     border-bottom:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 
 /* Left panel */
 
-.mixing-section
-.mixing-introduction {
+.mixing-section .mixing-introduction {
     min-width: 0;
 
     padding:
-        clamp(22px, 3vh, 38px)
-        clamp(18px, 2vw, 30px);
+        clamp(22px, 3vh, 38px) clamp(18px, 2vw, 30px);
 
     overflow-y: auto;
 
     border-right:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 
 /* Center visualization */
 
-.mixing-section
-.mixing-canvas-column {
+.mixing-section .mixing-canvas-column {
     display: grid;
 
     grid-template-rows:
-        minmax(0, 1fr)
-        auto;
+        minmax(0, 1fr) auto;
 
     min-width: 0;
     min-height: 0;
@@ -4286,24 +3496,20 @@ body > main > section > header .subtitle,
 }
 
 
-.mixing-section
-.cmyk-genealogy {
+.mixing-section .cmyk-genealogy {
     width: 100%;
     height: 100%;
 
     min-height:
-        clamp(
-            500px,
+        clamp(500px,
             60svh,
-            660px
-        );
+            660px);
 
     overflow: hidden;
 }
 
 
-.mixing-section
-.cmyk-genealogy svg {
+.mixing-section .cmyk-genealogy svg {
     display: block;
 
     width: 100%;
@@ -4317,29 +3523,24 @@ body > main > section > header .subtitle,
 
 /* Right information panel */
 
-.mixing-section
-.mixing-information-panel {
+.mixing-section .mixing-information-panel {
     min-width: 0;
 
     padding:
-        clamp(22px, 3vh, 38px)
-        clamp(18px, 2vw, 30px);
+        clamp(22px, 3vh, 38px) clamp(18px, 2vw, 30px);
 
     overflow-y: auto;
 
     border-left:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 }
 
 
 /* Keep recipe values inside panel */
 
-.mixing-section
-.mixing-recipe-list > div {
+.mixing-section .mixing-recipe-list>div {
     grid-template-columns:
-        minmax(60px, 1fr)
-        minmax(50px, auto);
+        minmax(60px, 1fr) minmax(50px, auto);
 
     gap: 14px;
 }
@@ -4347,48 +3548,38 @@ body > main > section > header .subtitle,
 
 /* Footer */
 
-.mixing-section
-> .mixing-footer {
+.mixing-section>.mixing-footer {
     width: 100%;
     margin: 0;
 }
 
 
-@media
-    (max-width: 1050px)
-    and
-    (min-width: 801px) {
+@media (max-width: 1050px) and (min-width: 801px) {
 
-    .mixing-section
-    > .mixing-layout {
+    .mixing-section>.mixing-layout {
         grid-template-columns:
-            minmax(175px, 0.75fr)
-            minmax(360px, 1.8fr);
+            minmax(175px, 0.75fr) minmax(360px, 1.8fr);
 
         overflow: visible;
     }
 
 
-    .mixing-section
-    .mixing-information-panel {
+    .mixing-section .mixing-information-panel {
         grid-column:
             1 / -1;
 
         display: grid;
 
         grid-template-columns:
-            repeat(
-                3,
-                minmax(0, 1fr)
-            );
+            repeat(3,
+                minmax(0, 1fr));
 
         gap: 28px;
 
         overflow: visible;
 
         border-top:
-            1px solid
-            var(--border);
+            1px solid var(--border);
 
         border-left: 0;
     }
@@ -4406,53 +3597,40 @@ body > main > section > header .subtitle,
     .color-timeline-section,
     .mixing-section {
         width:
-            calc(
-                100% -
-                var(--navigation-rail-space)
-            );
+            calc(100% - var(--navigation-rail-space));
 
         max-width:
-            calc(
-                100% -
-                var(--navigation-rail-space)
-            );
+            calc(100% - var(--navigation-rail-space));
 
         margin-right:
             var(--navigation-rail-space);
     }
 
 
-    .color-timeline-section
-    > .color-comparison-panel {
+    .color-timeline-section>.color-comparison-panel {
         display: block;
     }
 
 
-    .color-timeline-section
-    .comparison-year-column {
+    .color-timeline-section .comparison-year-column {
         min-height: 110px;
 
         border-right: 0;
 
         border-bottom:
-            1px solid
-            rgba(
+            1px solid rgba(255,
                 255,
                 255,
-                255,
-                0.25
-            );
+                0.25);
     }
 
 
-    .color-timeline-section
-    > #color-timeline {
+    .color-timeline-section>#color-timeline {
         min-height: 380px;
     }
 
 
-    .mixing-section
-    > .mixing-layout {
+    .mixing-section>.mixing-layout {
         display: block;
 
         min-height: 0;
@@ -4461,10 +3639,8 @@ body > main > section > header .subtitle,
     }
 
 
-    .mixing-section
-    .mixing-introduction,
-    .mixing-section
-    .mixing-information-panel {
+    .mixing-section .mixing-introduction,
+    .mixing-section .mixing-information-panel {
         overflow: visible;
 
         border-right: 0;
@@ -4472,18 +3648,15 @@ body > main > section > header .subtitle,
     }
 
 
-    .mixing-section
-    .mixing-information-panel {
+    .mixing-section .mixing-information-panel {
         display: block;
 
         border-top:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
-    .mixing-section
-    .cmyk-genealogy {
+    .mixing-section .cmyk-genealogy {
         height: 66svh;
         min-height: 500px;
     }
@@ -4502,173 +3675,6 @@ body > main > section > header .subtitle,
 
 
 /* ==========================================================
-   TRENDS
-   ========================================================== */
-
-.color-timeline-section {
-    width: calc(100% - var(--navigation-clearance));
-    max-width: calc(100% - var(--navigation-clearance));
-
-    margin: 0 var(--navigation-clearance) 0 0;
-    padding: 0;
-
-    display: grid;
-    grid-template-rows:
-        auto
-        auto
-        auto
-        auto
-        auto;
-
-    min-height: 100svh;
-
-    overflow: visible;
-}
-
-
-/* Header */
-
-.color-timeline-section > .color-timeline-header {
-    min-height: 0;
-    margin: 0;
-
-    padding:
-        clamp(22px, 3.5vh, 42px)
-        var(--page-gutter, 50px)
-        clamp(12px, 2vh, 22px);
-}
-
-
-/* Black selected-color panel */
-
-.color-timeline-section > .color-comparison-panel {
-    display: grid;
-
-    grid-template-columns:
-        clamp(130px, 14vw, 195px)
-        minmax(0, 1fr);
-
-    width: 100%;
-    min-width: 0;
-
-    min-height: clamp(235px, 30svh, 315px);
-
-    margin: 0;
-
-    overflow: hidden;
-
-    background: #111111;
-    color: #ffffff;
-    border: 0;
-}
-
-
-/* Center selected year */
-
-.color-timeline-section .comparison-year-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 0;
-
-    padding: clamp(18px, 2.5vw, 32px);
-
-    text-align: center;
-
-    border-right:
-        1px solid rgba(255, 255, 255, 0.25);
-}
-
-
-.color-timeline-section .comparison-year,
-.color-timeline-section .comparison-year-label {
-    width: 100%;
-    text-align: center;
-}
-
-
-/* Comparison cards */
-
-.color-timeline-section .comparison-colors {
-    display: flex;
-    align-items: flex-start;
-
-    min-width: 0;
-
-    gap: clamp(18px, 2.2vw, 34px);
-
-    padding:
-        clamp(22px, 3vh, 34px)
-        clamp(18px, 2.5vw, 32px)
-        30px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-
-.color-timeline-section .comparison-color-card {
-    flex: 0 0 auto;
-
-    min-width: clamp(210px, 22vw, 275px);
-
-    gap: 14px;
-    padding: 0;
-}
-
-
-.color-timeline-section .comparison-color-card-primary {
-    min-width: clamp(340px, 36vw, 420px);
-}
-
-
-.color-timeline-section .comparison-color-card-secondary {
-    min-width: clamp(205px, 21vw, 260px);
-}
-
-
-/* Timeline itself */
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-    min-width: 0;
-    min-height: 330px;
-
-    margin: 0;
-    padding: 14px 0 10px;
-
-    overflow-x: hidden;
-    overflow-y: visible;
-
-    background: #ffffff;
-}
-
-
-.color-timeline-section
-#color-timeline
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-    max-height: none;
-}
-
-
-/* Instructions + footer */
-
-.color-timeline-section > .instructions,
-.color-timeline-section > .color-timeline-footer {
-    width: 100%;
-    margin: 0;
-}
-
-
-/* ==========================================================
    MIXING
    ========================================================== */
 
@@ -4681,9 +3687,7 @@ body > main > section > header .subtitle,
 
     display: grid;
     grid-template-rows:
-        auto
-        auto
-        auto;
+        auto auto auto;
 
     min-height: 100svh;
 
@@ -4693,26 +3697,22 @@ body > main > section > header .subtitle,
 
 /* Header */
 
-.mixing-section > .mixing-header {
+.mixing-section>.mixing-header {
     min-height: 0;
     margin: 0;
 
     padding:
-        clamp(22px, 3.5vh, 42px)
-        var(--page-gutter, 50px)
-        clamp(12px, 2vh, 22px);
+        clamp(22px, 3.5vh, 42px) var(--page-gutter, 50px) clamp(12px, 2vh, 22px);
 }
 
 
 /* Three-column layout */
 
-.mixing-section > .mixing-layout {
+.mixing-section>.mixing-layout {
     display: grid;
 
     grid-template-columns:
-        minmax(165px, 0.75fr)
-        minmax(360px, 2.1fr)
-        minmax(190px, 0.9fr);
+        minmax(165px, 0.75fr) minmax(360px, 2.1fr) minmax(190px, 0.9fr);
 
     width: 100%;
     min-width: 0;
@@ -4734,8 +3734,7 @@ body > main > section > header .subtitle,
     min-width: 0;
 
     padding:
-        clamp(20px, 3vh, 36px)
-        clamp(16px, 2vw, 28px);
+        clamp(20px, 3vh, 36px) clamp(16px, 2vw, 28px);
 
     overflow-y: auto;
 
@@ -4748,8 +3747,7 @@ body > main > section > header .subtitle,
 .mixing-section .mixing-canvas-column {
     display: grid;
     grid-template-rows:
-        minmax(0, 1fr)
-        auto;
+        minmax(0, 1fr) auto;
 
     min-width: 0;
     min-height: 0;
@@ -4786,8 +3784,7 @@ body > main > section > header .subtitle,
     min-width: 0;
 
     padding:
-        clamp(20px, 3vh, 36px)
-        clamp(16px, 2vw, 28px);
+        clamp(20px, 3vh, 36px) clamp(16px, 2vw, 28px);
 
     overflow-y: auto;
 
@@ -4795,10 +3792,9 @@ body > main > section > header .subtitle,
 }
 
 
-.mixing-section .mixing-recipe-list > div {
+.mixing-section .mixing-recipe-list>div {
     grid-template-columns:
-        minmax(58px, 1fr)
-        minmax(48px, auto);
+        minmax(58px, 1fr) minmax(48px, auto);
 
     gap: 12px;
 }
@@ -4806,7 +3802,7 @@ body > main > section > header .subtitle,
 
 /* Footer */
 
-.mixing-section > .mixing-footer {
+.mixing-section>.mixing-footer {
     width: 100%;
     margin: 0;
 }
@@ -4818,10 +3814,9 @@ body > main > section > header .subtitle,
 
 @media (max-width: 1050px) and (min-width: 801px) {
 
-    .mixing-section > .mixing-layout {
+    .mixing-section>.mixing-layout {
         grid-template-columns:
-            minmax(170px, 0.75fr)
-            minmax(340px, 1.8fr);
+            minmax(170px, 0.75fr) minmax(340px, 1.8fr);
 
         overflow: visible;
     }
@@ -4866,7 +3861,7 @@ body > main > section > header .subtitle,
     }
 
 
-    .color-timeline-section > .color-comparison-panel {
+    .color-timeline-section>.color-comparison-panel {
         display: block;
     }
 
@@ -4881,12 +3876,12 @@ body > main > section > header .subtitle,
     }
 
 
-    .color-timeline-section > #color-timeline {
+    .color-timeline-section>#color-timeline {
         min-height: 390px;
     }
 
 
-    .mixing-section > .mixing-layout {
+    .mixing-section>.mixing-layout {
         display: block;
 
         min-height: 0;
@@ -4919,7 +3914,6 @@ body > main > section > header .subtitle,
 }
 
 
-
 /* ==========================================================
    MIXING — COMPLETE DESKTOP VIEWPORT FIT
    H1 + subtitle + interface + footer
@@ -4931,24 +3925,16 @@ body > main > section > header .subtitle,
         display: grid;
 
         grid-template-rows:
-            auto
-            minmax(0, 1fr)
-            auto;
+            auto minmax(0, 1fr) auto;
 
         width:
-            calc(
-                100% -
-                var(--navigation-clearance, 72px)
-            );
+            calc(100% - var(--navigation-clearance, 72px));
 
         height: 100svh;
         min-height: 620px;
 
         margin:
-            0
-            var(--navigation-clearance, 72px)
-            0
-            0;
+            0 var(--navigation-clearance, 72px) 0 0;
 
         padding: 0;
 
@@ -4960,53 +3946,43 @@ body > main > section > header .subtitle,
        HEADER
        ====================================== */
 
-    .mixing-section > .mixing-header {
+    .mixing-section>.mixing-header {
         min-height: 0;
 
         margin: 0;
 
         padding:
-            clamp(14px, 2.2vh, 26px)
-            var(--page-gutter)
-            clamp(8px, 1.2vh, 14px);
+            clamp(14px, 2.2vh, 26px) var(--page-gutter) clamp(8px, 1.2vh, 14px);
     }
 
 
-    .mixing-section > .mixing-header h1 {
+    .mixing-section>.mixing-header h1 {
         margin: 0;
 
         font-size:
-            clamp(
-                62px,
+            clamp(62px,
                 min(12vw, 15vh),
-                132px
-            );
+                132px);
 
         line-height: 0.76;
     }
 
 
-    .mixing-section > .mixing-header .subtitle {
+    .mixing-section>.mixing-header .subtitle {
         margin-top:
-            clamp(
-                6px,
+            clamp(6px,
                 1vh,
-                12px
-            );
+                12px);
 
         margin-left:
-            clamp(
-                12px,
+            clamp(12px,
                 2vw,
-                30px
-            );
+                30px);
 
         font-size:
-            clamp(
-                12px,
+            clamp(12px,
                 1.45vh,
-                16px
-            );
+                16px);
 
         line-height: 1.35;
     }
@@ -5016,13 +3992,11 @@ body > main > section > header .subtitle,
        MAIN INTERFACE
        ====================================== */
 
-    .mixing-section > .mixing-layout {
+    .mixing-section>.mixing-layout {
         display: grid;
 
         grid-template-columns:
-            minmax(165px, 0.78fr)
-            minmax(360px, 2.2fr)
-            minmax(190px, 0.92fr);
+            minmax(165px, 0.78fr) minmax(360px, 2.2fr) minmax(190px, 0.92fr);
 
         width: 100%;
         height: 100%;
@@ -5034,12 +4008,10 @@ body > main > section > header .subtitle,
         overflow: hidden;
 
         border-top:
-            1px solid
-            var(--border);
+            1px solid var(--border);
 
         border-bottom:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
@@ -5052,34 +4024,28 @@ body > main > section > header .subtitle,
         min-height: 0;
 
         padding:
-            clamp(14px, 2vh, 24px)
-            clamp(14px, 1.8vw, 26px);
+            clamp(14px, 2vh, 24px) clamp(14px, 1.8vw, 26px);
 
         overflow-y: auto;
 
         border-right:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
     .mixing-section .mixing-rule {
         margin-bottom:
-            clamp(
-                10px,
+            clamp(10px,
                 1.5vh,
-                18px
-            );
+                18px);
     }
 
 
     .mixing-section .mixing-lead {
         font-size:
-            clamp(
-                10px,
+            clamp(10px,
                 1.3vh,
-                13px
-            );
+                13px);
 
         line-height: 1.45;
     }
@@ -5087,42 +4053,33 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-steps {
         margin-top:
-            clamp(
-                12px,
+            clamp(12px,
                 1.8vh,
-                22px
-            );
+                22px);
     }
 
 
     .mixing-section .mixing-step {
         grid-template-columns:
-            28px
-            minmax(0, 1fr);
+            28px minmax(0, 1fr);
 
         gap: 10px;
 
         padding:
-            clamp(
-                7px,
+            clamp(7px,
                 1vh,
-                11px
-            )
-            12px;
+                11px) 12px;
     }
 
 
     .mixing-section .mixing-reset-button {
         margin-top:
-            clamp(
-                10px,
+            clamp(10px,
                 1.5vh,
-                18px
-            );
+                18px);
 
         padding:
-            9px
-            12px;
+            9px 12px;
     }
 
 
@@ -5134,8 +4091,7 @@ body > main > section > header .subtitle,
         display: grid;
 
         grid-template-rows:
-            minmax(0, 1fr)
-            auto;
+            minmax(0, 1fr) auto;
 
         min-width: 0;
         min-height: 0;
@@ -5164,25 +4120,18 @@ body > main > section > header .subtitle,
     }
 
 
-    .mixing-section
-    .mixing-canvas-column
-    > .instructions {
+    .mixing-section .mixing-canvas-column>.instructions {
         margin: 0;
 
         padding:
-            clamp(
-                6px,
+            clamp(6px,
                 1vh,
-                10px
-            )
-            18px;
+                10px) 18px;
 
         font-size:
-            clamp(
-                9px,
+            clamp(9px,
                 1.15vh,
-                11px
-            );
+                11px);
 
         line-height: 1.3;
     }
@@ -5197,63 +4146,51 @@ body > main > section > header .subtitle,
         min-height: 0;
 
         padding:
-            clamp(12px, 1.8vh, 22px)
-            clamp(14px, 1.8vw, 26px);
+            clamp(12px, 1.8vh, 22px) clamp(14px, 1.8vw, 26px);
 
         overflow-y: auto;
 
         border-left:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
     .mixing-section .mixing-panel-label {
         margin-bottom:
-            clamp(
-                8px,
+            clamp(8px,
                 1.2vh,
-                14px
-            );
+                14px);
     }
 
 
     .mixing-section .mixing-selection-section,
     .mixing-section .mixing-result-section {
         padding-bottom:
-            clamp(
-                12px,
+            clamp(12px,
                 1.8vh,
-                20px
-            );
+                20px);
     }
 
 
     .mixing-section .mixing-result-section,
     .mixing-section .mixing-recipe-section {
         padding-top:
-            clamp(
-                12px,
+            clamp(12px,
                 1.8vh,
-                20px
-            );
+                20px);
     }
 
 
     .mixing-section .mixing-selected-swatch {
         width:
-            clamp(
-                38px,
+            clamp(38px,
                 5vh,
-                56px
-            );
+                56px);
 
         height:
-            clamp(
-                38px,
+            clamp(38px,
                 5vh,
-                56px
-            );
+                56px);
 
         margin-bottom: 8px;
     }
@@ -5261,18 +4198,14 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-result-swatch {
         width:
-            clamp(
-                54px,
+            clamp(54px,
                 7vh,
-                76px
-            );
+                76px);
 
         height:
-            clamp(
-                54px,
+            clamp(54px,
                 7vh,
-                76px
-            );
+                76px);
 
         margin-bottom: 10px;
     }
@@ -5280,28 +4213,22 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-result-section h2 {
         font-size:
-            clamp(
-                13px,
+            clamp(13px,
                 1.65vh,
-                16px
-            );
+                16px);
     }
 
 
-    .mixing-section .mixing-recipe-list > div {
+    .mixing-section .mixing-recipe-list>div {
         grid-template-columns:
-            minmax(58px, 1fr)
-            minmax(48px, auto);
+            minmax(58px, 1fr) minmax(48px, auto);
 
         gap: 10px;
 
         padding:
-            clamp(
-                5px,
+            clamp(5px,
                 0.8vh,
-                8px
-            )
-            0;
+                8px) 0;
     }
 
 
@@ -5309,25 +4236,20 @@ body > main > section > header .subtitle,
        FOOTER
        ====================================== */
 
-    .mixing-section > .mixing-footer {
+    .mixing-section>.mixing-footer {
         min-height: 0;
 
         margin: 0;
 
         padding:
-            clamp(
-                7px,
+            clamp(7px,
                 1.1vh,
-                12px
-            )
-            var(--page-gutter);
+                12px) var(--page-gutter);
 
         font-size:
-            clamp(
-                9px,
+            clamp(9px,
                 1.15vh,
-                11px
-            );
+                11px);
 
         line-height: 1.3;
     }
@@ -5346,30 +4268,19 @@ body > main > section > header .subtitle,
         display: grid;
 
         grid-template-rows:
-            auto
-            minmax(0, 1fr)
-            auto;
+            auto minmax(0, 1fr) auto;
 
         width:
-            calc(
-                100% -
-                var(--navigation-rail-space, 72px)
-            );
+            calc(100% - var(--navigation-rail-space, 72px));
 
         max-width:
-            calc(
-                100% -
-                var(--navigation-rail-space, 72px)
-            );
+            calc(100% - var(--navigation-rail-space, 72px));
 
         height: 100svh;
         min-height: 600px;
 
         margin:
-            0
-            var(--navigation-rail-space, 72px)
-            0
-            0;
+            0 var(--navigation-rail-space, 72px) 0 0;
 
         padding: 0;
 
@@ -5381,7 +4292,7 @@ body > main > section > header .subtitle,
        HEADER
        ====================================== */
 
-    .mixing-section > .mixing-header {
+    .mixing-section>.mixing-header {
         display: block;
 
         min-height: 0;
@@ -5389,45 +4300,33 @@ body > main > section > header .subtitle,
         margin: 0;
 
         padding:
-            clamp(12px, 2vh, 22px)
-            var(--page-gutter)
-            clamp(7px, 1vh, 12px);
+            clamp(12px, 2vh, 22px) var(--page-gutter) clamp(7px, 1vh, 12px);
     }
 
 
-    .mixing-section > .mixing-header h1 {
+    .mixing-section>.mixing-header h1 {
         margin: 0;
 
         font-size:
-            clamp(
-                58px,
+            clamp(58px,
                 min(11vw, 14vh),
-                124px
-            );
+                124px);
 
         line-height: 0.76;
     }
 
 
-    .mixing-section > .mixing-header .subtitle {
+    .mixing-section>.mixing-header .subtitle {
         margin:
-            clamp(5px, 0.8vh, 9px)
-            0
-            0
-            var(--subtitle-offset, 18px);
+            clamp(5px, 0.8vh, 9px) 0 0 var(--subtitle-offset, 18px);
 
         max-width:
-            calc(
-                100% -
-                var(--subtitle-offset, 18px)
-            );
+            calc(100% - var(--subtitle-offset, 18px));
 
         font-size:
-            clamp(
-                11px,
+            clamp(11px,
                 1.35vh,
-                15px
-            );
+                15px);
 
         line-height: 1.3;
     }
@@ -5437,13 +4336,11 @@ body > main > section > header .subtitle,
        MAIN LAYOUT
        ====================================== */
 
-    .mixing-section > .mixing-layout {
+    .mixing-section>.mixing-layout {
         display: grid;
 
         grid-template-columns:
-            minmax(150px, 0.76fr)
-            minmax(320px, 2.2fr)
-            minmax(175px, 0.9fr);
+            minmax(150px, 0.76fr) minmax(320px, 2.2fr) minmax(175px, 0.9fr);
 
         grid-template-rows:
             minmax(0, 1fr);
@@ -5459,12 +4356,10 @@ body > main > section > header .subtitle,
         overflow: hidden;
 
         border-top:
-            1px solid
-            var(--border);
+            1px solid var(--border);
 
         border-bottom:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
@@ -5477,15 +4372,13 @@ body > main > section > header .subtitle,
         min-height: 0;
 
         padding:
-            clamp(12px, 1.7vh, 20px)
-            clamp(12px, 1.6vw, 22px);
+            clamp(12px, 1.7vh, 20px) clamp(12px, 1.6vw, 22px);
 
         overflow-x: hidden;
         overflow-y: auto;
 
         border-right:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
@@ -5497,11 +4390,9 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-lead {
         font-size:
-            clamp(
-                10px,
+            clamp(10px,
                 1.2vh,
-                12px
-            );
+                12px);
 
         line-height: 1.4;
     }
@@ -5515,25 +4406,21 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-step {
         grid-template-columns:
-            24px
-            minmax(0, 1fr);
+            24px minmax(0, 1fr);
 
         gap: 8px;
 
         padding:
-            clamp(5px, 0.75vh, 8px)
-            10px;
+            clamp(5px, 0.75vh, 8px) 10px;
     }
 
 
     .mixing-section .mixing-step p,
     .mixing-section .mixing-step span {
         font-size:
-            clamp(
-                9px,
+            clamp(9px,
                 1.05vh,
-                11px
-            );
+                11px);
 
         line-height: 1.3;
     }
@@ -5544,8 +4431,7 @@ body > main > section > header .subtitle,
             clamp(8px, 1.1vh, 13px);
 
         padding:
-            7px
-            10px;
+            7px 10px;
 
         font-size: 9px;
     }
@@ -5559,8 +4445,7 @@ body > main > section > header .subtitle,
         display: grid;
 
         grid-template-rows:
-            minmax(0, 1fr)
-            auto;
+            minmax(0, 1fr) auto;
 
         min-width: 0;
         min-height: 0;
@@ -5591,23 +4476,18 @@ body > main > section > header .subtitle,
     }
 
 
-    .mixing-section
-    .mixing-canvas-column
-    > .instructions {
+    .mixing-section .mixing-canvas-column>.instructions {
         min-height: 0;
 
         margin: 0;
 
         padding:
-            clamp(5px, 0.8vh, 8px)
-            14px;
+            clamp(5px, 0.8vh, 8px) 14px;
 
         font-size:
-            clamp(
-                8px,
+            clamp(8px,
                 1vh,
-                10px
-            );
+                10px);
 
         line-height: 1.25;
     }
@@ -5626,8 +4506,7 @@ body > main > section > header .subtitle,
         min-height: 0;
 
         padding:
-            clamp(10px, 1.5vh, 18px)
-            clamp(12px, 1.5vw, 21px);
+            clamp(10px, 1.5vh, 18px) clamp(12px, 1.5vw, 21px);
 
         overflow-x: hidden;
         overflow-y: auto;
@@ -5635,14 +4514,11 @@ body > main > section > header .subtitle,
         border-top: 0;
 
         border-left:
-            1px solid
-            var(--border);
+            1px solid var(--border);
     }
 
 
-    .mixing-section
-    .mixing-information-panel
-    > section {
+    .mixing-section .mixing-information-panel>section {
         min-width: 0;
 
         border-right: 0;
@@ -5673,18 +4549,14 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-selected-swatch {
         width:
-            clamp(
-                34px,
+            clamp(34px,
                 4.8vh,
-                50px
-            );
+                50px);
 
         height:
-            clamp(
-                34px,
+            clamp(34px,
                 4.8vh,
-                50px
-            );
+                50px);
 
         margin-bottom: 6px;
     }
@@ -5698,28 +4570,22 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-plus {
         padding-top:
-            clamp(
-                14px,
+            clamp(14px,
                 2vh,
-                22px
-            );
+                22px);
     }
 
 
     .mixing-section .mixing-result-swatch {
         width:
-            clamp(
-                46px,
+            clamp(46px,
                 6.5vh,
-                68px
-            );
+                68px);
 
         height:
-            clamp(
-                46px,
+            clamp(46px,
                 6.5vh,
-                68px
-            );
+                68px);
 
         margin-bottom: 8px;
     }
@@ -5727,11 +4593,9 @@ body > main > section > header .subtitle,
 
     .mixing-section .mixing-result-section h2 {
         font-size:
-            clamp(
-                12px,
+            clamp(12px,
                 1.5vh,
-                15px
-            );
+                15px);
     }
 
 
@@ -5741,16 +4605,14 @@ body > main > section > header .subtitle,
     }
 
 
-    .mixing-section .mixing-recipe-list > div {
+    .mixing-section .mixing-recipe-list>div {
         grid-template-columns:
-            minmax(52px, 1fr)
-            minmax(42px, auto);
+            minmax(52px, 1fr) minmax(42px, auto);
 
         gap: 8px;
 
         padding:
-            clamp(4px, 0.6vh, 6px)
-            0;
+            clamp(4px, 0.6vh, 6px) 0;
     }
 
 
@@ -5765,7 +4627,7 @@ body > main > section > header .subtitle,
        FOOTER
        ====================================== */
 
-    .mixing-section > .mixing-footer {
+    .mixing-section>.mixing-footer {
         display: block;
 
         min-height: 0;
@@ -5773,21 +4635,17 @@ body > main > section > header .subtitle,
         margin: 0;
 
         padding:
-            clamp(6px, 0.9vh, 9px)
-            var(--page-gutter);
+            clamp(6px, 0.9vh, 9px) var(--page-gutter);
 
         font-size:
-            clamp(
-                8px,
+            clamp(8px,
                 1vh,
-                10px
-            );
+                10px);
 
         line-height: 1.25;
     }
 
 }
-
 
 
 /* ==========================================
@@ -5808,10 +4666,7 @@ body > main > section > header .subtitle,
 
 }
 
-@media
-    (min-width: 801px)
-    and
-    (max-height: 760px) {
+@media (min-width: 801px) and (max-height: 760px) {
 
     .mixing-section .cmyk-genealogy {
         height: clamp(360px, 48svh, 460px);
@@ -5821,276 +4676,26 @@ body > main > section > header .subtitle,
 }
 
 
-/* ==========================================================
-   TRENDS — CONSISTENT COMPARISON CARDS
-   Selected text matches the other cards
-   ========================================================== */
-
-
-/* Keep every card vertically consistent */
-
-.color-timeline-section .comparison-color-card {
-    display: flex;
-    align-items: flex-start;
-
-    flex: 0 0 auto;
-
-    min-width: 255px;
-
-    gap: 16px;
-    padding: 0;
-
-    color: var(--white);
-}
-
-
-/* Selected card may remain wider because its swatch is larger */
-
-.color-timeline-section .comparison-color-card-primary {
-    min-width: 385px;
-
-    opacity: 1;
-
-    background: transparent;
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-}
-
-
-/* Secondary cards */
-
-.color-timeline-section .comparison-color-card-secondary {
-    min-width: 255px;
-
-    opacity: 0.72;
-}
-
-
-/* ==========================================
-   SWATCHES
-   ========================================== */
-
-.color-timeline-section .comparison-swatch {
-    display: block;
-
-    flex: 0 0 auto;
-
-    aspect-ratio: 1 / 1;
-
-    border: 1px solid rgba(255, 255, 255, 0.55);
-}
-
-
-/* Selected color remains visually identifiable by size */
-
-.color-timeline-section .comparison-swatch-primary {
-    width: 126px;
-    height: 126px;
-
-    border: 1px solid rgba(255, 255, 255, 0.75);
-}
-
-
-/* Fix the small swatches */
-
-.color-timeline-section .comparison-swatch-secondary {
-    width: 72px;
-    height: 72px;
-
-    min-width: 72px;
-    min-height: 72px;
-
-    border: 1px solid rgba(255, 255, 255, 0.55);
-}
-
-
-/* ==========================================
-   TEXT — SAME SIZE FOR ALL CARDS
-   ========================================== */
-
-.color-timeline-section
-.comparison-color-information,
-.color-timeline-section
-.comparison-color-card-primary
-.comparison-color-information,
-.color-timeline-section
-.comparison-color-card-secondary
-.comparison-color-information {
-    min-width: 0;
-
-    padding: 0;
-
-    border: 0;
-
-    background: transparent;
-}
-
-
-/* Source */
-
-.color-timeline-section
-.comparison-source,
-.color-timeline-section
-.comparison-color-card-primary
-.comparison-source,
-.color-timeline-section
-.comparison-color-card-secondary
-.comparison-source {
-    margin: 2px 0 9px;
-
-    color: var(--white);
-
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 1.2;
-
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-
-    opacity: 0.8;
-}
-
-
-/* Color name */
-
-.color-timeline-section
-.comparison-color-name,
-.color-timeline-section
-.comparison-color-card-primary
-.comparison-color-name,
-.color-timeline-section
-.comparison-color-card-secondary
-.comparison-color-name {
-    margin: 0 0 12px;
-
-    color: var(--white);
-
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.1;
-
-    letter-spacing: -0.015em;
-}
-
-
-/* Details */
-
-.color-timeline-section
-.comparison-color-details,
-.color-timeline-section
-.comparison-color-card-primary
-.comparison-color-details,
-.color-timeline-section
-.comparison-color-card-secondary
-.comparison-color-details {
-    margin: 0;
-    padding-top: 10px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.25);
-
-    font-size: 10px;
-    font-weight: 400;
-
-    opacity: 1;
-}
-
-
-.color-timeline-section
-.comparison-color-details div {
-    display: grid;
-
-    grid-template-columns:
-        46px
-        minmax(0, 1fr);
-
-    gap: 7px;
-
-    margin-top: 6px;
-}
-
-
-.color-timeline-section
-.comparison-color-details dt,
-.color-timeline-section
-.comparison-color-details dd,
-.color-timeline-section
-.comparison-color-card-primary
-.comparison-color-details dt,
-.color-timeline-section
-.comparison-color-card-primary
-.comparison-color-details dd,
-.color-timeline-section
-.comparison-color-card-secondary
-.comparison-color-details dt,
-.color-timeline-section
-.comparison-color-card-secondary
-.comparison-color-details dd {
-    margin: 0;
-
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 1.3;
-}
-
-
-.color-timeline-section
-.comparison-color-details dt {
-    color: rgba(255, 255, 255, 0.55);
-}
-
-
-.color-timeline-section
-.comparison-color-details dd {
-    color: var(--white);
-
-    overflow-wrap: anywhere;
-}
-
-
-/* ==========================================
-   BLACK BAND SPACING
-   ========================================== */
-
-.color-timeline-section .comparison-colors {
-    align-items: flex-start;
-
-    gap: clamp(24px, 2.5vw, 38px);
-
-    padding:
-        clamp(24px, 3vh, 34px)
-        clamp(20px, 2.5vw, 34px)
-        28px;
-}
-
-
 /* ==========================================
    MOBILE
    ========================================== */
 
 @media (max-width: 800px) {
 
-    .color-timeline-section
-    .comparison-color-card,
-    .color-timeline-section
-    .comparison-color-card-primary,
-    .color-timeline-section
-    .comparison-color-card-secondary {
+    .color-timeline-section .comparison-color-card,
+    .color-timeline-section .comparison-color-card-primary,
+    .color-timeline-section .comparison-color-card-secondary {
         min-width: 250px;
     }
 
 
-    .color-timeline-section
-    .comparison-swatch-primary {
+    .color-timeline-section .comparison-swatch-primary {
         width: 90px;
         height: 90px;
     }
 
 
-    .color-timeline-section
-    .comparison-swatch-secondary {
+    .color-timeline-section .comparison-swatch-secondary {
         width: 64px;
         height: 64px;
 
@@ -6099,251 +4704,12 @@ body > main > section > header .subtitle,
     }
 
 
-    .color-timeline-section
-    .comparison-color-name,
-    .color-timeline-section
-    .comparison-color-card-primary
-    .comparison-color-name,
-    .color-timeline-section
-    .comparison-color-card-secondary
-    .comparison-color-name {
+    .color-timeline-section .comparison-color-name,
+    .color-timeline-section .comparison-color-card-primary .comparison-color-name,
+    .color-timeline-section .comparison-color-card-secondary .comparison-color-name {
         font-size: 16px;
     }
 
-}
-
-/* ==========================================================
-   TRENDS — FIT ALL ROWS, NO VERTICAL SCROLL
-   ========================================================== */
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-    min-width: 0;
-
-    height: auto;
-    min-height: 0;
-    max-height: none;
-
-    margin: 0;
-    padding:
-        16px
-        0
-        12px;
-
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-
-/* Keep the SVG fully visible inside the section */
-
-.color-timeline-section
-#color-timeline
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-    max-height: none;
-}
-
-
-/* Make source labels clearly readable */
-
-.color-timeline-section
-.timeline-source-label {
-    fill: #111111;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-    font-weight: 700;
-
-    letter-spacing: 0.055em;
-}
-
-
-/* Keep year labels compact but legible */
-
-.color-timeline-section
-.timeline-year-label {
-    fill: #777777;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 8px;
-    font-weight: 500;
-
-    letter-spacing: 0.02em;
-}
-
-
-/* Active year remains easy to identify */
-
-.color-timeline-section
-.timeline-year-label.is-selected {
-    fill: #111111;
-
-    font-weight: 800;
-}
-
-
-
-/* Prevent any old scrolling behavior */
-
-.color-timeline-section
-#color-timeline,
-.color-timeline-section
-#color-timeline svg {
-    overflow: visible;
-}
-
-
-/* ==========================================================
-   TRENDS — FOUR-DIGIT YEARS + SINGLE-LINE SOURCES
-   ========================================================== */
-
-.color-timeline-section .timeline-source-label {
-    fill: #111111;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 8.5px;
-    font-weight: 700;
-
-    letter-spacing: 0.025em;
-
-    white-space: nowrap;
-}
-
-
-.color-timeline-section .timeline-year-label {
-    fill: #777777;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 7.5px;
-    font-weight: 500;
-
-    letter-spacing: 0;
-}
-
-
-.color-timeline-section
-.timeline-year-label.is-selected {
-    fill: #111111;
-    font-weight: 800;
-}
-
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-    min-width: 0;
-
-    min-height: 0;
-    max-height: none;
-
-    margin: 0;
-
-    padding:
-        8px
-        0
-        8px;
-
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-
-.color-timeline-section
-#color-timeline
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-    max-height: none;
-}
-
-
-/* ==========================================
-   TRENDS — FINAL TIMELINE LABELS
-   ========================================== */
-
-.color-timeline-section .timeline-source-label {
-    fill: #111111;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 8.5px;
-    font-weight: 700;
-
-    letter-spacing: 0.025em;
-}
-
-.color-timeline-section .timeline-year-label {
-    fill: #777777;
-
-    font-family:
-        Helvetica,
-        Arial,
-        sans-serif;
-
-    font-size: 7.5px;
-    font-weight: 500;
-
-    letter-spacing: 0;
-}
-
-.color-timeline-section
-.timeline-year-label.is-selected {
-    fill: #111111;
-    font-weight: 800;
-}
-
-.color-timeline-section > #color-timeline {
-    width: 100%;
-
-    min-width: 0;
-    min-height: 0;
-    max-height: none;
-
-    margin: 0;
-    padding: 8px 0;
-
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-.color-timeline-section
-#color-timeline
-.color-timeline-svg {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-    max-height: none;
 }
 
 
@@ -6509,27 +4875,16 @@ body > main > section > header .subtitle,
     line-height: 20px;
 }
 
-/* ==========================================================
-   SECTION 07 — PALETTE
-   AI COLOR CONSULTANT
-
-   Keep this section at the end of style.css so it overrides
-   earlier global header, footer, and section rules.
-   ========================================================== */
-
 
 /* ==========================================
    SECTION
    ========================================== */
 
-body > main > .palette-section {
+body>main>.palette-section {
     box-sizing: border-box;
 
     width:
-        calc(
-            100% -
-            var(--navigation-safe-area, 0px)
-        );
+        calc(100% - var(--navigation-safe-area, 0px));
 
     height: 100svh;
     min-height: 620px;
@@ -6537,16 +4892,12 @@ body > main > .palette-section {
     margin: 0;
 
     padding:
-        clamp(20px, 3vh, 38px)
-        var(--page-gutter)
-        clamp(14px, 2vh, 24px);
+        clamp(20px, 3vh, 38px) var(--page-gutter) clamp(14px, 2vh, 24px);
 
     display: grid;
 
     grid-template-rows:
-        auto
-        minmax(0, 1fr)
-        auto;
+        auto minmax(0, 1fr) auto;
 
     gap: clamp(12px, 1.6vh, 20px);
 
@@ -6569,7 +4920,6 @@ body > main > .palette-section {
 }
 
 
-
 /* ==========================================
    MAIN ASSISTANT
    ========================================== */
@@ -6582,8 +4932,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-columns:
-        minmax(340px, 0.88fr)
-        minmax(450px, 1.35fr);
+        minmax(340px, 0.88fr) minmax(450px, 1.35fr);
 
     overflow: hidden;
 
@@ -6606,8 +4955,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-rows:
-        auto
-        minmax(0, 1fr);
+        auto minmax(0, 1fr);
 
     overflow: hidden;
 
@@ -6673,9 +5021,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-rows:
-        minmax(0, 1fr)
-        auto
-        auto;
+        minmax(0, 1fr) auto auto;
 
     gap: 8px;
 }
@@ -6712,11 +5058,9 @@ body > main > .palette-section {
     color: var(--black);
 
     font-size:
-        clamp(
-            21px,
+        clamp(21px,
             min(2vw, 3.7vh),
-            31px
-        );
+            31px);
 
     font-weight: 500;
     line-height: 1.04;
@@ -6911,8 +5255,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1fr)
-        38px;
+        minmax(0, 1fr) 38px;
 
     gap: 7px;
 }
@@ -6925,26 +5268,18 @@ body > main > .palette-section {
     border: 1px solid var(--black);
 
     background:
-        linear-gradient(
-            45deg,
+        linear-gradient(45deg,
             #dddddd 25%,
-            transparent 25%
-        ),
-        linear-gradient(
-            -45deg,
+            transparent 25%),
+        linear-gradient(-45deg,
             #dddddd 25%,
-            transparent 25%
-        ),
-        linear-gradient(
-            45deg,
+            transparent 25%),
+        linear-gradient(45deg,
             transparent 75%,
-            #dddddd 75%
-        ),
-        linear-gradient(
-            -45deg,
+            #dddddd 75%),
+        linear-gradient(-45deg,
             transparent 75%,
-            #dddddd 75%
-        );
+            #dddddd 75%);
 
     background-position:
         0 0,
@@ -7099,10 +5434,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-rows:
-        auto
-        auto
-        auto
-        minmax(90px, 1fr);
+        auto auto auto minmax(90px, 1fr);
 
     align-content: start;
 }
@@ -7116,11 +5448,9 @@ body > main > .palette-section {
     color: var(--white);
 
     font-size:
-        clamp(
-            27px,
+        clamp(27px,
             min(3.3vw, 5.5vh),
-            50px
-        );
+            50px);
 
     font-weight: 500;
     line-height: 0.96;
@@ -7128,8 +5458,8 @@ body > main > .palette-section {
 }
 
 
-.palette-empty-state > p:not(.palette-result-label),
-.palette-loading-state > p:not(.palette-result-label) {
+.palette-empty-state>p:not(.palette-result-label),
+.palette-loading-state>p:not(.palette-result-label) {
     max-width: 500px;
 
     margin: 13px 0 18px;
@@ -7194,10 +5524,7 @@ body > main > .palette-section {
     background: var(--white);
 
     animation:
-        palette-loading
-        1.3s
-        ease-in-out
-        infinite;
+        palette-loading 1.3s ease-in-out infinite;
 }
 
 
@@ -7220,9 +5547,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-rows:
-        auto
-        minmax(100px, 1fr)
-        auto;
+        auto minmax(100px, 1fr) auto;
 
     gap: clamp(12px, 1.7vh, 20px);
 }
@@ -7274,8 +5599,7 @@ body > main > .palette-section {
     display: grid;
 
     grid-template-rows:
-        minmax(72px, 1fr)
-        auto;
+        minmax(72px, 1fr) auto;
 
     color: var(--black);
     background: var(--white);
@@ -7345,8 +5669,7 @@ body > main > .palette-section {
     padding-top: 7px;
 
     border-top:
-        1px solid
-        rgba(255, 255, 255, 0.5);
+        1px solid rgba(255, 255, 255, 0.5);
 }
 
 
@@ -7378,7 +5701,7 @@ body > main > .palette-section {
    Overrides the global footer rule
    ========================================== */
 
-body > main > .palette-section > .palette-footer {
+body>main>.palette-section>.palette-footer {
     position: static;
 
     width: 100%;
@@ -7394,7 +5717,6 @@ body > main > .palette-section > .palette-footer {
     font-size: 8px;
     line-height: 1.3;
 }
-
 
 
 .palette-footer p {
@@ -7415,11 +5737,9 @@ body > main > .palette-section > .palette-footer {
    SHORT DESKTOP SCREENS
    ========================================== */
 
-@media
-    (min-width: 801px)
-    and (max-height: 760px) {
+@media (min-width: 801px) and (max-height: 760px) {
 
-    body > main > .palette-section {
+    body>main>.palette-section {
         min-height: 560px;
 
         padding-top: 14px;
@@ -7427,8 +5747,6 @@ body > main > .palette-section > .palette-footer {
 
         gap: 9px;
     }
-
-
 
 
     .palette-question-panel {
@@ -7498,8 +5816,7 @@ body > main > .palette-section > .palette-footer {
 
     .palette-color-input-row {
         grid-template-columns:
-            minmax(0, 1fr)
-            32px;
+            minmax(0, 1fr) 32px;
     }
 
 
@@ -7532,19 +5849,16 @@ body > main > .palette-section > .palette-footer {
 
 @media (max-width: 800px) {
 
-    body > main > .palette-section {
+    body>main>.palette-section {
         width: 100%;
         height: auto;
         min-height: 100svh;
 
         padding:
-            28px
-            20px
-            20px;
+            28px 20px 20px;
 
         overflow: visible;
     }
-
 
 
     .palette-assistant {
@@ -7572,8 +5886,7 @@ body > main > .palette-section > .palette-footer {
     }
 
 
-    body > main > .palette-section >
-    .palette-footer {
+    body>main>.palette-section>.palette-footer {
         padding-top: 4px;
     }
 }
@@ -7585,7 +5898,7 @@ body > main > .palette-section > .palette-footer {
 
 @media (max-width: 520px) {
 
-  
+
 
 
     .palette-question-panel {
@@ -7607,8 +5920,7 @@ body > main > .palette-section > .palette-footer {
 
     .palette-result-swatch {
         grid-template-columns:
-            105px
-            minmax(0, 1fr);
+            105px minmax(0, 1fr);
 
         grid-template-rows: 76px;
     }
@@ -7647,108 +5959,32 @@ body > main > .palette-section > .palette-footer {
 
 
 /* ----------------------------------------------------------
-   TRENDS — COMPACT COMPARISON PANEL
-   ---------------------------------------------------------- */
-
-.color-timeline-section > .color-comparison-panel {
-    min-height: clamp(230px, 29svh, 320px);
-    grid-template-columns: clamp(120px, 13vw, 180px) minmax(0, 1fr);
-}
-
-.color-timeline-section .comparison-year-column {
-    padding: clamp(12px, 1.8vh, 20px);
-}
-
-.color-timeline-section .comparison-year-label {
-    margin-top: 10px;
-}
-
-.color-timeline-section .comparison-colors {
-    gap: 10px;
-    padding: 14px 16px 18px;
-}
-
-.color-timeline-section .comparison-color-card {
-    min-width: 210px;
-    gap: 12px;
-    padding: 0;
-    padding-bottom: 6px;
-}
-
-.color-timeline-section .comparison-color-card-primary {
-    min-width: 330px;
-}
-
-.color-timeline-section .comparison-color-card-secondary {
-    min-width: 190px;
-}
-
-.color-timeline-section .comparison-swatch-primary {
-    width: 104px;
-    height: 104px;
-}
-
-.color-timeline-section .comparison-swatch-secondary {
-    width: 52px;
-    height: 52px;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-information {
-    min-width: 180px;
-    padding: 11px;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-name {
-    margin-top: 5px;
-    font-size: clamp(20px, 2vw, 29px);
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-details {
-    margin-top: 10px;
-}
-
-.color-timeline-section .comparison-color-details {
-    padding-top: 7px;
-}
-
-.color-timeline-section .comparison-color-details div {
-    gap: 6px;
-    margin-top: 4px;
-}
-
-/* Keep the timeline itself compact vertically. */
-.color-timeline-section > #color-timeline {
-    min-height: 300px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-}
-
-/* ----------------------------------------------------------
    SHORT DESKTOP SCREENS
    ---------------------------------------------------------- */
 
 @media (min-width: 801px) and (max-height: 760px) {
-    body > main > section > header,
-    body > main > .pigment-map-section > .pigment-map-header,
-    body > main > .palette-section > .palette-header {
+
+    body>main>section>header,
+    body>main>.pigment-map-section>.pigment-map-header,
+    body>main>.palette-section>.palette-header {
         padding: 14px 38px 7px;
     }
 
-    body > main > section > header > h1,
-    body > main > .pigment-map-section > .pigment-map-header > h1,
-    body > main > .palette-section > .palette-header > h1 {
+    body>main>section>header>h1,
+    body>main>.pigment-map-section>.pigment-map-header>h1,
+    body>main>.palette-section>.palette-header>h1 {
         font-size: clamp(66px, min(13vw, 17vh), 128px);
     }
 
-    body > main > section > header > .subtitle,
-    body > main > .pigment-map-section > .pigment-map-header > .subtitle,
-    body > main > .palette-section > .palette-header > .subtitle {
+    body>main>section>header>.subtitle,
+    body>main>.pigment-map-section>.pigment-map-header>.subtitle,
+    body>main>.palette-section>.palette-header>.subtitle {
         margin-top: 6px;
         font-size: clamp(11px, 1.6vh, 15px);
         line-height: 1.3;
     }
 
-    .color-timeline-section > .color-comparison-panel {
+    .color-timeline-section>.color-comparison-panel {
         min-height: 205px;
     }
 
@@ -7772,23 +6008,24 @@ body > main > .palette-section > .palette-footer {
    ---------------------------------------------------------- */
 
 @media (max-width: 800px) {
-    body > main > section > header,
-    body > main > .pigment-map-section > .pigment-map-header,
-    body > main > .palette-section > .palette-header {
+
+    body>main>section>header,
+    body>main>.pigment-map-section>.pigment-map-header,
+    body>main>.palette-section>.palette-header {
         padding: 24px 20px 14px;
     }
 
-    body > main > section > header > h1,
-    body > main > .pigment-map-section > .pigment-map-header > h1,
-    body > main > .palette-section > .palette-header > h1 {
+    body>main>section>header>h1,
+    body>main>.pigment-map-section>.pigment-map-header>h1,
+    body>main>.palette-section>.palette-header>h1 {
         font-size: clamp(48px, 16.5vw, 92px);
         line-height: 0.78;
         letter-spacing: -0.08em;
     }
 
-    body > main > section > header > .subtitle,
-    body > main > .pigment-map-section > .pigment-map-header > .subtitle,
-    body > main > .palette-section > .palette-header > .subtitle {
+    body>main>section>header>.subtitle,
+    body>main>.pigment-map-section>.pigment-map-header>.subtitle,
+    body>main>.palette-section>.palette-header>.subtitle {
         max-width: 92%;
         margin-top: 7px;
         font-size: clamp(11px, 3.3vw, 14px);
@@ -7815,15 +6052,9 @@ body > main > .palette-section > .palette-footer {
 }
 
 
-
-/* ==========================================================
-   FINAL SECTION HEADER FIX
-   ========================================================== */
-
-
 /* All section headers use the same layout */
 
-body > main > section > header {
+body>main>section>header {
     display: block;
 
     width: 100%;
@@ -7833,9 +6064,7 @@ body > main > section > header {
     margin: 0;
 
     padding:
-        clamp(26px, 4.2vh, 50px)
-        var(--page-gutter)
-        clamp(14px, 2vh, 24px);
+        clamp(26px, 4.2vh, 50px) var(--page-gutter) clamp(14px, 2vh, 24px);
 
     text-align: left;
 }
@@ -7843,7 +6072,7 @@ body > main > section > header {
 
 /* All section H1 headings, including PALETTE */
 
-body > main > section > header > h1 {
+body>main>section>header>h1 {
     display: block;
 
     width: 100%;
@@ -7854,11 +6083,9 @@ body > main > section > header > h1 {
     font-family: Helvetica, Arial, sans-serif;
 
     font-size:
-        clamp(
-            72px,
+        clamp(72px,
             min(14vw, 19vh),
-            188px
-        );
+            188px);
 
     font-weight: 900;
     line-height: 0.76;
@@ -7870,27 +6097,23 @@ body > main > section > header > h1 {
 
 /* All subtitles start at the same left edge as H1 */
 
-body > main > section > header > .subtitle {
+body>main>section>header>.subtitle {
     display: block;
 
     width: 100%;
     max-width: 760px;
 
     margin:
-        8px
-        0
-        0;
+        8px 0 0;
 
     padding: 0;
 
     font-family: Helvetica, Arial, sans-serif;
 
     font-size:
-        clamp(
-            13px,
+        clamp(13px,
             1.6vh,
-            18px
-        );
+            18px);
 
     font-weight: 400;
     line-height: 1.45;
@@ -7906,21 +6129,17 @@ body > main > section > header > .subtitle {
 /* Remove Palette-specific outer padding that creates
    a second left offset */
 
-body > main > .palette-section {
+body>main>.palette-section {
     padding: 0;
 }
 
 
 /* Keep Palette content aligned with the header */
 
-body > main > .palette-section > .palette-assistant,
-body > main > .palette-section > .palette-footer {
+body>main>.palette-section>.palette-assistant,
+body>main>.palette-section>.palette-footer {
     width:
-        calc(
-            100% -
-            var(--page-gutter) -
-            var(--page-gutter)
-        );
+        calc(100% - var(--page-gutter) - var(--page-gutter));
 
     margin-right: var(--page-gutter);
     margin-left: var(--page-gutter);
@@ -7931,47 +6150,39 @@ body > main > .palette-section > .palette-footer {
 
 @media (max-width: 800px) {
 
-    body > main > section > header {
+    body>main>section>header {
         padding:
-            24px
-            20px
-            14px;
+            24px 20px 14px;
     }
 
 
-    body > main > section > header > h1 {
+    body>main>section>header>h1 {
         font-size:
-            clamp(
-                48px,
+            clamp(48px,
                 16.5vw,
-                92px
-            );
+                92px);
 
         line-height: 0.78;
         letter-spacing: -0.08em;
     }
 
 
-    body > main > section > header > .subtitle {
+    body>main>section>header>.subtitle {
         max-width: 92%;
 
         margin-top: 7px;
 
         font-size:
-            clamp(
-                11px,
+            clamp(11px,
                 3.3vw,
-                14px
-            );
+                14px);
 
         line-height: 1.35;
     }
 
 
-    body > main > .palette-section >
-    .palette-assistant,
-    body > main > .palette-section >
-    .palette-footer {
+    body>main>.palette-section>.palette-assistant,
+    body>main>.palette-section>.palette-footer {
         width: calc(100% - 40px);
 
         margin-right: 20px;
@@ -7980,19 +6191,14 @@ body > main > .palette-section > .palette-footer {
 }
 
 
-
-
-
 /* ------------------------------------------
    ALL SUBTITLES
    Exact same left edge as H1
    ------------------------------------------ */
 
-body > main > section > header > .subtitle,
-body > main > .pigment-map-section >
-.pigment-map-header > .subtitle,
-body > main > .palette-section >
-.palette-header > .subtitle {
+body>main>section>header>.subtitle,
+body>main>.pigment-map-section>.pigment-map-header>.subtitle,
+body>main>.palette-section>.palette-header>.subtitle {
     display: block !important;
 
     width: 100% !important;
@@ -8002,10 +6208,7 @@ body > main > .palette-section >
     Removes var(--subtitle-offset).
     */
     margin:
-        8px
-        0
-        0
-        0 !important;
+        8px 0 0 0 !important;
 
     padding: 0 !important;
 
@@ -8015,11 +6218,9 @@ body > main > .palette-section >
         sans-serif !important;
 
     font-size:
-        clamp(
-            13px,
+        clamp(13px,
             1.6vh,
-            18px
-        ) !important;
+            18px) !important;
 
     font-weight: 400 !important;
     line-height: 1.45 !important;
@@ -8034,26 +6235,13 @@ body > main > .palette-section >
 
 
 /* ==========================================
-   TRENDS — TIGHTEN GAP: BLACK PANEL → TIMELINE
-   Keep this at the very end of style.css
-   ========================================== */
-
-.color-timeline-section > .color-comparison-panel {
-    margin-bottom: 4px;
-}
-
-.color-timeline-section > #color-timeline {
-    padding-top: 0;
-}
-
-/* ==========================================
    PLAYGROUND SECTION — ANIMATED BACKGROUND
    Mirrors the playground-title-word color cycle
    ========================================== */
 
 @keyframes playground-bg-color-cycle {
 
-     100% {
+    100% {
         background-color: #ff7a8a;
     }
 
@@ -8081,12 +6269,13 @@ body > main > .palette-section >
         background-color: #9b78e8;
     }
 
-   
+
 }
 
 .playground-intro-section {
     animation: playground-bg-color-cycle 12s linear infinite;
     animation-delay: -4s;
+}
 
 @media (prefers-reduced-motion: reduce) {
     .playground-intro-section {
@@ -8096,68 +6285,6 @@ body > main > .palette-section >
 }
 
 
-/* ==========================================
-   TRENDS — LOCK BLACK PANEL WIDTH
-   Always reaches the navigation rail,
-   never resizes based on selected swatch
-   ========================================== */
-
-.color-timeline-section {
-    box-sizing: border-box;
-}
-
-.color-timeline-section > .color-comparison-panel {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.color-timeline-section .comparison-colors {
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.color-timeline-section .comparison-color-card-primary,
-.color-timeline-section .comparison-color-card-secondary {
-    flex-shrink: 0;
-}
-
-/* ==========================================
-   TRENDS — UNIFORM CARD/SWATCH SIZE
-   Selection shown by highlight, not resizing
-   ========================================== */
-
-.color-timeline-section .comparison-swatch-primary,
-.color-timeline-section .comparison-swatch-secondary {
-    width: 88px;
-    height: 88px;
-}
-
-.color-timeline-section .comparison-color-card,
-.color-timeline-section .comparison-color-card-primary,
-.color-timeline-section .comparison-color-card-secondary {
-    min-width: 260px;
-    flex-shrink: 0;
-    opacity: 1;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-name {
-    font-size: 17px;
-    margin-top: 0;
-}
-
-.color-timeline-section .comparison-color-card-primary .comparison-color-information {
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    padding: 16px;
-}
-
-.color-timeline-section .comparison-color-card-secondary .comparison-color-information {
-    border: 2px solid transparent;
-    padding: 16px;
-}
-
 .palette-follow-up-questions {
     display: grid;
     gap: 14px;
@@ -8165,4 +6292,278 @@ body > main > .palette-section >
 
 .palette-follow-up-question {
     display: grid;
+}
+
+/* ==========================================================
+   TRENDS — COLOR COMPARISON TIMELINE
+   Single, authoritative ruleset for this section.
+
+   The comparison panel has a FIXED height and the card row
+   scrolls horizontally inside it, so selecting a different
+   color swatch changes only the row's contents — it never
+   changes the panel's height, the section's height, or the
+   timeline chart below it.
+   ========================================== */
+
+.color-timeline-header {
+    margin: 0;
+}
+
+.color-timeline-section>.color-comparison-panel {
+    display: grid;
+    grid-template-columns: clamp(150px, 16vw, 220px) minmax(0, 1fr);
+    width: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
+    height: clamp(230px, 30svh, 300px);
+    margin: 0 0 clamp(16px, 2.5vh, 30px);
+    overflow: hidden;
+    background: var(--black);
+    color: var(--white);
+    border: 0;
+}
+
+.color-timeline-section .comparison-year-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    height: 100%;
+    padding: clamp(16px, 2.2vh, 28px);
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.color-timeline-section .comparison-year {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(38px, 5vh, 64px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+}
+
+.color-timeline-section .comparison-year-label {
+    margin: 14px 0 0;
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+}
+
+.color-timeline-section .comparison-colors {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.55) rgba(255, 255, 255, 0.12);
+}
+
+.color-timeline-section .comparison-colors::-webkit-scrollbar {
+    height: 7px;
+}
+
+.color-timeline-section .comparison-colors::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.color-timeline-section .comparison-colors::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.color-timeline-section .comparison-color-card {
+    display: flex;
+    align-items: center;
+    flex: 0 0 300px;
+    gap: 16px;
+    height: 100%;
+    padding: 0 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.color-timeline-section .comparison-color-card:last-child {
+    border-right: 0;
+}
+
+.color-timeline-section .comparison-color-card-primary {
+    flex: 0 0 360px;
+    background: transparent;
+}
+
+.color-timeline-section .comparison-swatch {
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.color-timeline-section .comparison-swatch-primary {
+    width: 88px;
+    height: 88px;
+}
+
+.color-timeline-section .comparison-swatch-secondary {
+    width: 60px;
+    height: 60px;
+}
+
+.color-timeline-section .comparison-color-information {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.color-timeline-section .comparison-source {
+    margin: 0 0 8px;
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.color-timeline-section .comparison-color-name {
+    margin: 0 0 10px;
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-name {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.color-timeline-section .comparison-color-details {
+    margin: 0;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.color-timeline-section .comparison-color-details div {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.color-timeline-section .comparison-color-details dt,
+.color-timeline-section .comparison-color-details dd {
+    margin: 0;
+    color: var(--white);
+    font-size: 10px;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.color-timeline-section .comparison-color-details dt {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.color-timeline-section>#color-timeline {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-gutter: stable;
+}
+
+.color-timeline-section>#color-timeline::-webkit-scrollbar {
+    height: 8px;
+}
+
+.color-timeline-section>#color-timeline::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.color-timeline-section>#color-timeline::-webkit-scrollbar-thumb {
+    background: #999999;
+}
+
+.color-timeline-section>#color-timeline::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+.color-timeline-section #color-timeline .color-timeline-svg {
+    display: block;
+}
+
+.color-timeline-section .timeline-source-label {
+    fill: #111111;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+}
+
+.color-timeline-section .timeline-year-label {
+    fill: #777777;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 7.5px;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.color-timeline-section .timeline-year-label.is-selected {
+    fill: #111111;
+    font-weight: 800;
+}
+
+.color-timeline-section .timeline-color-swatch.is-selected {
+    stroke: #111111;
+    stroke-width: 2px;
+}
+
+.color-timeline-section>.instructions,
+.color-timeline-section>.color-timeline-footer {
+    margin: 0;
+}
+
+@media (max-width: 800px) {
+
+    .color-timeline-section>.color-comparison-panel {
+        grid-template-columns: 88px minmax(0, 1fr);
+        height: clamp(190px, 32svh, 260px);
+    }
+
+    .color-timeline-section .comparison-year-column {
+        padding: 10px;
+    }
+
+    .color-timeline-section .comparison-year {
+        font-size: 30px;
+    }
+
+    .color-timeline-section .comparison-color-card {
+        flex: 0 0 225px;
+        padding: 0 14px;
+    }
+
+    .color-timeline-section .comparison-color-card-primary {
+        flex: 0 0 270px;
+    }
+
+    .color-timeline-section .comparison-swatch-primary {
+        width: 64px;
+        height: 64px;
+    }
+
+    .color-timeline-section .comparison-swatch-secondary {
+        width: 46px;
+        height: 46px;
+    }
+
 }

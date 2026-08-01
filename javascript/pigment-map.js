@@ -106,13 +106,13 @@ pigmentMap.on("load", function () {
 
       });
 
-console.log("Pigment source added successfully");
+      console.log("Pigment source added successfully");
       // ------------------------------------
       // 7. ADD LARGE TRANSPARENT HALOS
       // ------------------------------------
 
-    
-      
+
+
 
 
       // ------------------------------------
@@ -342,17 +342,17 @@ pigmentMap.on(
     `;
 
 
-new mapboxgl.Popup({
+    new mapboxgl.Popup({
 
-  closeButton: true,
+      closeButton: true,
 
-  closeOnClick: true,
+      closeOnClick: true,
 
-  offset: 10,
+      offset: 10,
 
-  maxWidth: "170px"
+      maxWidth: "170px"
 
-})
+    })
 
       .setLngLat(coordinates)
 

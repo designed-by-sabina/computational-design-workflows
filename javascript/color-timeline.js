@@ -40,8 +40,6 @@ let activeTimelineEntry = null;
 
 let colorTimelineResizeTimer = null;
 
-let lastMeasuredTimelineWidth = null;
-
 
 // ==========================================
 // INITIALIZE
@@ -138,14 +136,6 @@ async function initializeColorTimeline() {
         );
 
 
-        // Record the baseline width so the resize
-        // handler can ignore scrollbar-only changes.
-        lastMeasuredTimelineWidth =
-            timelineContainer
-                .getBoundingClientRect()
-                .width;
-
-
         if (activeTimelineEntry) {
 
             activateTimelineEntry(
@@ -153,6 +143,16 @@ async function initializeColorTimeline() {
             );
 
         }
+
+
+        // Redraw whenever the container's actual box
+        // size changes, so the chart always fills the
+        // available width regardless of what caused
+        // the change (window resize, layout shifts,
+        // zoom, etc.).
+        colorTimelineResizeObserver.observe(
+            timelineContainer
+        );
 
     } catch (error) {
 
@@ -366,9 +366,9 @@ function isValidTimelineEntry(entry) {
     return (
         Number.isFinite(entry.year) &&
         entry.year >=
-            COLOR_TIMELINE_START_YEAR &&
+        COLOR_TIMELINE_START_YEAR &&
         entry.year <=
-            COLOR_TIMELINE_END_YEAR &&
+        COLOR_TIMELINE_END_YEAR &&
         entry.source.length > 0 &&
         entry.colorName.length > 0
     );
@@ -503,8 +503,8 @@ function drawColorTimeline(data) {
     const innerWidth =
         Math.max(
             width -
-                margin.left -
-                margin.right,
+            margin.left -
+            margin.right,
             180
         );
 
@@ -821,7 +821,7 @@ function drawTimelineSourceLabel(
         .attr(
             "y",
             rowY +
-                rowHeight / 2
+            rowHeight / 2
         )
         .attr(
             "text-anchor",
@@ -1388,18 +1388,18 @@ function highlightTimelineSelection(
                     Number(
                         this.dataset.year
                     ) ===
-                        selectedEntry.year &&
+                    selectedEntry.year &&
 
                     this.dataset.source ===
-                        selectedEntry.source &&
+                    selectedEntry.source &&
 
                     this.dataset.colorName ===
-                        selectedEntry.colorName &&
+                    selectedEntry.colorName &&
 
                     Number(
                         this.dataset.rank
                     ) ===
-                        selectedEntry.rank
+                    selectedEntry.rank
                 );
 
             }
@@ -1457,16 +1457,16 @@ function isSameTimelineEntry(
 
     return (
         first.year ===
-            second.year &&
+        second.year &&
 
         first.source ===
-            second.source &&
+        second.source &&
 
         first.colorName ===
-            second.colorName &&
+        second.colorName &&
 
         first.rank ===
-            second.rank
+        second.rank
     );
 
 }
@@ -1474,89 +1474,56 @@ function isSameTimelineEntry(
 
 // ==========================================
 // RESPONSIVE REDRAW
-// Only redraws on real width changes —
-// ignores scrollbar-triggered resize events
-// caused by comparison-panel content swaps.
+// A ResizeObserver on #color-timeline itself
+// redraws whenever its box actually changes
+// size, for any reason — window resize, the
+// comparison panel's content changing, zoom,
+// font loading, etc. Debounced so a burst of
+// events (e.g. dragging a window edge) only
+// triggers one redraw.
 // ==========================================
 
-window.addEventListener(
-    "resize",
-    function () {
+const colorTimelineResizeObserver =
+    new ResizeObserver(
+        function () {
 
-        clearTimeout(
-            colorTimelineResizeTimer
-        );
-
-
-        colorTimelineResizeTimer =
-            setTimeout(
-                function () {
-
-                    const container =
-                        document.querySelector(
-                            "#color-timeline"
-                        );
+            clearTimeout(
+                colorTimelineResizeTimer
+            );
 
 
-                    if (!container) {
+            colorTimelineResizeTimer =
+                setTimeout(
+                    function () {
 
-                        return;
+                        if (
+                            colorTimelineData.length ===
+                            0
+                        ) {
 
-                    }
+                            return;
 
+                        }
 
-                    const currentWidth =
-                        container
-                            .getBoundingClientRect()
-                            .width;
-
-
-                    // Ignore changes smaller than a
-                    // typical scrollbar's width (~15-17px).
-                    const widthChanged =
-                        lastMeasuredTimelineWidth === null ||
-                        Math.abs(
-                            currentWidth -
-                            lastMeasuredTimelineWidth
-                        ) > 20;
-
-
-                    if (!widthChanged) {
-
-                        return;
-
-                    }
-
-
-                    lastMeasuredTimelineWidth =
-                        currentWidth;
-
-
-                    if (
-                        colorTimelineData.length >
-                        0
-                    ) {
 
                         drawColorTimeline(
                             colorTimelineData
                         );
 
-                    }
 
-
-                    if (
-                        activeTimelineEntry
-                    ) {
-
-                        activateTimelineEntry(
+                        if (
                             activeTimelineEntry
-                        );
+                        ) {
 
-                    }
+                            activateTimelineEntry(
+                                activeTimelineEntry
+                            );
 
-                },
-                200
-            );
+                        }
 
-    }
-);
+                    },
+                    150
+                );
+
+        }
+    );

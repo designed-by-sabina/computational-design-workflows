@@ -308,13 +308,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const hasDiscoveredColor =
                 paletteState.sourceType ===
-                    "discovered" &&
+                "discovered" &&
                 paletteState.discoveredColor
                     .trim() !== "";
 
             const hasWebsiteTheme =
                 paletteState.sourceType ===
-                    "website" &&
+                "website" &&
                 paletteState.theme !== "";
 
             nextButton.disabled =
@@ -876,7 +876,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return (
             paletteState.sourceType ===
-            "discovered"
+                "discovered"
                 ? `a discovered color described as "${paletteState.discoveredColor}"`
                 : `inspiration from: ${paletteState.theme}`
         );
@@ -1319,12 +1319,11 @@ Generate 2 to 3 short, specific follow-up questions to ask next, tailored to thi
                 paletteState.followUpQuestions
                     .map(
                         (question, index) =>
-                            `${question} — ${
-                                paletteState
-                                    .followUpAnswers[
-                                        index
-                                    ] ||
-                                "(no answer given)"
+                            `${question} — ${paletteState
+                                .followUpAnswers[
+                            index
+                            ] ||
+                            "(no answer given)"
                             }`
                     )
                     .join("\n");
