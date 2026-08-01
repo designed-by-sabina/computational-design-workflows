@@ -1,9 +1,40 @@
-
 // ==========================================
 // SECTION 07 — PALETTE
 // AI Color Consultant
 // Frontend consultation flow + OpenAI calls
+// + Firebase Analytics + Firestore save
 // ==========================================
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+// --- Initialize the PALETTE Firebase app (separate from color-poll) ---
+
+const paletteApp =
+    initializeApp(
+        firebaseConfigPalette,
+        "paletteApp"
+    );
+
+const paletteAnalytics =
+    getAnalytics(paletteApp);
+
+const paletteDb =
+    getFirestore(paletteApp);
+
+const paletteResultsRef =
+    collection(
+        paletteDb,
+        "paletteResults"
+    );
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -146,6 +177,13 @@ document.addEventListener("DOMContentLoaded", () => {
         followUpQuestions: [],
         followUpAnswers: []
     };
+
+    // Caches AI-resolved color names so we never
+    // ask twice for the same input (e.g. "Ultramarine").
+    const colorNameCache = {};
+
+    // Debounce timer for the AI color-name fallback.
+    let colorPreviewDebounceTimer = null;
 
 
     // ==========================================
@@ -352,18 +390,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // Checks if the browser itself already
+    // understands the value (hex, or a standard
+    // CSS color name like "coral" or "gold").
+    function isValidCssColor(value) {
+
+        const test = new Option();
+
+        test.style.color = "";
+        test.style.color = value;
+
+        return test.style.color !== "";
+
+    }
+
+
+    // Synchronous preview: hex codes and standard
+    // CSS color names resolve instantly, no AI needed.
+    // Returns true if a preview was applied.
     function updateColorPreview() {
 
-        const validHex =
-            normalizeHex(colorInput.value);
+        const value =
+            colorInput.value.trim();
 
 
-        if (validHex) {
+        const hex =
+            normalizeHex(value);
 
-            colorPreview.style.background =
-                validHex;
+        if (hex) {
 
-            return;
+            colorPreview.style.background = hex;
+
+            return true;
+
+        }
+
+
+        if (
+            value &&
+            isValidCssColor(value)
+        ) {
+
+            colorPreview.style.background = value;
+
+            return true;
 
         }
 
@@ -371,6 +441,95 @@ document.addEventListener("DOMContentLoaded", () => {
         colorPreview.removeAttribute(
             "style"
         );
+
+        return false;
+
+    }
+
+
+    // Only applies an AI-resolved color if the
+    // input hasn't changed since the request started.
+    function applyPreviewIfStillCurrent(
+        originalValue,
+        hex
+    ) {
+
+        const currentValue =
+            colorInput.value.trim();
+
+        if (currentValue === originalValue) {
+
+            colorPreview.style.background = hex;
+
+        }
+
+    }
+
+
+    // Fallback for names the browser doesn't
+    // recognize — e.g. "Ultramarine", "Future Dusk".
+    async function resolveColorNameWithAI(value) {
+
+        const cacheKey =
+            value.toLowerCase();
+
+
+        if (colorNameCache[cacheKey]) {
+
+            applyPreviewIfStillCurrent(
+                value,
+                colorNameCache[cacheKey]
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const raw =
+                await callOpenAI([
+                    {
+                        role: "system",
+                        content:
+                            'You are a color expert. Given a color name or description, respond only with valid JSON in the form {"hex": "#RRGGBB"} representing your best interpretation of that color as a 6-digit hex code. No markdown, no extra text, JSON only.'
+                    },
+                    {
+                        role: "user",
+                        content: value
+                    }
+                ]);
+
+            const parsed =
+                JSON.parse(raw);
+
+            const resolvedHex =
+                normalizeHex(
+                    parsed.hex || ""
+                );
+
+
+            if (resolvedHex) {
+
+                colorNameCache[cacheKey] =
+                    resolvedHex;
+
+                applyPreviewIfStillCurrent(
+                    value,
+                    resolvedHex
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Could not resolve color name:",
+                error
+            );
+
+        }
 
     }
 
@@ -512,9 +671,39 @@ document.addEventListener("DOMContentLoaded", () => {
             paletteState.discoveredColor =
                 colorInput.value.trim();
 
-            updateColorPreview();
-
             updateNavigationState();
+
+
+            clearTimeout(
+                colorPreviewDebounceTimer
+            );
+
+            const applied =
+                updateColorPreview();
+
+
+            if (!applied) {
+
+                const value =
+                    colorInput.value.trim();
+
+                if (value) {
+
+                    colorPreviewDebounceTimer =
+                        setTimeout(
+                            () => {
+
+                                resolveColorNameWithAI(
+                                    value
+                                );
+
+                            },
+                            600
+                        );
+
+                }
+
+            }
 
         }
     );
@@ -639,7 +828,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
     // OPENAI HELPER
-    // Shared by both AI calls below.
+    // Shared by all AI calls in this file.
     // ==========================================
 
     async function callOpenAI(messages) {
@@ -1025,6 +1214,58 @@ Generate 2 to 3 short, specific follow-up questions to ask next, tailored to thi
 
 
     // ==========================================
+    // SAVE RESULT TO FIRESTORE
+    // Runs right after a palette is generated.
+    // Never blocks the UI — failures are logged
+    // to the console only.
+    // ==========================================
+
+    async function savePaletteResult(
+        palette,
+        title,
+        inspiration,
+        application
+    ) {
+
+        try {
+
+            await addDoc(
+                paletteResultsRef,
+                {
+                    project: paletteState.project,
+                    sourceType: paletteState.sourceType,
+                    discoveredColor:
+                        paletteState.discoveredColor ||
+                        null,
+                    theme:
+                        paletteState.theme ||
+                        null,
+                    moods: paletteState.moods,
+                    followUpQuestions:
+                        paletteState.followUpQuestions,
+                    followUpAnswers:
+                        paletteState.followUpAnswers,
+                    paletteName: title,
+                    inspiration,
+                    application,
+                    colors: palette,
+                    createdAt: serverTimestamp()
+                }
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save palette to Firestore:",
+                error
+            );
+
+        }
+
+    }
+
+
+    // ==========================================
     // GENERATE — real OpenAI call
     // ==========================================
 
@@ -1125,13 +1366,47 @@ Create a 5-color palette for this project. Draw inspiration from historical pigm
                 const parsed =
                     JSON.parse(raw);
 
+                const finalTitle =
+                    parsed.paletteName ||
+                    paletteState.project;
+
+                const finalInspiration =
+                    parsed.inspiration || "";
+
+                const finalApplication =
+                    parsed.application || "";
+
 
                 renderPalette(
                     parsed.colors,
-                    parsed.paletteName ||
-                        paletteState.project,
-                    parsed.inspiration || "",
-                    parsed.application || ""
+                    finalTitle,
+                    finalInspiration,
+                    finalApplication
+                );
+
+
+                // Log an analytics event —
+                // never blocks the UI.
+                logEvent(
+                    paletteAnalytics,
+                    "palette_generated",
+                    {
+                        project: paletteState.project,
+                        source_type:
+                            paletteState.sourceType,
+                        mood_count:
+                            paletteState.moods.length
+                    }
+                );
+
+
+                // Save the result to Firestore —
+                // never blocks the UI.
+                savePaletteResult(
+                    parsed.colors,
+                    finalTitle,
+                    finalInspiration,
+                    finalApplication
                 );
 
             } catch (error) {
@@ -1229,5 +1504,3 @@ Create a 5-color palette for this project. Draw inspiration from historical pigm
     showStep(1);
 
 });
-
-
