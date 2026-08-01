@@ -1,197 +1,229 @@
-# Transparency — An Interactive Study of Color
+# COLOR Playground: Computational Explorations of Color
+
+An interactive exploration of color through computational design, creative coding, data visualization, and artificial intelligence.
+
+**COLOR Playground: Computational Explorations of Color** investigates color as an evolving system shaped by perception, history, interaction, and technology. Rather than presenting color as a collection of static swatches, the website invites visitors to experiment with color through a series of interactive studies, each exploring a different computational workflow.
+
+**Live Website**
+https://designed-by-sabina.github.io/computational-design-workflows/
+
+---
 
 ## Project Overview
 
-**Transparency** is an interactive web experiment exploring how colors transform through overlap, movement, perception, and visual relationships.
+The project explores color from multiple perspectives, including optical perception, historical pigments, contemporary color forecasting, digital color mixing, collective color preferences, and AI-assisted palette generation.
 
-The project is inspired by Josef Albers' seminal book **_Interaction of Color_ (1963)**, which explores the idea that color is not experienced as an isolated property, but is continuously affected by surrounding colors, context, and perception.
-
-This website translates Albers' color experiments into a digital environment where transparent moving forms generate evolving color relationships. Instead of presenting colors as fixed samples, the project creates an active space for observing how colors interact over time.
+Each section functions as an independent interactive experiment while contributing to a broader understanding of color as both a perceptual and computational phenomenon.
 
 ---
 
-# Concept
+# Interactive Studies
 
-The central idea of the project is **transparency as an active visual experience**.
+## Transparency
 
-The website treats the canvas as a digital color laboratory where:
+**Explore the illusion of transparency through interaction and overlap.**
 
-- colors overlap,
-- new color relationships emerge,
-- perception changes through context,
-- viewers can interact with and examine individual moments.
+Inspired by Josef Albers' *Interaction of Color*, this experiment demonstrates how overlapping transparent forms continuously generate new visual relationships. Visitors can pause the animation, inspect individual colors, and observe how perception changes as colors interact over time.
 
-Inspired by Albers' method of observation and experimentation, the project focuses not only on the colors themselves, but on the relationships created between them.
+**Features**
 
----
+* Animated transparent color forms
+* Dynamic color overlap detection
+* Live RGB color sampling
+* Perceptual color naming
+* Pause and observation mode
 
-# Visual Aesthetic
+**Technologies**
 
-The design language is influenced by:
-
-- Josef Albers' color studies
-- Bauhaus principles
-- modernist graphic design
-- minimalist exhibition layouts
-
-The interface emphasizes:
-
-- oversized typography,
-- geometric simplicity,
-- generous white space,
-- restrained visual elements,
-- color as the primary content.
-
-The large-scale title **"TRANSPARENCY"** references Bauhaus graphic design through bold typography, strong contrast, and minimal composition.
-
-The overall experience is designed to feel closer to a digital color study or exhibition piece rather than a traditional website interface.
+* HTML5 Canvas
+* JavaScript
+* CSS
 
 ---
 
-# Interactive Features
+## Deception
 
-## Animated Transparent Circles
+**Discover how color influences perception through optical illusions.**
 
-The main canvas contains multiple transparent pastel-colored circles that:
+A collection of interactive color studies demonstrating how identical colors appear different depending on surrounding colors, contrast, and context.
 
-- move continuously through the canvas,
-- drift organically with smooth directional changes,
-- create evolving compositions,
-- respond softly near canvas boundaries,
-- subtly change transparency over time.
+**Features**
 
-The movement is intentionally smooth and playful, allowing users to observe gradual transformations rather than fast animation.
+* Interactive optical illusions
+* Context-dependent color perception
+* Color comparison exercises
 
----
+**Technologies**
 
-## Color Interaction and Mixing
-
-When transparent circles overlap:
-
-- meaningful overlap regions are detected,
-- new mixed colors are generated,
-- color information appears through dynamic labels,
-- RGB values are displayed.
-
-The system avoids detecting very small accidental contacts and focuses on stronger color interactions where a visible new color relationship is created.
-
-Users can also hover over:
-
-- individual circles to view their original color,
-- overlapping regions to view the generated mixed color.
-
-This interaction is inspired by Albers' exploration of how colors shift depending on neighboring colors and surrounding conditions.
+* HTML5 Canvas
+* JavaScript
+* CSS
 
 ---
 
-## Perceptual Color Naming
+## Pigment
 
-Generated colors are analyzed using RGB and HSL color relationships.
+**Trace the origins of historical pigments.**
 
-Instead of assigning names only from a fixed palette, the system evaluates:
+An interactive Mapbox visualization exploring the geological origins of historical pigments and natural dyes around the world.
 
-- hue,
-- saturation,
-- lightness,
+Visitors can investigate pigment locations, learn about their mineral sources, and connect colors with the landscapes from which they originated.
 
-to create more perceptually relevant color descriptions such as:
+**Features**
 
-- Turquoise
-- Lavender
-- Peach
-- Muted Green
-- Light Rose
+* Interactive world map
+* Historical pigment database
+* Interactive popups
+* Geographic exploration
 
-The displayed RGB values preserve the actual sampled color produced by the interaction.
+**Technologies**
+
+* Mapbox GL JS
+* GeoJSON
+* JavaScript
 
 ---
 
-## Pause and Observation Mode
+## Trends
 
-Users can press:
+**Compare annual color selections and forecasts across industries.**
 
+An interactive timeline visualizing Color of the Year selections from multiple organizations, allowing visitors to compare annual trends and discover relationships between different forecasting systems.
+
+**Included Sources**
+
+* Pantone
+* Benjamin Moore
+* Sherwin-Williams
+* Coloro × WGSN
+
+**Features**
+
+* Interactive D3 timeline
+* Multi-source comparison
+* Year-by-year exploration
+* Detailed color information
+
+**Technologies**
+
+* D3.js
+* SVG
+* JavaScript
+
+---
+
+## Mixing
+
+**Discover color relationships through interactive CMYK mixing.**
+
+An interactive color laboratory where visitors experiment with Cyan, Magenta, Yellow, and Black to create new colors and explore relationships within subtractive color systems.
+
+**Features**
+
+* Interactive CMYK mixing
+* Dynamic color generation
+* Live color relationships
+* Color structure exploration
+
+**Technologies**
+
+* JavaScript
+* HTML5 Canvas
+* CSS
+
+---
+
+## Favorite
+
+**Share your favorite color and explore collective preferences.**
+
+Visitors contribute their favorite color to a shared Firebase database, creating a collaborative visualization of color preferences.
+
+**Features**
+
+* Anonymous participation
+* Firebase Firestore integration
+* Collective color archive
+* Live database
+
+**Technologies**
+
+* Firebase Authentication
+* Firebase Firestore
+* JavaScript
+
+---
+
+## Palette
+
+**Transform color discoveries into curated palettes for architecture, interiors, graphics, fashion, exhibitions, floral design, table settings, and more.**
+
+An AI-assisted color consultant guides visitors through a short interactive conversation before generating a personalized five-color palette inspired by discoveries made throughout the website.
+
+Visitors can begin with:
+
+* a discovered color or HEX value,
+* a historical pigment,
+* or a theme inspired by the project's interactive studies.
+
+The assistant considers project type, mood, and design goals before generating practical color recommendations tailored to the selected discipline.
+
+**Features**
+
+* Interactive multi-step questionnaire
+* AI-generated five-color palettes
+* HEX color recommendations
+* Project-specific design guidance
+* Inspiration drawn from pigments, transparency, color trends, and color relationships
+
+**Technologies**
+
+* Firebase Authentication
+* Firebase Cloud Functions
+* OpenAI API
+* JavaScript
+
+---
+
+# Technologies
+
+* HTML5
+* CSS3
+* JavaScript (ES6)
+* HTML5 Canvas
+* D3.js
+* Mapbox GL JS
+* Firebase Authentication
+* Firebase Firestore
+* Firebase Cloud Functions
+* OpenAI API
+* GitHub Pages
+
+---
+
+# Repository Structure
+
+```text
+computational-design-workflows/
+│
+├── index.html
+├── styles/
+│   └── style.css
+├── javascript/
+│   ├── transparency.js
+│   ├── deception.js
+│   ├── pigment-map.js
+│   ├── color-timeline.js
+│   ├── color-mixing.js
+│   ├── color-poll.js
+│   └── palette-assistant.js
+├── data/
+│   ├── pigments.geojson
+│   ├── colors-of-the-year.json
+│   └── ...
+├── functions/
+│   ├── index.js
+│   └── package.json
+├── firebase.json
+└── README.md
 ```
-SPACEBAR
-```
-
-to pause and resume the animation.
-
-This allows viewers to freeze a specific composition and examine the relationships between transparent layers, similar to studying a physical color arrangement.
-
----
-
-# Secondary Exercise System
-
-Below the main experiment is a horizontal navigation system containing multiple exercise tabs.
-
-Each tab represents a future canvas area that can be expanded with additional color studies and interactive experiments.
-
-Current structure:
-
-```
-Exercise 01 | Exercise 02 | Exercise 03 | Exercise 04 | Exercise 05 | Exercise 06
-```
-
-The modular layout allows future assignments and experiments to be added without changing the overall website structure.
-
----
-
-# Technical Implementation
-
-The project is created using:
-
-- HTML
-- CSS
-- JavaScript
-- HTML Canvas API
-
----
-
-## HTML
-
-Provides:
-
-- page structure,
-- canvas containers,
-- navigation tabs,
-- future exercise areas,
-- interactive content organization.
-
----
-
-## CSS
-
-Controls:
-
-- Bauhaus-inspired typography,
-- minimalist layout,
-- responsive behavior,
-- horizontal exercise navigation,
-- floating color information labels,
-- visual hierarchy and spacing.
-
----
-
-## JavaScript
-
-Handles:
-
-- organic circle movement,
-- transparency rendering,
-- live overlap detection,
-- dynamic color sampling,
-- RGB and HSL color analysis,
-- perceptual color naming,
-- hover-based color exploration,
-- discovery labels,
-- color archive generation,
-- pause/resume functionality,
-- exercise navigation.
-
----
-
-# Inspiration
-
-Josef Albers' **_Interaction of Color_** demonstrated that color perception is relational: a color changes depending on what surrounds it.
-
-**Transparency** transforms this principle into an interactive digital experiment where users do not simply view colors, but actively discover how colors influence and transform one another.
