@@ -671,7 +671,10 @@
         </section>
 
         <!-- ==========================================
-     SECTION 07 — PALETTE
+     <!-- ==========================================
+
+SECTION 07 — PALETTE
+
 =========================================== -->
 
 <section
@@ -686,14 +689,612 @@
         </h1>
 
         <p class="subtitle">
-            Future color study
+            Build an interdisciplinary color palette inspired by your discoveries.
         </p>
 
     </header>
 
-</section>
 
-    </main>
+    <div class="palette-assistant">
+
+
+        <!-- ==========================================
+             LEFT — QUESTIONS
+        =========================================== -->
+
+        <section
+            class="palette-question-panel"
+            aria-labelledby="paletteQuestionTitle"
+        >
+
+            <div class="palette-progress">
+
+                <span
+                    class="palette-progress-step is-active"
+                    data-progress-step="1"
+                >
+                    01
+                </span>
+
+                <span
+                    class="palette-progress-step"
+                    data-progress-step="2"
+                >
+                    02
+                </span>
+
+                <span
+                    class="palette-progress-step"
+                    data-progress-step="3"
+                >
+                    03
+                </span>
+
+            </div>
+
+
+            <form
+                id="paletteForm"
+                class="palette-form"
+            >
+
+
+                <!-- QUESTION 01 -->
+
+                <fieldset
+                    class="palette-step is-active"
+                    data-step="1"
+                >
+
+                    <legend id="paletteQuestionTitle">
+                        What is the color palette for?
+                    </legend>
+
+                    <p class="palette-question-description">
+                        Select a project or type your own.
+                    </p>
+
+
+                    <div class="palette-option-grid">
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Interior"
+                        >
+                            INTERIOR
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Poster"
+                        >
+                            POSTER
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Website"
+                        >
+                            WEBSITE
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Instagram page"
+                        >
+                            INSTAGRAM
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Flower arrangement"
+                        >
+                            FLOWERS
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Table decor"
+                        >
+                            TABLE DÉCOR
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Postcard"
+                        >
+                            POSTCARD
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-option"
+                            data-value="Fashion look"
+                        >
+                            FASHION
+                        </button>
+
+                    </div>
+
+
+                    <label
+                        class="palette-text-label"
+                        for="paletteProjectOther"
+                    >
+                        OTHER PROJECT
+                    </label>
+
+                    <input
+                        id="paletteProjectOther"
+                        class="palette-text-input"
+                        type="text"
+                        placeholder="Exhibition, packaging, ceramics..."
+                        autocomplete="off"
+                    >
+
+                </fieldset>
+
+
+                <!-- QUESTION 02 -->
+
+                <fieldset
+                    class="palette-step"
+                    data-step="2"
+                    hidden
+                >
+
+                    <legend>
+                        Where should the inspiration begin?
+                    </legend>
+
+                    <p class="palette-question-description">
+                        Continue with a discovered color or select a website theme.
+                    </p>
+
+
+                    <div class="palette-source-options">
+
+                        <button
+                            type="button"
+                            class="palette-source-card"
+                            data-source="discovered"
+                        >
+
+                            <span class="palette-source-number">
+                                A
+                            </span>
+
+                            <span>
+                                I DISCOVERED A COLOR
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="palette-source-card"
+                            data-source="website"
+                        >
+
+                            <span class="palette-source-number">
+                                B
+                            </span>
+
+                            <span>
+                                INSPIRE ME USING THE WEBSITE
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="paletteDiscoveredColor"
+                        class="palette-follow-up"
+                        hidden
+                    >
+
+                        <label
+                            class="palette-text-label"
+                            for="paletteColorInput"
+                        >
+                            COLOR NAME OR HEX
+                        </label>
+
+                        <div class="palette-color-input-row">
+
+                            <input
+                                id="paletteColorInput"
+                                class="palette-text-input"
+                                type="text"
+                                placeholder="Ultramarine or #2647A7"
+                                autocomplete="off"
+                            >
+
+                            <span
+                                id="paletteColorPreview"
+                                class="palette-color-preview"
+                                aria-hidden="true"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="paletteWebsiteThemes"
+                        class="palette-follow-up"
+                        hidden
+                    >
+
+                        <p class="palette-text-label">
+                            WEBSITE INSPIRATION
+                        </p>
+
+                        <div class="palette-theme-grid">
+
+                            <button
+                                type="button"
+                                class="palette-theme-option"
+                                data-theme="Natural pigments and minerals"
+                            >
+                                PIGMENTS
+                            </button>
+
+                            <button
+                                type="button"
+                                class="palette-theme-option"
+                                data-theme="Natural dyes"
+                            >
+                                DYES
+                            </button>
+
+                            <button
+                                type="button"
+                                class="palette-theme-option"
+                                data-theme="Transparency and overlapping color"
+                            >
+                                TRANSPARENCY
+                            </button>
+
+                            <button
+                                type="button"
+                                class="palette-theme-option"
+                                data-theme="Contemporary color trends"
+                            >
+                                TRENDS
+                            </button>
+
+                            <button
+                                type="button"
+                                class="palette-theme-option"
+                                data-theme="CMYK mixing and color relationships"
+                            >
+                                MIXING
+                            </button>
+
+                            <button
+                                type="button"
+                                class="palette-theme-option"
+                                data-theme="A combination of website themes"
+                            >
+                                MIX ALL
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- QUESTION 03 -->
+
+                <fieldset
+                    class="palette-step"
+                    data-step="3"
+                    hidden
+                >
+
+                    <legend>
+                        What should the palette feel like?
+                    </legend>
+
+                    <p class="palette-question-description">
+                        Select up to three qualities.
+                    </p>
+
+
+                    <div class="palette-mood-grid">
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Calm"
+                        >
+                            CALM
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Bold"
+                        >
+                            BOLD
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Playful"
+                        >
+                            PLAYFUL
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Elegant"
+                        >
+                            ELEGANT
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Natural"
+                        >
+                            NATURAL
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Dramatic"
+                        >
+                            DRAMATIC
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Minimal"
+                        >
+                            MINIMAL
+                        </button>
+
+                        <button
+                            type="button"
+                            class="palette-mood-option"
+                            data-mood="Unexpected"
+                        >
+                            UNEXPECTED
+                        </button>
+
+                    </div>
+
+
+                    <label
+                        class="palette-text-label"
+                        for="paletteDetails"
+                    >
+                        OPTIONAL DETAILS
+                    </label>
+
+                    <textarea
+                        id="paletteDetails"
+                        class="palette-textarea"
+                        placeholder="Season, materials, audience, lighting, existing colors..."
+                        rows="3"
+                    ></textarea>
+
+                </fieldset>
+
+
+                <!-- FORM NAVIGATION -->
+
+                <div class="palette-form-navigation">
+
+                    <button
+                        id="paletteBackButton"
+                        class="palette-navigation-button palette-back-button"
+                        type="button"
+                        hidden
+                    >
+                        BACK
+                    </button>
+
+                    <button
+                        id="paletteNextButton"
+                        class="palette-navigation-button palette-next-button"
+                        type="button"
+                        disabled
+                    >
+                        NEXT
+                    </button>
+
+                    <button
+                        id="paletteGenerateButton"
+                        class="palette-navigation-button palette-generate-button"
+                        type="submit"
+                        hidden
+                    >
+                        GENERATE PALETTE
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="paletteFormStatus"
+                    class="palette-form-status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==========================================
+             RIGHT — PALETTE RESULT
+        =========================================== -->
+
+        <section
+            id="paletteResultPanel"
+            class="palette-result-panel"
+            aria-live="polite"
+        >
+
+            <div
+                id="paletteEmptyState"
+                class="palette-empty-state"
+            >
+
+                <p class="palette-result-label">
+                    AI COLOR DESIGN ASSISTANT
+                </p>
+
+                <h2>
+                    Begin with your project.
+                </h2>
+
+                <p>
+                    The assistant will combine your selected application,
+                    website discoveries, color history, material qualities,
+                    trends, and mood.
+                </p>
+
+
+                <div class="palette-preview-stack">
+
+                    <span style="background-color: #2647A7;"></span>
+
+                    <span style="background-color: #C95D3A;"></span>
+
+                    <span style="background-color: #D6C68A;"></span>
+
+                    <span style="background-color: #6D8065;"></span>
+
+                    <span style="background-color: #EEE9DF;"></span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="paletteLoadingState"
+                class="palette-loading-state"
+                hidden
+            >
+
+                <p class="palette-result-label">
+                    GENERATING
+                </p>
+
+                <div class="palette-loading-line"></div>
+
+                <p>
+                    Studying your project, inspiration, and mood.
+                </p>
+
+            </div>
+
+
+            <article
+                id="paletteGeneratedResult"
+                class="palette-generated-result"
+                hidden
+            >
+
+                <div class="palette-result-heading">
+
+                    <div>
+
+                        <p class="palette-result-label">
+                            GENERATED PALETTE
+                        </p>
+
+                        <h2 id="paletteResultTitle">
+                            COLOR STUDY
+                        </h2>
+
+                    </div>
+
+                    <button
+                        id="paletteRestartButton"
+                        class="palette-restart-button"
+                        type="button"
+                    >
+                        START AGAIN
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="paletteSwatches"
+                    class="palette-result-swatches"
+                ></div>
+
+
+                <div class="palette-result-information">
+
+                    <section>
+
+                        <h3>
+                            WEBSITE INSPIRATION
+                        </h3>
+
+                        <p id="paletteInspirationText">
+                            —
+                        </p>
+
+                    </section>
+
+
+                    <section>
+
+                        <h3>
+                            HOW TO USE IT
+                        </h3>
+
+                        <p id="paletteApplicationText">
+                            —
+                        </p>
+
+                    </section>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </div>
+
+
+    <footer class="palette-footer">
+
+        <p>
+            AI-generated colors are visual suggestions.
+            Test materials, print output, lighting, and contrast before final use.
+        </p>
+
+    </footer>
+
+</section>
 
 
     <!-- ==========================================
