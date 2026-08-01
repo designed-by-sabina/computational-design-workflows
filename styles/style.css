@@ -48,7 +48,7 @@ header {
 h1 {
     font-size: clamp(70px, 12vw, 160px);
     font-weight: 900;
-    letter-spacing: -0.08em;
+    letter-spacing: -0.04em;
     line-height: 0.85;
 }
 
