@@ -40,6 +40,8 @@ let activeTimelineEntry = null;
 
 let colorTimelineResizeTimer = null;
 
+let lastMeasuredTimelineWidth = null;
+
 
 // ==========================================
 // INITIALIZE
@@ -134,6 +136,14 @@ async function initializeColorTimeline() {
         drawColorTimeline(
             colorTimelineData
         );
+
+
+        // Record the baseline width so the resize
+        // handler can ignore scrollbar-only changes.
+        lastMeasuredTimelineWidth =
+            timelineContainer
+                .getBoundingClientRect()
+                .width;
 
 
         if (activeTimelineEntry) {
@@ -478,12 +488,13 @@ function drawColorTimeline(data) {
     allowing every year to remain visible.
     */
 
-const margin = {
-    top: isMobile ? 44 : 48,   // was 60 / 66
-    right: isMobile ? 8 : 14,
-    bottom: 14,
-    left: isMobile ? 108 : 160
-};
+    const margin = {
+        top: isMobile ? 44 : 48,
+        right: isMobile ? 8 : 14,
+        bottom: 14,
+        left: isMobile ? 108 : 160
+    };
+
 
     const width =
         measuredWidth;
@@ -518,11 +529,11 @@ const margin = {
         );
 
 
-const rowHeight =
-    Math.max(
-        isMobile ? 18 : 20,
-        squareSize + 2
-    );
+    const rowHeight =
+        Math.max(
+            isMobile ? 18 : 20,
+            squareSize + 2
+        );
 
 
     const innerHeight =
@@ -635,6 +646,7 @@ const rowHeight =
     }
 
 }
+
 
 
 function drawTimelineYearLabels(
@@ -1477,6 +1489,9 @@ function isSameTimelineEntry(
 
 // ==========================================
 // RESPONSIVE REDRAW
+// Only redraws on real width changes —
+// ignores scrollbar-triggered resize events
+// caused by comparison-panel content swaps.
 // ==========================================
 
 window.addEventListener(
@@ -1491,6 +1506,46 @@ window.addEventListener(
         colorTimelineResizeTimer =
             setTimeout(
                 function () {
+
+                    const container =
+                        document.querySelector(
+                            "#color-timeline"
+                        );
+
+
+                    if (!container) {
+
+                        return;
+
+                    }
+
+
+                    const currentWidth =
+                        container
+                            .getBoundingClientRect()
+                            .width;
+
+
+                    // Ignore changes smaller than a
+                    // typical scrollbar's width (~15-17px).
+                    const widthChanged =
+                        lastMeasuredTimelineWidth === null ||
+                        Math.abs(
+                            currentWidth -
+                            lastMeasuredTimelineWidth
+                        ) > 20;
+
+
+                    if (!widthChanged) {
+
+                        return;
+
+                    }
+
+
+                    lastMeasuredTimelineWidth =
+                        currentWidth;
+
 
                     if (
                         colorTimelineData.length >

@@ -8052,6 +8052,11 @@ body > main > .palette-section >
    ========================================== */
 
 @keyframes playground-bg-color-cycle {
+
+     100% {
+        background-color: #ff7a8a;
+    }
+
     0% {
         background-color: #ff7a8a;
     }
@@ -8076,9 +8081,7 @@ body > main > .palette-section >
         background-color: #9b78e8;
     }
 
-    100% {
-        background-color: #ff7a8a;
-    }
+   
 }
 
 .playground-intro-section {
@@ -8091,3 +8094,67 @@ body > main > .palette-section >
         background-color: #9b78e8;
     }
 }
+
+
+/* ==========================================
+   TRENDS — LOCK BLACK PANEL WIDTH
+   Always reaches the navigation rail,
+   never resizes based on selected swatch
+   ========================================== */
+
+.color-timeline-section {
+    box-sizing: border-box;
+}
+
+.color-timeline-section > .color-comparison-panel {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.color-timeline-section .comparison-colors {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.color-timeline-section .comparison-color-card-primary,
+.color-timeline-section .comparison-color-card-secondary {
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   TRENDS — UNIFORM CARD/SWATCH SIZE
+   Selection shown by highlight, not resizing
+   ========================================== */
+
+.color-timeline-section .comparison-swatch-primary,
+.color-timeline-section .comparison-swatch-secondary {
+    width: 88px;
+    height: 88px;
+}
+
+.color-timeline-section .comparison-color-card,
+.color-timeline-section .comparison-color-card-primary,
+.color-timeline-section .comparison-color-card-secondary {
+    min-width: 260px;
+    flex-shrink: 0;
+    opacity: 1;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-name {
+    font-size: 17px;
+    margin-top: 0;
+}
+
+.color-timeline-section .comparison-color-card-primary .comparison-color-information {
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    padding: 16px;
+}
+
+.color-timeline-section .comparison-color-card-secondary .comparison-color-information {
+    border: 2px solid transparent;
+    padding: 16px;
+}
+
