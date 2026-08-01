@@ -571,15 +571,6 @@ footer {
     padding: 0;
 }
 
-.mixing-header {
-    padding: clamp(30px, 5vh, 70px) 50px clamp(24px, 4vh, 40px);
-    flex: 0 0 auto;
-    margin: 0;
-}
-
-.mixing-header .subtitle {
-    max-width: 660px;
-}
 
 .mixing-layout {
     display: grid;
@@ -2954,27 +2945,6 @@ rendered width aligns it with the L.
         12s
         linear
         infinite;
-}
-
-/* ==========================================
-   PALETTE PLACEHOLDER
-   ========================================== */
-
-.palette-section {
-    width: 100%;
-    min-height: 100svh;
-
-    padding-right: var(--navigation-safe-area);
-
-    background: var(--white);
-
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
-
-
-.palette-section > header {
-    min-height: 0;
 }
 
 
@@ -6592,4 +6562,1292 @@ body > main > section > header .subtitle,
     color: #111111;
     font-size: 15px;
     line-height: 20px;
+}
+
+/* ==========================================================
+   SECTION 07 — PALETTE
+   AI COLOR CONSULTANT
+
+   Keep this section at the end of style.css so it overrides
+   earlier global header, footer, and section rules.
+   ========================================================== */
+
+
+/* ==========================================
+   SECTION
+   ========================================== */
+
+body > main > .palette-section {
+    box-sizing: border-box;
+
+    width:
+        calc(
+            100% -
+            var(--navigation-safe-area, 0px)
+        );
+
+    height: 100svh;
+    min-height: 620px;
+
+    margin: 0;
+
+    padding:
+        clamp(20px, 3vh, 38px)
+        var(--page-gutter)
+        clamp(14px, 2vh, 24px);
+
+    display: grid;
+
+    grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        auto;
+
+    gap: clamp(12px, 1.6vh, 20px);
+
+    overflow: hidden;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--black);
+    background: var(--white);
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+
+.palette-section *,
+.palette-section *::before,
+.palette-section *::after {
+    box-sizing: border-box;
+}
+
+
+
+/* ==========================================
+   MAIN ASSISTANT
+   ========================================== */
+
+.palette-assistant {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(340px, 0.88fr)
+        minmax(450px, 1.35fr);
+
+    overflow: hidden;
+
+    border: 1px solid var(--black);
+
+    background: var(--white);
+}
+
+
+/* ==========================================
+   LEFT QUESTION PANEL
+   ========================================== */
+
+.palette-question-panel {
+    min-width: 0;
+    min-height: 0;
+
+    padding: clamp(16px, 2vw, 28px);
+
+    display: grid;
+
+    grid-template-rows:
+        auto
+        minmax(0, 1fr);
+
+    overflow: hidden;
+
+    border-right: 1px solid var(--black);
+}
+
+
+/* ==========================================
+   PROGRESS
+   ========================================== */
+
+.palette-progress {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 32px);
+
+    gap: 7px;
+
+    margin-bottom: clamp(10px, 1.4vh, 17px);
+}
+
+
+.palette-progress-step {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid var(--black);
+    border-radius: 50%;
+
+    color: var(--black);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    opacity: 0.28;
+}
+
+
+.palette-progress-step.is-active,
+.palette-progress-step.is-complete {
+    opacity: 1;
+}
+
+
+.palette-progress-step.is-active {
+    color: var(--white);
+    background: var(--black);
+}
+
+
+/* ==========================================
+   FORM AND STEPS
+   ========================================== */
+
+.palette-form {
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        auto
+        auto;
+
+    gap: 8px;
+}
+
+
+.palette-step {
+    min-width: 0;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0 4px 0 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    border: 0;
+
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+}
+
+
+.palette-step[hidden] {
+    display: none;
+}
+
+
+.palette-step legend {
+    width: 100%;
+
+    margin: 0 0 6px;
+    padding: 0;
+
+    color: var(--black);
+
+    font-size:
+        clamp(
+            21px,
+            min(2vw, 3.7vh),
+            31px
+        );
+
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+}
+
+
+.palette-question-description {
+    margin: 0 0 clamp(11px, 1.5vh, 18px);
+
+    color: #555555;
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   OPTION GRIDS
+   ========================================== */
+
+.palette-option-grid,
+.palette-theme-grid,
+.palette-mood-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 6px;
+}
+
+
+.palette-option,
+.palette-theme-option,
+.palette-mood-option,
+.palette-source-card {
+    min-width: 0;
+    min-height: 36px;
+
+    padding: 8px 10px;
+
+    border: 1px solid var(--black);
+    border-radius: 0;
+
+    color: var(--black);
+    background: transparent;
+
+    font: inherit;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        color 140ms ease,
+        background-color 140ms ease;
+}
+
+
+.palette-option:hover,
+.palette-theme-option:hover,
+.palette-mood-option:hover,
+.palette-source-card:hover,
+.palette-option.is-selected,
+.palette-theme-option.is-selected,
+.palette-mood-option.is-selected,
+.palette-source-card.is-selected {
+    color: var(--white);
+    background: var(--black);
+}
+
+
+.palette-option:focus-visible,
+.palette-theme-option:focus-visible,
+.palette-mood-option:focus-visible,
+.palette-source-card:focus-visible,
+.palette-navigation-button:focus-visible,
+.palette-restart-button:focus-visible {
+    outline: 2px solid #5b9df9;
+    outline-offset: 2px;
+}
+
+
+/* ==========================================
+   SOURCE OPTIONS
+   ========================================== */
+
+.palette-source-options {
+    display: grid;
+    gap: 7px;
+}
+
+
+.palette-source-card {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.palette-source-number {
+    width: 23px;
+    height: 23px;
+
+    flex: 0 0 23px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    font-size: 9px;
+}
+
+
+.palette-follow-up {
+    margin-top: 12px;
+}
+
+
+.palette-follow-up[hidden] {
+    display: none;
+}
+
+
+/* ==========================================
+   INPUTS
+   ========================================== */
+
+.palette-text-label {
+    display: block;
+
+    margin: 13px 0 5px;
+
+    color: var(--black);
+
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+}
+
+
+.palette-text-input,
+.palette-textarea {
+    width: 100%;
+
+    border: 1px solid var(--black);
+    border-radius: 0;
+    outline: none;
+
+    color: var(--black);
+    background: var(--white);
+
+    font-family: inherit;
+    font-size: 11px;
+}
+
+
+.palette-text-input {
+    height: 38px;
+    padding: 0 10px;
+}
+
+
+.palette-textarea {
+    min-height: clamp(100px, 16vh, 150px);
+
+    padding: 10px;
+
+    line-height: 1.4;
+
+    resize: none;
+}
+
+
+.palette-text-input:focus,
+.palette-textarea:focus {
+    box-shadow:
+        inset 0 0 0 1px var(--black);
+}
+
+
+.palette-color-input-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        38px;
+
+    gap: 7px;
+}
+
+
+.palette-color-preview {
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--black);
+
+    background:
+        linear-gradient(
+            45deg,
+            #dddddd 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            -45deg,
+            #dddddd 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            45deg,
+            transparent 75%,
+            #dddddd 75%
+        ),
+        linear-gradient(
+            -45deg,
+            transparent 75%,
+            #dddddd 75%
+        );
+
+    background-position:
+        0 0,
+        0 6px,
+        6px -6px,
+        -6px 0;
+
+    background-size: 12px 12px;
+}
+
+
+.palette-input-note {
+    margin: 6px 0 0;
+
+    color: #666666;
+
+    font-size: 8px;
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   DETAIL PROMPTS
+   ========================================== */
+
+.palette-detail-prompts {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 10px;
+}
+
+
+.palette-detail-prompts span {
+    padding: 4px 6px;
+
+    border: 1px solid var(--black);
+
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+
+
+/* ==========================================
+   NAVIGATION BUTTONS
+   ========================================== */
+
+.palette-form-navigation {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 7px;
+
+    padding-top: 2px;
+}
+
+
+.palette-navigation-button,
+.palette-restart-button {
+    min-height: 36px;
+
+    padding: 8px 14px;
+
+    border: 1px solid var(--black);
+    border-radius: 0;
+
+    color: var(--black);
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.palette-next-button,
+.palette-generate-button {
+    color: var(--white);
+    background: var(--black);
+}
+
+
+.palette-navigation-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+}
+
+
+.palette-form-status {
+    min-height: 13px;
+
+    margin: 0;
+
+    color: #a43131;
+
+    font-size: 8px;
+    line-height: 1.3;
+}
+
+
+/* ==========================================
+   RIGHT RESULT PANEL
+   ========================================== */
+
+.palette-result-panel {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    color: var(--white);
+    background: var(--black);
+}
+
+
+.palette-empty-state,
+.palette-loading-state,
+.palette-generated-result {
+    width: 100%;
+    height: 100%;
+
+    padding: clamp(20px, 2.7vw, 38px);
+}
+
+
+.palette-result-label {
+    margin: 0 0 12px;
+
+    color: var(--white);
+
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+}
+
+
+/* ==========================================
+   EMPTY STATE
+   ========================================== */
+
+.palette-empty-state {
+    display: grid;
+
+    grid-template-rows:
+        auto
+        auto
+        auto
+        minmax(90px, 1fr);
+
+    align-content: start;
+}
+
+
+.palette-empty-state h2,
+.palette-result-heading h2,
+.palette-loading-state h2 {
+    margin: 0;
+
+    color: var(--white);
+
+    font-size:
+        clamp(
+            27px,
+            min(3.3vw, 5.5vh),
+            50px
+        );
+
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+}
+
+
+.palette-empty-state > p:not(.palette-result-label),
+.palette-loading-state > p:not(.palette-result-label) {
+    max-width: 500px;
+
+    margin: 13px 0 18px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+
+.palette-preview-stack {
+    min-height: 90px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    align-self: end;
+}
+
+
+.palette-preview-stack span {
+    display: block;
+    min-width: 0;
+    min-height: 100%;
+}
+
+
+/* ==========================================
+   LOADING STATE
+   ========================================== */
+
+.palette-loading-state {
+    display: grid;
+    align-content: center;
+}
+
+
+.palette-loading-line {
+    width: 100%;
+    height: 1px;
+
+    margin: 15px 0 13px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.25);
+}
+
+
+.palette-loading-line::after {
+    content: "";
+
+    display: block;
+
+    width: 35%;
+    height: 100%;
+
+    background: var(--white);
+
+    animation:
+        palette-loading
+        1.3s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes palette-loading {
+    from {
+        transform: translateX(-110%);
+    }
+
+    to {
+        transform: translateX(310%);
+    }
+}
+
+
+/* ==========================================
+   GENERATED RESULT
+   ========================================== */
+
+.palette-generated-result {
+    display: grid;
+
+    grid-template-rows:
+        auto
+        minmax(100px, 1fr)
+        auto;
+
+    gap: clamp(12px, 1.7vh, 20px);
+}
+
+
+.palette-result-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 18px;
+}
+
+
+.palette-restart-button {
+    flex: 0 0 auto;
+
+    border-color: var(--white);
+
+    color: var(--white);
+}
+
+
+.palette-restart-button:hover {
+    color: var(--black);
+    background: var(--white);
+}
+
+
+/* ==========================================
+   RESULT SWATCHES
+   ========================================== */
+
+.palette-result-swatches {
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+}
+
+
+.palette-result-swatch {
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-rows:
+        minmax(72px, 1fr)
+        auto;
+
+    color: var(--black);
+    background: var(--white);
+}
+
+
+.palette-result-swatch-color {
+    min-width: 0;
+    min-height: 0;
+}
+
+
+.palette-result-swatch-copy {
+    min-width: 0;
+
+    padding: 8px;
+
+    border-top: 1px solid var(--black);
+
+    color: var(--black);
+    background: var(--white);
+}
+
+
+.palette-result-swatch-name,
+.palette-result-swatch-role,
+.palette-result-swatch-hex {
+    margin: 0;
+
+    overflow-wrap: anywhere;
+}
+
+
+.palette-result-swatch-name {
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+.palette-result-swatch-role,
+.palette-result-swatch-hex {
+    margin-top: 2px;
+
+    font-size: 7px;
+    line-height: 1.25;
+}
+
+
+/* ==========================================
+   RESULT INFORMATION
+   ========================================== */
+
+.palette-result-information {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+.palette-result-information section {
+    min-width: 0;
+
+    padding-top: 7px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.5);
+}
+
+
+.palette-result-information h3 {
+    margin: 0 0 5px;
+
+    color: var(--white);
+
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+}
+
+
+.palette-result-information p {
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.75);
+
+    font-size: 8px;
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   FOOTER
+   Overrides the global footer rule
+   ========================================== */
+
+body > main > .palette-section > .palette-footer {
+    position: static;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+    color: var(--black);
+    background: transparent;
+
+    font-size: 8px;
+    line-height: 1.3;
+}
+
+
+
+.palette-footer p {
+    margin: 0;
+}
+
+
+/* ==========================================
+   HIDDEN ELEMENTS
+   ========================================== */
+
+.palette-section [hidden] {
+    display: none;
+}
+
+
+/* ==========================================
+   SHORT DESKTOP SCREENS
+   ========================================== */
+
+@media
+    (min-width: 801px)
+    and (max-height: 760px) {
+
+    body > main > .palette-section {
+        min-height: 560px;
+
+        padding-top: 14px;
+        padding-bottom: 10px;
+
+        gap: 9px;
+    }
+
+
+
+
+    .palette-question-panel {
+        padding: 14px;
+    }
+
+
+    .palette-progress {
+        grid-template-columns:
+            repeat(4, 27px);
+
+        margin-bottom: 8px;
+    }
+
+
+    .palette-progress-step {
+        width: 27px;
+        height: 27px;
+
+        font-size: 8px;
+    }
+
+
+    .palette-step legend {
+        font-size: 20px;
+    }
+
+
+    .palette-question-description {
+        margin-bottom: 9px;
+
+        font-size: 9px;
+    }
+
+
+    .palette-option,
+    .palette-theme-option,
+    .palette-mood-option {
+        min-height: 29px;
+
+        padding: 5px 7px;
+
+        font-size: 8px;
+    }
+
+
+    .palette-source-card {
+        min-height: 39px;
+    }
+
+
+    .palette-text-label {
+        margin-top: 8px;
+    }
+
+
+    .palette-text-input {
+        height: 32px;
+    }
+
+
+    .palette-color-preview {
+        width: 32px;
+        height: 32px;
+    }
+
+
+    .palette-color-input-row {
+        grid-template-columns:
+            minmax(0, 1fr)
+            32px;
+    }
+
+
+    .palette-textarea {
+        min-height: 76px;
+    }
+
+
+    .palette-empty-state,
+    .palette-loading-state,
+    .palette-generated-result {
+        padding: 17px;
+    }
+
+
+    .palette-navigation-button,
+    .palette-restart-button {
+        min-height: 30px;
+
+        padding: 6px 11px;
+
+        font-size: 8px;
+    }
+}
+
+
+/* ==========================================
+   TABLET AND MOBILE
+   ========================================== */
+
+@media (max-width: 800px) {
+
+    body > main > .palette-section {
+        width: 100%;
+        height: auto;
+        min-height: 100svh;
+
+        padding:
+            28px
+            20px
+            20px;
+
+        overflow: visible;
+    }
+
+
+
+    .palette-assistant {
+        grid-template-columns: 1fr;
+
+        overflow: visible;
+    }
+
+
+    .palette-question-panel {
+        min-height: 590px;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--black);
+    }
+
+
+    .palette-result-panel {
+        min-height: 580px;
+    }
+
+
+    .palette-step {
+        overflow: visible;
+    }
+
+
+    body > main > .palette-section >
+    .palette-footer {
+        padding-top: 4px;
+    }
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+   ========================================== */
+
+@media (max-width: 520px) {
+
+  
+
+
+    .palette-question-panel {
+        min-height: 690px;
+
+        padding: 16px;
+    }
+
+
+    .palette-result-panel {
+        min-height: 690px;
+    }
+
+
+    .palette-result-swatches {
+        grid-template-columns: 1fr;
+    }
+
+
+    .palette-result-swatch {
+        grid-template-columns:
+            105px
+            minmax(0, 1fr);
+
+        grid-template-rows: 76px;
+    }
+
+
+    .palette-result-swatch-copy {
+        border-top: 0;
+        border-left: 1px solid var(--black);
+    }
+
+
+    .palette-result-information {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .palette-loading-line::after {
+        animation: none;
+    }
+
+
+    .palette-option,
+    .palette-theme-option,
+    .palette-mood-option,
+    .palette-source-card {
+        transition: none;
+    }
+}
+
+
+/* ==========================================================
+   SHARED SECTION HEADERS
+   Subtitle directly below heading
+   Keep this at the absolute end of style.css
+   ========================================================== */
+
+
+/* Main section headers */
+
+body > main > section > header,
+body > main > .pigment-map-section > .pigment-map-header {
+    display: block;
+}
+
+
+/* Section titles */
+
+body > main > section > header > h1,
+body > main > .pigment-map-section > .pigment-map-header > h1 {
+    margin: 0;
+    padding: 0;
+
+    text-align: left;
+}
+
+
+/* Subtitles directly below titles */
+
+body > main > section > header > .subtitle,
+body > main > .pigment-map-section > .pigment-map-header > .subtitle {
+    width: 100%;
+    max-width: 680px;
+
+    margin:
+        clamp(8px, 1.2vh, 14px)
+        0
+        0
+        0;
+
+    padding: 0;
+
+    text-align: left;
+    transform: none;
+}
+
+
+/* Short desktop screens */
+
+@media
+    (min-width: 801px)
+    and (max-height: 760px) {
+
+    body > main > section > header > .subtitle,
+    body > main > .pigment-map-section >
+    .pigment-map-header > .subtitle {
+        max-width: 620px;
+        margin-top: 6px;
+
+        font-size: clamp(
+            10px,
+            1.5vh,
+            14px
+        );
+
+        line-height: 1.3;
+    }
+}
+
+/* Mobile section headers */
+
+@media (max-width: 800px) {
+
+    body > main > section > header > .subtitle,
+    body > main > .pigment-map-section >
+    .pigment-map-header > .subtitle {
+        width: 100%;
+        max-width: 560px;
+
+        margin-top: 8px;
+
+        font-size: clamp(
+            11px,
+            3.3vw,
+            14px
+        );
+
+        line-height: 1.4;
+    }
+}
+
+
+/* ==========================================================
+   SHARED SECTION HEADERS
+   ========================================================== */
+
+body > main > section > header,
+body > main > .pigment-map-section > .pigment-map-header,
+body > main > .palette-section > .palette-header {
+
+    display: block;
+
+    padding:
+        clamp(26px,4.2vh,50px)
+        var(--page-gutter)
+        clamp(14px,2vh,24px);
+}
+
+
+body > main > section > header h1,
+body > main > .pigment-map-header h1,
+body > main > .palette-header h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            72px,
+            min(14vw,19vh),
+            188px
+        );
+
+    font-weight: 900;
+
+    line-height: .76;
+
+    letter-spacing: -.085em;
+}
+
+
+body > main > section > header .subtitle,
+body > main > .pigment-map-header .subtitle,
+body > main > .palette-header .subtitle {
+
+    margin-top: 8px;
+
+    max-width: 620px;
+
+    font-size:
+        clamp(
+            13px,
+            1.6vh,
+            18px
+        );
+
+    line-height: 1.45;
+
+    color: var(--gray);
+
+    text-align: left;
 }

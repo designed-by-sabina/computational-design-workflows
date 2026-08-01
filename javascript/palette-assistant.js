@@ -1,6 +1,7 @@
 // ==========================================
 // SECTION 07 — PALETTE
-// Frontend question flow
+// AI Color Consultant
+// Frontend consultation flow
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,13 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // ------------------------------------------
-    // DOM ELEMENTS
-    // ------------------------------------------
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
 
     const steps =
         Array.from(
-            document.querySelectorAll(".palette-step")
+            document.querySelectorAll(
+                ".palette-step"
+            )
         );
 
     const progressSteps =
@@ -120,9 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    // ------------------------------------------
+    // ==========================================
     // STATE
-    // ------------------------------------------
+    // ==========================================
+
+    const totalSteps = 4;
 
     let currentStep = 1;
 
@@ -136,9 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    // ------------------------------------------
-    // HELPERS
-    // ------------------------------------------
+    // ==========================================
+    // GENERAL HELPERS
+    // ==========================================
 
     function clearSelectedButtons(selector) {
 
@@ -148,6 +153,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 button.classList.remove(
                     "is-selected"
+                );
+
+                button.setAttribute(
+                    "aria-pressed",
+                    "false"
                 );
 
             });
@@ -166,6 +176,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "is-selected"
         );
 
+        button.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
     }
 
 
@@ -173,13 +188,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         currentStep = stepNumber;
 
+
         steps.forEach((step) => {
 
             const stepValue =
                 Number(step.dataset.step);
 
             const isCurrent =
-                stepValue === stepNumber;
+                stepValue === currentStep;
 
             step.hidden = !isCurrent;
 
@@ -202,12 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 progressStep.classList.toggle(
                     "is-active",
-                    progressValue === stepNumber
+                    progressValue === currentStep
                 );
 
                 progressStep.classList.toggle(
                     "is-complete",
-                    progressValue < stepNumber
+                    progressValue < currentStep
                 );
 
             }
@@ -215,13 +231,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         backButton.hidden =
-            stepNumber === 1;
+            currentStep === 1;
 
         nextButton.hidden =
-            stepNumber === 3;
+            currentStep === totalSteps;
 
         generateButton.hidden =
-            stepNumber !== 3;
+            currentStep !== totalSteps;
+
 
         updateNavigationState();
 
@@ -235,35 +252,49 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentStep === 1) {
 
             nextButton.disabled =
-                !paletteState.project;
+                paletteState.project === "";
+
+            return;
 
         }
 
 
         if (currentStep === 2) {
 
-            const discoveredIsValid =
+            const hasDiscoveredColor =
                 paletteState.sourceType ===
                     "discovered" &&
                 paletteState.discoveredColor
                     .trim() !== "";
 
-            const themeIsValid =
+            const hasWebsiteTheme =
                 paletteState.sourceType ===
                     "website" &&
                 paletteState.theme !== "";
 
             nextButton.disabled =
-                !discoveredIsValid &&
-                !themeIsValid;
+                !hasDiscoveredColor &&
+                !hasWebsiteTheme;
+
+            return;
 
         }
 
 
         if (currentStep === 3) {
 
-            generateButton.disabled =
+            nextButton.disabled =
                 paletteState.moods.length === 0;
+
+            return;
+
+        }
+
+
+        if (currentStep === 4) {
+
+            // Question 04 is optional.
+            generateButton.disabled = false;
 
         }
 
@@ -272,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function normalizeHex(value) {
 
-        const trimmedValue =
+        const cleanedValue =
             value.trim();
 
         const shortHexPattern =
@@ -282,37 +313,34 @@ document.addEventListener("DOMContentLoaded", () => {
             /^#([0-9a-f]{6})$/i;
 
 
-        if (longHexPattern.test(trimmedValue)) {
-            return trimmedValue;
+        if (longHexPattern.test(cleanedValue)) {
+            return cleanedValue.toUpperCase();
         }
 
 
         const shortMatch =
-            trimmedValue.match(
+            cleanedValue.match(
                 shortHexPattern
             );
 
 
-        if (shortMatch) {
-
-            const characters =
-                shortMatch[1].split("");
-
-            return (
-                "#" +
-                characters
-                    .map(
-                        (character) =>
-                            character +
-                            character
-                    )
-                    .join("")
-            );
-
+        if (!shortMatch) {
+            return null;
         }
 
 
-        return null;
+        return (
+            "#" +
+            shortMatch[1]
+                .split("")
+                .map(
+                    (character) =>
+                        character +
+                        character
+                )
+                .join("")
+                .toUpperCase()
+        );
 
     }
 
@@ -322,29 +350,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const validHex =
             normalizeHex(colorInput.value);
 
+
         if (validHex) {
 
             colorPreview.style.background =
                 validHex;
 
-        } else {
-
-            colorPreview.removeAttribute(
-                "style"
-            );
+            return;
 
         }
+
+
+        colorPreview.removeAttribute(
+            "style"
+        );
 
     }
 
 
-    // ------------------------------------------
+    // ==========================================
     // QUESTION 01 — PROJECT
-    // ------------------------------------------
+    // ==========================================
 
     document
         .querySelectorAll(".palette-option")
         .forEach((button) => {
+
+            button.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
 
             button.addEventListener(
                 "click",
@@ -378,7 +414,9 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             paletteState.project =
-                projectOtherInput.value.trim();
+                projectOtherInput
+                    .value
+                    .trim();
 
             updateNavigationState();
 
@@ -386,15 +424,21 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    // ------------------------------------------
-    // QUESTION 02 — INSPIRATION SOURCE
-    // ------------------------------------------
+    // ==========================================
+    // QUESTION 02 — INSPIRATION
+    // ==========================================
 
     document
         .querySelectorAll(
             ".palette-source-card"
         )
         .forEach((button) => {
+
+            button.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
 
             button.addEventListener(
                 "click",
@@ -408,6 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     paletteState.sourceType =
                         button.dataset.source;
 
+
                     if (
                         paletteState.sourceType ===
                         "discovered"
@@ -419,8 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         websiteThemePanel.hidden =
                             true;
 
-                        paletteState.theme =
-                            "";
+                        paletteState.theme = "";
 
                         clearSelectedButtons(
                             ".palette-theme-option"
@@ -436,14 +480,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         websiteThemePanel.hidden =
                             false;
 
-                        paletteState
-                            .discoveredColor = "";
+                        paletteState.discoveredColor =
+                            "";
 
                         colorInput.value = "";
 
                         updateColorPreview();
 
                     }
+
 
                     updateNavigationState();
 
@@ -474,6 +519,12 @@ document.addEventListener("DOMContentLoaded", () => {
         )
         .forEach((button) => {
 
+            button.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+
             button.addEventListener(
                 "click",
                 () => {
@@ -494,9 +545,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
-    // ------------------------------------------
+    // ==========================================
     // QUESTION 03 — MOOD
-    // ------------------------------------------
+    // ==========================================
 
     document
         .querySelectorAll(
@@ -504,27 +555,38 @@ document.addEventListener("DOMContentLoaded", () => {
         )
         .forEach((button) => {
 
+            button.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+
             button.addEventListener(
                 "click",
                 () => {
 
-                    const mood =
+                    const selectedMood =
                         button.dataset.mood;
 
-                    const existingIndex =
+                    const selectedIndex =
                         paletteState.moods
-                            .indexOf(mood);
+                            .indexOf(selectedMood);
 
 
-                    if (existingIndex >= 0) {
+                    if (selectedIndex >= 0) {
 
                         paletteState.moods.splice(
-                            existingIndex,
+                            selectedIndex,
                             1
                         );
 
                         button.classList.remove(
                             "is-selected"
+                        );
+
+                        button.setAttribute(
+                            "aria-pressed",
+                            "false"
                         );
 
                     } else {
@@ -535,24 +597,30 @@ document.addEventListener("DOMContentLoaded", () => {
                         ) {
 
                             formStatus.textContent =
-                                "Select no more than three moods.";
+                                "Choose no more than three qualities.";
 
                             return;
 
                         }
 
+
                         paletteState.moods.push(
-                            mood
+                            selectedMood
                         );
 
                         button.classList.add(
                             "is-selected"
                         );
 
+                        button.setAttribute(
+                            "aria-pressed",
+                            "true"
+                        );
+
                     }
 
-                    formStatus.textContent =
-                        "";
+
+                    formStatus.textContent = "";
 
                     updateNavigationState();
 
@@ -561,6 +629,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
+
+    // ==========================================
+    // QUESTION 04 — DETAILS
+    // ==========================================
 
     detailsInput.addEventListener(
         "input",
@@ -573,18 +645,20 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    // ------------------------------------------
+    // ==========================================
     // NAVIGATION
-    // ------------------------------------------
+    // ==========================================
 
     nextButton.addEventListener(
         "click",
         () => {
 
-            if (
-                currentStep < 3 &&
-                !nextButton.disabled
-            ) {
+            if (nextButton.disabled) {
+                return;
+            }
+
+
+            if (currentStep < totalSteps) {
 
                 showStep(
                     currentStep + 1
@@ -612,10 +686,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    // ------------------------------------------
-    // TEMPORARY SAMPLE GENERATOR
-    // Replace with Firebase/OpenAI later
-    // ------------------------------------------
+    // ==========================================
+    // TEMPORARY SAMPLE PALETTE
+    // This will later be replaced by Firebase.
+    // ==========================================
 
     const samplePalette = [
         {
@@ -688,54 +762,54 @@ document.addEventListener("DOMContentLoaded", () => {
                 color.hex;
 
 
-            const copy =
+            const information =
                 document.createElement(
                     "div"
                 );
 
-            copy.className =
+            information.className =
                 "palette-result-swatch-copy";
 
 
-            const name =
+            const colorName =
                 document.createElement("p");
 
-            name.className =
+            colorName.className =
                 "palette-result-swatch-name";
 
-            name.textContent =
+            colorName.textContent =
                 color.name;
 
 
-            const role =
+            const colorRole =
                 document.createElement("p");
 
-            role.className =
+            colorRole.className =
                 "palette-result-swatch-role";
 
-            role.textContent =
+            colorRole.textContent =
                 color.role.toUpperCase();
 
 
-            const hex =
+            const colorHex =
                 document.createElement("p");
 
-            hex.className =
+            colorHex.className =
                 "palette-result-swatch-hex";
 
-            hex.textContent =
+            colorHex.textContent =
                 color.hex.toUpperCase();
 
 
-            copy.append(
-                name,
-                role,
-                hex
+            information.append(
+                colorName,
+                colorRole,
+                colorHex
             );
 
             swatch.append(
                 colorArea,
-                copy
+                information
             );
 
             swatchesContainer.appendChild(
@@ -752,6 +826,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // ==========================================
+    // GENERATE
+    // ==========================================
+
     paletteForm.addEventListener(
         "submit",
         (event) => {
@@ -759,20 +837,46 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
 
-            if (
-                paletteState.moods.length === 0
-            ) {
+            paletteState.details =
+                detailsInput.value.trim();
+
+
+            if (!paletteState.project) {
+
+                showStep(1);
 
                 formStatus.textContent =
-                    "Select at least one mood.";
+                    "Choose or enter a project.";
 
                 return;
 
             }
 
 
-            paletteState.details =
-                detailsInput.value.trim();
+            if (!paletteState.sourceType) {
+
+                showStep(2);
+
+                formStatus.textContent =
+                    "Choose how the palette should begin.";
+
+                return;
+
+            }
+
+
+            if (
+                paletteState.moods.length === 0
+            ) {
+
+                showStep(3);
+
+                formStatus.textContent =
+                    "Choose at least one quality.";
+
+                return;
+
+            }
 
 
             emptyState.hidden = true;
@@ -786,36 +890,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 paletteState.sourceType ===
                 "discovered"
                     ? (
-                        "Built around " +
-                        paletteState
-                            .discoveredColor +
-                        ", then expanded through " +
-                        "historical pigments, natural dyes, " +
-                        "transparency, and color relationships."
+                        "The palette begins with " +
+                        paletteState.discoveredColor +
+                        " and expands it through ideas explored " +
+                        "across the website, including pigments, " +
+                        "natural dyes, transparency, trends, " +
+                        "mixing and color relationships."
                     )
                     : (
-                        "Inspired by " +
+                        "The palette is inspired by " +
                         paletteState.theme +
                         " from the COLOR playground."
                     );
 
 
-            const application =
+            let application =
                 "Designed for " +
                 paletteState.project +
                 " with a " +
-                paletteState.moods.join(
-                    ", "
-                ).toLowerCase() +
-                " atmosphere." +
-                (
-                    paletteState.details
-                        ? (
-                            " Additional context: " +
-                            paletteState.details
-                        )
-                        : ""
-                );
+                paletteState.moods
+                    .join(", ")
+                    .toLowerCase() +
+                " character.";
+
+
+            if (paletteState.details) {
+
+                application +=
+                    " It also responds to: " +
+                    paletteState.details;
+
+            }
 
 
             window.setTimeout(
@@ -836,9 +941,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    // ------------------------------------------
+    // ==========================================
     // RESTART
-    // ------------------------------------------
+    // ==========================================
 
     restartButton.addEventListener(
         "click",
@@ -846,12 +951,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             paletteForm.reset();
 
+
             paletteState.project = "";
             paletteState.sourceType = "";
             paletteState.discoveredColor = "";
             paletteState.theme = "";
             paletteState.moods = [];
             paletteState.details = "";
+
 
             clearSelectedButtons(
                 ".palette-option"
@@ -869,13 +976,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 ".palette-mood-option"
             );
 
+
             discoveredColorPanel.hidden =
                 true;
 
             websiteThemePanel.hidden =
                 true;
 
+
             updateColorPreview();
+
 
             generatedResult.hidden =
                 true;
@@ -886,15 +996,16 @@ document.addEventListener("DOMContentLoaded", () => {
             emptyState.hidden =
                 false;
 
+
             showStep(1);
 
         }
     );
 
 
-    // ------------------------------------------
+    // ==========================================
     // INITIALIZE
-    // ------------------------------------------
+    // ==========================================
 
     showStep(1);
 
