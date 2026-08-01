@@ -1,7 +1,7 @@
 // ==========================================
 // SECTION 07 — PALETTE
 // AI Color Consultant
-// Frontend consultation flow
+// Frontend consultation flow + OpenAI calls
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -67,11 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
             "paletteColorPreview"
         );
 
-    const detailsInput =
-        document.getElementById(
-            "paletteDetails"
-        );
-
     const discoveredColorPanel =
         document.getElementById(
             "paletteDiscoveredColor"
@@ -80,6 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const websiteThemePanel =
         document.getElementById(
             "paletteWebsiteThemes"
+        );
+
+    const followUpLoading =
+        document.getElementById(
+            "paletteFollowUpLoading"
+        );
+
+    const followUpContainer =
+        document.getElementById(
+            "paletteFollowUpContainer"
         );
 
     const formStatus =
@@ -121,12 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
             "paletteApplicationText"
         );
-        
-const rowHeight =
-    Math.max(
-        isMobile ? 24 : 26,
-        squareSize + 4
-    );
+
 
     // ==========================================
     // STATE
@@ -142,7 +142,8 @@ const rowHeight =
         discoveredColor: "",
         theme: "",
         moods: [],
-        details: ""
+        followUpQuestions: [],
+        followUpAnswers: []
     };
 
 
@@ -298,7 +299,7 @@ const rowHeight =
 
         if (currentStep === 4) {
 
-            // Question 04 is optional.
+            // Follow-up answers are optional.
             generateButton.disabled = false;
 
         }
@@ -636,18 +637,228 @@ const rowHeight =
 
 
     // ==========================================
-    // QUESTION 04 — DETAILS
+    // OPENAI HELPER
+    // Shared by both AI calls below.
     // ==========================================
 
-    detailsInput.addEventListener(
-        "input",
-        () => {
+    async function callOpenAI(messages) {
 
-            paletteState.details =
-                detailsInput.value.trim();
+        const response =
+            await fetch(
+                "https://api.openai.com/v1/chat/completions",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        "Authorization":
+                            `Bearer ${OPENAI_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o-mini",
+                        response_format: {
+                            type: "json_object"
+                        },
+                        messages
+                    })
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `OpenAI request failed: ${response.status}`
+            );
 
         }
-    );
+
+
+        const data =
+            await response.json();
+
+
+        return data.choices[0].message.content;
+
+    }
+
+
+    // ==========================================
+    // QUESTION 04 — AI-GENERATED FOLLOW-UP
+    // Runs when moving from step 3 to step 4.
+    // ==========================================
+
+    function buildInspirationSummary() {
+
+        return (
+            paletteState.sourceType ===
+            "discovered"
+                ? `a discovered color described as "${paletteState.discoveredColor}"`
+                : `inspiration from: ${paletteState.theme}`
+        );
+
+    }
+
+
+    async function loadFollowUpQuestions() {
+
+        followUpLoading.hidden = false;
+
+        followUpContainer.innerHTML = "";
+
+        generateButton.disabled = true;
+
+
+        const prompt = `
+Project type: ${paletteState.project}
+Inspiration: ${buildInspirationSummary()}
+Desired mood/qualities: ${paletteState.moods.join(", ")}
+
+Generate 2 to 3 short, specific follow-up questions to ask next, tailored to this exact project type and context. The goal is to gather any missing details needed before creating a 5-color palette (for example: materials, lighting, season, audience, existing colors, print vs digital — whichever are actually relevant to this project type). Keep each question under 12 words.
+        `.trim();
+
+
+        try {
+
+            const raw =
+                await callOpenAI([
+                    {
+                        role: "system",
+                        content:
+                            'You are a color and design consultant. Respond only with valid JSON in the form {"questions": ["...", "..."]}. Ask exactly 2 or 3 short, specific questions. No markdown, no extra text, JSON only.'
+                    },
+                    {
+                        role: "user",
+                        content: prompt
+                    }
+                ]);
+
+
+            const parsed =
+                JSON.parse(raw);
+
+            const questions =
+                Array.isArray(parsed.questions)
+                    ? parsed.questions.slice(0, 3)
+                    : [];
+
+
+            paletteState.followUpQuestions =
+                questions;
+
+            paletteState.followUpAnswers =
+                new Array(
+                    questions.length
+                ).fill("");
+
+
+            renderFollowUpQuestions(
+                questions
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not generate follow-up questions:",
+                error
+            );
+
+            paletteState.followUpQuestions = [];
+
+            paletteState.followUpAnswers = [];
+
+            followUpContainer.innerHTML = `
+                <p class="palette-input-note">
+                    Could not generate extra questions right now —
+                    you can continue without them.
+                </p>
+            `;
+
+        }
+
+
+        followUpLoading.hidden = true;
+
+        generateButton.disabled = false;
+
+    }
+
+
+    function renderFollowUpQuestions(questions) {
+
+        followUpContainer.innerHTML = "";
+
+
+        questions.forEach(
+            (questionText, index) => {
+
+                const wrapper =
+                    document.createElement(
+                        "div"
+                    );
+
+                wrapper.className =
+                    "palette-follow-up-question";
+
+
+                const label =
+                    document.createElement(
+                        "label"
+                    );
+
+                label.className =
+                    "palette-text-label";
+
+                label.setAttribute(
+                    "for",
+                    `paletteFollowUp${index}`
+                );
+
+                label.textContent =
+                    questionText;
+
+
+                const input =
+                    document.createElement(
+                        "input"
+                    );
+
+                input.className =
+                    "palette-text-input";
+
+                input.type = "text";
+
+                input.id =
+                    `paletteFollowUp${index}`;
+
+                input.autocomplete = "off";
+
+
+                input.addEventListener(
+                    "input",
+                    () => {
+
+                        paletteState.followUpAnswers[
+                            index
+                        ] = input.value.trim();
+
+                    }
+                );
+
+
+                wrapper.append(
+                    label,
+                    input
+                );
+
+                followUpContainer.appendChild(
+                    wrapper
+                );
+
+            }
+        );
+
+    }
 
 
     // ==========================================
@@ -656,10 +867,21 @@ const rowHeight =
 
     nextButton.addEventListener(
         "click",
-        () => {
+        async () => {
 
             if (nextButton.disabled) {
                 return;
+            }
+
+
+            if (currentStep === 3) {
+
+                showStep(4);
+
+                await loadFollowUpQuestions();
+
+                return;
+
             }
 
 
@@ -692,38 +914,8 @@ const rowHeight =
 
 
     // ==========================================
-    // TEMPORARY SAMPLE PALETTE
-    // This will later be replaced by Firebase.
+    // RENDER RESULT
     // ==========================================
-
-    const samplePalette = [
-        {
-            name: "Ultramarine",
-            role: "Primary",
-            hex: "#2647A7"
-        },
-        {
-            name: "Madder",
-            role: "Accent",
-            hex: "#B94B52"
-        },
-        {
-            name: "Weld",
-            role: "Highlight",
-            hex: "#D8BF58"
-        },
-        {
-            name: "Green Earth",
-            role: "Secondary",
-            hex: "#78836B"
-        },
-        {
-            name: "Chalk",
-            role: "Background",
-            hex: "#ECE8DC"
-        }
-    ];
-
 
     function renderPalette(
         palette,
@@ -832,18 +1024,14 @@ const rowHeight =
 
 
     // ==========================================
-    // GENERATE
+    // GENERATE — real OpenAI call
     // ==========================================
 
     paletteForm.addEventListener(
         "submit",
-        (event) => {
+        async (event) => {
 
             event.preventDefault();
-
-
-            paletteState.details =
-                detailsInput.value.trim();
 
 
             if (!paletteState.project) {
@@ -891,56 +1079,75 @@ const rowHeight =
             loadingState.hidden = false;
 
 
-            const inspiration =
-                paletteState.sourceType ===
-                "discovered"
-                    ? (
-                        "The palette begins with " +
-                        paletteState.discoveredColor +
-                        " and expands it through ideas explored " +
-                        "across the website, including pigments, " +
-                        "natural dyes, transparency, trends, " +
-                        "mixing and color relationships."
+            const followUpSummary =
+                paletteState.followUpQuestions
+                    .map(
+                        (question, index) =>
+                            `${question} — ${
+                                paletteState
+                                    .followUpAnswers[
+                                        index
+                                    ] ||
+                                "(no answer given)"
+                            }`
                     )
-                    : (
-                        "The palette is inspired by " +
-                        paletteState.theme +
-                        " from the COLOR playground."
-                    );
+                    .join("\n");
 
 
-            let application =
-                "Designed for " +
-                paletteState.project +
-                " with a " +
-                paletteState.moods
-                    .join(", ")
-                    .toLowerCase() +
-                " character.";
+            const prompt = `
+Project type: ${paletteState.project}
+Inspiration: ${buildInspirationSummary()}
+Desired mood/qualities: ${paletteState.moods.join(", ")}
+Additional context:
+${followUpSummary || "None provided."}
+
+Create a 5-color palette for this project. Draw inspiration from historical pigments, natural dyes, color relationships, transparency, and color trends where relevant.
+            `.trim();
 
 
-            if (paletteState.details) {
+            try {
 
-                application +=
-                    " It also responds to: " +
-                    paletteState.details;
+                const raw =
+                    await callOpenAI([
+                        {
+                            role: "system",
+                            content:
+                                'You are an expert color consultant creating a 5-color palette for a design project. Respond only with valid JSON in this exact form: {"paletteName": "...", "inspiration": "...", "application": "...", "colors": [{"name": "...", "role": "...", "hex": "#RRGGBB"}]}. Always return exactly 5 colors with valid 6-digit hex codes. No markdown, no code fences, JSON only.'
+                        },
+                        {
+                            role: "user",
+                            content: prompt
+                        }
+                    ]);
+
+
+                const parsed =
+                    JSON.parse(raw);
+
+
+                renderPalette(
+                    parsed.colors,
+                    parsed.paletteName ||
+                        paletteState.project,
+                    parsed.inspiration || "",
+                    parsed.application || ""
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Could not generate palette:",
+                    error
+                );
+
+                loadingState.hidden = true;
+
+                emptyState.hidden = false;
+
+                formStatus.textContent =
+                    "Something went wrong generating your palette — please try again.";
 
             }
-
-
-            window.setTimeout(
-                () => {
-
-                    renderPalette(
-                        samplePalette,
-                        paletteState.project,
-                        inspiration,
-                        application
-                    );
-
-                },
-                700
-            );
 
         }
     );
@@ -962,7 +1169,8 @@ const rowHeight =
             paletteState.discoveredColor = "";
             paletteState.theme = "";
             paletteState.moods = [];
-            paletteState.details = "";
+            paletteState.followUpQuestions = [];
+            paletteState.followUpAnswers = [];
 
 
             clearSelectedButtons(
@@ -992,6 +1200,11 @@ const rowHeight =
             updateColorPreview();
 
 
+            followUpContainer.innerHTML = "";
+
+            followUpLoading.hidden = false;
+
+
             generatedResult.hidden =
                 true;
 
@@ -1015,3 +1228,5 @@ const rowHeight =
     showStep(1);
 
 });
+
+

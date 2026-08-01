@@ -1155,70 +1155,33 @@ SECTION 07 — PALETTE
                      QUESTION 04
                 =========================================== -->
 
-                <fieldset
-                    class="palette-step"
-                    data-step="4"
-                    hidden
-                >
+               <fieldset
+    class="palette-step"
+    data-step="4"
+    hidden
+>
 
-                    <legend>
-                        What details should the palette respond to?
-                    </legend>
+    <legend>
+        A few more questions
+    </legend>
 
-                    <p class="palette-question-description">
-                        Include anything that could affect the colors.
-                    </p>
+    <p class="palette-question-description">
+        Generated based on your project, inspiration, and mood.
+    </p>
 
+    <div
+        id="paletteFollowUpLoading"
+        class="palette-input-note"
+    >
+        Thinking of the right questions to ask...
+    </div>
 
-                    <label
-                        class="palette-text-label"
-                        for="paletteDetails"
-                    >
-                        PROJECT CONTEXT
-                    </label>
+    <div
+        id="paletteFollowUpContainer"
+        class="palette-follow-up-questions"
+    ></div>
 
-                    <textarea
-                        id="paletteDetails"
-                        class="palette-textarea"
-                        rows="5"
-                        placeholder="Warm evening lighting, dark wood furniture, spring flowers, existing brand colors, young audience..."
-                    ></textarea>
-
-
-                    <div class="palette-detail-prompts">
-
-                        <span>
-                            MATERIALS
-                        </span>
-
-                        <span>
-                            SEASON
-                        </span>
-
-                        <span>
-                            LIGHTING
-                        </span>
-
-                        <span>
-                            AUDIENCE
-                        </span>
-
-                        <span>
-                            EXISTING COLORS
-                        </span>
-
-                        <span>
-                            ACCESSIBILITY
-                        </span>
-
-                    </div>
-
-                    <p class="palette-input-note">
-                        This step is optional, but additional context
-                        will produce a more specific recommendation.
-                    </p>
-
-                </fieldset>
+</fieldset>
 
 
                 <!-- ==========================================
@@ -1422,7 +1385,7 @@ SECTION 07 — PALETTE
 
 </section>
 
-
+</main>
     <!-- ==========================================
          JAVASCRIPT
     =========================================== -->
@@ -1461,6 +1424,7 @@ SECTION 07 — PALETTE
 
     <!-- AI palette assistant -->
 <script
+    type="module"
     src="javascript/palette-assistant.js"
 ></script>
 

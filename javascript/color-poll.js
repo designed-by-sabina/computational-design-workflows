@@ -10,14 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 // --- 1. Your Firebase config ---
-const firebaseConfig = {
-  apiKey: "AIzaSyDxg1l6vJaQ9fNv5mM9iMnDjq3ItPTZ0kE",
-  authDomain: "favorite-color-4f696.firebaseapp.com",
-  projectId: "favorite-color-4f696",
-  storageBucket: "favorite-color-4f696.firebasestorage.app",
-  messagingSenderId: "1038189466545",
-  appId: "1:1038189466545:web:89f1412ebc360d3547e390"
-};
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);

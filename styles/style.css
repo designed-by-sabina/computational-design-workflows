@@ -8158,3 +8158,11 @@ body > main > .palette-section >
     padding: 16px;
 }
 
+.palette-follow-up-questions {
+    display: grid;
+    gap: 14px;
+}
+
+.palette-follow-up-question {
+    display: grid;
+}
