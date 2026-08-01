@@ -121,7 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
             "paletteApplicationText"
         );
-
+        
+const rowHeight =
+    Math.max(
+        isMobile ? 24 : 26,
+        squareSize + 4
+    );
 
     // ==========================================
     // STATE
